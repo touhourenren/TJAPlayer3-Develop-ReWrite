@@ -76,19 +76,18 @@ namespace TJAPlayer3
 				Drums.nPoorになる範囲ms = TJAPlayer3.nPoor範囲ms;
 				Drums.strDTXManiaのバージョン = TJAPlayer3.AppNumericThreePartVersion;
 				Drums.最終更新日時 = DateTime.Now.ToString();
-				Drums.Hash = CScoreIni.t演奏セクションのMD5を求めて返す(Drums);
-				Drums.fゲージ = (float)this.actGauge.db現在のゲージ値[0];
-				if (!TJAPlayer3.ConfigIni.b太鼓パートAutoPlay)
-				{
-					Drums.nハイスコア = TJAPlayer3.stage選曲.r確定されたスコア.譜面情報.nハイスコア; //2015.06.16 kairera0467 他難易度の上書き防止。
-					if (TJAPlayer3.stage選曲.r確定されたスコア.譜面情報.nハイスコア[TJAPlayer3.stage選曲.n確定された曲の難易度] < (int)this.actScore.Get(E楽器パート.DRUMS, 0))
-						Drums.nハイスコア[TJAPlayer3.stage選曲.n確定された曲の難易度] = (int)this.actScore.Get(E楽器パート.DRUMS, 0);
-				}
-				var danC = TJAPlayer3.stage演奏ドラム画面.actDan.GetExam();
-				for (int i = 0; i < danC.Length; i++)
-				{
-					Drums.Dan_C[i] = danC[i];
-				}
+                Drums.fゲージ = (float)this.actGauge.db現在のゲージ値[ 0 ];
+                if( !TJAPlayer3.ConfigIni.b太鼓パートAutoPlay )
+                {
+                    Drums.nハイスコア = TJAPlayer3.stage選曲.r確定されたスコア.譜面情報.nハイスコア; //2015.06.16 kairera0467 他難易度の上書き防止。
+                    if( TJAPlayer3.stage選曲.r確定されたスコア.譜面情報.nハイスコア[ TJAPlayer3.stage選曲.n確定された曲の難易度 ] < (int)this.actScore.Get( E楽器パート.DRUMS, 0 ) )
+                        Drums.nハイスコア[ TJAPlayer3.stage選曲.n確定された曲の難易度 ] = (int)this.actScore.Get( E楽器パート.DRUMS, 0 );
+                }
+                var danC = TJAPlayer3.stage演奏ドラム画面.actDan.GetExam();
+                for (int i = 0; i < danC.Length; i++)
+                {
+                    Drums.Dan_C[i] = danC[i];
+                }
 			}
 		}
 		#endregion
@@ -2607,12 +2606,13 @@ namespace TJAPlayer3
 			{
 				return true;
 			}
-			if (IsDanFailed)
-			{
-				return true;
-			}
+            if (IsDanFailed)
+            {
+                return true;
+            }
 
-			var n現在時刻ms = (long)(CSound管理.rc演奏用タイマ.n現在時刻ms * (((double)TJAPlayer3.ConfigIni.n演奏速度) / 20.0));
+			var n現在時刻ms = CSound管理.rc演奏用タイマ.n現在時刻ms;
+
 			var db現在の譜面スクロール速度 = this.act譜面スクロール速度.db現在の譜面スクロール速度;
 
 			//double speed = 264.0;	// BPM150の時の1小節の長さ[dot]

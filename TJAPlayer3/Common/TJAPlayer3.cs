@@ -555,10 +555,8 @@ namespace TJAPlayer3
 			{
 				this.n進行描画の戻り値 = (r現在のステージ != null) ? r現在のステージ.On進行描画() : 0;
 
-				CScoreIni scoreIni = null;
-
-				if (Control.IsKeyLocked(Keys.CapsLock))             // #30925 2013.3.11 yyagi; capslock=ON時は、EnumSongsしないようにして、起動負荷とASIOの音切れの関係を確認する
-				{                                                       // → songs.db等の書き込み時だと音切れするっぽい
+				if ( Control.IsKeyLocked( Keys.CapsLock ) )				// #30925 2013.3.11 yyagi; capslock=ON時は、EnumSongsしないようにして、起動負荷とASIOの音切れの関係を確認する
+				{														// → songs.db等の書き込み時だと音切れするっぽい
 					actEnumSongs.On非活性化();
 					EnumSongs.SongListEnumCompletelyDone();
 					TJAPlayer3.stage選曲.bIsEnumeratingSongs = false;
@@ -989,7 +987,8 @@ for (int i = 0; i < 3; i++) {
 							case (int)E演奏画面の戻り値.演奏中断:
 								#region [ 演奏キャンセル ]
 								//-----------------------------
-								scoreIni = this.tScoreIniへBGMAdjustとHistoryとPlayCountを更新("Play canceled");
+
+								tScoreIniへBGMAdjustとHistoryとPlayCountを更新( "Play canceled" );
 
 								//int lastd = 0;
 								//int f = 0;
@@ -1035,7 +1034,8 @@ for (int i = 0; i < 3; i++) {
 							case (int)E演奏画面の戻り値.ステージ失敗:
 								#region [ 演奏失敗(StageFailed) ]
 								//-----------------------------
-								scoreIni = this.tScoreIniへBGMAdjustとHistoryとPlayCountを更新("Stage failed");
+
+								tScoreIniへBGMAdjustとHistoryとPlayCountを更新( "Stage failed" );
 
 								DTX.t全チップの再生停止();
 								DTX.On非活性化();
@@ -1048,71 +1048,72 @@ for (int i = 0; i < 3; i++) {
 
 								this.tガベージコレクションを実行する();
 								break;
-							//-----------------------------
-							#endregion
 
-							case (int)E演奏画面の戻り値.ステージ失敗_ハード:
-								#region 演奏失敗(ハードゲージ)
-								//-----------------------------
-								CScoreIni.C演奏記録 c演奏記録_Drums;
-								stage演奏ドラム画面.t演奏結果を格納する(out c演奏記録_Drums);
+                            //-----------------------------
+                            #endregion
 
-								double ps = 0.0, gs = 0.0;
-								if (!c演奏記録_Drums.b全AUTOである && c演奏記録_Drums.n全チップ数 > 0)
-								{
-									ps = c演奏記録_Drums.db演奏型スキル値;
-									gs = c演奏記録_Drums.dbゲーム型スキル値;
-								}
-								string str = "Failed";
-								switch (CScoreIni.t総合ランク値を計算して返す(c演奏記録_Drums, null, null))
-								{
-									case (int)CScoreIni.ERANK.SS:
-										str = string.Format("Failed (SS: {0:F2})", ps);
-										break;
+                            case (int) E演奏画面の戻り値.ステージ失敗_ハード:
+                                #region 演奏失敗(ハードゲージ)
+                                //-----------------------------
+                                CScoreIni.C演奏記録 c演奏記録_Drums;
+                                stage演奏ドラム画面.t演奏結果を格納する(out c演奏記録_Drums);
 
-									case (int)CScoreIni.ERANK.S:
-										str = string.Format("Failed (S: {0:F2})", ps);
-										break;
+                                double ps = 0.0, gs = 0.0;
+                                if (!c演奏記録_Drums.b全AUTOである && c演奏記録_Drums.n全チップ数 > 0)
+                                {
+                                    ps = c演奏記録_Drums.db演奏型スキル値;
+                                    gs = c演奏記録_Drums.dbゲーム型スキル値;
+                                }
+                                string str = "Failed";
+                                switch (CScoreIni.t総合ランク値を計算して返す(c演奏記録_Drums, null, null))
+                                {
+                                    case (int)CScoreIni.ERANK.SS:
+                                        str = string.Format("Failed (SS: {0:F2})", ps);
+                                        break;
 
-									case (int)CScoreIni.ERANK.A:
-										str = string.Format("Failed (A: {0:F2})", ps);
-										break;
+                                    case (int)CScoreIni.ERANK.S:
+                                        str = string.Format("Failed (S: {0:F2})", ps);
+                                        break;
 
-									case (int)CScoreIni.ERANK.B:
-										str = string.Format("Failed (B: {0:F2})", ps);
-										break;
+                                    case (int)CScoreIni.ERANK.A:
+                                        str = string.Format("Failed (A: {0:F2})", ps);
+                                        break;
 
-									case (int)CScoreIni.ERANK.C:
-										str = string.Format("Failed (C: {0:F2})", ps);
-										break;
+                                    case (int)CScoreIni.ERANK.B:
+                                        str = string.Format("Failed (B: {0:F2})", ps);
+                                        break;
 
-									case (int)CScoreIni.ERANK.D:
-										str = string.Format("Failed (D: {0:F2})", ps);
-										break;
+                                    case (int)CScoreIni.ERANK.C:
+                                        str = string.Format("Failed (C: {0:F2})", ps);
+                                        break;
 
-									case (int)CScoreIni.ERANK.E:
-										str = string.Format("Failed (E: {0:F2})", ps);
-										break;
+                                    case (int)CScoreIni.ERANK.D:
+                                        str = string.Format("Failed (D: {0:F2})", ps);
+                                        break;
 
-									case (int)CScoreIni.ERANK.UNKNOWN:  // #23534 2010.10.28 yyagi add: 演奏チップが0個のとき
-										str = "Failed (GAUGE:HARD)";
-										break;
-								}
+                                    case (int)CScoreIni.ERANK.E:
+                                        str = string.Format("Failed (E: {0:F2})", ps);
+                                        break;
 
-								scoreIni = this.tScoreIniへBGMAdjustとHistoryとPlayCountを更新(str);
+                                    case (int)CScoreIni.ERANK.UNKNOWN:  // #23534 2010.10.28 yyagi add: 演奏チップが0個のとき
+                                        str = "Failed (GAUGE:HARD)";
+                                        break;
+                                }
 
-								r現在のステージ.On非活性化();
-								Trace.TraceInformation("----------------------");
-								Trace.TraceInformation("■ 結果");
-								stage結果.st演奏記録.Drums = c演奏記録_Drums;
-								stage結果.On活性化();
-								r直前のステージ = r現在のステージ;
-								r現在のステージ = stage結果;
+                                tScoreIniへBGMAdjustとHistoryとPlayCountを更新(str);
 
-								break;
-							#endregion
+                                r現在のステージ.On非活性化();
+                                Trace.TraceInformation("----------------------");
+                                Trace.TraceInformation("■ 結果");
+                                stage結果.st演奏記録.Drums = c演奏記録_Drums;
+                                stage結果.On活性化();
+                                r直前のステージ = r現在のステージ;
+                                r現在のステージ = stage結果;
 
-							case (int)E演奏画面の戻り値.ステージクリア:
+                                break;
+                            #endregion
+
+                            case (int) E演奏画面の戻り値.ステージクリア:
 								#region [ 演奏クリア ]
 								//-----------------------------
 								stage演奏ドラム画面.t演奏結果を格納する(out c演奏記録_Drums);
@@ -1160,7 +1161,7 @@ for (int i = 0; i < 3; i++) {
 										break;
 								}
 
-								scoreIni = this.tScoreIniへBGMAdjustとHistoryとPlayCountを更新(str);
+								tScoreIniへBGMAdjustとHistoryとPlayCountを更新( str );
 
 								r現在のステージ.On非活性化();
 								Trace.TraceInformation("----------------------");
@@ -2207,17 +2208,16 @@ for (int i = 0; i < 3; i++) {
 				this.b終了処理完了済み = true;
 			}
 		}
-		private CScoreIni tScoreIniへBGMAdjustとHistoryとPlayCountを更新(string str新ヒストリ行)
+
+		private static void tScoreIniへBGMAdjustとHistoryとPlayCountを更新(string str新ヒストリ行)
 		{
-			bool bIsUpdatedDrums, bIsUpdatedGuitar, bIsUpdatedBass;
-			string strFilename = DTX.strファイル名の絶対パス + ".score.ini";
-			CScoreIni ini = new CScoreIni(strFilename);
-			if (!File.Exists(strFilename))
+            string strFilename = DTX.strファイル名の絶対パス + ".score.ini";
+			CScoreIni ini = new CScoreIni( strFilename );
+			if( !File.Exists( strFilename ) )
 			{
 				ini.stファイル.Title = DTX.TITLE;
 				ini.stファイル.Name = DTX.strファイル名;
-				ini.stファイル.Hash = CScoreIni.tファイルのMD5を求めて返す(DTX.strファイル名の絶対パス);
-				for (int i = 0; i < 6; i++)
+				for( int i = 0; i < 6; i++ )
 				{
 					ini.stセクション[i].nPerfectになる範囲ms = nPerfect範囲ms;
 					ini.stセクション[i].nGreatになる範囲ms = nGreat範囲ms;
@@ -2226,8 +2226,8 @@ for (int i = 0; i < 3; i++) {
 				}
 			}
 			ini.stファイル.BGMAdjust = DTX.nBGMAdjust;
-			CScoreIni.t更新条件を取得する(out bIsUpdatedDrums, out bIsUpdatedGuitar, out bIsUpdatedBass);
-			if (bIsUpdatedDrums || bIsUpdatedGuitar || bIsUpdatedBass)
+			CScoreIni.t更新条件を取得する( out var bIsUpdatedDrums, out var bIsUpdatedGuitar, out var bIsUpdatedBass );
+			if( bIsUpdatedDrums || bIsUpdatedGuitar || bIsUpdatedBass )
 			{
 				if (bIsUpdatedDrums)
 				{
@@ -2254,9 +2254,8 @@ for (int i = 0; i < 3; i++) {
 			{
 				ini.t書き出し(strFilename);
 			}
-
-			return ini;
 		}
+
 		private void tガベージコレクションを実行する()
 		{
 			GC.Collect(GC.MaxGeneration);

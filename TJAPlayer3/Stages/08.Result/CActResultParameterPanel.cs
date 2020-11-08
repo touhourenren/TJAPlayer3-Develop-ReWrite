@@ -2,7 +2,6 @@
 using System.Drawing;
 using System.IO;
 using FDK;
-using System;
 
 namespace TJAPlayer3
 {
@@ -115,33 +114,11 @@ namespace TJAPlayer3
 		{
 			this.ct表示用.n現在の値 = this.ct表示用.n終了値;
 		}
-        private void tスコアアニメーション情報の初期化()
-        {
-            this.nScores = new string[] { TJAPlayer3.stage結果.st演奏記録.Drums.nスコア.ToString(), TJAPlayer3.stage結果.st演奏記録.Drums.nPerfect数.ToString(), TJAPlayer3.stage結果.st演奏記録.Drums.nGreat数.ToString(), TJAPlayer3.stage結果.st演奏記録.Drums.nMiss数.ToString(), TJAPlayer3.stage結果.st演奏記録.Drums.n最大コンボ数.ToString(), TJAPlayer3.stage結果.st演奏記録.Drums.n連打数.ToString() };
-            this.ctMainTimer = new CCounter();
 
-            for (int i = 0; i < 6; i++)
-            {
-                if (this.c数字アニメーション[i] == null)
-                    this.c数字アニメーション[i] = new C数字アニメーション();
-                if (i < this.c数字アニメーション.Length)
-                    this.c数字アニメーション[i].b数字アニメ終了した = false;
 
-                this.c数字アニメーション[i].n現在の桁数 = -1;
+		// CActivity 実装
 
-                if (this.c数字アニメーション[i].ct数字待機アニメ == null)
-                {
-                    this.c数字アニメーション[i].ct数字待機アニメ = new CCounter(0, TJAPlayer3.Skin.nScoreEndValueOfWaitingTime, TJAPlayer3.Skin.dbScoreWaitingTime, TJAPlayer3.Timer);
-                    this.c数字アニメーション[i].ct数字終了アニメ = new CCounter(0, TJAPlayer3.Skin.nScoreEndValueOfEndTime, TJAPlayer3.Skin.dbScoreEndTime, TJAPlayer3.Timer);
-                }
-            }
-            if (this.ct数字回転 == null)
-                this.ct数字回転 = new CCounter();
-        }
-
-        // CActivity 実装
-
-        public override void On活性化()
+		public override void On活性化()
 		{
 			this.sdDTXで指定されたフルコンボ音 = null;
 			this.bフルコンボ音再生済み = false;
@@ -153,21 +130,17 @@ namespace TJAPlayer3
 			{
 				this.ct表示用 = null;
 			}
-            if (this.sdDTXで指定されたフルコンボ音 != null)
-            {
-                TJAPlayer3.Sound管理.tサウンドを破棄する(this.sdDTXで指定されたフルコンボ音);
-                this.sdDTXで指定されたフルコンボ音 = null;
-            }
-
-            TJAPlayer3.Skin.sound数字回転音.t停止する();
-
-            base.On非活性化();
+			if( this.sdDTXで指定されたフルコンボ音 != null )
+			{
+				TJAPlayer3.Sound管理.tサウンドを破棄する( this.sdDTXで指定されたフルコンボ音 );
+				this.sdDTXで指定されたフルコンボ音 = null;
+			}
+			base.On非活性化();
 		}
 		public override void OnManagedリソースの作成()
 		{
 			if( !base.b活性化してない )
 			{
-                tスコアアニメーション情報の初期化();
                 Dan_Plate = TJAPlayer3.tテクスチャの生成(Path.GetDirectoryName(TJAPlayer3.DTX.strファイル名の絶対パス) + @"\Dan_Plate.png");
                 base.OnManagedリソースの作成();
 			}
@@ -188,15 +161,10 @@ namespace TJAPlayer3
 			}
 			if( base.b初めての進行描画 )
 			{
-                this.ctMainTimer = new CCounter(0, 999999999, 1, TJAPlayer3.Timer);
-                this.ct数字回転 = new CCounter(0, 9, TJAPlayer3.Skin.dbNumberRotationSpeed, TJAPlayer3.Timer);
-                this.ct表示用 = new CCounter( 0, 0x3e7, 2, TJAPlayer3.Timer );
+				this.ct表示用 = new CCounter( 0, 0x3e7, 2, TJAPlayer3.Timer );
 				base.b初めての進行描画 = false;
 			}
-
-			ctMainTimer.t進行();
-            ct数字回転.t進行Loop();
-            ct表示用.t進行();
+			this.ct表示用.t進行();
             
             TJAPlayer3.Tx.Result_Panel?.t2D描画(TJAPlayer3.app.Device, TJAPlayer3.Skin.nResultPanelP1X, TJAPlayer3.Skin.nResultPanelP1Y);
             TJAPlayer3.Tx.Result_Score_Text?.t2D描画(TJAPlayer3.app.Device, 753, 249); //点
@@ -351,13 +319,25 @@ namespace TJAPlayer3
                 TJAPlayer3.Tx.Gauge_Soul.t2D描画( TJAPlayer3.app.Device, 1174, 107, new Rectangle( 0, 0, 80, 80 ) );
             }
             //演奏中のやつ使いまわせなかった。ファック。
-            if (this.ctMainTimer.n現在の値 >= TJAPlayer3.Skin.nScoreAnimeStartValue)
-            {
-                t数字アニメーション();
-            }
+            this.tスコア文字表示( TJAPlayer3.Skin.nResultScoreP1X, TJAPlayer3.Skin.nResultScoreP1Y, string.Format( "{0,7:######0}",TJAPlayer3.stage結果.st演奏記録.Drums.nスコア ) );
+            this.t小文字表示( TJAPlayer3.Skin.nResultGreatP1X, TJAPlayer3.Skin.nResultGreatP1Y, string.Format( "{0,4:###0}", TJAPlayer3.stage結果.st演奏記録.Drums.nPerfect数.ToString() ) );
+            this.t小文字表示( TJAPlayer3.Skin.nResultGoodP1X, TJAPlayer3.Skin.nResultGoodP1Y, string.Format( "{0,4:###0}", TJAPlayer3.stage結果.st演奏記録.Drums.nGreat数.ToString() ) );
+            this.t小文字表示( TJAPlayer3.Skin.nResultBadP1X, TJAPlayer3.Skin.nResultBadP1Y, string.Format( "{0,4:###0}", TJAPlayer3.stage結果.st演奏記録.Drums.nMiss数.ToString() ) );
+
+            this.t小文字表示( TJAPlayer3.Skin.nResultComboP1X, TJAPlayer3.Skin.nResultComboP1Y, string.Format( "{0,4:###0}", TJAPlayer3.stage結果.st演奏記録.Drums.n最大コンボ数.ToString() ) );
+            this.t小文字表示( TJAPlayer3.Skin.nResultRollP1X, TJAPlayer3.Skin.nResultRollP1Y, string.Format( "{0,4:###0}", TJAPlayer3.stage結果.st演奏記録.Drums.n連打数.ToString() ) );
+            //CDTXMania.act文字コンソール.tPrint( 960, 200, C文字コンソール.Eフォント種別.白, string.Format( "{0,4:###0}",CDTXMania.stage結果.st演奏記録.Drums.nPerfect数.ToString()) );
+            //CDTXMania.act文字コンソール.tPrint( 960, 236, C文字コンソール.Eフォント種別.白, string.Format( "{0,4:###0}",CDTXMania.stage結果.st演奏記録.Drums.nGreat数.ToString()) );
+            //CDTXMania.act文字コンソール.tPrint( 960, 276, C文字コンソール.Eフォント種別.白, string.Format( "{0,4:###0}",CDTXMania.stage結果.st演奏記録.Drums.nMiss数.ToString()) );
+
+            //CDTXMania.act文字コンソール.tPrint( 1150, 200, C文字コンソール.Eフォント種別.白, string.Format( "{0,4:###0}",CDTXMania.stage結果.st演奏記録.Drums.n最大コンボ数.ToString()) );
+			int num = this.ct表示用.n現在の値;
+
+            //this.txプレイヤーナンバー.t2D描画(CDTXMania.app.Device, 254, 93);
+            //this.txネームプレート.t2D描画( CDTXMania.app.Device, 254, 93 );
 
             #region 段位認定モード用
-            if (TJAPlayer3.stage選曲.n確定された曲の難易度 == (int)Difficulty.Dan)
+            if(TJAPlayer3.stage選曲.n確定された曲の難易度 == (int)Difficulty.Dan)
             {
                 TJAPlayer3.stage演奏ドラム画面.actDan.DrawExam(TJAPlayer3.stage結果.st演奏記録.Drums.Dan_C);
                 switch (TJAPlayer3.stage演奏ドラム画面.actDan.GetExamStatus(TJAPlayer3.stage結果.st演奏記録.Drums.Dan_C))
@@ -408,141 +388,45 @@ namespace TJAPlayer3
 
         private CTexture Dan_Plate;
 
-        private string[] nScores;
-        private CCounter ctMainTimer;
+		private void t小文字表示( int x, int y, string str )
+		{
+			foreach( char ch in str )
+			{
+				for( int i = 0; i < this.st小文字位置.Length; i++ )
+				{
+                    if( ch == ' ' )
+                    {
+                        break;
+                    }
 
-        protected void tスコア文字表示(CTexture txScore, int x, int y, int n間隔, string str, ref CCounter ctスコア待機用, ref CCounter ctスコア終了用, ref int n現在の桁数, ref bool b数字アニメを終了した, bool isScore = false)
+					if( this.st小文字位置[ i ].ch == ch )
+					{
+                        var rectangle = new Rectangle( this.st小文字位置[ i ].pt.X, this.st小文字位置[ i ].pt.Y, 32, 38 );
+                        TJAPlayer3.Tx.Result_Number?.t2D描画(TJAPlayer3.app.Device, x, y, rectangle);
+                        break;
+					}
+				}
+				x += 22;
+			}
+		}
+
+        private void tスコア文字表示(int x, int y, string str)
         {
-            ctスコア待機用.t進行();
-            ctスコア終了用.t進行();
-            if (b数字アニメを終了した)
+            foreach (char ch in str)
             {
-                #region [ 終了用カウンターの処理 ]
-                if (!ctスコア終了用.b進行中)
+                for (int i = 0; i < this.stScoreFont.Length; i++)
                 {
-                    ctスコア終了用.t進行();//終了用カウンターを動かす(本家では間隔が違ったので)
-                    ctスコア終了用.n現在の値 = 0;//終了用カウンターを動かす
-                }
-                #endregion
-            }
-            else
-            {
-                #region [ ピッ！音の再生処理や停止処理 ]
-                if (n現在の桁数 < str.Length - (str.Length > 1 ? 1 : 0))
-                {
-                    if (!TJAPlayer3.Skin.sound数字回転音.b再生中)
-                        TJAPlayer3.Skin.sound数字回転音.t再生する();
-                }
-                if ((!ctスコア待機用.b進行中 || ctスコア待機用.n現在の値 == ctスコア待機用.n終了値))
-                {
-                    if (n現在の桁数 < str.Length && n現在の桁数 >= str.Length - 1)
+                    if (this.stScoreFont[i].ch == ch)
                     {
-                        TJAPlayer3.Skin.sound数字回転音.t停止する();
-                        TJAPlayer3.Skin.sound決定音.t再生する();
+                        var rectangle = new Rectangle(this.stScoreFont[ i ].pt.X, 0, 24, 40);
+                        TJAPlayer3.Tx.Result_Score_Number?.t2D描画(TJAPlayer3.app.Device, x, y, rectangle);
+                        break;
                     }
                 }
-                #endregion
-                #region [ 一文字ずつ増えていく仕組みをCCounterで再現 ]
-                if ((!ctスコア待機用.b進行中 || ctスコア待機用.n現在の値 == ctスコア待機用.n終了値))//カウンターの一文字間隔カウンターが終了値に達したら。
-                {
-                    ctスコア待機用.t進行();//カウンターをループさせる
-                    ctスコア待機用.n現在の値 = 0;//カウンターをループさせる
-
-                    if (n現在の桁数 < str.Length)
-                    {
-                        if (n現在の桁数 >= str.Length - 1)
-                        {
-                            TJAPlayer3.Skin.sound数字回転音.t停止する();//ピッ！音を止める。
-                            TJAPlayer3.Skin.sound決定音.t再生する();//ドン！音を再生。
-                        }
-                        n現在の桁数++;//1桁増やす。
-                    }
-                    else
-                    {
-                        b数字アニメを終了した = true;//終了処理のため終了したかを確認するbooleanをここで動かす！！！。。
-                        n現在の桁数 = str.Length;//念のため、終わった時に参照されている文字列の桁数にセット。
-                    }
-                }
-                #endregion
-            }
-            #region [ メインとなる数字 ]
-            for (int nScore = 0; nScore < n現在の桁数; nScore++)
-            {
-                for (int i = 0; i < 10; i++)
-                {
-                    char[] chars = str.ToCharArray();
-                    Array.Reverse(chars);
-                    var ret = new string(chars);
-
-                    if (char.Parse(i.ToString()) == ret.ToCharArray()[nScore])
-                    {
-                        if (txScore != null)
-                        {
-                            Rectangle rectangle = new Rectangle((int)(txScore.szテクスチャサイズ.Width / (10f + (!isScore ? 1f : 0f))) * i, 0, (int)(txScore.szテクスチャサイズ.Width / (10f + (!isScore ? 1f : 0f))), (int)(txScore.szテクスチャサイズ.Height / (!isScore ? 2f : 1f)));
-                            txScore.t2D描画(TJAPlayer3.app.Device, x - (nScore * n間隔) + (isScore ? 155 : 65), y, rectangle);
-                        }
-                    }
-                }
-            }
-            #endregion
-            #region [ ぐるぐる回転する数字 ]
-            if (n現在の桁数 < str.Length)
-            {
-                if (txScore != null)
-                {
-                    Rectangle rectangle = new Rectangle((int)(txScore.szテクスチャサイズ.Width / (10f + (!isScore ? 1f : 0f))) * this.ct数字回転.n現在の値, 0, (int)(txScore.szテクスチャサイズ.Width / (10f + (!isScore ? 1f : 0f))), (int)(txScore.szテクスチャサイズ.Height / (!isScore ? 2f : 1f)));
-                    txScore.t2D描画(TJAPlayer3.app.Device, x - ((n現在の桁数) * n間隔) + (isScore ? 155 : 65), y, rectangle);
-                }
-            }
-            #endregion
-        }
-
-
-        //-----------------
-        #endregion
-
-        private void t数字アニメーション()
-        {
-            #region [ キーが押されたら。。。 ]
-            if (TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.RRed) || TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.LRed))
-            {
-                for (int i = 0; i < this.nScores.Length; i++)
-                {
-                    if (!this.c数字アニメーション[i].b数字アニメ終了した)
-                    {
-                        TJAPlayer3.Skin.sound数字回転音.t停止する();//ピッ！音を止める。
-                        this.c数字アニメーション[i].n現在の桁数 = this.nScores[i].Length;
-                        this.c数字アニメーション[i].b数字アニメ終了した = true;
-                    }
-                }
-            }
-            #endregion
-            int[] nScoreY = new int[] { TJAPlayer3.Skin.nResultScoreP1Y, TJAPlayer3.Skin.nResultGreatP1Y, TJAPlayer3.Skin.nResultGoodP1Y, TJAPlayer3.Skin.nResultBadP1Y, TJAPlayer3.Skin.nResultComboP1Y, TJAPlayer3.Skin.nResultRollP1Y };
-            int[] nScoreX = new int[] { TJAPlayer3.Skin.nResultScoreP1X, TJAPlayer3.Skin.nResultGreatP1X, TJAPlayer3.Skin.nResultGoodP1X, TJAPlayer3.Skin.nResultBadP1X, TJAPlayer3.Skin.nResultComboP1X, TJAPlayer3.Skin.nResultRollP1X };
-            for (int i = 0; i < this.nScores.Length; i++)
-            {
-                if (i == 0)
-                {
-                    this.tスコア文字表示(TJAPlayer3.Tx.Result_Score_Number, nScoreX[0], nScoreY[0], 20, this.nScores[0], ref this.c数字アニメーション[i].ct数字待機アニメ, ref this.c数字アニメーション[i].ct数字終了アニメ, ref this.c数字アニメーション[i].n現在の桁数, ref this.c数字アニメーション[i].b数字アニメ終了した, true);
-                    if (this.c数字アニメーション[i].b数字アニメ終了した ? this.c数字アニメーション[i].ct数字終了アニメ.n現在の値 < this.c数字アニメーション[i].ct数字終了アニメ.n終了値 : true)
-                        return;
-                }
-                else
-                {
-                    this.tスコア文字表示(TJAPlayer3.Tx.Result_Number, nScoreX[i], nScoreY[i], 22, this.nScores[i], ref this.c数字アニメーション[i].ct数字待機アニメ, ref this.c数字アニメーション[i].ct数字終了アニメ, ref this.c数字アニメーション[i].n現在の桁数, ref this.c数字アニメーション[i].b数字アニメ終了した);
-                    if (this.c数字アニメーション[i].b数字アニメ終了した ? this.c数字アニメーション[i].ct数字終了アニメ.n現在の値 < this.c数字アニメーション[i].ct数字終了アニメ.n終了値 : true)
-                        return;
-                }
+                x += 24;
             }
         }
-        class C数字アニメーション
-        {
-            public bool b数字アニメ終了した;
-            public int n現在の桁数;
-            public CCounter ct数字待機アニメ;
-            public CCounter ct数字終了アニメ;
-        }
-        private C数字アニメーション[] c数字アニメーション = new C数字アニメーション[8];
-        private CCounter ct数字回転 = new CCounter();
-    }
+		//-----------------
+		#endregion
+	}
 }

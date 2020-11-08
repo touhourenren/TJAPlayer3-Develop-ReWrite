@@ -306,10 +306,9 @@ namespace TJAPlayer3
 
         //譜面分岐
         private CCounter[] ctレベルアップダウン;
+		
         public CDTX.ECourse[] After;
         public CDTX.ECourse[] Before;
-        //private CTexture txレベルアップ;
-        //private CTexture txレベルダウン;
         //-----------------
         #endregion
 
