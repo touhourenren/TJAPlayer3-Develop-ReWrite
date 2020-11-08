@@ -1534,7 +1534,7 @@ namespace TJAPlayer3
 						soundDeviceType = ESoundDeviceType.ASIO;
 						break;
 					case 2:
-						soundDeviceType = ESoundDeviceType.ExclusiveWASAPI;
+						soundDeviceType = ESoundDeviceType.SharedWASAPI;
 						break;
 					default:
 						soundDeviceType = ESoundDeviceType.Unknown;

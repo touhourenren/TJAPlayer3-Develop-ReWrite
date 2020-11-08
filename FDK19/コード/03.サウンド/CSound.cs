@@ -187,7 +187,7 @@ namespace FDK
 
 			ESoundDeviceType[] ESoundDeviceTypes = new ESoundDeviceType[ 4 ]
 			{
-				ESoundDeviceType.ExclusiveWASAPI,
+				ESoundDeviceType.SharedWASAPI,
 				ESoundDeviceType.ASIO,
 				ESoundDeviceType.DirectSound,
 				ESoundDeviceType.Unknown
@@ -196,7 +196,7 @@ namespace FDK
 			int n初期デバイス;
 			switch ( soundDeviceType )
 			{
-				case ESoundDeviceType.ExclusiveWASAPI:
+				case ESoundDeviceType.SharedWASAPI:
 					n初期デバイス = 0;
 					break;
 				case ESoundDeviceType.ASIO:
@@ -227,7 +227,7 @@ namespace FDK
 					}
 				}
 			}
-			if ( soundDeviceType == ESoundDeviceType.ExclusiveWASAPI || soundDeviceType == ESoundDeviceType.ASIO )
+			if ( soundDeviceType == ESoundDeviceType.SharedWASAPI || soundDeviceType == ESoundDeviceType.ASIO )
 			{
 				//Bass.BASS_SetConfig( BASSConfig.BASS_CONFIG_UPDATETHREADS, 4 );
 				//Bass.BASS_SetConfig( BASSConfig.BASS_CONFIG_UPDATEPERIOD, 0 );

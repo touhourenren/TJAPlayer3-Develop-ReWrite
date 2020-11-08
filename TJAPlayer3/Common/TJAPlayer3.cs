@@ -1764,7 +1764,7 @@ for (int i = 0; i < 3; i++) {
 						soundDeviceType = ESoundDeviceType.ASIO;
 						break;
 					case 2:
-						soundDeviceType = ESoundDeviceType.ExclusiveWASAPI;
+						soundDeviceType = ESoundDeviceType.SharedWASAPI;
 						break;
 					default:
 						soundDeviceType = ESoundDeviceType.Unknown;
