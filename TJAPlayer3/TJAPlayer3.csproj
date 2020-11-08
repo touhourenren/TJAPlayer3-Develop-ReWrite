@@ -123,7 +123,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Updates\UpdateChecker.cs" />
     <EmbeddedResource Include="Properties\Discord.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Discord.Designer.cs</LastGenOutput>
