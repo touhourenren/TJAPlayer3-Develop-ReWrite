@@ -1,47 +1,32 @@
 ---
-name: Bug Report
-about: Create a report to help us improve
+name: バグ報告
+about: ソフト内で発生した問題を報告できます。
 
 ---
 
-**Can you write a one-sentence description of the bug?**
+**注意: お使いのTJAPlayer3-Developが最新のバージョンであること確認してください！**
 
+## 内容
+発生したバグ/問題の具体的な説明を書いてください。
 
+## 発生手順
+バグ/問題を発生させる方法が分かる場合、手順を記入してください。
+1. 記入例です。 手順を番号で分けて
+2. 記入してください。
 
-**What is the current behavior?**
+## 正常時の挙動
+バグ/問題がないと仮定した場合の、正しい挙動がどのようなものか記入してください。
 
+## 動作環境
+バグ/問題が発生した際に使用したコンピュータの環境を記入してください。
 
-
-**Please provide the steps to reproduce and if possible a minimal demo of the problem.**
-
-
-
-**What is the expected behavior?**
-
-
-
-**Please tell us about your environment:**
-
-- TJAPlayer3 version: vX.X.X-yyy
-- Operating system version:
-- Windows System Locale:
-- Display adapter:
-- Audio adapter:
-- Input device:
-
-
-
-**Other information**
-
-If you can provide any additional information, please do. If small, feel free to paste the content into the issue. If larger, consider linking to a Gist or a downloadable file.
-
-Here are some suggestions:
-
-- Related issues
-- Config.ini file
-- Skin *Config.ini files
-- Stack trace(s)
-- Log file(s)
-- Example .tja file(s) (do *not* provide media)
-
+## その他の情報
+上記の内容のほかに提供できる情報がある場合、提供をお願いします。
+例えば以下のようなものを提供していただけると助かります: (ある場合)
+- 似ている/関連している他のバグ報告
+- Config.iniファイル
+- 使用しているスキンの各種Config.iniファイル
+- クラッシュ時のエラー
+- ログファイル
+- バグ/問題の発生が確認できる.tjaファイル (音声は含めないでください)
 
