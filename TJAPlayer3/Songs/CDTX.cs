@@ -2520,7 +2520,7 @@ namespace TJAPlayer3
         private string[] tコマンド行を削除したTJAを返す(string[] input, int nMode)
         {
             var sb = new StringBuilder();
-            
+
             // 18/11/11 AioiLight 譜面にSpace、スペース、Tab等が入っているとおかしくなるので修正。
             // 多分コマンドもスペースが抜かれちゃっているが、コマンド行を除く譜面を返すので大丈夫(たぶん)。
             for (int i = 0; i < input.Length; i++)
@@ -6199,7 +6199,7 @@ namespace TJAPlayer3
                     {
                         this.t入力_行解析_チップ配置(strコマンド, strパラメータ, strコメント);
                     }
-                    EOL:
+                EOL:
                     Debug.Assert(true);     // #23885 2010.12.12 yyagi: dummy line to exit parsing the line
                                             // 2011.8.17 from: "int xx=0;" から変更。毎回警告が出るので。
                 }

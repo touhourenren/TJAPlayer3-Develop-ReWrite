@@ -30,14 +30,13 @@ namespace TJAPlayer3.Tests.Songs
         }
 
         [Test]
-        [TestCase("J-POP", EジャンルAC15SortOrder.JPOP)]
+        [TestCase("J-POP", EジャンルAC15SortOrder.ポップス)]
         [TestCase("アニメ", EジャンルAC15SortOrder.アニメ)]
         [TestCase("ボーカロイド", EジャンルAC15SortOrder.ボーカロイド)]
         [TestCase("VOCALOID", EジャンルAC15SortOrder.ボーカロイド)]
-        [TestCase("どうよう", EジャンルAC15SortOrder.どうよう)]
-        [TestCase("バラエティ", EジャンルAC15SortOrder.バラエティ)]
+        [TestCase("キッズ", EジャンルAC15SortOrder.キッズ)]
         [TestCase("クラシック", EジャンルAC15SortOrder.クラシック)]
-        [TestCase("ゲームミュージック", EジャンルAC15SortOrder.ゲームミュージック)]
+        [TestCase("ゲームミュージック", EジャンルAC15SortOrder.ゲームバラエティ)]
         [TestCase("ナムコオリジナル", EジャンルAC15SortOrder.ナムコオリジナル)]
         [TestCase(null, EジャンルAC15SortOrder.Unknown)]
         [TestCase("", EジャンルAC15SortOrder.Unknown)]

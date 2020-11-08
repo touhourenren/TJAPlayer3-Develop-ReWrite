@@ -8,18 +8,16 @@
             {
                 case CStrジャンル.アニメ:
                     return "Anime";
-                case CStrジャンル.JPOP:
-                    return CStrジャンル.JPOP;
-                case CStrジャンル.ゲームミュージック:
-                    return "Game";
+                case CStrジャンル.ポップス:
+                    return "Pops";
+                case CStrジャンル.ゲームバラエティ:
+                    return "GameVariety";
                 case CStrジャンル.ナムコオリジナル:
                     return "Namco";
                 case CStrジャンル.クラシック:
                     return "Classic";
-                case CStrジャンル.どうよう:
+                case CStrジャンル.キッズ:
                     return "Child";
-                case CStrジャンル.バラエティ:
-                    return "Variety";
                 case CStrジャンル.ボーカロイドJP:
                 case CStrジャンル.ボーカロイドEN:
                     return "Vocaloid";

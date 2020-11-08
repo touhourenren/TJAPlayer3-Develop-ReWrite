@@ -1089,8 +1089,8 @@ namespace TJAPlayer3
 						break;
 
 					case C曲リストノード.Eノード種別.BOX:
-						if (TJAPlayer3.Tx.SongSelect_Frame_Box != null)
-							TJAPlayer3.Tx.SongSelect_Frame_Box.t2D描画(TJAPlayer3.app.Device, 450, TJAPlayer3.Skin.SongSelect_Overall_Y);
+						var frameBoxIndex = CStrジャンルtoNum.ForFrameBoxIndex(r現在選択中の曲.strジャンル);
+						TJAPlayer3.Tx.SongSelect_Frame_Box[frameBoxIndex]?.t2D描画(TJAPlayer3.app.Device, 450, TJAPlayer3.Skin.SongSelect_Overall_Y);
 						break;
 
 					case C曲リストノード.Eノード種別.BACKBOX:
@@ -1194,10 +1194,10 @@ namespace TJAPlayer3
 			}
 			//-----------------
 
-			if (this.e曲のバー種別を返す(this.r現在選択中の曲) == Eバー種別.Score && this.nStrジャンルtoNum(this.r現在選択中の曲.strジャンル) != 8)
+			if (this.e曲のバー種別を返す(this.r現在選択中の曲) == Eバー種別.Score && CStrジャンルtoNum.ForGenreTextIndex(this.r現在選択中の曲.strジャンル) != 8)
 			{
 				if (TJAPlayer3.Tx.SongSelect_GenreText != null)
-					TJAPlayer3.Tx.SongSelect_GenreText.t2D描画(TJAPlayer3.app.Device, 496, TJAPlayer3.Skin.SongSelect_Overall_Y - 64, new Rectangle(0, 60 * this.nStrジャンルtoNum(this.r現在選択中の曲.strジャンル), 288, 60));
+					TJAPlayer3.Tx.SongSelect_GenreText.t2D描画(TJAPlayer3.app.Device, 496, TJAPlayer3.Skin.SongSelect_Overall_Y - 64, new Rectangle(0, 60 * CStrジャンルtoNum.ForGenreTextIndex(this.r現在選択中の曲.strジャンル), 288, 60));
 			}
 			return 0;
 		}
@@ -1433,7 +1433,6 @@ namespace TJAPlayer3
 			{
 				this.stバー情報[ i ].strタイトル文字列 = song.strタイトル;
                 this.stバー情報[ i ].strジャンル = song.strジャンル;
-				this.stバー情報[ i ].col文字色 = song.col文字色;
                 this.stバー情報[i].ForeColor = song.ForeColor;
                 this.stバー情報[i].BackColor = song.BackColor;
 				this.stバー情報[ i ].eバー種別 = this.e曲のバー種別を返す( song );
@@ -1472,6 +1471,9 @@ namespace TJAPlayer3
 
             var barGenreIndex = CStrジャンルtoNum.ForBarGenreIndex( strジャンル );
 		    TJAPlayer3.Tx.SongSelect_Bar_Genre[barGenreIndex]?.t2D描画( TJAPlayer3.app.Device, x, y );
+
+			if (eバー種別 != Eバー種別.BackBox)
+				TJAPlayer3.Tx.SongSelect_Bar_Genre[8]?.t2D描画(TJAPlayer3.app.Device, x, y);
 		}
 
         private TitleTextureKey ttk曲名テクスチャを生成する( string str文字, Color forecolor, Color backcolor)
@@ -1498,7 +1500,7 @@ namespace TJAPlayer3
 	    private static CTexture GenerateTitleTexture(TitleTextureKey titleTextureKey)
 	    {
 			using (var bmp = new Bitmap(titleTextureKey.cPrivateFastFont.DrawPrivateFont(
-	            titleTextureKey.str文字, titleTextureKey.forecolor, titleTextureKey.backcolor, true)))
+	            titleTextureKey.str文字, titleTextureKey.forecolor, titleTextureKey.backcolor)))
 	        {
 	            CTexture tx文字テクスチャ = TJAPlayer3.tテクスチャの生成(bmp, false);
 	            if (tx文字テクスチャ.szテクスチャサイズ.Height > titleTextureKey.maxHeight)

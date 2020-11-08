@@ -16,15 +16,13 @@
                     return 3;
                 case CStrジャンル.クラシック:
                     return 4;
-                case CStrジャンル.どうよう:
+                case CStrジャンル.キッズ:
                     return 5;
-                case CStrジャンル.バラエティ:
-                    return 6;
                 case CStrジャンル.ボーカロイドJP:
                 case CStrジャンル.ボーカロイドEN:
-                    return 7;
+                    return 6;
                 default:
-                    return 8;
+                    return 7;
             }
         }
 
@@ -39,10 +37,8 @@
                 case CStrジャンル.ボーカロイドJP:
                 case CStrジャンル.ボーカロイドEN:
                     return EジャンルAC15SortOrder.ボーカロイド;
-                case CStrジャンル.どうよう:
-                    return EジャンルAC15SortOrder.どうよう;
-                case CStrジャンル.バラエティ:
-                    return EジャンルAC15SortOrder.バラエティ;
+                case CStrジャンル.キッズ:
+                    return EジャンルAC15SortOrder.キッズ;
                 case CStrジャンル.クラシック:
                     return EジャンルAC15SortOrder.クラシック;
                 case CStrジャンル.ゲームバラエティ:
@@ -78,13 +74,11 @@
                     return 4;
                 case CStrジャンル.クラシック:
                     return 5;
-                case CStrジャンル.バラエティ:
+                case CStrジャンル.キッズ:
                     return 6;
-                case CStrジャンル.どうよう:
-                    return 7;
                 case CStrジャンル.ボーカロイドJP:
                 case CStrジャンル.ボーカロイドEN:
-                    return 8;
+                    return 7;
                 default:
                     return 0;
             }

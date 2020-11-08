@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Diagnostics;
+using DirectShowLib.DES;
 
 namespace TJAPlayer3
 {
@@ -89,7 +90,13 @@ namespace TJAPlayer3
 		/// <returns>描画済テクスチャ</returns>
 		public Bitmap DrawPrivateFont( string drawstr, Color fontColor, Color edgeColor, bool bVertical )
 		{
-			return DrawPrivateFont_V( drawstr, fontColor, edgeColor, bVertical );
+			if (bVertical)
+            {
+				return DrawPrivateFont_V(drawstr, fontColor, edgeColor, bVertical);
+			}else
+            {
+				return DrawPrivateFont(drawstr, fontColor, edgeColor, bVertical);
+			}
 		}
 
 		#endregion
