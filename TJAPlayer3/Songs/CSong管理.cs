@@ -946,54 +946,6 @@ namespace TJAPlayer3
 		}
 		private void t曲リストへ後処理を適用する( List<C曲リストノード> ノードリスト )
 		{
-			#region [ リストに１つ以上の曲があるなら RANDOM BOX を入れる ]
-			//-----------------------------
-			if( ノードリスト.Count > 0 )
-			{
-				C曲リストノード itemRandom = new C曲リストノード();
-				itemRandom.eノード種別 = C曲リストノード.Eノード種別.RANDOM;
-				itemRandom.strタイトル = "ランダムに曲をえらぶ";
-				itemRandom.nスコア数 = (int)Difficulty.Total;
-				itemRandom.r親ノード = ノードリスト[ 0 ].r親ノード;
-                
-                itemRandom.strBreadcrumbs = ( itemRandom.r親ノード == null ) ?
-					itemRandom.strタイトル :  itemRandom.r親ノード.strBreadcrumbs + " > " + itemRandom.strタイトル;
-
-				for( int i = 0; i < (int)Difficulty.Total; i++ )
-				{
-					itemRandom.arスコア[ i ] = new Cスコア();
-					itemRandom.arスコア[ i ].譜面情報.タイトル = string.Format( "< RANDOM SELECT Lv.{0} >", i + 1 );
-					itemRandom.arスコア[i].譜面情報.コメント =
-						 (CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ja") ?
-						 string.Format("難易度レベル {0} 付近の曲をランダムに選択します。難易度レベルを持たない曲も選択候補となります。", i + 1) :
-						 string.Format("Random select from the songs which has the level about L{0}. Non-leveled songs may also selected.", i + 1);
-					itemRandom.ar難易度ラベル[ i ] = string.Format( "L{0}", i + 1 );
-				}
-				ノードリスト.Add( itemRandom );
-
-				#region [ ログ出力 ]
-				//-----------------------------
-				if( TJAPlayer3.ConfigIni.bLog曲検索ログ出力 )
-				{
-					StringBuilder sb = new StringBuilder( 0x100 );
-					sb.Append( string.Format( "nID#{0:D3}", itemRandom.nID ) );
-					if( itemRandom.r親ノード != null )
-					{
-						sb.Append( string.Format( "(in#{0:D3}):", itemRandom.r親ノード.nID ) );
-					}
-					else
-					{
-						sb.Append( "(onRoot):" );
-					}
-					sb.Append( " RANDOM" );
-					Trace.TraceInformation( sb.ToString() );
-				}
-				//-----------------------------
-				#endregion
-			}
-			//-----------------------------
-			#endregion
-
 			// すべてのノードについて…
 			foreach( C曲リストノード c曲リストノード in ノードリスト )
 			{
@@ -1003,52 +955,56 @@ namespace TJAPlayer3
 				//-----------------------------
 				if( c曲リストノード.eノード種別 == C曲リストノード.Eノード種別.BOX )
 				{
-					C曲リストノード itemBack = new C曲リストノード();
-					itemBack.eノード種別 = C曲リストノード.Eノード種別.BACKBOX;
-					itemBack.strタイトル = "とじる";
-					itemBack.nスコア数 = 1;
-					itemBack.r親ノード = c曲リストノード;
-
-					itemBack.strSkinPath = ( c曲リストノード.r親ノード == null ) ?
-						"" : c曲リストノード.r親ノード.strSkinPath;
-
-					if ( itemBack.strSkinPath != "" && !listStrBoxDefSkinSubfolderFullName.Contains( itemBack.strSkinPath ) )
+					int 曲数 = c曲リストノード.list子リスト.Count;
+					for (int index = 0; index < ((曲数 - 1) / 15) + 2; index++)
 					{
-						listStrBoxDefSkinSubfolderFullName.Add( itemBack.strSkinPath );
-					}
+						C曲リストノード itemBack = new C曲リストノード();
+						itemBack.eノード種別 = C曲リストノード.Eノード種別.BACKBOX;
+						itemBack.strタイトル = "";
+						itemBack.strジャンル = c曲リストノード.strジャンル;
+						itemBack.nスコア数 = 1;
+						itemBack.r親ノード = c曲リストノード;
+						itemBack.strSkinPath = (c曲リストノード.r親ノード == null) ?
+							"" : c曲リストノード.r親ノード.strSkinPath;
 
-					itemBack.strBreadcrumbs = ( itemBack.r親ノード == null ) ?
-						itemBack.strタイトル : itemBack.r親ノード.strBreadcrumbs + " > " + itemBack.strタイトル;
-
-					itemBack.arスコア[ 0 ] = new Cスコア();
-					itemBack.arスコア[ 0 ].ファイル情報.フォルダの絶対パス = "";
-					itemBack.arスコア[ 0 ].譜面情報.タイトル = itemBack.strタイトル;
-					itemBack.arスコア[ 0 ].譜面情報.コメント =
-						(CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ja") ?
-						"BOX を出ます。" :
-						"Exit from the BOX.";
-					c曲リストノード.list子リスト.Insert( 0, itemBack );
-
-					#region [ ログ出力 ]
-					//-----------------------------
-					if( TJAPlayer3.ConfigIni.bLog曲検索ログ出力 )
-					{
-						StringBuilder sb = new StringBuilder( 0x100 );
-						sb.Append( string.Format( "nID#{0:D3}", itemBack.nID ) );
-						if( itemBack.r親ノード != null )
+						if (itemBack.strSkinPath != "" && !listStrBoxDefSkinSubfolderFullName.Contains(itemBack.strSkinPath))
 						{
-							sb.Append( string.Format( "(in#{0:D3}):", itemBack.r親ノード.nID ) );
+							listStrBoxDefSkinSubfolderFullName.Add(itemBack.strSkinPath);
 						}
-						else
-						{
-							sb.Append( "(onRoot):" );
-						}
-						sb.Append( " BACKBOX" );
-						Trace.TraceInformation( sb.ToString() );
-					}
-					//-----------------------------
-					#endregion
 
+						itemBack.strBreadcrumbs = (itemBack.r親ノード == null) ?
+							itemBack.strタイトル : itemBack.r親ノード.strBreadcrumbs + " > " + itemBack.strタイトル;
+
+						itemBack.arスコア[0] = new Cスコア();
+						itemBack.arスコア[0].ファイル情報.フォルダの絶対パス = "";
+						itemBack.arスコア[0].譜面情報.タイトル = itemBack.strタイトル;
+						itemBack.arスコア[0].譜面情報.コメント =
+							(CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ja") ?
+							"BOX を出ます。" :
+							"Exit from the BOX.";
+
+						c曲リストノード.list子リスト.Insert(Math.Min(index * (15 + 1), c曲リストノード.list子リスト.Count), itemBack);
+
+						#region [ ログ出力 ]
+						//-----------------------------
+						if (TJAPlayer3.ConfigIni.bLog曲検索ログ出力)
+						{
+							StringBuilder sb = new StringBuilder(0x100);
+							sb.Append(string.Format("nID#{0:D3}", itemBack.nID));
+							if (itemBack.r親ノード != null)
+							{
+								sb.Append(string.Format("(in#{0:D3}):", itemBack.r親ノード.nID));
+							}
+							else
+							{
+								sb.Append("(onRoot):");
+							}
+							sb.Append(" BACKBOX");
+							Trace.TraceInformation(sb.ToString());
+						}
+						//-----------------------------
+						#endregion
+					}
 					this.t曲リストへ後処理を適用する( c曲リストノード.list子リスト );
 					continue;
 				}
