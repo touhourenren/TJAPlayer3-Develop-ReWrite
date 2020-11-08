@@ -996,7 +996,8 @@ namespace TJAPlayer3
 					{
 						C曲リストノード itemBack = new C曲リストノード();
 						itemBack.eノード種別 = C曲リストノード.Eノード種別.BACKBOX;
-						itemBack.strタイトル = "とじる";
+						itemBack.strタイトル = "";
+						itemBack.strジャンル = c曲リストノード.strジャンル;
 						itemBack.nスコア数 = 1;
 						itemBack.r親ノード = c曲リストノード;
 
