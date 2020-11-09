@@ -213,7 +213,14 @@ namespace TJAPlayer3
 									c曲リストノード.strタイトル = dtx.TITLE;
 									c曲リストノード.strサブタイトル = dtx.SUBTITLE;
 
-									c曲リストノード.strジャンル = dtx.GENRE.ToNullIfEmpty() ?? boxdef?.Genre ?? c曲リストノード.r親ノード?.strジャンル;
+									var genreName = dtx.GENRE.ToNullIfEmpty() ?? boxdef?.Genre ?? c曲リストノード.r親ノード?.strジャンル;
+									if (genreName == "J-POP") genreName = "ポップス";
+									if (genreName == "ゲームミュージック") genreName = "ゲームバラエティ";
+									if (genreName == "バラエティ") genreName = "ゲームバラエティ";
+									if (genreName == "バラエティー") genreName = "ゲームバラエティ";
+									if (genreName == "どうよう") genreName = "キッズ";
+									c曲リストノード.strジャンル = genreName;
+
 									c曲リストノード.ForeColor = boxdef?.ForeColor ?? c曲リストノード.r親ノード?.ForeColor ?? c曲リストノード.ForeColor;
 									c曲リストノード.BackColor = boxdef?.BackColor ?? c曲リストノード.r親ノード?.BackColor ?? c曲リストノード.BackColor;
 
