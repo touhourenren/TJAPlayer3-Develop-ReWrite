@@ -346,7 +346,14 @@ namespace TJAPlayer3
 								c曲リストノード.strサブタイトル = dtx.SUBTITLE;
 								c曲リストノード.strジャンル = dtx.GENRE;
 
-								c曲リストノード.strジャンル = dtx.GENRE.ToNullIfEmpty() ?? boxdef?.Genre ?? c曲リストノード.r親ノード?.strジャンル;
+								var genreName = dtx.GENRE.ToNullIfEmpty() ?? boxdef?.Genre ?? c曲リストノード.r親ノード?.strジャンル;
+								if (genreName == "J-POP") genreName = "ポップス";
+								if (genreName == "ゲームミュージック") genreName = "ゲームバラエティ";
+								if (genreName == "バラエティ") genreName = "ゲームバラエティ";
+								if (genreName == "バラエティー") genreName = "ゲームバラエティ";
+								if (genreName == "どうよう") genreName = "キッズ";
+								c曲リストノード.strジャンル = genreName;
+
 								c曲リストノード.ForeColor = boxdef?.ForeColor ?? c曲リストノード.r親ノード?.ForeColor ?? c曲リストノード.ForeColor;
 								c曲リストノード.BackColor = boxdef?.BackColor ?? c曲リストノード.r親ノード?.BackColor ?? c曲リストノード.BackColor;
 
@@ -480,7 +487,13 @@ namespace TJAPlayer3
 						}
 						if (dtxfilesBoxdef.Genre != null)
 						{
-							c曲リストノード.strジャンル = dtxfilesBoxdef.Genre;
+							var genreName = dtxfilesBoxdef.Genre;
+							if (genreName == "J-POP") genreName = "ポップス";
+							if (genreName == "ゲームミュージック") genreName = "ゲームバラエティ";
+							if (genreName == "バラエティ") genreName = "ゲームバラエティ";
+							if (genreName == "バラエティー") genreName = "ゲームバラエティ";
+							if (genreName == "どうよう") genreName = "キッズ";
+							c曲リストノード.strジャンル = genreName;
 						}
 						if (dtxfilesBoxdef.ForeColor != null)
 						{
@@ -535,7 +548,14 @@ namespace TJAPlayer3
 					c曲リストノード.eノード種別 = C曲リストノード.Eノード種別.BOX;
 					c曲リストノード.bDTXFilesで始まるフォルダ名のBOXである = false;
 					c曲リストノード.strタイトル = boxdef.Title ?? "";
-					c曲リストノード.strジャンル = boxdef.Genre ?? "";
+					
+					var genreName = boxdef.Genre ?? "";
+					if (genreName == "J-POP") genreName = "ポップス";
+					if (genreName == "ゲームミュージック") genreName = "ゲームバラエティ";
+					if (genreName == "バラエティ") genreName = "ゲームバラエティ";
+					if (genreName == "バラエティー") genreName = "ゲームバラエティ";
+					if (genreName == "どうよう") genreName = "キッズ";
+					c曲リストノード.strジャンル = genreName;
 
 					if (boxdef.ForeColor != null)
 					{
