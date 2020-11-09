@@ -1,57 +1,92 @@
 ﻿namespace TJAPlayer3
 {
-    internal static class CStrジャンルtoNum
+    public static class CStrジャンルtoNum
     {
-        internal static int ForAC8_14( string strジャンル )
+        public static int ForAC8_14SortOrder( string strジャンル )
         {
             switch( strジャンル )
             {
-                case "アニメ":
+                case CStrジャンル.アニメ:
                     return 0;
-                case "ポップス":
+                case CStrジャンル.ポップス:
                     return 1;
-                case "ゲームミュージック":
+                case CStrジャンル.ゲームバラエティ:
                     return 2;
-                case "ナムコオリジナル":
+                case CStrジャンル.ナムコオリジナル:
                     return 3;
-                case "クラシック":
+                case CStrジャンル.クラシック:
                     return 4;
-                case "どうよう":
+                case CStrジャンル.キッズ:
                     return 5;
-                case "バラエティ":
+                case CStrジャンル.ボーカロイドJP:
+                case CStrジャンル.ボーカロイドEN:
                     return 6;
-                case "ボーカロイド":
-                case "VOCALOID":
-                    return 7;
                 default:
-                    return 8;
+                    return 7;
             }
         }
 
-        internal static int ForAC15(string strジャンル)
+        public static EジャンルAC15SortOrder ForAC15SortOrder( string strジャンル )
         {
-            switch (strジャンル)
+            switch ( strジャンル )
             {
-                case "ポップス":
-                    return 0;
-                case "アニメ":
+                case CStrジャンル.ポップス:
+                    return EジャンルAC15SortOrder.ポップス;
+                case CStrジャンル.アニメ:
+                    return EジャンルAC15SortOrder.アニメ;
+                case CStrジャンル.ボーカロイドJP:
+                case CStrジャンル.ボーカロイドEN:
+                    return EジャンルAC15SortOrder.ボーカロイド;
+                case CStrジャンル.キッズ:
+                    return EジャンルAC15SortOrder.キッズ;
+                case CStrジャンル.クラシック:
+                    return EジャンルAC15SortOrder.クラシック;
+                case CStrジャンル.ゲームバラエティ:
+                    return EジャンルAC15SortOrder.ゲームバラエティ;
+                case CStrジャンル.ナムコオリジナル:
+                    return EジャンルAC15SortOrder.ナムコオリジナル;
+                default:
+                    return EジャンルAC15SortOrder.Unknown;
+            }
+        }
+
+        public static int ForBarGenreIndex( string strジャンル )
+        {
+            return ForGenreBackIndex( strジャンル );
+        }
+
+        public static int ForFrameBoxIndex( string strジャンル )
+        {
+            return ForGenreBackIndex( strジャンル );
+        }
+
+        public static int ForGenreBackIndex( string strジャンル )
+        {
+            switch ( strジャンル )
+            {
+                case CStrジャンル.ポップス:
                     return 1;
-                case "ボーカロイド":
-                case "VOCALOID":
+                case CStrジャンル.アニメ:
                     return 2;
-                case "キッズ":
+                case CStrジャンル.ゲームバラエティ:
                     return 3;
-                case "バラエティ":
+                case CStrジャンル.ナムコオリジナル:
                     return 4;
-                case "クラシック":
+                case CStrジャンル.クラシック:
                     return 5;
-                case "ゲームバラエティ":
+                case CStrジャンル.キッズ:
                     return 6;
-                case "ナムコオリジナル":
+                case CStrジャンル.ボーカロイドJP:
+                case CStrジャンル.ボーカロイドEN:
                     return 7;
                 default:
-                    return 8;
+                    return 0;
             }
+        }
+
+        public static int ForGenreTextIndex( string strジャンル )
+        {
+            return ForAC8_14SortOrder( strジャンル );
         }
     }
 }

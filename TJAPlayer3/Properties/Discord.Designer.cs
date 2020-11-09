@@ -19,7 +19,7 @@ namespace TJAPlayer3.Properties {
     // または Visual Studio のようなツールを使用して自動生成されました。
     // メンバーを追加または削除するには、.ResX ファイルを編集して、/str オプションと共に
     // ResGen を実行し直すか、または VS プロジェクトをビルドし直します。
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Discord {
@@ -70,7 +70,7 @@ namespace TJAPlayer3.Properties {
         }
         
         /// <summary>
-        ///   Playing に類似しているローカライズされた文字列を検索します。
+        ///   Playing a song に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string Stage_InGame {
             get {
@@ -97,7 +97,7 @@ namespace TJAPlayer3.Properties {
         }
         
         /// <summary>
-        ///   SongSelect に類似しているローカライズされた文字列を検索します。
+        ///   Selecting a song に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string Stage_SongSelect {
             get {
@@ -106,7 +106,7 @@ namespace TJAPlayer3.Properties {
         }
         
         /// <summary>
-        ///   Startup に類似しているローカライズされた文字列を検索します。
+        ///   Starting up... に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string Stage_StartUp {
             get {

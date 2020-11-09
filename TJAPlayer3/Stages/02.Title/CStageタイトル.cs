@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 using System.Drawing;
 using SlimDX.DirectInput;
 using FDK;
-using System.Reflection;
 
 namespace TJAPlayer3
 {
@@ -145,8 +142,7 @@ namespace TJAPlayer3
 
 				// キー入力
 
-				if( base.eフェーズID == CStage.Eフェーズ.共通_通常状態		// 通常状態、かつ
-					&& TJAPlayer3.act現在入力を占有中のプラグイン == null )	// プラグインの入力占有がない
+				if( base.eフェーズID == CStage.Eフェーズ.共通_通常状態 )	// 通常状態
 				{
 					if( TJAPlayer3.Input管理.Keyboard.bキーが押された( (int) Key.Escape ) )
 						return (int) E戻り値.EXIT;
@@ -184,20 +180,17 @@ namespace TJAPlayer3
 
                 // 描画
 
-                if (TJAPlayer3.Tx.Title_Background != null )
-                    TJAPlayer3.Tx.Title_Background.t2D描画( TJAPlayer3.app.Device, 0, 0 );
+                TJAPlayer3.Tx.Title_Background?.t2D描画( TJAPlayer3.app.Device, 0, 0 );
 
                 #region[ バージョン表示 ]
-                //string strVersion = "KTT:J:A:I:2017072200";
-                string strCreator = "https://github.com/AioiLight/TJAPlayer3";
-                AssemblyName asmApp = Assembly.GetExecutingAssembly().GetName();
+                const string repositoryUrl = "https://github.com/twopointzero/TJAPlayer3";
 #if DEBUG
                 TJAPlayer3.act文字コンソール.tPrint(4, 44, C文字コンソール.Eフォント種別.白, "DEBUG BUILD");
 #endif
-                TJAPlayer3.act文字コンソール.tPrint(4, 4, C文字コンソール.Eフォント種別.白, asmApp.Name + " Ver." + TJAPlayer3.VERSION + " (" + strCreator + ")" );
+                TJAPlayer3.act文字コンソール.tPrint(4, 4, C文字コンソール.Eフォント種別.白, $"{TJAPlayer3.AppDisplayNameWithInformationalVersion} ({repositoryUrl})");
                 TJAPlayer3.act文字コンソール.tPrint(4, 24, C文字コンソール.Eフォント種別.白, "Skin:" + TJAPlayer3.Skin.Skin_Name + " Ver." + TJAPlayer3.Skin.Skin_Version + " (" + TJAPlayer3.Skin.Skin_Creator + ")");
                 //CDTXMania.act文字コンソール.tPrint(4, 24, C文字コンソール.Eフォント種別.白, strSubTitle);
-                TJAPlayer3.act文字コンソール.tPrint(4, (720 - 24), C文字コンソール.Eフォント種別.白, "TJAPlayer3 forked TJAPlayer2 forPC(kairera0467)");
+                TJAPlayer3.act文字コンソール.tPrint(4, (720 - 24), C文字コンソール.Eフォント種別.白, $"{TJAPlayer3.AppDisplayName} is open source software under the MIT license. See README for acknowledgments.");
                 #endregion
 
                 
@@ -245,7 +238,7 @@ namespace TJAPlayer3
                 if(TJAPlayer3.Input管理.Mouse.bキーが押された((int) MouseObject.Button1))
                 {
                     if (point.X >= 180 * scaling && point.X <= 490 * scaling && point.Y >= 0 && point.Y <= 20 * scaling)
-                        System.Diagnostics.Process.Start(strCreator);
+                        System.Diagnostics.Process.Start(repositoryUrl);
                 }
 
                 //CDTXMania.act文字コンソール.tPrint(0, 80, C文字コンソール.Eフォント種別.白, point.X.ToString());
