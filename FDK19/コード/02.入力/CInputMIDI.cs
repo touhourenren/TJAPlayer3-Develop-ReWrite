@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
+using System.Diagnostics;
 
 namespace FDK
 {
@@ -76,6 +78,14 @@ namespace FDK
 			return false;
 		}
 		public bool bキーが押されている( int nKey )
+		{
+			return false;
+		}
+		public bool bキーが離された( int nKey )
+		{
+			return false;
+		}
+		public bool bキーが離されている( int nKey )
 		{
 			return false;
 		}

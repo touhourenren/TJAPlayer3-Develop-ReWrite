@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace TJAPlayer3
@@ -39,6 +40,18 @@ namespace TJAPlayer3
 
 		// コンストラクタ
 
+		public CDTXVersion()
+		{
+			this.n整数部 = 0;
+			this.n小数部 = 0;
+			this.Unknown = true;
+		}
+		public CDTXVersion( int n整数部 )
+		{
+			this.n整数部 = n整数部;
+			this.n小数部 = 0;
+			this.Unknown = false;
+		}
 		public CDTXVersion( string Version )
 		{
 			this.n整数部 = 0;
@@ -98,6 +111,13 @@ namespace TJAPlayer3
 				}
 			}
 		}
+		public CDTXVersion( int n整数部, int n小数部 )
+		{
+			this.n整数部 = n整数部;
+			this.n小数部 = n小数部;
+			this.Unknown = false;
+		}
+
 	
 		// メソッド
 		

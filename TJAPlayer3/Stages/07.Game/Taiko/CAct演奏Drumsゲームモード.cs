@@ -465,30 +465,31 @@ namespace TJAPlayer3
                 //CDTXMania.act文字コンソール.tPrint( 100, 16 * 7, C文字コンソール.Eフォント種別.白, this.st叩ききりまショー.ct加算審査中.n現在の値.ToString() );
 
                 #region[ 残り時間描画 ]
-                TJAPlayer3.Tx.GameMode_Timer_Frame?.t2D描画( TJAPlayer3.app.Device, 230, 84 );
-                this.st叩ききりまショー.ct針アニメ.t進行Loop();
-
-                int nCenterX = 230;
-                int nCerterY = 84;
-                float fRotate = -C変換.DegreeToRadian( 360.0f * ( this.st叩ききりまショー.ct針アニメ.n現在の値 / 1000.0f ) );
-                if( this.st叩ききりまショー.b加算アニメ中 == true )
-                    fRotate = C変換.DegreeToRadian( 360.0f * ( this.st叩ききりまショー.ct針アニメ.n現在の値 / (float)this.st叩ききりまショー.n延長アニメ速度 ) );
-
-                SlimDX.Matrix mat = SlimDX.Matrix.Identity;
-                if( this.st叩ききりまショー.b最初のチップが叩かれた )
+                if(TJAPlayer3.Tx.Taiko_Combo != null )
                 {
-                    mat *= SlimDX.Matrix.RotationZ( fRotate );
-                    mat *= SlimDX.Matrix.Translation( 280 - 640, -( 134 - 360 ), 0 );
-                }
-                else
-                {
-                    mat *= SlimDX.Matrix.Translation( 280 - 640, -( 134 - 360 ), 0 );
-                }
+                    if (TJAPlayer3.Tx.GameMode_Timer_Frame != null)
+                        TJAPlayer3.Tx.GameMode_Timer_Frame.t2D描画( TJAPlayer3.app.Device, 230, 84 );
+                    this.st叩ききりまショー.ct針アニメ.t進行Loop();
 
-                TJAPlayer3.Tx.GameMode_Timer_Tick?.t3D描画( TJAPlayer3.app.Device, mat );
+                    int nCenterX = 230;
+                    int nCerterY = 84;
+                    float fRotate = -C変換.DegreeToRadian( 360.0f * ( this.st叩ききりまショー.ct針アニメ.n現在の値 / 1000.0f ) );
+                    if( this.st叩ききりまショー.b加算アニメ中 == true )
+                        fRotate = C変換.DegreeToRadian( 360.0f * ( this.st叩ききりまショー.ct針アニメ.n現在の値 / (float)this.st叩ききりまショー.n延長アニメ速度 ) );
 
-                if (TJAPlayer3.Tx.GameMode_Timer_Frame != null)
-                {
+                    SlimDX.Matrix mat = SlimDX.Matrix.Identity;
+                    if( this.st叩ききりまショー.b最初のチップが叩かれた )
+                    {
+                        mat *= SlimDX.Matrix.RotationZ( fRotate );
+                        mat *= SlimDX.Matrix.Translation( 280 - 640, -( 134 - 360 ), 0 );
+                    }
+                    else
+                    {
+                        mat *= SlimDX.Matrix.Translation( 280 - 640, -( 134 - 360 ), 0 );
+                    }
+
+                    TJAPlayer3.Tx.GameMode_Timer_Tick.t3D描画( TJAPlayer3.app.Device, mat );
+
                     string str表示する残り時間 = ( this.st叩ききりまショー.ct残り時間.n現在の値 < 1000 ) ? "25" : ( ( 26000 - this.st叩ききりまショー.ct残り時間.n現在の値 ) / 1000 ).ToString();
                     this.t小文字表示( 230 + (str表示する残り時間.Length * TJAPlayer3.Skin.Game_Taiko_Combo_Size[0] / 4 ), 84 + TJAPlayer3.Tx.GameMode_Timer_Frame.szテクスチャサイズ.Height / 2 , string.Format("{0,2:#0}", str表示する残り時間 ));
                 }
@@ -646,8 +647,8 @@ namespace TJAPlayer3
                 #endregion
 
 
-                this.n最後に時間延長した時刻 = (int)(CSound管理.rc演奏用タイマ.n現在時刻 * (((double)TJAPlayer3.ConfigIni.n演奏速度) / 20.0));
-                if ( n延長する時間 < 0 )
+                this.n最後に時間延長した時刻 = (int)CSound管理.rc演奏用タイマ.n現在時刻ms;
+                if( n延長する時間 < 0 )
                     n延長する時間 = 0;
                 if( this.st叩ききりまショー.n区間ノート数 == 0 )
                     n延長する時間 = 15;
@@ -717,8 +718,8 @@ namespace TJAPlayer3
                 }
 
 
-                this.n最後に時間延長した時刻 = (int)(CSound管理.rc演奏用タイマ.n現在時刻 * (((double)TJAPlayer3.ConfigIni.n演奏速度) / 20.0));
-                if ( n延長する時間 < 0 )
+                this.n最後に時間延長した時刻 = (int)CSound管理.rc演奏用タイマ.n現在時刻ms;
+                if( n延長する時間 < 0 )
                     n延長する時間 = 0;
 
                 //各数値を初期化
@@ -852,22 +853,20 @@ namespace TJAPlayer3
 				{
                     if (this.st小文字位置[i].ch == ch)
                     {
-                        var taikoComboTexture = TJAPlayer3.Tx.Taiko_Combo[0];
-                        if(taikoComboTexture != null)
-                        {
-                            Rectangle rectangle = new Rectangle(TJAPlayer3.Skin.Game_Taiko_Combo_Size[0] * i, 0, TJAPlayer3.Skin.Game_Taiko_Combo_Size[0], TJAPlayer3.Skin.Game_Taiko_Combo_Size[1]);
-
+                        Rectangle rectangle = new Rectangle(TJAPlayer3.Skin.Game_Taiko_Combo_Size[0] * i, 0, TJAPlayer3.Skin.Game_Taiko_Combo_Size[0], TJAPlayer3.Skin.Game_Taiko_Combo_Size[1]);
+						if(TJAPlayer3.Tx.Taiko_Combo[0]  != null )
+						{
                             if( this.st叩ききりまショー.bタイマー使用中 )
-                                taikoComboTexture.Opacity = 255;
+                                TJAPlayer3.Tx.Taiko_Combo[0].Opacity = 255;
                             else if( this.st叩ききりまショー.b最初のチップが叩かれた && !this.st叩ききりまショー.bタイマー使用中 )
-                                taikoComboTexture.Opacity = 128;
+                                TJAPlayer3.Tx.Taiko_Combo[0].Opacity = 128;
                             if (this.st叩ききりまショー.b加算アニメ中)
-                                taikoComboTexture.Opacity = 0;
-                            taikoComboTexture.vc拡大縮小倍率.Y = 1f;
-                            taikoComboTexture.vc拡大縮小倍率.X = 1f;
-                            taikoComboTexture.t2D中心基準描画( TJAPlayer3.app.Device, x, y, rectangle );
-                        }
-                        break;
+                                TJAPlayer3.Tx.Taiko_Combo[0].Opacity = 0;
+                            TJAPlayer3.Tx.Taiko_Combo[0].vc拡大縮小倍率.Y = 1f;
+                            TJAPlayer3.Tx.Taiko_Combo[0].vc拡大縮小倍率.X = 1f;
+                            TJAPlayer3.Tx.Taiko_Combo[0].t2D中心基準描画( TJAPlayer3.app.Device, x, y, rectangle );
+						}
+						break;
 					}
 				}
 				x += TJAPlayer3.Skin.Game_Taiko_Combo_Padding[0] * 2;

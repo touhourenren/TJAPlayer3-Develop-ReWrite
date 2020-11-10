@@ -1,4 +1,9 @@
-﻿namespace TJAPlayer3.Animations
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace TJAPlayer3.Animations
 {
     /// <summary>
     /// アニメーション インターフェイス。

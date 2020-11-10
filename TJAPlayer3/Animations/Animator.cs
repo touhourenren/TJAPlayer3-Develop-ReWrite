@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using TJAPlayer3;
 using FDK;
 
 namespace TJAPlayer3.Animations
 {
-    internal abstract class Animator : IAnimatable
+    class Animator : IAnimatable
     {
-        protected Animator(int startValue, int endValue, int tickInterval, bool isLoop)
+        public Animator(int startValue, int endValue, int tickInterval, bool isLoop)
         {
             Type = CounterType.Normal;
             StartValue = startValue;
@@ -14,7 +18,7 @@ namespace TJAPlayer3.Animations
             IsLoop = isLoop;
             Counter = new CCounter();
         }
-        protected Animator(double startValue, double endValue, double tickInterval, bool isLoop)
+        public Animator(double startValue, double endValue, double tickInterval, bool isLoop)
         {
             Type = CounterType.Double;
             StartValue = startValue;

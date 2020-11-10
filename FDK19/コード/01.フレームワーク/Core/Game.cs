@@ -21,9 +21,11 @@
 */
 using System;
 using System.ComponentModel;
+using System.Threading;
 using System.Windows.Forms;
 using SlimDX;
 using SlimDX.Direct3D9;
+using System.Collections.ObjectModel;
 
 namespace SampleFramework
 {
@@ -382,6 +384,16 @@ namespace SampleFramework
                 lastUpdateTime = (float)clock.CurrentTime.TotalSeconds;
                 lastUpdateFrame = 0;
             }
+        }
+
+        /// <summary>
+        /// Resets the elapsed time.
+        /// </summary>
+        public void ResetElapsedTime()
+        {
+            forceElapsedTimeToZero = true;
+            updatesSinceRunningSlowly1 = int.MaxValue;
+            updatesSinceRunningSlowly2 = int.MaxValue;
         }
 
         /// <summary>

@@ -1,35 +1,27 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Drawing;
 using FDK;
 
 namespace TJAPlayer3
 {
-	internal sealed class CActFIFOResult : CActivity
+	internal class CActFIFOResult : CActivity
 	{
 		// メソッド
 
-        public void tフェードアウト開始()
-        {
-            mode = EFIFOモード.フェードアウト;
-            counter = new CCounter(0, 500, 2, TJAPlayer3.Timer);
-            SetResultFadeInTextureOpaque();
+		public void tフェードアウト開始()
+		{
+			this.mode = EFIFOモード.フェードアウト;
+			this.counter = new CCounter( 0, 500, 2, TJAPlayer3.Timer );
+            TJAPlayer3.Tx.Result_FadeIn.Opacity = 255;
         }
-
-        public void tフェードイン開始()
-        {
-            mode = EFIFOモード.フェードイン;
-            counter = new CCounter(0, 100, 5, TJAPlayer3.Timer);
-            SetResultFadeInTextureOpaque();
+		public void tフェードイン開始()
+		{
+			this.mode = EFIFOモード.フェードイン;
+			this.counter = new CCounter( 0, 100, 5, TJAPlayer3.Timer );
+            TJAPlayer3.Tx.Result_FadeIn.Opacity = 255;
         }
-
-        private static void SetResultFadeInTextureOpaque()
-        {
-            var txResultFadeIn = TJAPlayer3.Tx.Result_FadeIn;
-            if (txResultFadeIn != null)
-            {
-                txResultFadeIn.Opacity = 255;
-            }
-        }
-
         public void tフェードイン完了()		// #25406 2011.6.9 yyagi
 		{
 			this.counter.n現在の値 = this.counter.n終了値;

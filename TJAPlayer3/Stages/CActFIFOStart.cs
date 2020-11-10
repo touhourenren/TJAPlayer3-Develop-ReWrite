@@ -1,4 +1,8 @@
-﻿using FDK;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Drawing;
+using FDK;
 
 namespace TJAPlayer3
 {
@@ -16,6 +20,10 @@ namespace TJAPlayer3
 		{
 			this.mode = EFIFOモード.フェードイン;
 			this.counter = new CCounter( 0, 1500, 1, TJAPlayer3.Timer );
+		}
+		public void tフェードイン完了()		// #25406 2011.6.9 yyagi
+		{
+			this.counter.n現在の値 = this.counter.n終了値;
 		}
 
 		// CActivity 実装
