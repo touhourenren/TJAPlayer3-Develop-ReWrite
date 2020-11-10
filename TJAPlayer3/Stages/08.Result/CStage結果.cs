@@ -197,6 +197,7 @@ namespace TJAPlayer3
 				#endregion
 				#region [ 選曲画面の譜面情報の更新 ]
 				//---------------------
+				if( !TJAPlayer3.bコンパクトモード )
 				{
 					Cスコア cスコア = TJAPlayer3.stage選曲.r確定されたスコア;
 					bool[] b更新が必要か否か = new bool[ 3 ];
@@ -274,6 +275,7 @@ namespace TJAPlayer3
 		{
 			if( !base.b活性化してない )
 			{
+				int num;
 				if( base.b初めての進行描画 )
 				{
 					this.ct登場用 = new CCounter( 0, 100, 5, TJAPlayer3.Timer );
@@ -301,10 +303,24 @@ namespace TJAPlayer3
 
 				// 描画
 
-                TJAPlayer3.Tx.Result_Background?.t2D描画(TJAPlayer3.app.Device, 0, 0);
-
-                TJAPlayer3.Tx.Result_Header?.t2D描画(TJAPlayer3.app.Device, 0, 0);
-
+				if(TJAPlayer3.Tx.Result_Background != null )
+				{
+                    TJAPlayer3.Tx.Result_Background.t2D描画( TJAPlayer3.app.Device, 0, 0 );
+				}
+				if( this.ct登場用.b進行中 && ( TJAPlayer3.Tx.Result_Header != null ) )
+				{
+					double num2 = ( (double) this.ct登場用.n現在の値 ) / 100.0;
+					double num3 = Math.Sin( Math.PI / 2 * num2 );
+					num = ( (int) ( TJAPlayer3.Tx.Result_Header.sz画像サイズ.Height * num3 ) ) - TJAPlayer3.Tx.Result_Header.sz画像サイズ.Height;
+				}
+				else
+				{
+					num = 0;
+				}
+				if(TJAPlayer3.Tx.Result_Header != null )
+				{
+                    TJAPlayer3.Tx.Result_Header.t2D描画( TJAPlayer3.app.Device, 0, 0 );
+				}
                 if ( this.actResultImage.On進行描画() == 0 )
 				{
 					this.bアニメが完了 = false;
@@ -320,9 +336,12 @@ namespace TJAPlayer3
 				}
 
                 #region ネームプレート
-                for (int i = 0; i < Math.Min(TJAPlayer3.ConfigIni.nPlayerCount, TJAPlayer3.Tx.NamePlate.Length); i++)
+                for (int i = 0; i < TJAPlayer3.ConfigIni.nPlayerCount; i++)
                 {
-                    TJAPlayer3.Tx.NamePlate[i]?.t2D描画(TJAPlayer3.app.Device, TJAPlayer3.Skin.Result_NamePlate_X[i], TJAPlayer3.Skin.Result_NamePlate_Y[i]);
+                    if (TJAPlayer3.Tx.NamePlate[i] != null)
+                    {
+                        TJAPlayer3.Tx.NamePlate[i].t2D描画(TJAPlayer3.app.Device, TJAPlayer3.Skin.Result_NamePlate_X[i], TJAPlayer3.Skin.Result_NamePlate_Y[i]);
+                    }
                 }
                 #endregion
 
@@ -331,7 +350,6 @@ namespace TJAPlayer3
 					if( this.actFI.On進行描画() != 0 )
 					{
 						base.eフェーズID = CStage.Eフェーズ.共通_通常状態;
-                        TJAPlayer3.Skin.bgm結果画面.t再生する();
 					}
 				}
 				else if( ( base.eフェーズID == CStage.Eフェーズ.共通_フェードアウト ) )			//&& ( this.actFO.On進行描画() != 0 ) )
@@ -350,37 +368,40 @@ namespace TJAPlayer3
 
 				// キー入力
 
-				if( ( ( TJAPlayer3.Pad.b押されたDGB( Eパッド.CY ) || TJAPlayer3.Pad.b押された( E楽器パート.DRUMS, Eパッド.RD ) ) || ( TJAPlayer3.Pad.b押された( E楽器パート.DRUMS, Eパッド.LC ) || TJAPlayer3.Input管理.Keyboard.bキーが押された( (int)SlimDX.DirectInput.Key.Return ) ) ) && !this.bアニメが完了 )
+				if( TJAPlayer3.act現在入力を占有中のプラグイン == null )
 				{
-					this.actFI.tフェードイン完了();					// #25406 2011.6.9 yyagi
-					this.actResultImage.tアニメを完了させる();
-					this.actParameterPanel.tアニメを完了させる();
-					this.actSongBar.tアニメを完了させる();
-					this.ct登場用.t停止();
-				}
-				#region [ #24609 2011.4.7 yyagi リザルト画面で[F12]を押下すると、リザルト画像をpngで保存する機能は、CDTXManiaに移管。 ]
+					if( ( ( TJAPlayer3.Pad.b押されたDGB( Eパッド.CY ) || TJAPlayer3.Pad.b押された( E楽器パート.DRUMS, Eパッド.RD ) ) || ( TJAPlayer3.Pad.b押された( E楽器パート.DRUMS, Eパッド.LC ) || TJAPlayer3.Input管理.Keyboard.bキーが押された( (int)SlimDX.DirectInput.Key.Return ) ) ) && !this.bアニメが完了 )
+					{
+						this.actFI.tフェードイン完了();					// #25406 2011.6.9 yyagi
+						this.actResultImage.tアニメを完了させる();
+						this.actParameterPanel.tアニメを完了させる();
+						this.actSongBar.tアニメを完了させる();
+						this.ct登場用.t停止();
+					}
+					#region [ #24609 2011.4.7 yyagi リザルト画面で[F12]を押下すると、リザルト画像をpngで保存する機能は、CDTXManiaに移管。 ]
 //					if ( CDTXMania.Input管理.Keyboard.bキーが押された( (int) SlimDX.DirectInput.Key.F12 ) &&
 //						CDTXMania.ConfigIni.bScoreIniを出力する )
 //					{
 //						CheckAndSaveResultScreen(false);
 //						this.bIsCheckedWhetherResultScreenShouldSaveOrNot = true;
 //					}
-				#endregion
-				if ( base.eフェーズID == CStage.Eフェーズ.共通_通常状態 )
-				{
-					if ( TJAPlayer3.Input管理.Keyboard.bキーが押された( (int)SlimDX.DirectInput.Key.Escape ) )
+					#endregion
+					if ( base.eフェーズID == CStage.Eフェーズ.共通_通常状態 )
 					{
-						TJAPlayer3.Skin.sound取消音.t再生する();
-						this.actFO.tフェードアウト開始();
-						base.eフェーズID = CStage.Eフェーズ.共通_フェードアウト;
-						this.eフェードアウト完了時の戻り値 = E戻り値.完了;
-					}
-					if ( ( ( TJAPlayer3.Pad.b押されたDGB( Eパッド.CY ) || TJAPlayer3.Pad.b押された( E楽器パート.DRUMS, Eパッド.RD ) ) || ( TJAPlayer3.Pad.b押された( E楽器パート.DRUMS, Eパッド.LC ) || TJAPlayer3.Input管理.Keyboard.bキーが押された( (int) SlimDX.DirectInput.Key.Return ) ) ) && this.bアニメが完了 )
-					{
-						TJAPlayer3.Skin.sound取消音.t再生する();
-//						this.actFO.tフェードアウト開始();
-						base.eフェーズID = CStage.Eフェーズ.共通_フェードアウト;
-						this.eフェードアウト完了時の戻り値 = E戻り値.完了;
+						if ( TJAPlayer3.Input管理.Keyboard.bキーが押された( (int)SlimDX.DirectInput.Key.Escape ) )
+						{
+							TJAPlayer3.Skin.sound取消音.t再生する();
+							this.actFO.tフェードアウト開始();
+							base.eフェーズID = CStage.Eフェーズ.共通_フェードアウト;
+							this.eフェードアウト完了時の戻り値 = E戻り値.完了;
+						}
+						if ( ( ( TJAPlayer3.Pad.b押されたDGB( Eパッド.CY ) || TJAPlayer3.Pad.b押された( E楽器パート.DRUMS, Eパッド.RD ) ) || ( TJAPlayer3.Pad.b押された( E楽器パート.DRUMS, Eパッド.LC ) || TJAPlayer3.Input管理.Keyboard.bキーが押された( (int) SlimDX.DirectInput.Key.Return ) ) ) && this.bアニメが完了 )
+						{
+							TJAPlayer3.Skin.sound取消音.t再生する();
+//							this.actFO.tフェードアウト開始();
+							base.eフェーズID = CStage.Eフェーズ.共通_フェードアウト;
+							this.eフェードアウト完了時の戻り値 = E戻り値.完了;
+						}
 					}
 				}
 			}

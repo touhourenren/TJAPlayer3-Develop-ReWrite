@@ -178,7 +178,13 @@ namespace TJAPlayer3
                 this.bDShowクリップを再生している = false;
             }
 		}
-
+		public void Cont( int n再開時刻ms )
+		{
+			if ( ( this.rAVI != null ) && ( this.rAVI.avi != null ) )
+			{
+				this.n移動開始時刻ms = n再開時刻ms;
+			}
+		}
 		public unsafe int t進行描画( int x, int y )
 		{
 			if ( !base.b活性化してない )
@@ -273,12 +279,12 @@ namespace TJAPlayer3
 				Point point4 = new Point( this.n表示側終了位置X, this.n表示側終了位置Y );
 				long num3 = this.n総移動時間ms;
 				long num4 = this.n移動開始時刻ms;
-                if ((CSound管理.rc演奏用タイマ.n現在時刻 * (((double)TJAPlayer3.ConfigIni.n演奏速度) / 20.0)) < num4)
-                {
-                    num4 = (long)(CSound管理.rc演奏用タイマ.n現在時刻 * (((double)TJAPlayer3.ConfigIni.n演奏速度) / 20.0));
-                }
-                time = (int)(((CSound管理.rc演奏用タイマ.n現在時刻 * (((double)TJAPlayer3.ConfigIni.n演奏速度) / 20.0)) - num4));
-                if ( num3 == 0 )
+				if ( CSound管理.rc演奏用タイマ.n現在時刻 < num4 )
+				{
+					num4 = CSound管理.rc演奏用タイマ.n現在時刻;
+				}
+				time = (int) ( ( CSound管理.rc演奏用タイマ.n現在時刻 - num4 ) * ( ( (double) TJAPlayer3.ConfigIni.n演奏速度 ) / 20.0 ) );
+				if ( num3 == 0 )
 				{
 					rectangle = new Rectangle( location, size3 );
 					rectangle2 = new Rectangle( point3, size3 );
@@ -542,8 +548,12 @@ namespace TJAPlayer3
 		{
 			if ( !base.b活性化してない )
 			{
+#if TEST_Direct3D9Ex
+				this.tx描画用 = new CTexture( CDTXMania.app.Device, 320, 355, CDTXMania.app.GraphicsDeviceManager.CurrentSettings.BackBufferFormat, Pool.Default, Usage.Dynamic );
+#else
 				this.tx描画用 = new CTexture( TJAPlayer3.app.Device, 1280, 720, TJAPlayer3.app.GraphicsDeviceManager.CurrentSettings.BackBufferFormat, Pool.Managed );
 				this.tx窓描画用 = new CTexture( TJAPlayer3.app.Device, 1280, 720, TJAPlayer3.app.GraphicsDeviceManager.CurrentSettings.BackBufferFormat, Pool.Managed );
+#endif
 				base.OnManagedリソースの作成();
 			}
 		}

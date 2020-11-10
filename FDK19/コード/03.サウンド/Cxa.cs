@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Runtime.InteropServices;
 using System.IO;
 using System.Diagnostics;
+using System.Threading;
+
 
 namespace FDK
 {
@@ -159,6 +162,10 @@ namespace FDK
 			#endregion
 
 			return dlen;
+		}
+		public override int Seek( int nHandle, uint dwPosition )
+		{
+			return 0;
 		}
 		public override int Decode( int nHandle, IntPtr pDest, uint szDestSize, int bLoop )
 		{

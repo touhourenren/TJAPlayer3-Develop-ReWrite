@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
+using System.Text;
 using System.Runtime.InteropServices;
 using System.Drawing;
+using System.IO;
 using FDK;
 
 
@@ -100,7 +104,8 @@ namespace TJAPlayer3
 				if ( this.n現在の選択行 != lciMenuItems.Length - 1 )
 				{
 					if ( lciMenuItems[ n現在の選択行 ].cItem.e種別 == CItemBase.E種別.リスト ||
-						 lciMenuItems[ n現在の選択行 ].cItem.e種別 == CItemBase.E種別.ONorOFFトグル )
+						 lciMenuItems[ n現在の選択行 ].cItem.e種別 == CItemBase.E種別.ONorOFFトグル ||
+						 lciMenuItems[ n現在の選択行 ].cItem.e種別 == CItemBase.E種別.ONorOFFor不定スリーステート	)
 					{
 						lciMenuItems[ n現在の選択行 ].cItem.t項目値を次へ移動();
 					}
@@ -313,10 +318,11 @@ namespace TJAPlayer3
 					#endregion
 				}
 				#region [ ポップアップメニュー 背景描画 ]
-
-                TJAPlayer3.Tx.Menu_Title?.t2D描画(TJAPlayer3.app.Device, 160, 40);
-
-                #endregion
+				if ( TJAPlayer3.Tx.Menu_Title != null )
+				{
+                    TJAPlayer3.Tx.Menu_Title.t2D描画( TJAPlayer3.app.Device, 160, 40 );
+				}
+				#endregion
 				#region [ ソートメニュータイトル描画 ]
 				int x = 240, y = 44;
 				stqMenuTitle.txName.t2D描画( TJAPlayer3.app.Device, x, y );

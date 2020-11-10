@@ -28,6 +28,7 @@ using System.Security.Permissions;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
+using SampleFramework.Properties;
 
 namespace SampleFramework
 {
@@ -36,6 +37,8 @@ namespace SampleFramework
     /// </summary>
     public class GameWindow : Form
     {
+        const int DefaultWidth = 800;
+        const int DefaultHeight = 600;
         const string DefaultTitle = "Game";
 
         Size cachedSize;
@@ -119,6 +122,16 @@ namespace SampleFramework
 			get;
 			set;
 		}
+		public string strMessage				// #28821 2014.1.23 yyagi
+		{
+			get;
+			private set;
+		}
+		public bool IsReceivedMessage
+		{
+			get;
+			set;
+		}
 
 		private Screen m_Screen;
         /// <summary>
@@ -142,6 +155,7 @@ namespace SampleFramework
 
             //Icon = GetDefaultIcon();
             Text = GetDefaultTitle();
+			strMessage = "";
         }
 
         /// <summary>
@@ -406,6 +420,16 @@ namespace SampleFramework
 				}
 				#endregion
 			}
+			#region #28821 2014.1.23 yyagi (WM_COPYDATA)
+			else if ( m.Msg == WindowConstants.WM_COPYDATA )
+			{
+//Trace.WriteLine( "FDK;msg received" );
+				COPYDATASTRUCT cds = (COPYDATASTRUCT) Marshal.PtrToStructure( m.LParam, typeof( COPYDATASTRUCT ) );
+				strMessage = Marshal.PtrToStringUni( cds.lpData );
+				IsReceivedMessage = true;
+//Trace.WriteLine( "FDK;msg=" + strMessage + ", len=" + strMessage.Length + ", truelen=" + cds.cbData );
+			}
+			#endregion
 			#region #23510 2010.11.16 yyagi add: 縦横比固定でのウインドウサイズ変更 from http://d.hatena.ne.jp/iselix/20080917/1221666614 http://hp.vector.co.jp/authors/VA016117/sizing.html
 			else if ( m.Msg == WM_SIZING )
 			{
@@ -548,6 +572,11 @@ namespace SampleFramework
 
             return DefaultTitle;
         }
+
+        static Icon GetDefaultIcon()
+        {
+            return (Icon)Resources.sdx_icon_black.Clone();
+		}
 
 		#region システムメニューに"640x480"を追加 #23510 2010.11.13 yyagi add: to set "640x480" menu in systemmenu. See also http://cs2ch.blog123.fc2.com/blog-entry-80.html
 		[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
