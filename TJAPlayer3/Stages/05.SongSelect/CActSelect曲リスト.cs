@@ -1111,6 +1111,7 @@ namespace TJAPlayer3
 				//-----------------
 				TJAPlayer3.Tx.SongSelect_Bar_Genre[TJAPlayer3.stage選曲.nStrジャンルtoNum(stバー情報[nパネル番号].strジャンル)].vc拡大縮小倍率.X = 1.0f;
 				TJAPlayer3.Tx.SongSelect_Bar_Genre[8].vc拡大縮小倍率.X = 1.0f;
+				TJAPlayer3.Tx.SongSelect_Bar_Genre_Back.vc拡大縮小倍率.X = 1.0f;
 				if (n現在のスクロールカウンタ != 0)
 					this.tジャンル別選択されていない曲バーの描画(xAnime - (int)Box, y - ((int)Box * 3), this.stバー情報[nパネル番号].strジャンル, stバー情報[nパネル番号].eバー種別);
 				else if (n見た目の行番号 != 4)

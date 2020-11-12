@@ -759,6 +759,7 @@ namespace TJAPlayer3
 
         public EGame eGameMode;
         public bool bSuperHard = false;
+        public bool bTokkunMode = false;
         public bool bJust;
 
         public bool bEndingAnime = false;   // 2017.01.27 DD 「また遊んでね」画面の有効/無効オプション追加
