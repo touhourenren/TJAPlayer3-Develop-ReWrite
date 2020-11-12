@@ -47,6 +47,7 @@ namespace TJAPlayer3
 		public int nPoor範囲ms = -1;
 		public int nスコア数;
 		public C曲リストノード r親ノード;
+		public int Openindex;
 		public Stack<int> stackランダム演奏番号 = new Stack<int>();
 		public string strジャンル = "";
 		public string strタイトル = "";

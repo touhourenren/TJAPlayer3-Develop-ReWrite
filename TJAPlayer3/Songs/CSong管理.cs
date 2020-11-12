@@ -7,6 +7,8 @@ using System.IO;
 using System.Threading;
 using TJAPlayer3.C曲リストノードComparers;
 using FDK;
+using System.Web.UI;
+using System.Drawing;
 
 namespace TJAPlayer3
 {
@@ -956,11 +958,12 @@ namespace TJAPlayer3
 				if( c曲リストノード.eノード種別 == C曲リストノード.Eノード種別.BOX )
 				{
 					int 曲数 = c曲リストノード.list子リスト.Count;
-					for (int index = 0; index < ((曲数 - 1) / 15) + 2; index++)
+					for (int index = 0; index < (曲数 / 7) + 1; index++)
 					{
 						C曲リストノード itemBack = new C曲リストノード();
 						itemBack.eノード種別 = C曲リストノード.Eノード種別.BACKBOX;
-						itemBack.strタイトル = "";
+						itemBack.strタイトル = "とじる";
+						itemBack.BackColor = ColorTranslator.FromHtml("#513009");
 						itemBack.strジャンル = c曲リストノード.strジャンル;
 						itemBack.nスコア数 = 1;
 						itemBack.r親ノード = c曲リストノード;
@@ -983,7 +986,7 @@ namespace TJAPlayer3
 							"BOX を出ます。" :
 							"Exit from the BOX.";
 
-						c曲リストノード.list子リスト.Insert(Math.Min(index * (15 + 1), c曲リストノード.list子リスト.Count), itemBack);
+						c曲リストノード.list子リスト.Insert(Math.Min(index * (7 + 1), c曲リストノード.list子リスト.Count), itemBack);
 
 						#region [ ログ出力 ]
 						//-----------------------------
@@ -1005,7 +1008,6 @@ namespace TJAPlayer3
 						//-----------------------------
 						#endregion
 					}
-					this.t曲リストへ後処理を適用する( c曲リストノード.list子リスト );
 					continue;
 				}
 				//-----------------------------
