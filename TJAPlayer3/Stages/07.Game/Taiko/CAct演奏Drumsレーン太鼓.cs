@@ -714,7 +714,7 @@ namespace TJAPlayer3
 
                     if (this.txゴーゴースプラッシュ != null)
                     {
-                        this.txゴーゴースプラッシュ[(int)this.ctゴーゴースプラッシュ.db現在の値].t2D描画(CDTXMania.app.Device, 0, 260);
+                        this.txゴーゴースプラッシュ[(int)this.ctゴーゴースプラッシュ.n現在の値].t2D描画(CDTXMania.app.Device, 0, 260);
                         this.ctゴーゴースプラッシュ.n現在の値++;
                         if(this.ctゴーゴースプラッシュ.b終了値に達した)
                         {
@@ -729,7 +729,7 @@ namespace TJAPlayer3
                 {
                     if (this.ctゴーゴースプラッシュ.b終了値に達してない)
                     {
-                        this.txゴーゴースプラッシュ[(int)this.ctゴーゴースプラッシュ.db現在の値].t2D描画(CDTXMania.app.Device, 0, 260);
+                        this.txゴーゴースプラッシュ[(int)this.ctゴーゴースプラッシュ.n現在の値].t2D描画(CDTXMania.app.Device, 0, 260);
                     }
 
                 }

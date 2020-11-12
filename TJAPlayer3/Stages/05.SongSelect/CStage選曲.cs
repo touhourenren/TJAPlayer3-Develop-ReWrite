@@ -307,7 +307,7 @@ namespace TJAPlayer3
                     {
                         for( int i = 0 ; i <(1280 / TJAPlayer3.Tx.SongSelect_Background.szテクスチャサイズ.Width) + 2; i++ )
                             if (TJAPlayer3.Tx.SongSelect_GenreBack[nGenreBack] != null )
-                                    TJAPlayer3.Tx.SongSelect_GenreBack[nGenreBack].t2D描画(TJAPlayer3.app.Device, -ct背景スクロール用タイマー.n現在の値 + TJAPlayer3.Tx.SongSelect_Background.szテクスチャサイズ.Width * i , 0);
+                                    TJAPlayer3.Tx.SongSelect_GenreBack[nGenreBack].t2D描画(TJAPlayer3.app.Device, -(int)ct背景スクロール用タイマー.n現在の値 + TJAPlayer3.Tx.SongSelect_Background.szテクスチャサイズ.Width * i , 0);
                     }
                 }
 
@@ -510,24 +510,16 @@ namespace TJAPlayer3
                                         case C曲リストノード.Eノード種別.BOX:
                                             {
                                                 TJAPlayer3.Skin.sound決定音.t再生する();
-                                                bool bNeedChangeSkin = this.act曲リスト.tBOXに入る();
-                                                if (bNeedChangeSkin)
-                                                {
-                                                    this.eフェードアウト完了時の戻り値 = E戻り値.スキン変更;
-                                                    base.eフェーズID = Eフェーズ.選曲_NowLoading画面へのフェードアウト;
-                                                }
+												this.act曲リスト.ctBoxOpen.t開始(200, 2700, 1.3, TJAPlayer3.Timer);
+												this.act曲リスト.bBoxOpen = true;
                                             }
                                             break;
                                         case C曲リストノード.Eノード種別.BACKBOX:
                                             {
                                                 TJAPlayer3.Skin.sound取消音.t再生する();
-                                                bool bNeedChangeSkin = this.act曲リスト.tBOXを出る();
-                                                if (bNeedChangeSkin)
-                                                {
-                                                    this.eフェードアウト完了時の戻り値 = E戻り値.スキン変更;
-                                                    base.eフェーズID = Eフェーズ.選曲_NowLoading画面へのフェードアウト;
-                                                }
-                                            }
+												this.act曲リスト.ctBoxOpen.t開始(200, 2700, 1.3, TJAPlayer3.Timer);
+												this.act曲リスト.bBoxClose = true;
+											}
                                             break;
                                         case C曲リストノード.Eノード種別.RANDOM:
                                             if (TJAPlayer3.Skin.sound曲決定音.b読み込み成功)

@@ -539,7 +539,7 @@ namespace TJAPlayer3
                             this.actChara.アクションタイマーリセット();
                             this.actChara.ctキャラクターアクション_10コンボMAX = new CCounter(0, TJAPlayer3.Skin.Game_Chara_Ptn_10combo_Max - 1, (dbUnit / TJAPlayer3.Skin.Game_Chara_Ptn_10combo_Max) * 2, CSound管理.rc演奏用タイマ);
                             this.actChara.ctキャラクターアクション_10コンボMAX.t進行db();
-                            this.actChara.ctキャラクターアクション_10コンボMAX.db現在の値 = 0D;
+                            this.actChara.ctキャラクターアクション_10コンボMAX.n現在の値 = 0;
                             this.actChara.bマイどんアクション中 = true;
                         }
                     }
@@ -1457,8 +1457,8 @@ namespace TJAPlayer3
                             {
                                 if (this.actCombo.n現在のコンボ数[nPlayer] >= 300 && ctChipAnimeLag[nPlayer].b終了値に達した)
                                 {
-                                    //num9 = ctChipAnime[nPlayer].db現在の値 != 0 ? 260 : 0;
-                                    if ((int)ctChipAnime[nPlayer].db現在の値 == 1 || (int)ctChipAnime[nPlayer].db現在の値 == 3)
+                                    //num9 = ctChipAnime[nPlayer].n現在の値 != 0 ? 260 : 0;
+                                    if ((int)ctChipAnime[nPlayer].n現在の値 == 1 || (int)ctChipAnime[nPlayer].n現在の値 == 3)
                                     {
                                         num9 = 260;
                                     }
@@ -1470,7 +1470,7 @@ namespace TJAPlayer3
                                 else if (this.actCombo.n現在のコンボ数[nPlayer] >= 300 && !ctChipAnimeLag[nPlayer].b終了値に達した)
                                 {
                                     //num9 = base.n現在の音符の顔番号 != 0 ? base.n現在の音符の顔番号 * 130 : 0;
-                                    if ((int)ctChipAnime[nPlayer].db現在の値 == 1 || (int)ctChipAnime[nPlayer].db現在の値 == 3)
+                                    if ((int)ctChipAnime[nPlayer].n現在の値 == 1 || (int)ctChipAnime[nPlayer].n現在の値 == 3)
                                     {
                                         num9 = 130;
                                     }
@@ -1482,7 +1482,7 @@ namespace TJAPlayer3
                                 else if (this.actCombo.n現在のコンボ数[nPlayer] >= 150)
                                 {
                                     //num9 = base.n現在の音符の顔番号 != 0 ? base.n現在の音符の顔番号 * 130 : 0;
-                                    if ((int)ctChipAnime[nPlayer].db現在の値 == 1 || (int)ctChipAnime[nPlayer].db現在の値 == 3)
+                                    if ((int)ctChipAnime[nPlayer].n現在の値 == 1 || (int)ctChipAnime[nPlayer].n現在の値 == 3)
                                     {
                                         num9 = 130;
                                     }
@@ -1494,7 +1494,7 @@ namespace TJAPlayer3
                                 else if (this.actCombo.n現在のコンボ数[nPlayer] >= 50 && ctChipAnimeLag[nPlayer].b終了値に達した)
                                 {
                                     //num9 = base.n現在の音符の顔番号 != 0 ? base.n現在の音符の顔番号 * 130 : 0;
-                                    if ((int)ctChipAnime[nPlayer].db現在の値 <= 1)
+                                    if ((int)ctChipAnime[nPlayer].n現在の値 <= 1)
                                     {
                                         num9 = 130;
                                     }
@@ -1765,8 +1765,8 @@ namespace TJAPlayer3
                         {
                             if (this.actCombo.n現在のコンボ数[nPlayer] >= 300 && ctChipAnimeLag[nPlayer].b終了値に達した)
                             {
-                                //num9 = ctChipAnime[nPlayer].db現在の値 != 0 ? 260 : 0;
-                                if ((int)ctChipAnime[nPlayer].db現在の値 == 1 || (int)ctChipAnime[nPlayer].db現在の値 == 3)
+                                //num9 = ctChipAnime[nPlayer].n現在の値 != 0 ? 260 : 0;
+                                if ((int)ctChipAnime[nPlayer].n現在の値 == 1 || (int)ctChipAnime[nPlayer].n現在の値 == 3)
                                 {
                                     num9 = 260;
                                 }
@@ -1778,7 +1778,7 @@ namespace TJAPlayer3
                             else if (this.actCombo.n現在のコンボ数[nPlayer] >= 300 && !ctChipAnimeLag[nPlayer].b終了値に達した)
                             {
                                 //num9 = base.n現在の音符の顔番号 != 0 ? base.n現在の音符の顔番号 * 130 : 0;
-                                if ((int)ctChipAnime[nPlayer].db現在の値 == 1 || (int)ctChipAnime[nPlayer].db現在の値 == 3)
+                                if ((int)ctChipAnime[nPlayer].n現在の値 == 1 || (int)ctChipAnime[nPlayer].n現在の値 == 3)
                                 {
                                     num9 = 130;
                                 }
@@ -1790,7 +1790,7 @@ namespace TJAPlayer3
                             else if (this.actCombo.n現在のコンボ数[nPlayer] >= 150)
                             {
                                 //num9 = base.n現在の音符の顔番号 != 0 ? base.n現在の音符の顔番号 * 130 : 0;
-                                if ((int)ctChipAnime[nPlayer].db現在の値 == 1 || (int)ctChipAnime[nPlayer].db現在の値 == 3)
+                                if ((int)ctChipAnime[nPlayer].n現在の値 == 1 || (int)ctChipAnime[nPlayer].n現在の値 == 3)
                                 {
                                     num9 = 130;
                                 }
@@ -1802,7 +1802,7 @@ namespace TJAPlayer3
                             else if (this.actCombo.n現在のコンボ数[nPlayer] >= 50 && ctChipAnimeLag[nPlayer].b終了値に達した)
                             {
                                 //num9 = base.n現在の音符の顔番号 != 0 ? base.n現在の音符の顔番号 * 130 : 0;
-                                if ((int)ctChipAnime[nPlayer].db現在の値 <= 1)
+                                if ((int)ctChipAnime[nPlayer].n現在の値 <= 1)
                                 {
                                     num9 = 130;
                                 }
