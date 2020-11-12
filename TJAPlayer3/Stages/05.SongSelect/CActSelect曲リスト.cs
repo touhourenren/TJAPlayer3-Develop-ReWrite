@@ -711,7 +711,7 @@ namespace TJAPlayer3
 
 			ctBarOpen.t進行();
 
-			int BarAnimeCount = this.ctBarOpen.n現在の値 <= 200 ? 0 : (int)(Math.Sin(((this.ctBarOpen.n現在の値 - 200) * 1.5f) * (Math.PI / 180)) * 56.0f);
+			int BarAnimeCount = this.ctBarOpen.n現在の値 <= 200 ? 0 : (int)(Math.Sin(((this.ctBarOpen.n現在の値 - 200) * 1.5f) * (Math.PI / 180)) * 62.0f);
 
 			// まだ選択中の曲が決まってなければ、曲ツリールートの最初の曲にセットする。
 
