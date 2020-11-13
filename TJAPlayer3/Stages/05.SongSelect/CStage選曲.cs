@@ -177,7 +177,10 @@ namespace TJAPlayer3
 				for( int i = 0; i < 4; i++ )
 					this.ctキー反復用[ i ] = new CCounter( 0, 0, 0, TJAPlayer3.Timer );
 
-                //this.act難易度選択画面.bIsDifficltSelect = true;
+				ctDonchan_Normal = new CCounter(0, TJAPlayer3.Tx.SongSelect_Donchan_Normal.Length - 1, 1000 / 45, TJAPlayer3.Timer);
+				ctDonchan_Select = new CCounter();
+
+				//this.act難易度選択画面.bIsDifficltSelect = true;
 				base.On活性化();
 
 				this.actステータスパネル.t選択曲が変更された();	// 最大ランクを更新
@@ -292,6 +295,9 @@ namespace TJAPlayer3
 				//---------------------
 				#endregion
 
+				ctDonchan_Select.t進行();
+				ctDonchan_Normal.t進行Loop();
+
 				this.ct登場時アニメ用共通.t進行();
 
 				if( TJAPlayer3.Tx.SongSelect_Background != null )
@@ -327,8 +333,6 @@ namespace TJAPlayer3
                     TJAPlayer3.Tx.SongSelect_Header.t2D描画( TJAPlayer3.app.Device, 0, 0 );
 
 				this.actInformation.On進行描画();
-				if( TJAPlayer3.Tx.SongSelect_Footer != null )
-                    TJAPlayer3.Tx.SongSelect_Footer.t2D描画( TJAPlayer3.app.Device, 0, 720 - TJAPlayer3.Tx.SongSelect_Footer.sz画像サイズ.Height );
 
                 #region ネームプレート
                 for (int i = 0; i < TJAPlayer3.ConfigIni.nPlayerCount; i++)
@@ -379,9 +383,6 @@ namespace TJAPlayer3
 				//this.actオプションパネル.On進行描画();
 				this.actShowCurrentPosition.On進行描画();								// #27648 2011.3.28 yyagi
 
-                //CDTXMania.act文字コンソール.tPrint( 0, 0, C文字コンソール.Eフォント種別.白, this.n現在選択中の曲の難易度.ToString() );
-                TJAPlayer3.Tx.SongSelect_Difficulty.t2D描画( TJAPlayer3.app.Device, 980, 30, new Rectangle( 0, 70 * this.n現在選択中の曲の難易度, 260, 70 ) );
-
 				if( !this.bBGM再生済み && ( base.eフェーズID == CStage.Eフェーズ.共通_通常状態 ) )
 				{
 					TJAPlayer3.Skin.bgm選曲画面.t再生する();
@@ -422,10 +423,13 @@ namespace TJAPlayer3
                                 return 0;
                             }
                             else
-                            {
-                                TJAPlayer3.Skin.sound取消音.t再生する();
-                                bool bNeedChangeSkin = this.act曲リスト.tBOXを出る();
-                                this.actPresound.tサウンド停止();
+							{
+								if (this.act曲リスト.ctBoxOpen.b終了値に達した || this.act曲リスト.ctBoxOpen.n現在の値 == 0)
+								{
+									TJAPlayer3.Skin.sound取消音.t再生する();
+									this.act曲リスト.ctBoxOpen.t開始(200, 2700, 1.3, TJAPlayer3.Timer);
+									this.act曲リスト.bBoxClose = true;
+								}
                             }
                         #endregion
                         #region [ Shift-F1: CONFIG画面 ]
@@ -524,13 +528,15 @@ namespace TJAPlayer3
                                                 TJAPlayer3.Skin.sound決定音.t再生する();
 												this.act曲リスト.ctBoxOpen.t開始(200, 2700, 1.3, TJAPlayer3.Timer);
 												this.act曲リスト.bBoxOpen = true;
-                                            }
+													this.ctDonchan_Select.t開始(0, TJAPlayer3.Tx.SongSelect_Donchan_Select.Length - 1, 1000 / 45, TJAPlayer3.Timer);
+												}
                                             break;
                                         case C曲リストノード.Eノード種別.BACKBOX:
                                             {
                                                 TJAPlayer3.Skin.sound取消音.t再生する();
 												this.act曲リスト.ctBoxOpen.t開始(200, 2700, 1.3, TJAPlayer3.Timer);
 												this.act曲リスト.bBoxClose = true;
+												this.ctDonchan_Select.t開始(0, TJAPlayer3.Tx.SongSelect_Donchan_Select.Length - 1, 1000 / 45, TJAPlayer3.Timer);
 											}
                                             break;
                                         case C曲リストノード.Eノード種別.RANDOM:
@@ -646,6 +652,16 @@ namespace TJAPlayer3
                 //    CDTXMania.act文字コンソール.tPrint(0, 16, C文字コンソール.Eフォント種別.赤, "Count:" + this.ctDiffSelect移動待ち.n現在の値);
                 //}
                 //------------------------------
+
+				if(this.ctDonchan_Select.b終了値に達してない)
+				{
+					TJAPlayer3.Tx.SongSelect_Donchan_Select[ctDonchan_Select.n現在の値].t2D描画(TJAPlayer3.app.Device, 0, 330);
+				}
+                else
+				{
+					TJAPlayer3.Tx.SongSelect_Donchan_Normal[ctDonchan_Normal.n現在の値].t2D描画(TJAPlayer3.app.Device, 0, 330);
+				}
+
 				switch ( base.eフェーズID )
 				{
 					case CStage.Eフェーズ.共通_フェードイン:
@@ -763,7 +779,9 @@ namespace TJAPlayer3
 		public CActSortSongs actSortSongs;
 		private CActSelectQuickConfig actQuickConfig;
 
-                private int nGenreBack;
+		private CCounter ctDonchan_Normal;
+		private CCounter ctDonchan_Select;
+		private int nGenreBack;
 		private bool bBGM再生済み;
 		private STキー反復用カウンタ ctキー反復用;
 		public CCounter ct登場時アニメ用共通;

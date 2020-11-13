@@ -9,10 +9,10 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TJAPlayer3</RootNamespace>
-    <AssemblyName>TJAPlayer3</AssemblyName>
+    <AssemblyName>TJAPlayer3-Develop-ReWrite</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <ApplicationIcon>Resources\TJAPlayer3.ico</ApplicationIcon>
+    <ApplicationIcon>TJAPlayer3-Develop-ReWrite.ico</ApplicationIcon>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>
@@ -276,6 +276,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="dtx.ico" />
+    <Content Include="TJAPlayer3-Develop-ReWrite.ico" />
     <None Include="Resources\TJAPlayer3.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -331,7 +332,7 @@ move /y "$(TargetDir)SlimDX.dll" "$(SolutionDir)Test\dll\"
 move /y "$(TargetDir)CSharpTest.Net.Collections.*" "$(SolutionDir)Test\dll\"
 copy /y "$(SolutionDir)Readme.txt" "$(SolutionDir)Test\"
 call "$(DevEnvDir)..\Tools\VsDevCmd.bat"
-"$(SolutionDir)editbin\editbin.exe" /LARGEADDRESSAWARE "$(SolutionDir)Test\TJAPlayer3.exe"</PostBuildEvent>
+"$(SolutionDir)editbin\editbin.exe" /LARGEADDRESSAWARE "$(SolutionDir)Test\TJAPlayer3-Develop-ReWrite.exe"</PostBuildEvent>
   </PropertyGroup>
   <Import Project="packages\SharpDX.2.6.3\build\SharpDX.targets" Condition="Exists('packages\SharpDX.2.6.3\build\SharpDX.targets')" />
 </Project>
