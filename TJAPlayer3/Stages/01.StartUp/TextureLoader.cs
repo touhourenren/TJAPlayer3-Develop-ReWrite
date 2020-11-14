@@ -307,13 +307,24 @@ namespace TJAPlayer3
             Mob_Footer = TxC(GAME + FOOTER + @"0.png");
             #endregion
             #region 背景
+
             Background = TxC(GAME + Background + @"0\" + @"Background.png");
-            Background_Up = new CTexture[2];
-            Background_Up[0] = TxC(GAME + BACKGROUND + @"0\" + @"1P_Up.png");
-            Background_Up[1] = TxC(GAME + BACKGROUND + @"0\" + @"2P_Up.png");
-            Background_Up_Clear = new CTexture[2];
-            Background_Up_Clear[0] = TxC(GAME + BACKGROUND + @"0\" + @"1P_Up_Clear.png");
-            Background_Up_Clear[1] = TxC(GAME + BACKGROUND + @"0\" + @"2P_Up_Clear.png");
+
+            Background_Up_1st = new CTexture[3];
+            Background_Up_1st[0] = TxC(GAME + BACKGROUND + @"0\" + @"1P_Up_1st.png");
+            Background_Up_1st[1] = TxC(GAME + BACKGROUND + @"0\" + @"2P_Up_1st.png");
+            Background_Up_1st[2] = TxC(GAME + BACKGROUND + @"0\" + @"Clear_Up_1st.png");
+
+            Background_Up_2nd = new CTexture[3];
+            Background_Up_2nd[0] = TxC(GAME + BACKGROUND + @"0\" + @"1P_Up_2nd.png");
+            Background_Up_2nd[1] = TxC(GAME + BACKGROUND + @"0\" + @"2P_Up_2nd.png");
+            Background_Up_2nd[2] = TxC(GAME + BACKGROUND + @"0\" + @"Clear_Up_2nd.png");
+
+            Background_Up_3rd = new CTexture[3];
+            Background_Up_3rd[0] = TxC(GAME + BACKGROUND + @"0\" + @"1P_Up_3rd.png");
+            Background_Up_3rd[1] = TxC(GAME + BACKGROUND + @"0\" + @"2P_Up_3rd.png");
+            Background_Up_3rd[2] = TxC(GAME + BACKGROUND + @"0\" + @"Clear_Up_3rd.png");
+
             Background_Down = TxC(GAME + BACKGROUND + @"0\" + @"Down.png");
             Background_Down_Clear = TxC(GAME + BACKGROUND + @"0\" + @"Down_Clear.png");
             Background_Down_Scroll = TxC(GAME + BACKGROUND + @"0\" + @"Down_Scroll.png");
@@ -349,9 +360,10 @@ namespace TJAPlayer3
             Taiko_Score[0] = TxC(GAME + TAIKO + @"Score.png");
             Taiko_Score[1] = TxC(GAME + TAIKO + @"Score_1P.png");
             Taiko_Score[2] = TxC(GAME + TAIKO + @"Score_2P.png");
-            Taiko_Combo = new CTexture[2];
+            Taiko_Combo = new CTexture[3];
             Taiko_Combo[0] = TxC(GAME + TAIKO + @"Combo.png");
             Taiko_Combo[1] = TxC(GAME + TAIKO + @"Combo_Big.png");
+            Taiko_Combo[2] = TxC(GAME + TAIKO + @"Combo_Midium.png");
             Taiko_Combo_Effect = TxC(GAME + TAIKO + @"Combo_Effect.png");
             Taiko_Combo_Text = TxC(GAME + TAIKO + @"Combo_Text.png");
             #endregion
@@ -674,10 +686,15 @@ namespace TJAPlayer3
             #endregion
             #region 背景
             TJAPlayer3.tテクスチャの解放(ref Background);
-            TJAPlayer3.tテクスチャの解放(ref Background_Up[0]);
-            TJAPlayer3.tテクスチャの解放(ref Background_Up[1]);
-            TJAPlayer3.tテクスチャの解放(ref Background_Up_Clear[0]);
-            TJAPlayer3.tテクスチャの解放(ref Background_Up_Clear[1]);
+            TJAPlayer3.tテクスチャの解放(ref Background_Up_1st[0]);
+            TJAPlayer3.tテクスチャの解放(ref Background_Up_1st[1]);
+            TJAPlayer3.tテクスチャの解放(ref Background_Up_1st[2]);
+            TJAPlayer3.tテクスチャの解放(ref Background_Up_2nd[0]);
+            TJAPlayer3.tテクスチャの解放(ref Background_Up_2nd[1]);
+            TJAPlayer3.tテクスチャの解放(ref Background_Up_2nd[2]);
+            TJAPlayer3.tテクスチャの解放(ref Background_Up_3rd[0]);
+            TJAPlayer3.tテクスチャの解放(ref Background_Up_3rd[1]);
+            TJAPlayer3.tテクスチャの解放(ref Background_Up_3rd[2]);
             TJAPlayer3.tテクスチャの解放(ref Background_Down);
             TJAPlayer3.tテクスチャの解放(ref Background_Down_Clear);
             TJAPlayer3.tテクスチャの解放(ref Background_Down_Scroll);
@@ -929,8 +946,9 @@ namespace TJAPlayer3
             Background_Down,
             Background_Down_Clear,
             Background_Down_Scroll;
-        public CTexture[] Background_Up,
-            Background_Up_Clear;
+        public CTexture[] Background_Up_1st,
+                          Background_Up_2nd,
+                          Background_Up_3rd;
         #endregion
         #region 太鼓
         public CTexture[] Taiko_Frame, // MTaiko下敷き

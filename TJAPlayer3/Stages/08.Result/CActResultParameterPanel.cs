@@ -163,7 +163,7 @@ namespace TJAPlayer3
 
 		public void tアニメを完了させる()
 		{
-			this.ct表示用.n現在の値 = this.ct表示用.n終了値;
+			this.ct表示用.n現在の値 = (int)this.ct表示用.n終了値;
 		}
 
 

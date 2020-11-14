@@ -9,32 +9,32 @@ using System.Linq;
 
 namespace TJAPlayer3
 {
-	// グローバル定数
+    // グローバル定数
 
-	public enum Eシステムサウンド
-	{
-		BGMオプション画面 = 0,
-		BGMコンフィグ画面,
-		BGM起動画面,
-		BGM選曲画面,
-		SOUNDステージ失敗音,
-		SOUNDカーソル移動音,
-		SOUNDゲーム開始音,
-		SOUNDゲーム終了音,
-		SOUNDステージクリア音,
-		SOUNDタイトル音,
-		SOUNDフルコンボ音,
-		SOUND歓声音,
-		SOUND曲読込開始音,
-		SOUND決定音,
-		SOUND取消音,
-		SOUND変更音,
+    public enum Eシステムサウンド
+    {
+        BGMオプション画面 = 0,
+        BGMコンフィグ画面,
+        BGM起動画面,
+        BGM選曲画面,
+        SOUNDステージ失敗音,
+        SOUNDカーソル移動音,
+        SOUNDゲーム開始音,
+        SOUNDゲーム終了音,
+        SOUNDステージクリア音,
+        SOUNDタイトル音,
+        SOUNDフルコンボ音,
+        SOUND歓声音,
+        SOUND曲読込開始音,
+        SOUND決定音,
+        SOUND取消音,
+        SOUND変更音,
         //SOUND赤,
         //SOUND青,
         SOUND風船,
         SOUND曲決定音,
         SOUND成績発表,
-		Count				// システムサウンド総数の計算用
+        Count				// システムサウンド総数の計算用
     }
 
     internal class CSkin : IDisposable
@@ -173,31 +173,31 @@ namespace TJAPlayer3
                 if (string.IsNullOrEmpty(this.strファイル名))
                     throw new InvalidOperationException("ファイル名が無効です。");
 
-				if( !File.Exists( CSkin.Path( this.strファイル名 ) ) )
-				{
+                if (!File.Exists(CSkin.Path(this.strファイル名)))
+                {
                     Trace.TraceWarning($"ファイルが存在しません。: {this.strファイル名}");
-				    return;
-				}
-////				for( int i = 0; i < 2; i++ )		// #27790 2012.3.10 yyagi 2回読み出しを、1回読みだし＋1回メモリコピーに変更
-////				{
-//                    try
-//                    {
-//                        this.rSound[ 0 ] = CDTXMania.Sound管理.tサウンドを生成する( CSkin.Path( this.strファイル名 ) );
-//                    }
-//                    catch
-//                    {
-//                        this.rSound[ 0 ] = null;
-//                        throw;
-//                    }
-//                    if ( this.rSound[ 0 ] == null )	// #28243 2012.5.3 yyagi "this.rSound[ 0 ].bストリーム再生する"時もCloneするようにし、rSound[1]がnullにならないよう修正→rSound[1]の再生正常化
-//                    {
-//                        this.rSound[ 1 ] = null;
-//                    }
-//                    else
-//                    {
-//                        this.rSound[ 1 ] = ( CSound ) this.rSound[ 0 ].Clone();	// #27790 2012.3.10 yyagi add: to accelerate loading chip sounds
-//                        CDTXMania.Sound管理.tサウンドを登録する( this.rSound[ 1 ] );	// #28243 2012.5.3 yyagi add (登録漏れによりストリーム再生処理が発生していなかった)
-//                    }
+                    return;
+                }
+                ////				for( int i = 0; i < 2; i++ )		// #27790 2012.3.10 yyagi 2回読み出しを、1回読みだし＋1回メモリコピーに変更
+                ////				{
+                //                    try
+                //                    {
+                //                        this.rSound[ 0 ] = CDTXMania.Sound管理.tサウンドを生成する( CSkin.Path( this.strファイル名 ) );
+                //                    }
+                //                    catch
+                //                    {
+                //                        this.rSound[ 0 ] = null;
+                //                        throw;
+                //                    }
+                //                    if ( this.rSound[ 0 ] == null )	// #28243 2012.5.3 yyagi "this.rSound[ 0 ].bストリーム再生する"時もCloneするようにし、rSound[1]がnullにならないよう修正→rSound[1]の再生正常化
+                //                    {
+                //                        this.rSound[ 1 ] = null;
+                //                    }
+                //                    else
+                //                    {
+                //                        this.rSound[ 1 ] = ( CSound ) this.rSound[ 0 ].Clone();	// #27790 2012.3.10 yyagi add: to accelerate loading chip sounds
+                //                        CDTXMania.Sound管理.tサウンドを登録する( this.rSound[ 1 ] );	// #28243 2012.5.3 yyagi add (登録漏れによりストリーム再生処理が発生していなかった)
+                //                    }
 
                 ////				}
 
@@ -312,17 +312,19 @@ namespace TJAPlayer3
         public Cシステムサウンド soundゲーム終了音 = null;
         public Cシステムサウンド soundステージクリア音 = null;
         public Cシステムサウンド soundタイトル音 = null;
+        public Cシステムサウンド soundタイトルスタート音 = null;
         public Cシステムサウンド soundフルコンボ音 = null;
         public Cシステムサウンド sound歓声音 = null;
         public Cシステムサウンド sound曲読込開始音 = null;
         public Cシステムサウンド sound決定音 = null;
         public Cシステムサウンド sound取消音 = null;
         public Cシステムサウンド sound変更音 = null;
+        public Cシステムサウンド bgm選曲画面In = null;
+        public Cシステムサウンド soundSongSelectChara = null;
         //add
-        public Cシステムサウンド bgmリザルト = null;
-        public Cシステムサウンド bgmリザルトループ = null;
         public Cシステムサウンド sound曲決定音 = null;
-        public Cシステムサウンド sound成績発表 = null;
+        public Cシステムサウンド bgmリザルトイン音 = null;
+        public Cシステムサウンド bgmリザルト音 = null;
 
         //public Cシステムサウンド soundRed = null;
         //public Cシステムサウンド soundBlue = null;
@@ -397,7 +399,7 @@ namespace TJAPlayer3
                         return this.sound曲決定音;
 
                     case Eシステムサウンド.SOUND成績発表:
-                        return this.sound成績発表;
+                        return this.bgmリザルトイン音;
                 }
                 throw new IndexOutOfRangeException();
             }
@@ -469,7 +471,7 @@ namespace TJAPlayer3
                         return this.sound曲決定音;
 
                     case 18:
-                        return this.sound成績発表;
+                        return this.bgmリザルトイン音;
                 }
                 throw new IndexOutOfRangeException();
             }
@@ -602,6 +604,7 @@ namespace TJAPlayer3
                     this[i].Dispose();
                 }
             }
+            this.soundタイトルスタート音 = new Cシステムサウンド(@"Sounds\Title_Start.ogg", false, true, false, ESoundGroup.SongPreview);
             this.soundカーソル移動音 = new Cシステムサウンド(@"Sounds\Move.ogg", false, false, false, ESoundGroup.SoundEffect);
             this.sound決定音 = new Cシステムサウンド(@"Sounds\Decide.ogg", false, false, false, ESoundGroup.SoundEffect);
             this.sound変更音 = new Cシステムサウンド(@"Sounds\Change.ogg", false, false, false, ESoundGroup.SoundEffect);
@@ -613,17 +616,20 @@ namespace TJAPlayer3
             this.soundステージクリア音 = new Cシステムサウンド(@"Sounds\Stage clear.ogg", false, true, true, ESoundGroup.Voice);
             this.soundフルコンボ音 = new Cシステムサウンド(@"Sounds\Full combo.ogg", false, false, true, ESoundGroup.Voice);
             this.sound曲読込開始音 = new Cシステムサウンド(@"Sounds\Now loading.ogg", false, true, true, ESoundGroup.Unknown);
-            this.soundタイトル音 = new Cシステムサウンド(@"Sounds\Title.ogg", false, true, false, ESoundGroup.SongPlayback);
+            this.soundタイトル音 = new Cシステムサウンド(@"Sounds\Title.ogg", true, true, false, ESoundGroup.SongPreview);
             this.bgm起動画面 = new Cシステムサウンド(@"Sounds\Setup BGM.ogg", true, true, false, ESoundGroup.SongPlayback);
             this.bgmオプション画面 = new Cシステムサウンド(@"Sounds\Option BGM.ogg", true, true, false, ESoundGroup.SongPlayback);
             this.bgmコンフィグ画面 = new Cシステムサウンド(@"Sounds\Config BGM.ogg", true, true, false, ESoundGroup.SongPlayback);
             this.bgm選曲画面 = new Cシステムサウンド(@"Sounds\Select BGM.ogg", true, true, false, ESoundGroup.SongPreview);
+            this.bgm選曲画面In = new Cシステムサウンド(@"Sounds\Select BGM start.ogg", false, true, false, ESoundGroup.SongPreview);
+            this.soundSongSelectChara = new Cシステムサウンド(@"Sounds\SongSelect Chara.ogg", false, false, false, ESoundGroup.SongPreview);
 
             //this.soundRed               = new Cシステムサウンド( @"Sounds\dong.ogg",            false, false, true, ESoundType.SoundEffect );
             //this.soundBlue              = new Cシステムサウンド( @"Sounds\ka.ogg",              false, false, true, ESoundType.SoundEffect );
             this.soundBalloon = new Cシステムサウンド(@"Sounds\balloon.ogg", false, false, true, ESoundGroup.SoundEffect);
             this.sound曲決定音 = new Cシステムサウンド(@"Sounds\SongDecide.ogg", false, false, true, ESoundGroup.Voice);
-            this.sound成績発表 = new Cシステムサウンド(@"Sounds\ResultIn.ogg", false, false, false, ESoundGroup.Voice);
+            this.bgmリザルトイン音 = new Cシステムサウンド(@"Sounds\ResultIn.ogg", false, false, false, ESoundGroup.Voice);
+            this.bgmリザルト音 = new Cシステムサウンド(@"Sounds\Result.ogg", true, false, false, ESoundGroup.Voice);
             ReloadSkin();
             tReadSkinConfig();
         }
@@ -1005,6 +1011,30 @@ namespace TJAPlayer3
                                 {
                                     SongSelect_Overall_Y = int.Parse(strParam);
                                 }
+                            }
+                            else if (strCommand == "SongSelect_BoxExplanation_X")
+                            {
+                                SongSelect_BoxExplanation_X = int.Parse(strParam);
+                            }
+                            else if (strCommand == "SongSelect_BoxExplanation_Y")
+                            {
+                                SongSelect_BoxExplanation_Y = int.Parse(strParam);
+                            }
+                            else if (strCommand == "SongSelect_Title_X")
+                            {
+                                SongSelect_Title_Y = int.Parse(strParam);
+                            }
+                            else if (strCommand == "SongSelect_Title_Y")
+                            {
+                                SongSelect_Title_Y = int.Parse(strParam);
+                            }
+                            else if (strCommand == "Difficulty_Title_X")
+                            {
+                                Difficulty_Title_X = int.Parse(strParam);
+                            }
+                            else if (strCommand == "Difficulty_Title_Y")
+                            {
+                                Difficulty_Title_Y = int.Parse(strParam);
                             }
                             else if (strCommand == "SongSelect_NamePlate_X")
                             {
@@ -2372,38 +2402,38 @@ namespace TJAPlayer3
 
         //リザルト画面
         //現在のデフォルト値はダミーです。
-        public int nResultPanelP1X = 515;
-        public int nResultPanelP1Y = 75;
+        public int nResultPanelP1X = 0;
+        public int nResultPanelP1Y = 0;
         public int nResultPanelP2X = 515;
         public int nResultPanelP2Y = 75;
-        public int nResultScoreP1X = 582;
-        public int nResultScoreP1Y = 252;
-        public int nResultJudge1_P1X = 815;
+        public int nResultScoreP1X = 295;
+        public int nResultScoreP1Y = 212;
+        public int nResultJudge1_P1X = 495;
         public int nResultJudge1_P1Y = 182;
         public int nResultJudge2_P1X = 968;
         public int nResultJudge2_P1Y = 174;
-        public int nResultGreatP1X = 875;
+        public int nResultGreatP1X = 490;
         public int nResultGreatP1Y = 188;
         public int nResultGreatP2X = 875;
         public int nResultGreatP2Y = 188;
-        public int nResultGoodP1X = 875;
-        public int nResultGoodP1Y = 226;
+        public int nResultGoodP1X = 490;
+        public int nResultGoodP1Y = 230;
         public int nResultGoodP2X = 875;
         public int nResultGoodP2Y = 226;
-        public int nResultBadP1X = 875;
-        public int nResultBadP1Y = 266;
+        public int nResultBadP1X = 490;
+        public int nResultBadP1Y = 272;
         public int nResultBadP2X = 875;
         public int nResultBadP2Y = 266;
-        public int nResultComboP1X = 1144;
-        public int nResultComboP1Y = 188;
-        public int nResultComboP2X = 1144;
-        public int nResultComboP2Y = 188;
-        public int nResultRollP1X = 1144;
-        public int nResultRollP1Y = 226;
+        public int nResultRollP1X = 490;
+        public int nResultRollP1Y = 314;
         public int nResultRollP2X = 1144;
         public int nResultRollP2Y = 226;
-        public int nResultGaugeBaseP1X = 555;
-        public int nResultGaugeBaseP1Y = 122;
+        public int nResultComboP1X = 490;
+        public int nResultComboP1Y = 356;
+        public int nResultComboP2X = 1144;
+        public int nResultComboP2Y = 188;
+        public int nResultGaugeBaseP1X = 56;
+        public int nResultGaugeBaseP1Y = 141;
         public int nResultGaugeBaseP2X = 555;
         public int nResultGaugeBaseP2Y = 122;
         public int nResultGaugeBodyP1X = 559;
@@ -2435,6 +2465,12 @@ namespace TJAPlayer3
         #endregion
         #region SongSelect
         public int SongSelect_Overall_Y = 123;
+        public int SongSelect_BoxExplanation_X = 0;
+        public int SongSelect_BoxExplanation_Y = 0;
+        public int SongSelect_Title_X = 0;
+        public int SongSelect_Title_Y = 0;
+        public int Difficulty_Title_X = 0;
+        public int Difficulty_Title_Y = 0;
         public int[] SongSelect_NamePlate_X = new int[] { 60, 950 };
         public int[] SongSelect_NamePlate_Y = new int[] { 650, 650 };
         public int[] SongSelect_Auto_X = new int[] { 60, 950 };
@@ -2465,19 +2501,19 @@ namespace TJAPlayer3
         public int SongLoading_Plate_X = 640;
         public int SongLoading_Plate_Y = 360;
         public int SongLoading_Title_X = 640;
-        public int SongLoading_Title_Y = 340;
+        public int SongLoading_Title_Y = 280;
         public int SongLoading_SubTitle_X = 640;
-        public int SongLoading_SubTitle_Y = 390;
-        public int SongLoading_Title_FontSize = 30;
-        public int SongLoading_SubTitle_FontSize = 22;
+        public int SongLoading_SubTitle_Y = 325;
+        public int SongLoading_Title_FontSize = 31;
+        public int SongLoading_SubTitle_FontSize = 20;
         public ReferencePoint SongLoading_Plate_ReferencePoint = ReferencePoint.Center;
         public ReferencePoint SongLoading_Title_ReferencePoint = ReferencePoint.Center;
         public ReferencePoint SongLoading_SubTitle_ReferencePoint = ReferencePoint.Center;
         public Color SongLoading_Title_ForeColor = ColorTranslator.FromHtml("#FFFFFF");
         public Color SongLoading_Title_BackColor = ColorTranslator.FromHtml("#000000");
-        public Color SongLoading_SubTitle_ForeColor = ColorTranslator.FromHtml("#FFFFFF");
-        public Color SongLoading_SubTitle_BackColor = ColorTranslator.FromHtml("#000000");
-        public bool SongLoading_Plate_ScreenBlend = true;
+        public Color SongLoading_SubTitle_ForeColor = ColorTranslator.FromHtml("#000000");
+        public Color SongLoading_SubTitle_BackColor = ColorTranslator.FromHtml("#00000000");
+        public bool SongLoading_Plate_ScreenBlend = false;
 
         #endregion
         #region Game
@@ -2530,12 +2566,12 @@ namespace TJAPlayer3
         public int[] Game_CourseSymbol_Y = new int[] { 232, 432 };
         #endregion
         #region PanelFont
-        public int Game_MusicName_X = 1254;
-        public int Game_MusicName_Y = 14;
-        public int Game_MusicName_FontSize = 30;
+        public int Game_MusicName_X = 1260;
+        public int Game_MusicName_Y = 28;
+        public int Game_MusicName_FontSize = 27;
         public ReferencePoint Game_MusicName_ReferencePoint = ReferencePoint.Right;
-        public int Game_Genre_X = 1114;
-        public int Game_Genre_Y = 74;
+        public int Game_Genre_X = 1000;
+        public int Game_Genre_Y = 70;
         public int Game_Lyric_X = 640;
         public int Game_Lyric_Y = 630;
         public string Game_Lyric_FontName = "MS UI Gothic";
@@ -2561,24 +2597,24 @@ namespace TJAPlayer3
         public int[] Game_Score_Size = new int[] { 24, 40 };
         #endregion
         #region Taiko
-        public int[] Game_Taiko_NamePlate_X = new int[] { 0, 0 };
-        public int[] Game_Taiko_NamePlate_Y = new int[] { 288, 368 };
+        public int[] Game_Taiko_NamePlate_X = new int[] { -27, -27 };
+        public int[] Game_Taiko_NamePlate_Y = new int[] { 286, 366 };
         public int[] Game_Taiko_PlayerNumber_X = new int[] { 4, 4 };
         public int[] Game_Taiko_PlayerNumber_Y = new int[] { 233, 435 };
         public int[] Game_Taiko_X = new int[] { 190, 190 };
-        public int[] Game_Taiko_Y = new int[] { 190, 366 };
-        public int[] Game_Taiko_Combo_X = new int[] { 268, 268 };
+        public int[] Game_Taiko_Y = new int[] { 190, 368 };
+        public int[] Game_Taiko_Combo_X = new int[] { 267, 267 };
         public int[] Game_Taiko_Combo_Y = new int[] { 270, 448 };
         public int[] Game_Taiko_Combo_Ex_X = new int[] { 268, 268 };
-        public int[] Game_Taiko_Combo_Ex_Y = new int[] { 270, 448 };
+        public int[] Game_Taiko_Combo_Ex_Y = new int[] { 275, 452 };
         public int[] Game_Taiko_Combo_Ex4_X = new int[] { 268, 268 };
         public int[] Game_Taiko_Combo_Ex4_Y = new int[] { 270, 448 };
-        public int[] Game_Taiko_Combo_Padding = new int[] { 28, 30, 24 };
-        public int[] Game_Taiko_Combo_Size = new int[] { 42, 48 };
-        public int[] Game_Taiko_Combo_Size_Ex = new int[] { 42, 56 };
+        public int[] Game_Taiko_Combo_Padding = new int[] { 34, 34, 24 };
+        public int[] Game_Taiko_Combo_Size = new int[] { 40, 48 };
+        public int[] Game_Taiko_Combo_Size_Ex = new int[] { 40, 48 };
         public float[] Game_Taiko_Combo_Scale = new float[] { 1.0f, 1.0f, 0.8f };
         public int[] Game_Taiko_Combo_Text_X = new int[] { 268, 268 };
-        public int[] Game_Taiko_Combo_Text_Y = new int[] { 295, 472 };
+        public int[] Game_Taiko_Combo_Text_Y = new int[] { 298, 475 };
         public int[] Game_Taiko_Combo_Text_Size = new int[] { 100, 50 };
         public bool Game_Taiko_Combo_Ex_IsJumping = true;
         #endregion
@@ -2627,7 +2663,7 @@ namespace TJAPlayer3
         public float[] Game_Effect_Roll_Speed_2P_X = new float[] { 0.6f };
         public float[] Game_Effect_Roll_Speed_2P_Y = new float[] { 0.6f };
         public int Game_Effect_Roll_Ptn;
-        public int[] Game_Effect_NotesFlash = new int[] { 180, 180, 12 }; // Width, Height, Ptn
+        public int[] Game_Effect_NotesFlash = new int[] { 180, 180, 11 }; // Width, Height, Ptn
         public int Game_Effect_NotesFlash_Timer = 20;
         public int[] Game_Effect_GoGoSplash = new int[] { 300, 400, 30 };
         public int[] Game_Effect_GoGoSplash_X = new int[] { 120, 300, 520, 760, 980, 1160 };
@@ -2668,7 +2704,7 @@ namespace TJAPlayer3
         public int[] Game_PuchiChara_BalloonX = new int[] { 300, 300 };
         public int[] Game_PuchiChara_BalloonY = new int[] { 240, 500 };
         public float[] Game_PuchiChara_Scale = new float[] { 0.7f, 1.0f }; // 通常時、 ふうせん連打時
-        public int[] Game_PuchiChara = new int[] { 180, 180, 2}; // Width, Height, Ptn
+        public int[] Game_PuchiChara = new int[] { 180, 180, 2 }; // Width, Height, Ptn
         public int Game_PuchiChara_Sine = 20;
         public int Game_PuchiChara_Timer = 4800;
         public double Game_PuchiChara_SineTimer = 2;
@@ -2699,10 +2735,10 @@ namespace TJAPlayer3
         #endregion
         #endregion
         #region Result
-        public int Result_MusicName_X = 1254;
-        public int Result_MusicName_Y = 6;
-        public int Result_MusicName_FontSize = 30;
-        public ReferencePoint Result_MusicName_ReferencePoint = ReferencePoint.Right;
+        public int Result_MusicName_X = 640;
+        public int Result_MusicName_Y = 30;
+        public int Result_MusicName_FontSize = 25;
+        public ReferencePoint Result_MusicName_ReferencePoint = ReferencePoint.Center;
         public int Result_StageText_X = 230;
         public int Result_StageText_Y = 6;
         public int Result_StageText_FontSize = 30;
@@ -2715,8 +2751,8 @@ namespace TJAPlayer3
         public Color Result_StageText_BackColor = ColorTranslator.FromHtml("#000000");
         //public Color Result_StageText_BackColor_Red = ColorTranslator.FromHtml("#FF0000");
 
-        public int[] Result_NamePlate_X = new int[] { 260, 260 };
-        public int[] Result_NamePlate_Y = new int[] { 96, 390 };
+        public int[] Result_NamePlate_X = new int[] { 6, 260 };
+        public int[] Result_NamePlate_Y = new int[] { 611, 611 };
 
         public int[] Result_Dan = new int[] { 500, 500 };
         public int[] Result_Dan_XY = new int[] { 100, 0 };

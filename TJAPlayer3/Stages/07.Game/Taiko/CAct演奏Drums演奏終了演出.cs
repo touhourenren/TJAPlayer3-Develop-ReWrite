@@ -290,7 +290,6 @@ namespace TJAPlayer3
                 {
                     if (!this.bリザルトボイス再生済み)
                     {
-                        TJAPlayer3.Skin.sound成績発表.t再生する();
                         this.bリザルトボイス再生済み = true;
                     }
                     return 1;

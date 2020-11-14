@@ -22,7 +22,7 @@ namespace TJAPlayer3
 		}
 		public void tフェードイン完了()		// #25406 2011.6.9 yyagi
 		{
-			this.counter.n現在の値 = this.counter.n終了値;
+			this.counter.n現在の値 = (int)this.counter.n終了値;
 		}
 
 		// CActivity 実装

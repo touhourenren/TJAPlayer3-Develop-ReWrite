@@ -95,7 +95,7 @@ namespace TJAPlayer3
             ctChara_Normal = new CCounter(0, arモーション番号.Length - 1, 10, CSound管理.rc演奏用タイマ);
             ctChara_GoGo = new CCounter(0, arゴーゴーモーション番号.Length - 1, 10, CSound管理.rc演奏用タイマ);
             ctChara_Clear = new CCounter(0, arクリアモーション番号.Length - 1, 10, CSound管理.rc演奏用タイマ);
-            if (CharaAction_Balloon_Delay != null) CharaAction_Balloon_Delay.n現在の値 = CharaAction_Balloon_Delay.n終了値;
+            if (CharaAction_Balloon_Delay != null) CharaAction_Balloon_Delay.n現在の値 = (int)CharaAction_Balloon_Delay.n終了値;
             base.OnManagedリソースの作成();
         }
 

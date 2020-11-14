@@ -427,7 +427,7 @@ namespace TJAPlayer3
 								if (this.act曲リスト.ctBoxOpen.b終了値に達した || this.act曲リスト.ctBoxOpen.n現在の値 == 0)
 								{
 									TJAPlayer3.Skin.sound取消音.t再生する();
-									this.act曲リスト.ctBoxOpen.t開始(200, 2700, 1.3, TJAPlayer3.Timer);
+									this.act曲リスト.ctBoxOpen.t開始(200, 2700, 1.3f, TJAPlayer3.Timer);
 									this.act曲リスト.bBoxClose = true;
 								}
                             }
@@ -526,7 +526,7 @@ namespace TJAPlayer3
                                         case C曲リストノード.Eノード種別.BOX:
                                             {
                                                 TJAPlayer3.Skin.sound決定音.t再生する();
-												this.act曲リスト.ctBoxOpen.t開始(200, 2700, 1.3, TJAPlayer3.Timer);
+												this.act曲リスト.ctBoxOpen.t開始(200, 2700, 1.3f, TJAPlayer3.Timer);
 												this.act曲リスト.bBoxOpen = true;
 													this.ctDonchan_Select.t開始(0, TJAPlayer3.Tx.SongSelect_Donchan_Select.Length - 1, 1000 / 45, TJAPlayer3.Timer);
 												}
@@ -534,7 +534,7 @@ namespace TJAPlayer3
                                         case C曲リストノード.Eノード種別.BACKBOX:
                                             {
                                                 TJAPlayer3.Skin.sound取消音.t再生する();
-												this.act曲リスト.ctBoxOpen.t開始(200, 2700, 1.3, TJAPlayer3.Timer);
+												this.act曲リスト.ctBoxOpen.t開始(200, 2700, 1.3f, TJAPlayer3.Timer);
 												this.act曲リスト.bBoxClose = true;
 												this.ctDonchan_Select.t開始(0, TJAPlayer3.Tx.SongSelect_Donchan_Select.Length - 1, 1000 / 45, TJAPlayer3.Timer);
 											}

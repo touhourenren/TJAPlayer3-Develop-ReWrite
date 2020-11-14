@@ -27,7 +27,7 @@ namespace TJAPlayer3
 
 		public void tアニメを完了させる()
 		{
-			this.ct登場用.n現在の値 = this.ct登場用.n終了値;
+			this.ct登場用.n現在の値 = (int)this.ct登場用.n終了値;
 		}
 
 

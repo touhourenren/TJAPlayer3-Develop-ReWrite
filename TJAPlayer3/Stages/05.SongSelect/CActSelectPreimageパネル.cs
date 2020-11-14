@@ -109,7 +109,7 @@ namespace TJAPlayer3
 					{
 						this.tプレビュー画像_動画の変更();
 						TJAPlayer3.Timer.t更新();
-						this.ct遅延表示.n現在の経過時間 = TJAPlayer3.Timer.n現在時刻;
+						this.ct遅延表示.n現在の経過時間ms = TJAPlayer3.Timer.n現在時刻;
 						this.b新しいプレビューファイルを読み込んだ = true;
 					}
 					else if ( this.ct遅延表示.b終了値に達した && this.ct遅延表示.b進行中 )
@@ -452,7 +452,7 @@ namespace TJAPlayer3
 		}
 		private void t描画処理_センサ光()
 		{
-			int num = this.ctセンサ光.n現在の値;
+			int num = (int)this.ctセンサ光.n現在の値;
 			if( num < 12 )
 			{
 				int x = this.n本体X + 0xcc;
