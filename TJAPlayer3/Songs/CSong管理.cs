@@ -203,8 +203,24 @@ namespace TJAPlayer3
                                         c曲リストノード.strジャンル = c曲リストノード.r親ノード.strジャンル;
                                     }
                                     c曲リストノード.nLevel = dtx.LEVELtaiko;
-                                    
-                                    c曲リストノード.arスコア[ n ] = new Cスコア();
+
+                                    switch (c曲リストノード.strジャンル) 
+									{
+										case "J-POP":
+											c曲リストノード.strジャンル = "ポップス";
+											break;
+										case "ゲームミュージック":
+										case "バラエティー":
+										case "バラエティ":
+											c曲リストノード.strジャンル = "ゲームバラエティ";
+											break;
+										case "どうよう":
+											c曲リストノード.strジャンル = "キッズ";
+											break;
+									}
+
+
+									c曲リストノード.arスコア[ n ] = new Cスコア();
                                     c曲リストノード.arスコア[ n ].ファイル情報.ファイルの絶対パス = str基点フォルダ + fileinfo.Name;
                                     c曲リストノード.arスコア[ n ].ファイル情報.フォルダの絶対パス = str基点フォルダ;
                                     c曲リストノード.arスコア[ n ].ファイル情報.ファイルサイズ = fileinfo.Length;
@@ -293,7 +309,22 @@ namespace TJAPlayer3
                                     }
                                 }
 
-                                if (c曲リストノード.r親ノード != null)
+								switch (c曲リストノード.strジャンル)
+								{
+									case "J-POP":
+										c曲リストノード.strジャンル = "ポップス";
+										break;
+									case "ゲームミュージック":
+									case "バラエティー":
+									case "バラエティ":
+										c曲リストノード.strジャンル = "ゲームバラエティ";
+										break;
+									case "どうよう":
+										c曲リストノード.strジャンル = "キッズ";
+										break;
+								}
+
+								if (c曲リストノード.r親ノード != null)
                                 {
                                     if (c曲リストノード.r親ノード.IsChangedForeColor)
                                     {
@@ -426,6 +457,7 @@ namespace TJAPlayer3
 					c曲リストノード.strBreadcrumbs = ( c曲リストノード.r親ノード == null ) ?
 						c曲リストノード.strタイトル : c曲リストノード.r親ノード.strBreadcrumbs + " > " + c曲リストノード.strタイトル;
 
+
 		
 					c曲リストノード.list子リスト = new List<C曲リストノード>();
 					c曲リストノード.arスコア[ 0 ] = new Cスコア();
@@ -456,7 +488,22 @@ namespace TJAPlayer3
                             c曲リストノード.BackColor = boxdef.BackColor;
                         }
                     }
-					if( TJAPlayer3.ConfigIni.bLog曲検索ログ出力 )
+
+					switch (c曲リストノード.strジャンル)
+					{
+						case "J-POP":
+							c曲リストノード.strジャンル = "ポップス";
+							break;
+						case "ゲームミュージック":
+						case "バラエティー":
+						case "バラエティ":
+							c曲リストノード.strジャンル = "ゲームバラエティ";
+							break;
+						case "どうよう":
+							c曲リストノード.strジャンル = "キッズ";
+							break;
+					}
+					if ( TJAPlayer3.ConfigIni.bLog曲検索ログ出力 )
 					{
 						Trace.Indent();
 						try
@@ -501,7 +548,22 @@ namespace TJAPlayer3
 					c曲リストノード.strタイトル = boxdef.Title;
 					c曲リストノード.strジャンル = boxdef.Genre;
 
-                    if (boxdef.IsChangedForeColor)
+					switch (c曲リストノード.strジャンル)
+					{
+						case "J-POP":
+							c曲リストノード.strジャンル = "ポップス";
+							break;
+						case "ゲームミュージック":
+						case "バラエティー":
+						case "バラエティ":
+							c曲リストノード.strジャンル = "ゲームバラエティ";
+							break;
+						case "どうよう":
+							c曲リストノード.strジャンル = "キッズ";
+							break;
+					}
+
+					if (boxdef.IsChangedForeColor)
                     {
                         c曲リストノード.ForeColor = boxdef.ForeColor;
                         c曲リストノード.IsChangedForeColor = true;
