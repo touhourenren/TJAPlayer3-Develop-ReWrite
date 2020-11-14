@@ -503,17 +503,35 @@ namespace TJAPlayer3
             #endregion
 
             #region 6_結果発表
-            Result_Background = TxC(RESULT + @"Background.png");
             Result_FadeIn = TxC(RESULT + @"FadeIn.png");
             Result_Gauge = TxC(RESULT + @"Gauge.png");
             Result_Gauge_Base = TxC(RESULT + @"Gauge_Base.png");
-            Result_Judge = TxC(RESULT + @"Judge.png");
             Result_Header = TxC(RESULT + @"Header.png");
             Result_Number = TxC(RESULT + @"Number.png");
             Result_Panel = TxC(RESULT + @"Panel.png");
-            Result_Score_Text = TxC(RESULT + @"Score_Text.png");
+            Result_Soul_Text = TxC(RESULT + @"Soul_Text.png");
+            Result_Soul_Fire = TxC(RESULT + @"Result_Soul_Fire.png");
+            Result_Diff_Bar = TxC(RESULT + @"DifficultyBar.png");
             Result_Score_Number = TxC(RESULT + @"Score_Number.png");
             Result_Dan = TxC(RESULT + @"Dan.png");
+
+            for (int i = 0; i < 41; i++)
+                Result_Rainbow[i] = TxC(RESULT + @"Rainbow\" + i.ToString() + ".png");
+
+            for (int i = 0; i < 2; i++)
+                Result_Background[i] = TxC(RESULT + @"Background_" + i.ToString() + ".png");
+
+            for (int i = 0; i < 2; i++)
+                Result_Mountain[i] = TxC(RESULT + @"Background_Mountain_" + i.ToString() + ".png");
+
+            for (int i = 0; i < 3; i++)
+                Result_Crown[i] = TxC(RESULT + @"Crown\Crown_" + i.ToString() + ".png");
+
+            for (int i = 0; i < Result_Donchan_Normal.Length; i++)
+                Result_Donchan_Normal[i] = TxC(RESULT + @"Result_Donchan_Normal\" + i.ToString() + ".png");
+
+            for (int i = 0; i < Result_Donchan_Clear.Length; i++)
+                Result_Donchan_Clear[i] = TxC(RESULT + @"Result_Donchan_Clear\" + i.ToString() + ".png");
             #endregion
 
             #region 7_終了画面
@@ -833,17 +851,35 @@ namespace TJAPlayer3
             #endregion
 
             #region 6_結果発表
-            TJAPlayer3.tテクスチャの解放(ref Result_Background);
             TJAPlayer3.tテクスチャの解放(ref Result_FadeIn);
             TJAPlayer3.tテクスチャの解放(ref Result_Gauge);
             TJAPlayer3.tテクスチャの解放(ref Result_Gauge_Base);
-            TJAPlayer3.tテクスチャの解放(ref Result_Judge);
             TJAPlayer3.tテクスチャの解放(ref Result_Header);
             TJAPlayer3.tテクスチャの解放(ref Result_Number);
             TJAPlayer3.tテクスチャの解放(ref Result_Panel);
-            TJAPlayer3.tテクスチャの解放(ref Result_Score_Text);
+            TJAPlayer3.tテクスチャの解放(ref Result_Soul_Text);
+            TJAPlayer3.tテクスチャの解放(ref Result_Soul_Fire);
+            TJAPlayer3.tテクスチャの解放(ref Result_Diff_Bar);
             TJAPlayer3.tテクスチャの解放(ref Result_Score_Number);
             TJAPlayer3.tテクスチャの解放(ref Result_Dan);
+
+            for (int i = 0; i < 41; i++)
+                TJAPlayer3.tテクスチャの解放(ref Result_Rainbow[i]);
+
+            for (int i = 0; i < 2; i++)
+                TJAPlayer3.tテクスチャの解放(ref Result_Background[i]);
+
+            for (int i = 0; i < 2; i++)
+                TJAPlayer3.tテクスチャの解放(ref Result_Mountain[i]);
+
+            for (int i = 0; i < 3; i++)
+                TJAPlayer3.tテクスチャの解放(ref Result_Crown[i]);
+
+            for (int i = 0; i < Result_Donchan_Normal.Length; i++)
+                TJAPlayer3.tテクスチャの解放(ref Result_Donchan_Normal[i]);
+
+            for (int i = 0; i < TJAPlayer3.Tx.Result_Donchan_Normal.Length; i++)
+                TJAPlayer3.tテクスチャの解放(ref Result_Donchan_Clear[i]);
             #endregion
 
             #region 7_終了画面
@@ -1043,17 +1079,24 @@ namespace TJAPlayer3
         #endregion
 
         #region 6_結果発表
-        public CTexture Result_Background,
-            Result_FadeIn,
+        public CTexture Result_FadeIn,
             Result_Gauge,
             Result_Gauge_Base,
-            Result_Judge,
             Result_Header,
             Result_Number,
             Result_Panel,
-            Result_Score_Text,
+            Result_Soul_Text,
+            Result_Soul_Fire,
+            Result_Diff_Bar,
             Result_Score_Number,
             Result_Dan;
+        public CTexture[]
+            Result_Rainbow = new CTexture[41],
+            Result_Background = new CTexture[2],
+            Result_Crown = new CTexture[3],
+            Result_Donchan_Normal = new CTexture[28],
+            Result_Donchan_Clear = new CTexture[38],
+            Result_Mountain = new CTexture[2];
         #endregion
 
         #region 7_終了画面
