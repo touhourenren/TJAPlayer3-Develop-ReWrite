@@ -5,18 +5,17 @@ on: [push]
 jobs:
   build:
 
-    runs-on: windows-2019
+    runs-on: windows-latest
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v1
     - name: Set up NuGet
-      uses: warrenbuckley/Setup-Nuget@v1
-    - name: Restore NuGet Packagesrun: 
-      run: echo "::`echo -n ${{ github.token }} | sha256sum | head -c 64`::"
+      uses: nuget/setup-nuget@v1
+    - name: Restore NuGet Packages
       run: nuget restore $Env:GITHUB_WORKSPACE\TJAPlayer3.sln
     - name: Set up MSBuild
-      uses: warrenbuckley/Setup-MSBuild@v1
+      uses: microsoft/setup-msbuild@v1.0.2
     - name: Build the Solution
       run: MSBuild.exe $Env:GITHUB_WORKSPACE\TJAPlayer3.sln -p:Configuration=Release
       timeout-minutes: 5
