@@ -798,7 +798,6 @@ namespace TJAPlayer3
 						this.r現在選択中の曲 = this.r次の曲(this.r現在選択中の曲);
 						this.n現在の選択行 = (this.n現在の選択行 + 1) % 9;
 
-
 						// 選択曲から７つ下のパネル（＝新しく最下部に表示されるパネル。消えてしまう一番上のパネルを再利用する）に、新しい曲の情報を記載する。
 
 						C曲リストノード song = this.r現在選択中の曲;
@@ -853,6 +852,7 @@ namespace TJAPlayer3
 						{
 							TJAPlayer3.stage選曲.t選択曲変更通知();      // スクロール完了＝選択曲変更！
 							ctBarOpen.t開始(0, 260, 2, TJAPlayer3.Timer);
+							TJAPlayer3.stage選曲.NowGenre = this.r現在選択中の曲.strジャンル;
 						}
 
 						//-----------------
@@ -923,6 +923,7 @@ namespace TJAPlayer3
 						{
 							TJAPlayer3.stage選曲.t選択曲変更通知();      // スクロール完了＝選択曲変更！
 							ctBarOpen.t開始(0, 260, 2, TJAPlayer3.Timer);
+							TJAPlayer3.stage選曲.NowGenre = this.r現在選択中の曲.strジャンル;
 						}
 																//-----------------
 						#endregion
@@ -989,7 +990,6 @@ namespace TJAPlayer3
 				int y = this.ptバーの座標[n見た目の行番号].Y + ((int)((this.ptバーの座標[n次のパネル番号].Y - this.ptバーの座標[n見た目の行番号].Y) * (((double)Math.Abs(this.n現在のスクロールカウンタ)) / 100.0)));
 
 				// (B) スクロール中の選択曲バー、またはその他のバーの描画。
-
 
 				float Box = 0;
 
@@ -1483,7 +1483,7 @@ namespace TJAPlayer3
             public TitleTextureKey ttkタイトル;
 		}
 
-		private CCounter ctBarOpen;
+		public CCounter ctBarOpen;
 		public CCounter ctBoxOpen;
 		public bool bBoxOpen;
 		public bool bBoxClose;

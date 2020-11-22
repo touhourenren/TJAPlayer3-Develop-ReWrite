@@ -2663,7 +2663,7 @@ namespace TJAPlayer3
         public float[] Game_Effect_Roll_Speed_2P_X = new float[] { 0.6f };
         public float[] Game_Effect_Roll_Speed_2P_Y = new float[] { 0.6f };
         public int Game_Effect_Roll_Ptn;
-        public int[] Game_Effect_NotesFlash = new int[] { 180, 180, 11 }; // Width, Height, Ptn
+        public int[] Game_Effect_NotesFlash = new int[] { 180, 180, 16 }; // Width, Height, Ptn
         public int Game_Effect_NotesFlash_Timer = 20;
         public int[] Game_Effect_GoGoSplash = new int[] { 300, 400, 30 };
         public int[] Game_Effect_GoGoSplash_X = new int[] { 120, 300, 520, 760, 980, 1160 };

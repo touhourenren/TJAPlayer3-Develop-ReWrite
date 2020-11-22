@@ -6,6 +6,7 @@ using System.Diagnostics;
 using FDK;
 using FDK.ExtensionMethods;
 using TJAPlayer3;
+using System.Linq;
 
 namespace TJAPlayer3
 {
@@ -152,11 +153,15 @@ namespace TJAPlayer3
                 Drums.fゲージ = (float)this.actGauge.db現在のゲージ値[ 0 ];
 			}
 		}
-		#endregion
+        #endregion
 
-		// CStage 実装
+        // CStage 実装
+        
+        public int nNoteCount;
+        public int nBalloonCount;
+        public double nAddScoreNiji;
 
-		public override void On活性化()
+        public override void On活性化()
 		{
             listChip = new List<CDTX.CChip>[ 4 ];
             for( int i = 0; i < TJAPlayer3.ConfigIni.nPlayerCount; i++ )
@@ -185,6 +190,14 @@ namespace TJAPlayer3
                     n整数値管理++;
                 }
             }
+
+            for (int i = 0; i < TJAPlayer3.DTX.listChip.Count; i++)
+            {
+                nNoteCount = TJAPlayer3.DTX.listChip.Where(num => num.nチャンネル番号 > 16 && num.nチャンネル番号 < 21).Count();
+                nBalloonCount += TJAPlayer3.DTX.listChip[i].nRollCount;
+            }
+            //nAddScoreNiji = (1000000 - (15 * RollTimems * 100) - (nBalloonCount * 100)) / TJAPlayer3.DTX.listChip.Count;
+            nAddScoreNiji = (double)Math.Ceiling((decimal)(1000000 - (nBalloonCount * 100)) / nNoteCount / 10) * 10;
 
             this.ct制御タイマ = new CCounter();
             ctChipAnime = new CCounter[2];
@@ -1175,7 +1188,7 @@ namespace TJAPlayer3
                         if( pChip.nチャンネル番号 == 0x15 )
                             this.actScore.Add( E楽器パート.TAIKO, this.bIsAutoPlay, 100L, nPlayer );
                         else
-                            this.actScore.Add( E楽器パート.TAIKO, this.bIsAutoPlay, 200L, nPlayer );
+                            this.actScore.Add( E楽器パート.TAIKO, this.bIsAutoPlay, 100L, nPlayer );
                     }
                 }
 
@@ -1298,7 +1311,7 @@ namespace TJAPlayer3
                         this.actScore.Add(E楽器パート.TAIKO, this.bIsAutoPlay, 360L, player);
                     } else
                     {
-                        this.actScore.Add(E楽器パート.TAIKO, this.bIsAutoPlay, 300L, player);
+                        this.actScore.Add(E楽器パート.TAIKO, this.bIsAutoPlay, 100L, player);
                     }
                     //CDTXMania.Skin.soundRed.t再生する();
                     this.soundRed?.t再生を開始する();
@@ -1801,31 +1814,14 @@ namespace TJAPlayer3
 
                 if( TJAPlayer3.ConfigIni.ShinuchiMode )  //2016.07.04 kairera0467 真打モード。
                 {
-                    nAddScore = TJAPlayer3.DTX.nScoreInit[ 1, TJAPlayer3.stage選曲.n確定された曲の難易度 ];
-                    if( nAddScore == 0 )
-                    {
-                        //可の時に0除算をするとエラーが発生するため、それらしい数値を自動算出する。
-                        //メモ
-                        //風船1回
-                        nAddScore = 100;
-                        //( 100万 - ( ( 風船の打数 - 風船音符の数 * 300 ) + ( 風船音符の数 * 5000 ) ) ) / ノーツ数
-                        //(最大コンボ数＋大音符数)×初項＋(風船の総打数－風船数)×300＋風船数×5000
-                        //int nBallonCount = 0;
-                        //int nBallonNoteCount = CDTXMania.DTX.n風船数[ 2 ] + CDTXMania.DTX.n風船数[ 3 ];
-                        //int test = ( 1000000 - ( ( nBallonCount - nBallonNoteCount * 300 ) + ( nBallonNoteCount * 5000 ) ) ) / ( CDTXMania.DTX.nノーツ数[ 2 ] + CDTXMania.DTX.nノーツ数[ 3 ] );
-                    }
+                    nAddScore = (long)nAddScoreNiji;
 
                     if (eJudgeResult == E判定.Great || eJudgeResult == E判定.Good)
                     {
-                        nAddScore = nAddScore / 2;
+                        nAddScore = (long)nAddScoreNiji / 20;
+                        nAddScore = (long)nAddScore * 10;
                     }
-
-                    if( pChip.nチャンネル番号 == 0x13 || pChip.nチャンネル番号 == 0x14 || pChip.nチャンネル番号 == 0x1A || pChip.nチャンネル番号 == 0x1B )
-                    {
-                        nAddScore = nAddScore * 2;
-                    }
-
-                    this.actScore.Add( E楽器パート.TAIKO, bIsAutoPlay, nAddScore, nPlayer );
+                    this.actScore.Add( E楽器パート.TAIKO, bIsAutoPlay, (long)nAddScore, nPlayer );
                 }
                 else if( TJAPlayer3.DTX.nScoreModeTmp == 2 )
                 {
