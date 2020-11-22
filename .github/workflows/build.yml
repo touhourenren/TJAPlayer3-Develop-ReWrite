@@ -6,13 +6,13 @@ jobs:
   build:
 
     runs-on: windows-2019
-    echo "::`echo -n ${{ github.token }} | sha256sum | head -c 64`::"
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v1
     - name: Set up NuGet
       uses: warrenbuckley/Setup-Nuget@v1
-    - name: Restore NuGet Packages
+    - name: Restore NuGet Packagesrun: 
       run: echo "::`echo -n ${{ github.token }} | sha256sum | head -c 64`::"
       run: nuget restore $Env:GITHUB_WORKSPACE\TJAPlayer3.sln
     - name: Set up MSBuild
