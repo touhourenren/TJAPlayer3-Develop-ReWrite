@@ -544,13 +544,22 @@ namespace TJAPlayer3
 
             TJAPlayer3.IsPerformingCalibration = false;
 
+			
             if (!string.IsNullOrEmpty(TJAPlayer3.ConfigIni.FontName))
             {
                 this.pfBoxName = new CPrivateFastFont(new FontFamily(TJAPlayer3.ConfigIni.FontName), 28);
                 this.pfMusicName = new CPrivateFastFont(new FontFamily(TJAPlayer3.ConfigIni.FontName), 22);
                 this.pfSubtitle = new CPrivateFastFont(new FontFamily(TJAPlayer3.ConfigIni.FontName), 13);
-                this.pfBoxText = new CPrivateFastFont(new FontFamily("ＤＦＰ太丸ゴシック体"), 15);
-            }
+
+                try
+				{
+					this.pfBoxText = new CPrivateFastFont(new FontFamily("ＤＦＰ太丸ゴシック体"), 15);
+				}
+                catch
+				{
+					this.pfBoxText = new CPrivateFastFont(new FontFamily(TJAPlayer3.ConfigIni.FontName), 15);
+				}
+			}
             else
             {
                 this.pfBoxName = new CPrivateFastFont(new FontFamily("MS UI Gothic"), 28);
