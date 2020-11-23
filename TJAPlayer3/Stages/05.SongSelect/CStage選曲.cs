@@ -530,7 +530,9 @@ namespace TJAPlayer3
                         {
                             if (this.act曲リスト.ctBoxOpen.b終了値に達した || this.act曲リスト.ctBoxOpen.n現在の値 == 0)
                             {
-                                #region [ Decide ]
+                                if (!this.bスクロール中)
+                                {
+                                    #region [ Decide ]
                                     if ((TJAPlayer3.Pad.b押されたDGB(Eパッド.Decide) || (TJAPlayer3.Pad.b押されたDGB(Eパッド.LRed) || TJAPlayer3.Pad.b押されたDGB(Eパッド.RRed)) ||
                                     ((TJAPlayer3.ConfigIni.bEnterがキー割り当てのどこにも使用されていない && TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDX.DirectInput.Key.Return)))))
                                     {
@@ -572,7 +574,8 @@ namespace TJAPlayer3
                                             }
                                         }
                                     }
-                                #endregion
+                                    #endregion
+                                }
                                 #region [ Up ]
                                 if (!this.bスクロール中)
                                 {
@@ -589,7 +592,7 @@ namespace TJAPlayer3
                                     if (TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.LBlue))
                                     {
                                         this.ctBackgroundFade.t開始(0, 600, 1, TJAPlayer3.Timer);
-                                        for(int i = 0; i < 7; i++) tカーソルスキップ(true);
+                                        for (int i = 0; i < 7; i++) tカーソルスキップ(true);
                                     }
                                 }
                                 #endregion
@@ -952,8 +955,8 @@ namespace TJAPlayer3
         {
             if (this.act曲リスト.ctBarOpen.n現在の値 >= 200 || this.ctBackgroundFade.n現在の値 >= 600 - 255)
                 TJAPlayer3.stage選曲.OldGenre = this.r現在選択中の曲.strジャンル;
-            if (Up) this.act曲リスト.t次に移動();
-            else this.act曲リスト.t前に移動();
+            if (Up) this.act曲リスト.t前に移動();
+            else this.act曲リスト.t次に移動();
 
             TJAPlayer3.Skin.soundSkip.t再生する();
         }

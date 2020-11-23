@@ -13,115 +13,236 @@ namespace TJAPlayer3
 
 		public CAct演奏Drums判定文字列()
 		{
-			this.stレーンサイズ = new STレーンサイズ[ 12 ];
+			this.stレーンサイズ = new STレーンサイズ[12];
 			base.b活性化してない = true;
 		}
-		
-		
+
+
 		// CActivity 実装（共通クラスからの差分のみ）
 		public override int On進行描画()
 		{
-			throw new InvalidOperationException( "t進行描画(C演奏判定ライン座標共通 演奏判定ライン共通 ) のほうを使用してください。" );
+			throw new InvalidOperationException("t進行描画(C演奏判定ライン座標共通 演奏判定ライン共通 ) のほうを使用してください。");
 		}
-		public override int t進行描画( C演奏判定ライン座標共通 演奏判定ライン座標 )
+		public override int t進行描画(C演奏判定ライン座標共通 演奏判定ライン座標)
 		{
-			if( !base.b活性化してない )
+			if (!base.b活性化してない)
 			{
-				for( int i = 0; i < 12; i++ )
+				for (int i = 0; i < 12; i++)
 				{
-					if( !base.st状態[ i ].ct進行.b停止中 )
+					if (!base.st状態[i].ct進行.b停止中)
 					{
-						base.st状態[ i ].ct進行.t進行();
-						if( base.st状態[ i ].ct進行.b終了値に達した )
+						base.st状態[i].ct進行.t進行();
+						if (base.st状態[i].ct進行.b終了値に達した)
 						{
-							base.st状態[ i ].ct進行.t停止();
-                            base.st状態[ i ].b使用中 = false;
+							base.st状態[i].ct進行.t停止();
+							base.st状態[i].b使用中 = false;
 						}
-						int num2 = base.st状態[ i ].ct進行.n現在の値;
-                        if( base.st状態[ i ].judge != E判定.Great )
-                        {
-							base.st状態[ i ].n相対X座標 = 0;
-							base.st状態[ i ].n相対Y座標 = 15;
-							base.st状態[ i ].n透明度 = 0xff;
-                        }
-						if( ( base.st状態[ i ].judge != E判定.Miss ) && ( base.st状態[ i ].judge != E判定.Bad ) )
+						int num2 = base.st状態[i].ct進行.n現在の値;
+						if (base.st状態[i].judge != E判定.Great)
 						{
-							if( num2 < 20 )
+							base.st状態[i].n相対X座標 = 0;
+							base.st状態[i].n相対Y座標 = 0;
+							base.st状態[i].n透明度 = 0xff;
+						}
+						if ((base.st状態[i].judge != E判定.Miss) && (base.st状態[i].judge != E判定.Bad))
+						{
+							if (num2 < 5)
 							{
-								base.st状態[ i ].n相対X座標 = 0;
-								base.st状態[ i ].n相対Y座標 = 0;
-								base.st状態[ i ].n透明度 = 0xff;
+								this.st状態[i].n相対X座標 = 0;
+								this.st状態[i].n相対Y座標 = 0;
+								this.st状態[i].n透明度 = 0;
 							}
-							else if( num2 < 40 )
+							else if (num2 < 10)
 							{
-								base.st状態[ i ].n相対X座標 = 0;
-								base.st状態[ i ].n相対Y座標 = 5;
-								base.st状態[ i ].n透明度 = 0xff;
+								this.st状態[i].n相対X座標 = 0;
+								this.st状態[i].n相対Y座標 = -4;
+								this.st状態[i].n透明度 = 0;
 							}
-							else if( num2 >= 60 )
+							else if (num2 < 15)
 							{
-								base.st状態[ i ].n相対X座標 = 0;
-								base.st状態[ i ].n相対Y座標 = 10;
-								base.st状態[ i ].n透明度 = 0xff;
+								this.st状態[i].n相対X座標 = 0;
+								this.st状態[i].n相対Y座標 = -8;
+								this.st状態[i].n透明度 = 0;
 							}
-							else
+							else if (num2 < 20)
 							{
-								base.st状態[ i ].n相対X座標 = 0;
-								base.st状態[ i ].n相対Y座標 = 15;
-								base.st状態[ i ].n透明度 = 0xff;
+								this.st状態[i].n相対X座標 = 0;
+								this.st状態[i].n相対Y座標 = -12;
+								this.st状態[i].n透明度 = 255;
+							}
+							else if (num2 < 25)
+							{
+								this.st状態[i].n相対X座標 = 0;
+								this.st状態[i].n相対Y座標 = -15;
+								this.st状態[i].n透明度 = 0;
+							}
+							else if (num2 < 30)
+							{
+								this.st状態[i].n相対X座標 = 0;
+								this.st状態[i].n相対Y座標 = -14;
+								this.st状態[i].n透明度 = 0;
+							}
+							else if (num2 < 35)
+							{
+								this.st状態[i].n相対X座標 = 0;
+								this.st状態[i].n相対Y座標 = -12;
+								this.st状態[i].n透明度 = 0;
+							}
+							else if (num2 < 40)
+							{
+								this.st状態[i].n相対X座標 = 0;
+								this.st状態[i].n相対Y座標 = -10;
+								this.st状態[i].n透明度 = 0;
+							}
+							else if (num2 < 45)
+							{
+								this.st状態[i].n相対X座標 = 0;
+								this.st状態[i].n相対Y座標 = -8;
+								this.st状態[i].n透明度 = 0;
+							}
+							else if (num2 < 50)
+							{
+								this.st状態[i].n相対X座標 = 0;
+								this.st状態[i].n相対Y座標 = -7;
+								this.st状態[i].n透明度 = 0;
+							}
+							else if (num2 < 55)
+							{
+								this.st状態[i].n相対X座標 = 0;
+								this.st状態[i].n相対Y座標 = -6;
+								this.st状態[i].n透明度 = 0;
+							}
+							else if (num2 < 60)
+							{
+								this.st状態[i].n相対X座標 = 0;
+								this.st状態[i].n相対Y座標 = -4;
+								this.st状態[i].n透明度 = 0;
+							}
+							else if (num2 < 65)
+							{
+								this.st状態[i].n相対X座標 = 0;
+								this.st状態[i].n相対Y座標 = -2;
+								this.st状態[i].n透明度 = 0;
+							}
+							else if (num2 < 70)
+							{
+								this.st状態[i].n相対X座標 = 0;
+								this.st状態[i].n相対Y座標 = 0;
+								this.st状態[i].n透明度 = 0;
 							}
 						}
-						if( num2 < 20 )
+						if (num2 < 5)
 						{
-							base.st状態[ i ].n相対X座標 = 0;
-							base.st状態[ i ].n相対Y座標 = 0;
-							base.st状態[ i ].n透明度 = 0xff;
+							this.st状態[i].n相対X座標 = 0;
+							this.st状態[i].n相対Y座標 = 0;
+							this.st状態[i].n透明度 = 0;
 						}
-						else if( num2 < 40 )
+						else if (num2 < 10)
 						{
-							base.st状態[ i ].n相対X座標 = 0;
-							base.st状態[ i ].n相対Y座標 = 5;
-							base.st状態[ i ].n透明度 = 0xff;
+							this.st状態[i].n相対X座標 = 0;
+							this.st状態[i].n相対Y座標 = -4;
+							this.st状態[i].n透明度 = 0;
 						}
-						else if( num2 >= 60 )
+						else if (num2 < 15)
 						{
-							base.st状態[ i ].n相対X座標 = 0;
-							base.st状態[ i ].n相対Y座標 = 10;
-							base.st状態[ i ].n透明度 = 0xff;
+							this.st状態[i].n相対X座標 = 0;
+							this.st状態[i].n相対Y座標 = -8;
+							this.st状態[i].n透明度 = 0;
 						}
-						else
+						else if (num2 < 20)
 						{
-							base.st状態[ i ].n相対X座標 = 0;
-							base.st状態[ i ].n相対Y座標 = 15;
-							base.st状態[ i ].n透明度 = 0xff;
+							this.st状態[i].n相対X座標 = 0;
+							this.st状態[i].n相対Y座標 = -12;
+							this.st状態[i].n透明度 = 255;
+						}
+						else if (num2 < 25)
+						{
+							this.st状態[i].n相対X座標 = 0;
+							this.st状態[i].n相対Y座標 = -15;
+							this.st状態[i].n透明度 = 0;
+						}
+						else if (num2 < 30)
+						{
+							this.st状態[i].n相対X座標 = 0;
+							this.st状態[i].n相対Y座標 = -14;
+							this.st状態[i].n透明度 = 0;
+						}
+						else if (num2 < 35)
+						{
+							this.st状態[i].n相対X座標 = 0;
+							this.st状態[i].n相対Y座標 = -12;
+							this.st状態[i].n透明度 = 0;
+						}
+						else if (num2 < 40)
+						{
+							this.st状態[i].n相対X座標 = 0;
+							this.st状態[i].n相対Y座標 = -10;
+							this.st状態[i].n透明度 = 0;
+						}
+						else if (num2 < 45)
+						{
+							this.st状態[i].n相対X座標 = 0;
+							this.st状態[i].n相対Y座標 = -8;
+							this.st状態[i].n透明度 = 0;
+						}
+						else if (num2 < 50)
+						{
+							this.st状態[i].n相対X座標 = 0;
+							this.st状態[i].n相対Y座標 = -7;
+							this.st状態[i].n透明度 = 0;
+						}
+						else if (num2 < 55)
+						{
+							this.st状態[i].n相対X座標 = 0;
+							this.st状態[i].n相対Y座標 = -6;
+							this.st状態[i].n透明度 = 0;
+						}
+						else if (num2 < 60)
+						{
+							this.st状態[i].n相対X座標 = 0;
+							this.st状態[i].n相対Y座標 = -4;
+							this.st状態[i].n透明度 = 0;
+						}
+						else if (num2 < 65)
+						{
+							this.st状態[i].n相対X座標 = 0;
+							this.st状態[i].n相対Y座標 = -2;
+							this.st状態[i].n透明度 = 0;
+						}
+						else if (num2 < 70)
+						{
+							this.st状態[i].n相対X座標 = 0;
+							this.st状態[i].n相対Y座標 = 0;
+							this.st状態[i].n透明度 = 0;
 						}
 					}
 				}
-				for( int j = 0; j < 12; j++ )
+				for (int j = 0; j < 12; j++)
 				{
-					if( !base.st状態[ j ].ct進行.b停止中 )
+					if (!base.st状態[j].ct進行.b停止中)
 					{
 						int baseX = 370;
-                        //int baseY = 135;
-                        int baseY = TJAPlayer3.Skin.nScrollFieldY[base.st状態[j].nPlayer] - 53;
-						int x = TJAPlayer3.Skin.nScrollFieldX[ 0 ] - TJAPlayer3.Tx.Judge.szテクスチャサイズ.Width / 2;
-						int y = ( baseY + base.st状態[ j ].n相対Y座標 );
-						if( TJAPlayer3.Tx.Judge != null )
+						//int baseY = 135;
+						int baseY = TJAPlayer3.Skin.nScrollFieldY[base.st状態[j].nPlayer] - 43;
+						int x = TJAPlayer3.Skin.nScrollFieldX[0] - TJAPlayer3.Tx.Judge.szテクスチャサイズ.Width / 2;
+						int y = (baseY + base.st状態[j].n相対Y座標);
+						if (TJAPlayer3.Tx.Judge != null)
 						{
-                            TJAPlayer3.Tx.Judge.t2D描画( TJAPlayer3.app.Device, x, y, base.st判定文字列[ (int) base.st状態[ j ].judge ].rc );
+							TJAPlayer3.Tx.Judge.Opacity = base.st状態[j].ct進行.n現在の値 >= 150 ? (int)(255 - (base.st状態[j].ct進行.n現在の値 - 150) * 1.7) : 255;
+							TJAPlayer3.Tx.Judge.t2D描画(TJAPlayer3.app.Device, x, y, base.st判定文字列[(int)base.st状態[j].judge].rc);
 						}
 					}
 				}
 			}
 			return 0;
 		}
-		
+
 
 		// その他
 
 		#region [ private ]
 		//-----------------
-		[StructLayout( LayoutKind.Sequential )]
+		[StructLayout(LayoutKind.Sequential)]
 		private struct STレーンサイズ
 		{
 			public int x;

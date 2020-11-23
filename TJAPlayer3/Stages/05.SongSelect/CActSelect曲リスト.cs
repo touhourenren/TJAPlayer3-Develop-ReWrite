@@ -789,7 +789,7 @@ namespace TJAPlayer3
 					}
 					else
 					{
-						n加速度 = 700;
+						n加速度 = 650;
 					}
 					//-----------------
 					#endregion
