@@ -475,6 +475,13 @@ namespace TJAPlayer3
 						{
 							c曲リストノード.strタイトル = boxdef.Title;
 						}
+						for(int i = 0; i < 3; i++)
+						{
+							if ((boxdef.strBoxText[i] != null) && (boxdef.strBoxText[i].Length > 0))
+							{
+								c曲リストノード.strBoxText[i] = boxdef.strBoxText[i];
+							}
+						}
 						if( ( boxdef.Genre != null ) && ( boxdef.Genre.Length > 0 ) )
 						{
 							c曲リストノード.strジャンル = boxdef.Genre;
@@ -574,7 +581,14 @@ namespace TJAPlayer3
                         c曲リストノード.IsChangedBackColor = true;
                     }
 
-                    switch (CStrジャンルtoNum.ForAC15(c曲リストノード.strジャンル))
+					for (int i = 0; i < 3; i++)
+					{
+						if ((boxdef.strBoxText[i] != null) && (boxdef.strBoxText[i].Length > 0))
+						{
+							c曲リストノード.strBoxText[i] = boxdef.strBoxText[i];
+						}
+					}
+					switch (CStrジャンルtoNum.ForAC15(c曲リストノード.strジャンル))
                     {
                         case 0:
                             c曲リストノード.ForeColor = TJAPlayer3.Skin.SongSelect_ForeColor_JPOP;

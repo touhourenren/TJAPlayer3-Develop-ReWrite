@@ -326,6 +326,7 @@ namespace TJAPlayer3
 		{
 			if( this.r現在選択中の曲 != null )
 			{
+				ctBarOpen.t停止();
 				ctBarOpen.n現在の値 = 0;
 				this.n目標のスクロールカウンタ += 100;
 			}
@@ -335,6 +336,7 @@ namespace TJAPlayer3
 		{
 			if( this.r現在選択中の曲 != null )
 			{
+				ctBarOpen.t停止();
 				ctBarOpen.n現在の値 = 0;
 				this.n目標のスクロールカウンタ -= 100;
 			}
@@ -547,12 +549,14 @@ namespace TJAPlayer3
                 this.pfBoxName = new CPrivateFastFont(new FontFamily(TJAPlayer3.ConfigIni.FontName), 28);
                 this.pfMusicName = new CPrivateFastFont(new FontFamily(TJAPlayer3.ConfigIni.FontName), 22);
                 this.pfSubtitle = new CPrivateFastFont(new FontFamily(TJAPlayer3.ConfigIni.FontName), 13);
+                this.pfBoxText = new CPrivateFastFont(new FontFamily("ＤＦＰ太丸ゴシック体"), 15);
             }
             else
             {
                 this.pfBoxName = new CPrivateFastFont(new FontFamily("MS UI Gothic"), 28);
                 this.pfMusicName = new CPrivateFastFont(new FontFamily("MS UI Gothic"), 22);
                 this.pfSubtitle = new CPrivateFastFont(new FontFamily("MS UI Gothic"), 13);
+                this.pfBoxText = new CPrivateFastFont(new FontFamily("MS UI Gothic"), 15);
             }
 
 		    _titleTextures.ItemRemoved += OnTitleTexturesOnItemRemoved;
@@ -580,6 +584,16 @@ namespace TJAPlayer3
 			this.ctBoxOpen = new CCounter();
 
 			this.ct三角矢印アニメ = new CCounter();
+
+			for(int i = 0; i < 3; i++)
+			{
+				using (var texture = pfBoxText.DrawPrivateFont(this.r現在選択中の曲.strBoxText[i], r現在選択中の曲.ForeColor, r現在選択中の曲.BackColor))
+                {
+					this.txBoxText[i] = TJAPlayer3.tテクスチャの生成(texture);
+					this.strBoxText = this.r現在選択中の曲.strBoxText[0] + this.r現在選択中の曲.strBoxText[1] + this.r現在選択中の曲.strBoxText[2];
+
+				}
+			}
 
 			base.On活性化();
 
@@ -724,6 +738,18 @@ namespace TJAPlayer3
 
 			// 本ステージは、(1)登場アニメフェーズ → (2)通常フェーズ　と二段階にわけて進む。
 
+			if(strBoxText != r現在選択中の曲.strBoxText[0] + r現在選択中の曲.strBoxText[1] + r現在選択中の曲.strBoxText[2])
+			{
+				for (int i = 0; i < 3; i++)
+				{
+					using (var texture = pfBoxText.DrawPrivateFont(this.r現在選択中の曲.strBoxText[i], r現在選択中の曲.ForeColor, r現在選択中の曲.BackColor))
+					{
+						this.txBoxText[i] = TJAPlayer3.tテクスチャの生成(texture);
+						this.strBoxText = this.r現在選択中の曲.strBoxText[0] + this.r現在選択中の曲.strBoxText[1] + this.r現在選択中の曲.strBoxText[2];
+					}
+				}
+			}
+
 
 			// 進行。
 			if (n現在のスクロールカウンタ == 0) ct三角矢印アニメ.t進行Loop();
@@ -763,7 +789,7 @@ namespace TJAPlayer3
 					}
 					else
 					{
-						n加速度 = 8;
+						n加速度 = 700;
 					}
 					//-----------------
 					#endregion
@@ -1387,6 +1413,24 @@ namespace TJAPlayer3
 						if (ttk選択している曲の曲名 != null)
 							ResolveTitleTexture(this.ttk選択している曲の曲名).Opacity = 255;
 
+					for(int j = 0; j < 3; j++)
+					{
+						if (!ctBoxOpen.b終了値に達した && ctBoxOpen.n現在の値 != 0)
+						{
+							if (txBoxText[j] != null)
+								this.txBoxText[j].Opacity = (int)(ctBoxOpen.n現在の値 >= 1200 && ctBoxOpen.n現在の値 <= 1620 ? 255 - (ctBoxOpen.n現在の値 - 1200) * 2.55f :
+								ctBoxOpen.n現在の値 >= 2000 ? (ctBoxOpen.n現在の値 - 2000) * 2.55f : ctBoxOpen.n現在の値 <= 1200 ? 255 : 0);
+						}
+						else
+							if (txBoxText[j] != null)
+								this.txBoxText[j].Opacity = (int)(BarAnimeCount * 4.25f);
+
+						if(this.txBoxText[j].szテクスチャサイズ.Width >= 540)
+							this.txBoxText[j].vc拡大縮小倍率.X = 540f / this.txBoxText[j].szテクスチャサイズ.Width;
+
+						this.txBoxText[j].t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, 640 + TJAPlayer3.Skin.SongSelect_BoxExplanation_X, 355 + j * 35 + TJAPlayer3.Skin.SongSelect_BoxExplanation_Y);
+					}
+
 					if (this.ttk選択している曲のサブタイトル != null)
 					{
 						if (!ctBoxOpen.b終了値に達した)
@@ -1495,6 +1539,10 @@ namespace TJAPlayer3
         private CPrivateFastFont pfMusicName;
         private CPrivateFastFont pfSubtitle;
         private CPrivateFastFont pfBoxName;
+
+		private string strBoxText;
+		private CPrivateFont pfBoxText;
+		private CTexture[] txBoxText = new CTexture[3];
 
 	    // 2018-09-17 twopointzero: I can scroll through 2300 songs consuming approx. 200MB of memory.
 	    //                          I have set the title texture cache size to a nearby round number (2500.)

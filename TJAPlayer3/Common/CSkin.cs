@@ -321,6 +321,7 @@ namespace TJAPlayer3
         public Cシステムサウンド sound変更音 = null;
         public Cシステムサウンド bgm選曲画面In = null;
         public Cシステムサウンド soundSongSelectChara = null;
+        public Cシステムサウンド soundSkip = null;
         //add
         public Cシステムサウンド sound曲決定音 = null;
         public Cシステムサウンド bgmリザルトイン音 = null;
@@ -623,6 +624,7 @@ namespace TJAPlayer3
             this.bgm選曲画面 = new Cシステムサウンド(@"Sounds\Select BGM.ogg", true, true, false, ESoundGroup.SongPreview);
             this.bgm選曲画面In = new Cシステムサウンド(@"Sounds\Select BGM start.ogg", false, true, false, ESoundGroup.SongPreview);
             this.soundSongSelectChara = new Cシステムサウンド(@"Sounds\SongSelect Chara.ogg", false, false, false, ESoundGroup.SongPreview);
+            this.soundSkip = new Cシステムサウンド(@"Sounds\Skip.ogg", false, false, false, ESoundGroup.SoundEffect);
 
             //this.soundRed               = new Cシステムサウンド( @"Sounds\dong.ogg",            false, false, true, ESoundType.SoundEffect );
             //this.soundBlue              = new Cシステムサウンド( @"Sounds\ka.ogg",              false, false, true, ESoundType.SoundEffect );
@@ -2554,7 +2556,7 @@ namespace TJAPlayer3
         public string Game_Dancer_Motion = "0";
         public int Game_Dancer_Ptn = 0;
         public int Game_Dancer_Beat = 8;
-        public int[] Game_Dancer_Gauge = new int[] { 0, 20, 40, 60, 80 };
+        public int[] Game_Dancer_Gauge = new int[] { 0, 0, 0, 40, 80 };
         #endregion
         #region Mob
         public int Game_Mob_Ptn = 0;

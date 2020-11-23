@@ -14,7 +14,8 @@ namespace TJAPlayer3
 		public Color Color;
 		public string Genre;
 		public string Title;
-        public Color ForeColor;
+		public string[] strBoxText = new string[3];
+		public Color ForeColor;
         public Color BackColor;
         public bool IsChangedForeColor;
         public bool IsChangedBackColor;
@@ -24,6 +25,8 @@ namespace TJAPlayer3
 
 		public CBoxDef()
 		{
+			for (int i = 0; i < 3; i++)
+				this.strBoxText[i] = "";
 			this.Title = "";
 			this.Genre = "";
             ForeColor = Color.White;
@@ -82,8 +85,18 @@ namespace TJAPlayer3
                             {
                                 this.BackColor = ColorTranslator.FromHtml(str.Substring(10).Trim(ignoreChars));
                                 IsChangedBackColor = true;
-                            }
-                        }
+							}
+							else
+							{
+								for(int i = 0; i < 3; i++)
+                                {
+									if (str.StartsWith("#BOXEXPLANATION" + (i + 1).ToString(), StringComparison.OrdinalIgnoreCase))
+                                    {
+										this.strBoxText[i] = str.Substring(16).Trim(ignoreChars);
+                                    }
+								}
+							}
+						}
 						continue;
 					}
 					catch (Exception e)

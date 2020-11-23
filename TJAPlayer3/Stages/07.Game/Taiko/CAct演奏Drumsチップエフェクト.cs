@@ -76,22 +76,21 @@ namespace TJAPlayer3
                         st[i].ct進行.t停止();
                         st[i].b使用中 = false;
                     }
-                    if (this.st[i].ctChipEffect.n現在の値 < 13)
+                    switch (st[i].nプレイヤー)
                     {
-                        switch (st[i].nプレイヤー)
-                        {
-                            case 0:
-                                if (TJAPlayer3.Tx.Gauge_Soul_Explosion[0] != null)
-                                    TJAPlayer3.Tx.Gauge_Soul_Explosion[0].t2D中心基準描画(TJAPlayer3.app.Device, TJAPlayer3.Skin.Game_Effect_FlyingNotes_EndPoint_X[0], TJAPlayer3.Skin.Game_Effect_FlyingNotes_EndPoint_Y[0], new Rectangle(st[i].ct進行.n現在の値 * TJAPlayer3.Skin.Game_Effect_NotesFlash[0], 0, TJAPlayer3.Skin.Game_Effect_NotesFlash[0], TJAPlayer3.Skin.Game_Effect_NotesFlash[1]));
+                        case 0:
+                            if (TJAPlayer3.Tx.Gauge_Soul_Explosion[0] != null)
+                                TJAPlayer3.Tx.Gauge_Soul_Explosion[0].t2D中心基準描画(TJAPlayer3.app.Device, TJAPlayer3.Skin.Game_Effect_FlyingNotes_EndPoint_X[0], TJAPlayer3.Skin.Game_Effect_FlyingNotes_EndPoint_Y[0], new Rectangle(st[i].ct進行.n現在の値 * TJAPlayer3.Skin.Game_Effect_NotesFlash[0], 0, TJAPlayer3.Skin.Game_Effect_NotesFlash[0], TJAPlayer3.Skin.Game_Effect_NotesFlash[1]));
+                            if (this.st[i].ctChipEffect.n現在の値 < 13)
                                 TJAPlayer3.Tx.Notes.t2D中心基準描画(TJAPlayer3.app.Device, TJAPlayer3.Skin.Game_Effect_FlyingNotes_EndPoint_X[0], TJAPlayer3.Skin.Game_Effect_FlyingNotes_EndPoint_Y[0], new Rectangle(st[i].Lane * 130, 0, 130, 130));
-                                break;
+                            break;
 
-                            case 1:
-                                if (TJAPlayer3.Tx.Gauge_Soul_Explosion[1] != null)
-                                    TJAPlayer3.Tx.Gauge_Soul_Explosion[1].t2D中心基準描画(TJAPlayer3.app.Device, TJAPlayer3.Skin.Game_Effect_FlyingNotes_EndPoint_X[1], TJAPlayer3.Skin.Game_Effect_FlyingNotes_EndPoint_Y[1], new Rectangle(st[i].ct進行.n現在の値 * TJAPlayer3.Skin.Game_Effect_NotesFlash[0], 0, TJAPlayer3.Skin.Game_Effect_NotesFlash[0], TJAPlayer3.Skin.Game_Effect_NotesFlash[1]));
+                        case 1:
+                            if (TJAPlayer3.Tx.Gauge_Soul_Explosion[1] != null)
+                                TJAPlayer3.Tx.Gauge_Soul_Explosion[1].t2D中心基準描画(TJAPlayer3.app.Device, TJAPlayer3.Skin.Game_Effect_FlyingNotes_EndPoint_X[1], TJAPlayer3.Skin.Game_Effect_FlyingNotes_EndPoint_Y[1], new Rectangle(st[i].ct進行.n現在の値 * TJAPlayer3.Skin.Game_Effect_NotesFlash[0], 0, TJAPlayer3.Skin.Game_Effect_NotesFlash[0], TJAPlayer3.Skin.Game_Effect_NotesFlash[1]));
+                            if (this.st[i].ctChipEffect.n現在の値 < 13)
                                 TJAPlayer3.Tx.Notes.t2D中心基準描画(TJAPlayer3.app.Device, TJAPlayer3.Skin.Game_Effect_FlyingNotes_EndPoint_X[1], TJAPlayer3.Skin.Game_Effect_FlyingNotes_EndPoint_Y[1], new Rectangle(st[i].Lane * 130, 0, 130, 130));
-                                break;
-                        }
+                            break;
                     }
 
                     if(this.st[i].ctChipEffect.n現在の値 < 12)
