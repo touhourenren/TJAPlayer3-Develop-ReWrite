@@ -2606,10 +2606,10 @@ namespace TJAPlayer3
         public int[] Game_Taiko_X = new int[] { 190, 190 };
         public int[] Game_Taiko_Y = new int[] { 190, 368 };
         public int[] Game_Taiko_Combo_X = new int[] { 267, 267 };
-        public int[] Game_Taiko_Combo_Y = new int[] { 270, 448 };
-        public int[] Game_Taiko_Combo_Ex_X = new int[] { 268, 268 };
+        public int[] Game_Taiko_Combo_Y = new int[] { 273, 448 };
+        public int[] Game_Taiko_Combo_Ex_X = new int[] { 267, 267 };
         public int[] Game_Taiko_Combo_Ex_Y = new int[] { 275, 452 };
-        public int[] Game_Taiko_Combo_Ex4_X = new int[] { 268, 268 };
+        public int[] Game_Taiko_Combo_Ex4_X = new int[] { 267, 267 };
         public int[] Game_Taiko_Combo_Ex4_Y = new int[] { 270, 448 };
         public int[] Game_Taiko_Combo_Padding = new int[] { 34, 34, 24 };
         public int[] Game_Taiko_Combo_Size = new int[] { 40, 48 };

@@ -359,11 +359,11 @@ namespace TJAPlayer3
 			#region[ コンボ文字 ]
 			if (n桁数 <= 2)
 			{
-				TJAPlayer3.Tx.Taiko_Combo_Text?.t2D拡大率考慮下中心基準描画(TJAPlayer3.app.Device, TJAPlayer3.Skin.Game_Taiko_Combo_Text_X[nPlayer], TJAPlayer3.Skin.Game_Taiko_Combo_Text_Y[nPlayer], new Rectangle(0, 0, TJAPlayer3.Skin.Game_Taiko_Combo_Text_Size[0], TJAPlayer3.Skin.Game_Taiko_Combo_Text_Size[1]));
+				TJAPlayer3.Tx.Taiko_Combo_Text?.t2D拡大率考慮下中心基準描画(TJAPlayer3.app.Device, TJAPlayer3.Skin.Game_Taiko_Combo_Text_X[nPlayer], TJAPlayer3.Skin.Game_Taiko_Combo_Text_Y[nPlayer]);
 			}
 			else
 			{
-				TJAPlayer3.Tx.Taiko_Combo_Text?.t2D拡大率考慮下中心基準描画(TJAPlayer3.app.Device, TJAPlayer3.Skin.Game_Taiko_Combo_Text_X[nPlayer], TJAPlayer3.Skin.Game_Taiko_Combo_Text_Y[nPlayer], new Rectangle(0, TJAPlayer3.Skin.Game_Taiko_Combo_Text_Size[1], TJAPlayer3.Skin.Game_Taiko_Combo_Text_Size[0], TJAPlayer3.Skin.Game_Taiko_Combo_Text_Size[1]));
+				TJAPlayer3.Tx.Taiko_Combo_Text?.t2D拡大率考慮下中心基準描画(TJAPlayer3.app.Device, TJAPlayer3.Skin.Game_Taiko_Combo_Text_X[nPlayer], TJAPlayer3.Skin.Game_Taiko_Combo_Text_Y[nPlayer]);
 			}
 			#endregion
 

@@ -55,31 +55,31 @@ namespace TJAPlayer3
 							else if (num2 < 10)
 							{
 								this.st状態[i].n相対X座標 = 0;
-								this.st状態[i].n相対Y座標 = -4;
+								this.st状態[i].n相対Y座標 = -3;
 								this.st状態[i].n透明度 = 0;
 							}
 							else if (num2 < 15)
 							{
 								this.st状態[i].n相対X座標 = 0;
-								this.st状態[i].n相対Y座標 = -8;
+								this.st状態[i].n相対Y座標 = -6;
 								this.st状態[i].n透明度 = 0;
 							}
 							else if (num2 < 20)
 							{
 								this.st状態[i].n相対X座標 = 0;
-								this.st状態[i].n相対Y座標 = -12;
+								this.st状態[i].n相対Y座標 = -9;
 								this.st状態[i].n透明度 = 255;
 							}
 							else if (num2 < 25)
 							{
 								this.st状態[i].n相対X座標 = 0;
-								this.st状態[i].n相対Y座標 = -15;
+								this.st状態[i].n相対Y座標 = -12;
 								this.st状態[i].n透明度 = 0;
 							}
 							else if (num2 < 30)
 							{
 								this.st状態[i].n相対X座標 = 0;
-								this.st状態[i].n相対Y座標 = -14;
+								this.st状態[i].n相対Y座標 = -15;
 								this.st状態[i].n透明度 = 0;
 							}
 							else if (num2 < 35)
@@ -91,19 +91,19 @@ namespace TJAPlayer3
 							else if (num2 < 40)
 							{
 								this.st状態[i].n相対X座標 = 0;
-								this.st状態[i].n相対Y座標 = -10;
+								this.st状態[i].n相対Y座標 = -9;
 								this.st状態[i].n透明度 = 0;
 							}
 							else if (num2 < 45)
 							{
 								this.st状態[i].n相対X座標 = 0;
-								this.st状態[i].n相対Y座標 = -8;
+								this.st状態[i].n相対Y座標 = -6;
 								this.st状態[i].n透明度 = 0;
 							}
 							else if (num2 < 50)
 							{
 								this.st状態[i].n相対X座標 = 0;
-								this.st状態[i].n相対Y座標 = -7;
+								this.st状態[i].n相対Y座標 = -3;
 								this.st状態[i].n透明度 = 0;
 							}
 							else if (num2 < 55)
@@ -140,31 +140,31 @@ namespace TJAPlayer3
 						else if (num2 < 10)
 						{
 							this.st状態[i].n相対X座標 = 0;
-							this.st状態[i].n相対Y座標 = -4;
+							this.st状態[i].n相対Y座標 = -3;
 							this.st状態[i].n透明度 = 0;
 						}
 						else if (num2 < 15)
 						{
 							this.st状態[i].n相対X座標 = 0;
-							this.st状態[i].n相対Y座標 = -8;
+							this.st状態[i].n相対Y座標 = -6;
 							this.st状態[i].n透明度 = 0;
 						}
 						else if (num2 < 20)
 						{
 							this.st状態[i].n相対X座標 = 0;
-							this.st状態[i].n相対Y座標 = -12;
+							this.st状態[i].n相対Y座標 = -9;
 							this.st状態[i].n透明度 = 255;
 						}
 						else if (num2 < 25)
 						{
 							this.st状態[i].n相対X座標 = 0;
-							this.st状態[i].n相対Y座標 = -15;
+							this.st状態[i].n相対Y座標 = -12;
 							this.st状態[i].n透明度 = 0;
 						}
 						else if (num2 < 30)
 						{
 							this.st状態[i].n相対X座標 = 0;
-							this.st状態[i].n相対Y座標 = -14;
+							this.st状態[i].n相対Y座標 = -15;
 							this.st状態[i].n透明度 = 0;
 						}
 						else if (num2 < 35)
@@ -176,19 +176,19 @@ namespace TJAPlayer3
 						else if (num2 < 40)
 						{
 							this.st状態[i].n相対X座標 = 0;
-							this.st状態[i].n相対Y座標 = -10;
+							this.st状態[i].n相対Y座標 = -9;
 							this.st状態[i].n透明度 = 0;
 						}
 						else if (num2 < 45)
 						{
 							this.st状態[i].n相対X座標 = 0;
-							this.st状態[i].n相対Y座標 = -8;
+							this.st状態[i].n相対Y座標 = -6;
 							this.st状態[i].n透明度 = 0;
 						}
 						else if (num2 < 50)
 						{
 							this.st状態[i].n相対X座標 = 0;
-							this.st状態[i].n相対Y座標 = -7;
+							this.st状態[i].n相対Y座標 = -3;
 							this.st状態[i].n透明度 = 0;
 						}
 						else if (num2 < 55)
