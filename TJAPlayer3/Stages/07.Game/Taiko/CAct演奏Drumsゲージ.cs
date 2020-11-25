@@ -218,13 +218,27 @@ namespace TJAPlayer3
                 */
 
 
-                if( TJAPlayer3.Tx.Gauge_Base[0] != null )
+                if (TJAPlayer3.stage選曲.n確定された曲の難易度 == (int)Difficulty.Dan)
                 {
-                    TJAPlayer3.Tx.Gauge_Base[0].t2D描画( TJAPlayer3.app.Device, 492, 144, new Rectangle( 0, 0, 700, 44 ) );
+                    if (TJAPlayer3.Tx.Gauge_Dan[0] != null)
+                    {
+                        TJAPlayer3.Tx.Gauge_Dan[0].t2D描画(TJAPlayer3.app.Device, 492, 144, new Rectangle(0, 0, 700, 44));
+                    }
+                    if (TJAPlayer3.Tx.Gauge_Dan[2] != null)
+                    {
+                        TJAPlayer3.Tx.Gauge_Dan[2].t2D描画(TJAPlayer3.app.Device, 492 + (TJAPlayer3.DTX.Dan_C[0].GetValue(false) / 2 * 14), 144, new Rectangle((TJAPlayer3.DTX.Dan_C[0].GetValue(false) / 2 * 14), 0, 700 - (TJAPlayer3.DTX.Dan_C[0].GetValue(false) / 2 * 14), 44));
+                    }
                 }
-                if( TJAPlayer3.stage演奏ドラム画面.bDoublePlay && TJAPlayer3.Tx.Gauge_Base[1] != null )
+                else
                 {
-                    TJAPlayer3.Tx.Gauge_Base[1].t2D描画( TJAPlayer3.app.Device, 492, 532, new Rectangle( 0, 0, 700, 44 ) );
+                    if (TJAPlayer3.Tx.Gauge_Base[0] != null)
+                    {
+                        TJAPlayer3.Tx.Gauge_Base[0].t2D描画(TJAPlayer3.app.Device, 492, 144, new Rectangle(0, 0, 700, 44));
+                    }
+                    if (TJAPlayer3.stage演奏ドラム画面.bDoublePlay && TJAPlayer3.Tx.Gauge_Base[1] != null)
+                    {
+                        TJAPlayer3.Tx.Gauge_Base[1].t2D描画(TJAPlayer3.app.Device, 492, 532, new Rectangle(0, 0, 700, 44));
+                    }
                 }
                 #region[ ゲージ1P ]
                 if( TJAPlayer3.Tx.Gauge[0] != null )
@@ -236,11 +250,11 @@ namespace TJAPlayer3
                         if( this.db現在のゲージ値[ 0 ] >= 100.0 )
                         {
                             this.ct虹アニメ.t進行Loop();
-			    this.ct虹透明度.t進行Loop();
+			                this.ct虹透明度.t進行Loop();
                             if(TJAPlayer3.Tx.Gauge_Rainbow[ this.ct虹アニメ.n現在の値 ] != null )
                             {
-				TJAPlayer3.Tx.Gauge_Rainbow[this.ct虹アニメ.n現在の値].Opacity = 255;
-				TJAPlayer3.Tx.Gauge_Rainbow[this.ct虹アニメ.n現在の値].t2D描画(TJAPlayer3.app.Device, 492, 144);
+				                TJAPlayer3.Tx.Gauge_Rainbow[this.ct虹アニメ.n現在の値].Opacity = 255;
+				                TJAPlayer3.Tx.Gauge_Rainbow[this.ct虹アニメ.n現在の値].t2D描画(TJAPlayer3.app.Device, 492, 144);
                                 TJAPlayer3.Tx.Gauge_Rainbow[虹ベース].Opacity = (ct虹透明度.n現在の値 * 255 / (int)ct虹透明度.n終了値)/1;
                                 TJAPlayer3.Tx.Gauge_Rainbow[虹ベース].t2D描画(TJAPlayer3.app.Device, 492, 144);
                             }
@@ -268,7 +282,7 @@ namespace TJAPlayer3
                         if (this.db現在のゲージ値[1] >= 100.0)
                         {
                             this.ct虹アニメ.t進行Loop();
-			    this.ct虹透明度.t進行Loop();
+			                this.ct虹透明度.t進行Loop();
                             if (TJAPlayer3.Tx.Gauge_Rainbow[this.ct虹アニメ.n現在の値] != null)
                             {
                                 TJAPlayer3.Tx.Gauge_Rainbow[ct虹アニメ.n現在の値].Opacity = 255;

@@ -10,6 +10,11 @@ namespace TJAPlayer3
     /// </summary>
     public class Dan_C
     {
+        public Dan_C()
+        {
+
+        }
+
         public Dan_C(Dan_C dan_C) : this(dan_C.GetExamType(), new int[] { dan_C.GetValue(false), dan_C.GetValue(true) }, dan_C.GetExamRange())
         {
             
@@ -319,6 +324,11 @@ namespace TJAPlayer3
         /// 条件をクリアしているか否か。
         /// </summary>
         public readonly bool[] IsCleared = new[] { false, false };
+
+        /// <summary>
+        /// 曲ごとの条件を格納する
+        /// </summary>
+        public Dan_C[] SongExam = new Dan_C[3];
 
         /// <summary>
         /// 条件の達成見込みがなくなったら、真になる。

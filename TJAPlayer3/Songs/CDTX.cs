@@ -760,6 +760,7 @@ namespace TJAPlayer3
             public int ScoreDiff;
             public static int Number;
             public CWAV Wave;
+            public Dan_C[] Dan_C = new Dan_C[4];
 
             public DanSongs()
             {
@@ -1147,7 +1148,6 @@ namespace TJAPlayer3
         public Dictionary<int, CJPOSSCROLL> listJPOSSCROLL;
         public List<DanSongs> List_DanSongs;
 
-
         private int listSCROLL_Normal_数値管理;
         private int listSCROLL_Expert_数値管理;
         private int listSCROLL_Master_数値管理;
@@ -1400,7 +1400,7 @@ namespace TJAPlayer3
 #endif
 
             Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture; // Change default culture to invariant, fixes (Purota)
-            Dan_C = new Dan_C[3];
+            Dan_C = new Dan_C[4];
         }
         public CDTX(string str全入力文字列)
             : this()
@@ -2952,7 +2952,7 @@ namespace TJAPlayer3
 
         private static readonly Regex regexForPrefixingCommaStartingLinesWithZero = new Regex(@"^,", RegexOptions.Multiline | RegexOptions.Compiled);
         private static readonly Regex regexForStrippingHeadingLines = new Regex(
-            @"^(?!(TITLE|LEVEL|BPM|WAVE|OFFSET|BALLOON|EXAM1|EXAM2|EXAM3|BALLOONNOR|BALLOONEXP|BALLOONMAS|SONGVOL|SEVOL|SCOREINIT|SCOREDIFF|COURSE|STYLE|GAME|LIFE|DEMOSTART|SIDE|SUBTITLE|SCOREMODE|GENRE|MOVIEOFFSET|BGIMAGE|BGMOVIE|HIDDENBRANCH|GAUGEINCR|#HBSCROLL|#BMSCROLL)).+\n",
+            @"^(?!(TITLE|LEVEL|BPM|WAVE|OFFSET|BALLOON|EXAM1|EXAM2|EXAM3|EXAM4|EXAMSONG22|EXAMSONG23|EXAMSONG32|EXAMSONG33|EXAMSONG42|EXAMSONG43|BALLOONNOR|BALLOONEXP|BALLOONMAS|SONGVOL|SEVOL|SCOREINIT|SCOREDIFF|COURSE|STYLE|GAME|LIFE|DEMOSTART|SIDE|SUBTITLE|SCOREMODE|GENRE|MOVIEOFFSET|BGIMAGE|BGMOVIE|HIDDENBRANCH|GAUGEINCR|#HBSCROLL|#BMSCROLL)).+\n",
             RegexOptions.Multiline | RegexOptions.Compiled);
 
         /// <summary>
@@ -4327,7 +4327,10 @@ namespace TJAPlayer3
                     this.b配点が指定されている[1, this.n参照中の難易度] = true;
                 }
             }
-            else if (strCommandName.Equals("EXAM1") || strCommandName.Equals("EXAM2") || strCommandName.Equals("EXAM3"))
+            else if(strCommandName.Equals("EXAM1") || 
+                    strCommandName.Equals("EXAM2") || 
+                    strCommandName.Equals("EXAM3") ||
+                    strCommandName.Equals("EXAM4"))
             {
                 if (!string.IsNullOrEmpty(strCommandParam))
                 {
@@ -4385,6 +4388,7 @@ namespace TJAPlayer3
                             examRange = Exam.Range.More;
                             break;
                     }
+
                     Dan_C[int.Parse(strCommandName.Substring(4)) - 1] = new Dan_C(examType, examValue, examRange);
                 }
             }

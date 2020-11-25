@@ -551,6 +551,7 @@ namespace TJAPlayer3
                                                 case C曲リストノード.Eノード種別.BOX:
                                                     {
                                                         TJAPlayer3.Skin.sound決定音.t再生する();
+                                                        this.act曲リスト.ctBarFlash.t開始(0, 2700, 1, TJAPlayer3.Timer);
                                                         this.act曲リスト.ctBoxOpen.t開始(200, 2700, 1.3f, TJAPlayer3.Timer);
                                                         this.act曲リスト.bBoxOpen = true;
                                                         this.ctDonchan_Select.t開始(0, TJAPlayer3.Tx.SongSelect_Donchan_Select.Length - 1, 1000 / 45, TJAPlayer3.Timer);
@@ -559,6 +560,7 @@ namespace TJAPlayer3
                                                 case C曲リストノード.Eノード種別.BACKBOX:
                                                     {
                                                         TJAPlayer3.Skin.sound取消音.t再生する();
+                                                        this.act曲リスト.ctBarFlash.t開始(0, 2700, 1, TJAPlayer3.Timer);
                                                         this.act曲リスト.ctBoxOpen.t開始(200, 2700, 1.3f, TJAPlayer3.Timer);
                                                         this.act曲リスト.bBoxClose = true;
                                                         this.ctDonchan_Select.t開始(0, TJAPlayer3.Tx.SongSelect_Donchan_Select.Length - 1, 1000 / 45, TJAPlayer3.Timer);
@@ -568,7 +570,8 @@ namespace TJAPlayer3
                                                     //    if (CDTXMania.Skin.sound段位移動.b読み込み成功)
                                                     //        CDTXMania.Skin.sound段位移動.t再生する();
                                                     //    else
-                                                    //        CDTXMania.Skin.sound段位移動.t再生する();
+                                                    //        CDTXMania.Skin.sound段位移動.t再生する(); 
+
                                                     //    this.X();
                                                     //    break;
                                             }
@@ -583,7 +586,6 @@ namespace TJAPlayer3
                                     //this.ctキー反復用.Up.tキー反復( CDTXMania.Input管理.Keyboard.bキーが押されている( (int) SlimDX.DirectInput.Key.UpArrow ) || CDTXMania.Input管理.Keyboard.bキーが押されている( (int) SlimDX.DirectInput.Key.LeftArrow ), new CCounter.DGキー処理( this.tカーソルを上へ移動する ) );
                                     if (TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.LBlue))
                                     {
-                                        this.ctBackgroundFade.t開始(0, 600, 1, TJAPlayer3.Timer);
                                         this.tカーソルを上へ移動する();
                                     }
                                 }
@@ -591,7 +593,6 @@ namespace TJAPlayer3
                                 {
                                     if (TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.LBlue))
                                     {
-                                        this.ctBackgroundFade.t開始(0, 600, 1, TJAPlayer3.Timer);
                                         for (int i = 0; i < 7; i++) tカーソルスキップ(true);
                                     }
                                 }
@@ -603,7 +604,6 @@ namespace TJAPlayer3
                                     //this.ctキー反復用.Down.tキー反復( CDTXMania.Input管理.Keyboard.bキーが押されている( (int) SlimDX.DirectInput.Key.DownArrow ) || CDTXMania.Input管理.Keyboard.bキーが押されている( (int) SlimDX.DirectInput.Key.RightArrow ), new CCounter.DGキー処理( this.tカーソルを下へ移動する ) );
                                     if (TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.RBlue))
                                     {
-                                        this.ctBackgroundFade.t開始(0, 600, 1, TJAPlayer3.Timer);
                                         this.tカーソルを下へ移動する();
                                     }
                                 }
@@ -611,7 +611,6 @@ namespace TJAPlayer3
                                 {
                                     if (TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.RBlue))
                                     {
-                                        this.ctBackgroundFade.t開始(0, 600, 1, TJAPlayer3.Timer);
                                         for (int i = 0; i < 7; i++) tカーソルスキップ(false);
                                     }
                                 }
@@ -939,6 +938,7 @@ namespace TJAPlayer3
 
         private void tカーソルを下へ移動する()
         {
+            this.ctBackgroundFade.t開始(0, 600, 1, TJAPlayer3.Timer);
             if (this.act曲リスト.ctBarOpen.n現在の値 >= 200 || this.ctBackgroundFade.n現在の値 >= 600 - 255)
                 TJAPlayer3.stage選曲.OldGenre = this.r現在選択中の曲.strジャンル;
             this.act曲リスト.t次に移動();
@@ -946,6 +946,7 @@ namespace TJAPlayer3
         }
         private void tカーソルを上へ移動する()
         {
+            this.ctBackgroundFade.t開始(0, 600, 1, TJAPlayer3.Timer);
             if (this.act曲リスト.ctBarOpen.n現在の値 >= 200 || this.ctBackgroundFade.n現在の値 >= 600 - 255)
                 TJAPlayer3.stage選曲.OldGenre = this.r現在選択中の曲.strジャンル;
             this.act曲リスト.t前に移動();
@@ -953,6 +954,7 @@ namespace TJAPlayer3
         }
         private void tカーソルスキップ(bool Up)
         {
+            this.ctBackgroundFade.t開始(0, 600, 1, TJAPlayer3.Timer);
             if (this.act曲リスト.ctBarOpen.n現在の値 >= 200 || this.ctBackgroundFade.n現在の値 >= 600 - 255)
                 TJAPlayer3.stage選曲.OldGenre = this.r現在選択中の曲.strジャンル;
             if (Up) this.act曲リスト.t前に移動();

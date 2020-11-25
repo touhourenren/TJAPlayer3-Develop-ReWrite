@@ -108,6 +108,7 @@ namespace TJAPlayer3
             SongSelect_Frame_BackBox = TxC(SONGSELECT + @"Frame_BackBox.png");
             SongSelect_Frame_Random = TxC(SONGSELECT + @"Frame_Random.png");
             SongSelect_Bar_Genre_Back = TxC(SONGSELECT + @"Bar_Genre_Back.png");
+            SongSelect_Bar_Select = TxC(SONGSELECT + @"Bar_Select.png");
             SongSelect_Level_Number = TxC(SONGSELECT + @"Level_Number.png");
             for (int i = 0; i < SongSelect_Bar_Genre.Length; i++)
             {
@@ -387,6 +388,11 @@ namespace TJAPlayer3
                     Gauge_Rainbow[i] = TxC(GAME + GAUGE + @"Rainbow\" + i.ToString() + ".png");
                 }
             }
+            Gauge_Dan = new CTexture[4];
+            Gauge_Dan[0] = TxC(GAME + GAUGE + @"1P_Dan_Base.png");
+            Gauge_Dan[1] = TxC(GAME + GAUGE + @"1P_Dan.png");
+            Gauge_Dan[2] = TxC(GAME + GAUGE + @"1P_Dan_Clear_Base.png");
+            Gauge_Dan[3] = TxC(GAME + GAUGE + @"1P_Dan_Clear.png");
             Gauge_Soul = TxC(GAME + GAUGE + @"Soul.png");
             Gauge_Soul_Fire = TxC(GAME + GAUGE + @"Fire.png");
             Gauge_Soul_Explosion = new CTexture[2];
@@ -491,8 +497,10 @@ namespace TJAPlayer3
                 DanC_Gauge[i] = TxC(GAME + DANC + @"Gauge_" + type[i] + ".png");
             }
             DanC_Base = TxC(GAME + DANC + @"Base.png");
+            DanC_Gauge_Base = TxC(GAME + DANC + @"Gauge_Base.png");
             DanC_Failed = TxC(GAME + DANC + @"Failed.png");
             DanC_Number = TxC(GAME + DANC + @"Number.png");
+            DanC_Small_Number = TxC(GAME + DANC + @"Small_Number.png");
             DanC_ExamType = TxC(GAME + DANC + @"ExamType.png");
             DanC_ExamRange = TxC(GAME + DANC + @"ExamRange.png");
             DanC_ExamUnit = TxC(GAME + DANC + @"ExamUnit.png");
@@ -588,6 +596,7 @@ namespace TJAPlayer3
             TJAPlayer3.tテクスチャの解放(ref SongSelect_Frame_BackBox);
             TJAPlayer3.tテクスチャの解放(ref SongSelect_Frame_Random);
             TJAPlayer3.tテクスチャの解放(ref SongSelect_Bar_Genre_Back);
+            TJAPlayer3.tテクスチャの解放(ref SongSelect_Bar_Select);
             TJAPlayer3.tテクスチャの解放(ref SongSelect_Level_Number);
             for (int i = 0; i < SongSelect_Bar_Genre.Length; i++)
             {
@@ -759,6 +768,10 @@ namespace TJAPlayer3
             {
                 TJAPlayer3.tテクスチャの解放(ref Gauge_Rainbow[i]);
             }
+            for (int i = 0; i < 4; i++)
+            {
+                Gauge_Dan[i]?.Dispose();
+            }
             TJAPlayer3.tテクスチャの解放(ref Gauge_Soul);
             TJAPlayer3.tテクスチャの解放(ref Gauge_Soul_Fire);
             TJAPlayer3.tテクスチャの解放(ref Gauge_Soul_Explosion[0]);
@@ -840,8 +853,10 @@ namespace TJAPlayer3
                 DanC_Gauge[i]?.Dispose();
             }
             DanC_Base?.Dispose();
+            DanC_Gauge_Base?.Dispose();
             DanC_Failed?.Dispose();
             DanC_Number?.Dispose();
+            DanC_Small_Number?.Dispose();
             DanC_ExamRange?.Dispose();
             DanC_ExamUnit?.Dispose();
             DanC_ExamType?.Dispose();
@@ -930,6 +945,7 @@ namespace TJAPlayer3
             SongSelect_Bar_Center,
             SongSelect_Bar_Genre_Back,
             SongSelect_Level_Number,
+            SongSelect_Bar_Select,
             SongSelect_ScoreWindow_Text;
         public CTexture[] SongSelect_GenreBack = new CTexture[9],
             SongSelect_ScoreWindow = new CTexture[(int)Difficulty.Total],
@@ -1015,6 +1031,7 @@ namespace TJAPlayer3
             Gauge_Soul_Explosion;
         public CTexture Gauge_Soul,
             Gauge_Soul_Fire;
+        public CTexture[] Gauge_Dan;
         #endregion
         #region 吹き出し
         public CTexture[] Balloon_Combo;
@@ -1069,8 +1086,10 @@ namespace TJAPlayer3
         public CTexture DanC_Background;
         public CTexture[] DanC_Gauge;
         public CTexture DanC_Base;
+        public CTexture DanC_Gauge_Base;
         public CTexture DanC_Failed;
         public CTexture DanC_Number,
+            DanC_Small_Number,
             DanC_ExamType,
             DanC_ExamRange,
             DanC_ExamUnit;
