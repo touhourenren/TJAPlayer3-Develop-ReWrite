@@ -2627,14 +2627,14 @@ namespace TJAPlayer3
         #region Balloon
         public int[] Game_Balloon_Combo_X = new int[] { 253, 253 };
         public int[] Game_Balloon_Combo_Y = new int[] { -11, 498 };
-        public int[] Game_Balloon_Combo_Number_X = new int[] { 312, 312 };
-        public int[] Game_Balloon_Combo_Number_Y = new int[] { 34, 540 };
-        public int[] Game_Balloon_Combo_Number_Ex_X = new int[] { 335, 335 };
-        public int[] Game_Balloon_Combo_Number_Ex_Y = new int[] { 34, 540 };
-        public int[] Game_Balloon_Combo_Text_X = new int[] { 471, 471 };
-        public int[] Game_Balloon_Combo_Text_Y = new int[] { 55, 561 };
+        public int[] Game_Balloon_Combo_Number_X = new int[] { 257, 212 };
+        public int[] Game_Balloon_Combo_Number_Y = new int[] { 54, 540 };
+        public int[] Game_Balloon_Combo_Number_Ex_X = new int[] { 365, 335 };
+        public int[] Game_Balloon_Combo_Number_Ex_Y = new int[] { 50, 540 };
+        public int[] Game_Balloon_Combo_Text_X = new int[] { 440, 385 };
+        public int[] Game_Balloon_Combo_Text_Y = new int[] { 85, 561 };
         public int[] Game_Balloon_Combo_Text_Ex_X = new int[] { 491, 491 };
-        public int[] Game_Balloon_Combo_Text_Ex_Y = new int[] { 55, 561 };
+        public int[] Game_Balloon_Combo_Text_Ex_Y = new int[] { 40, 561 };
 
         public int[] Game_Balloon_Balloon_X = new int[] { 382, 382 };
         public int[] Game_Balloon_Balloon_Y = new int[] { 115, 290 };
@@ -2726,7 +2726,7 @@ namespace TJAPlayer3
         public int Game_DanC_Number_Padding = 37;
         public float Game_DanC_Number_Small_Scale = 0.92f;
         public int Game_DanC_Number_Small_Padding = 37;
-        public int[] Game_DanC_Number_XY = new int[] { 218, 610 };
+        public int[] Game_DanC_Number_XY = new int[] { 218, 67 };
         public int[] Game_DanC_Number_Small_Number_Offset = new int[] { 240, 38 };
         public int[] Game_DanC_ExamType_Size = new int[] { 247, 28 };
         public int[] Game_DanC_ExamRange_Size = new int[] { 60, 36 };

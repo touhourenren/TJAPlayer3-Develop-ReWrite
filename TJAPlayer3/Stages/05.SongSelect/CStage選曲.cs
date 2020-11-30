@@ -115,7 +115,7 @@ namespace TJAPlayer3
             base.list子Activities.Add(this.actSortSongs = new CActSortSongs());
             base.list子Activities.Add(this.actShowCurrentPosition = new CActSelectShowCurrentPosition());
             base.list子Activities.Add(this.actQuickConfig = new CActSelectQuickConfig());
-            //base.list子Activities.Add( this.act難易度選択画面 = new CActSelect難易度選択画面() );
+            base.list子Activities.Add(this.act難易度選択画面 = new CActSelect難易度選択画面());
 
             this.CommandHistory = new CCommandHistory();        // #24063 2011.1.16 yyagi
         }
@@ -423,7 +423,7 @@ namespace TJAPlayer3
                         return 0;
                     }
                     #endregion
-                    if (!this.actSortSongs.bIsActivePopupMenu && !this.actQuickConfig.bIsActivePopupMenu /*&&  !this.act難易度選択画面.bIsDifficltSelect */ )
+                    if (!this.actSortSongs.bIsActivePopupMenu && !this.actQuickConfig.bIsActivePopupMenu &&  !this.act難易度選択画面.bIsDifficltSelect )
                     {
                         #region [ ESC ]
                         if (TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDX.DirectInput.Key.Escape) && (this.act曲リスト.r現在選択中の曲 != null))// && (  ) ) )
@@ -541,12 +541,22 @@ namespace TJAPlayer3
                                             switch (this.act曲リスト.r現在選択中の曲.eノード種別)
                                             {
                                                 case C曲リストノード.Eノード種別.SCORE:
-                                                    if (TJAPlayer3.Skin.sound曲決定音.b読み込み成功)
-                                                        TJAPlayer3.Skin.sound曲決定音.t再生する();
-                                                    else
-                                                        TJAPlayer3.Skin.sound決定音.t再生する();
-
-                                                    this.t曲を選択する();
+                                                    {
+                                                        if(this.n現在選択中の曲の難易度 == (int)Difficulty.Dan)
+                                                        {
+                                                            TJAPlayer3.Skin.sound決定音.t再生する();
+                                                            this.t曲を選択する();
+                                                        }
+                                                        else
+                                                        {
+                                                            TJAPlayer3.Skin.sound決定音.t再生する();
+                                                            this.act難易度選択画面.bIsDifficltSelect = true;
+                                                            this.act難易度選択画面.t選択画面初期化();
+                                                            this.act曲リスト.ctBarFlash.t開始(0, 2700, 1, TJAPlayer3.Timer);
+                                                            this.act曲リスト.ctDifficultyIn.t開始(0, 3200, 1, TJAPlayer3.Timer);
+                                                            this.ctDonchan_Select.t開始(0, TJAPlayer3.Tx.SongSelect_Donchan_Select.Length - 1, 1000 / 45, TJAPlayer3.Timer);
+                                                        }
+                                                    }
                                                     break;
                                                 case C曲リストノード.Eノード種別.BOX:
                                                     {
@@ -566,14 +576,6 @@ namespace TJAPlayer3
                                                         this.ctDonchan_Select.t開始(0, TJAPlayer3.Tx.SongSelect_Donchan_Select.Length - 1, 1000 / 45, TJAPlayer3.Timer);
                                                     }
                                                     break;
-                                                    //case C曲リストノード.Eノード種別.DANI:
-                                                    //    if (CDTXMania.Skin.sound段位移動.b読み込み成功)
-                                                    //        CDTXMania.Skin.sound段位移動.t再生する();
-                                                    //    else
-                                                    //        CDTXMania.Skin.sound段位移動.t再生する(); 
-
-                                                    //    this.X();
-                                                    //    break;
                                             }
                                         }
                                     }
@@ -684,15 +686,13 @@ namespace TJAPlayer3
                 }
 
                 //------------------------------
-                //if (this.act難易度選択画面.bIsDifficltSelect)
-                //{
-                //    if (this.ctDiffSelect移動待ち.n現在の値 == this.ctDiffSelect移動待ち.n終了値)
-                //    {
-                //        this.act難易度選択画面.On進行描画();
-                //        CDTXMania.act文字コンソール.tPrint(0, 0, C文字コンソール.Eフォント種別.赤, "NowStage:DifficltSelect");
-                //    }
-                //    CDTXMania.act文字コンソール.tPrint(0, 16, C文字コンソール.Eフォント種別.赤, "Count:" + this.ctDiffSelect移動待ち.n現在の値);
-                //}
+                if (this.act難易度選択画面.bIsDifficltSelect)
+                {
+                    if (this.act曲リスト.ctDifficultyIn.n現在の値 >= 1255)
+                    {
+                        this.act難易度選択画面.On進行描画();
+                    }
+                }
                 //------------------------------
 
                 if (this.ctDonchan_Select.b終了値に達してない)
@@ -821,7 +821,7 @@ namespace TJAPlayer3
         public CActSelect演奏履歴パネル act演奏履歴パネル;
         public CActSelect曲リスト act曲リスト;
         private CActSelectShowCurrentPosition actShowCurrentPosition;
-        private CActSelect難易度選択画面 act難易度選択画面;
+        public CActSelect難易度選択画面 act難易度選択画面;
 
         public CActSortSongs actSortSongs;
         private CActSelectQuickConfig actQuickConfig;

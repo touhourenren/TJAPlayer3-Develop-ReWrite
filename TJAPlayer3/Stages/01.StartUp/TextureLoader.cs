@@ -132,6 +132,17 @@ namespace TJAPlayer3
                 SongSelect_GenreBack[i] = TxC(SONGSELECT + @"GenreBackground_" + i.ToString() + ".png");
             }
             SongSelect_ScoreWindow_Text = TxC(SONGSELECT + @"ScoreWindow_Text.png");
+
+            #region [ 難易度選択画面 ]
+            Difficulty_Bar = TxC(SONGSELECT + @"Difficulty_Select\Difficulty_Bar.png");
+            Difficulty_Select_Bar = TxC(SONGSELECT + @"Difficulty_Select\Difficulty_Select_Bar.png");
+            
+            for (int i = 0; i < Difficulty_Back.Length; i++)
+            {
+                Difficulty_Back[i] = TxC(SONGSELECT + @"Difficulty_Select\Difficulty_Back_" + i.ToString() + ".png");
+            }
+            #endregion
+
             #endregion
 
             #region 4_読み込み画面
@@ -620,10 +631,21 @@ namespace TJAPlayer3
                 TJAPlayer3.tテクスチャの解放(ref SongSelect_Donchan_Normal[i]);
             }
             TJAPlayer3.tテクスチャの解放(ref SongSelect_ScoreWindow_Text);
+
+            #region [ 難易度選択画面 ]
+            TJAPlayer3.tテクスチャの解放(ref Difficulty_Bar);
+            TJAPlayer3.tテクスチャの解放(ref Difficulty_Select_Bar);
+
+            for (int i = 0; i < Difficulty_Back.Length; i++)
+            {
+                TJAPlayer3.tテクスチャの解放(ref Difficulty_Back[i]);
+            }
+            #endregion
+
             #endregion
 
             #region 4_読み込み画面
-            TJAPlayer3.tテクスチャの解放(ref SongLoading_Plate);
+        TJAPlayer3.tテクスチャの解放(ref SongLoading_Plate);
             TJAPlayer3.tテクスチャの解放(ref SongLoading_FadeIn);
             TJAPlayer3.tテクスチャの解放(ref SongLoading_FadeOut);
             #endregion
@@ -932,6 +954,7 @@ namespace TJAPlayer3
         #endregion
 
         #region 3_選曲画面
+
         public CTexture SongSelect_Background,
             SongSelect_Header,
             SongSelect_Auto,
@@ -953,6 +976,14 @@ namespace TJAPlayer3
             SongSelect_Donchan_Select = new CTexture[47],
             SongSelect_Donchan_Normal = new CTexture[49],
             SongSelect_NamePlate = new CTexture[1];
+
+        #region [ 難易度選択画面 ]
+        public CTexture Difficulty_Bar;
+        public CTexture Difficulty_Select_Bar;
+
+        public CTexture[] Difficulty_Back = new CTexture[8];
+        #endregion 
+
         #endregion
 
         #region 4_読み込み画面
