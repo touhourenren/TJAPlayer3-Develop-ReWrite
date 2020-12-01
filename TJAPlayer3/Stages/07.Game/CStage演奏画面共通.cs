@@ -196,8 +196,16 @@ namespace TJAPlayer3
                 nNoteCount = TJAPlayer3.DTX.listChip.Where(num => num.nチャンネル番号 > 16 && num.nチャンネル番号 < 21).Count();
                 nBalloonCount += TJAPlayer3.DTX.listChip[i].nRollCount;
             }
+
             //nAddScoreNiji = (1000000 - (15 * RollTimems * 100) - (nBalloonCount * 100)) / TJAPlayer3.DTX.listChip.Count;
-            nAddScoreNiji = (double)Math.Ceiling((decimal)(1000000 - (nBalloonCount * 100)) / nNoteCount / 10) * 10;
+            if(nNoteCount == 0 && nBalloonCount == 0)
+            {
+                nAddScoreNiji = 1000000;
+            }
+            else
+            {
+                nAddScoreNiji = (double)Math.Ceiling((decimal)(1000000 - (nBalloonCount * 100)) / nNoteCount / 10) * 10;
+            }
 
             this.ct制御タイマ = new CCounter();
             ctChipAnime = new CCounter[2];
@@ -1109,13 +1117,16 @@ namespace TJAPlayer3
         {
             if( dbProcess_time >= pChip.n発声時刻ms && dbProcess_time < pChip.nノーツ終了時刻ms )
             {
-                if( pChip.nRollCount == 0 )
+                if( pChip.nRollCount == 0 ) //連打カウントが0の時
                 {
                     this.actRoll.b表示[ nPlayer ] = true;
                     this.n現在の連打数[ nPlayer ] = 0;
-                    this.actRoll.t枠表示時間延長( nPlayer );
+                    this.actRoll.t枠表示時間延長(nPlayer, true);
                 }
-                this.actRoll.t枠表示時間延長(nPlayer);
+                else
+                {
+                    this.actRoll.t枠表示時間延長(nPlayer, false);
+                }
                 this.b連打中[ nPlayer ] = true;
                 if(this.actRoll.ct連打アニメ[nPlayer].b終了値に達してない)
                 {

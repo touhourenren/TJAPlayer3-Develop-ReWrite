@@ -24,7 +24,7 @@ namespace TJAPlayer3
         {
             if (TJAPlayer3.Tx.Notes != null)
             {
-                for (int i = 0; i < 128; i++)
+                for (int i = 0; i < 32; i++)
                 {
                     if (!Flying[i].IsUsing)
                     {
@@ -58,7 +58,7 @@ namespace TJAPlayer3
 
         public override void On活性化()
         {
-            for (int i = 0; i < 128; i++)
+            for (int i = 0; i < 32; i++)
             {
                 Flying[i] = new Status();
                 Flying[i].IsUsing = false;
@@ -72,7 +72,7 @@ namespace TJAPlayer3
         }
         public override void On非活性化()
         {
-            for (int i = 0; i < 128; i++)
+            for (int i = 0; i < 32; i++)
             {
                 Flying[i].Counter = null;
             }
@@ -96,7 +96,7 @@ namespace TJAPlayer3
         {
             if (!base.b活性化してない)
             {
-                for (int i = 0; i < 128; i++)
+                for (int i = 0; i < 32; i++)
                 {
                     if (Flying[i].IsUsing)
                     {
@@ -182,7 +182,7 @@ namespace TJAPlayer3
             public double Theta;
         }
 
-        private Status[] Flying = new Status[128];
+        private Status[] Flying = new Status[32];
 
         public readonly int[] StartPointX = new int[2];
 

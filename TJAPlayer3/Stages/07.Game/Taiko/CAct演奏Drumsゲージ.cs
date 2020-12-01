@@ -226,7 +226,16 @@ namespace TJAPlayer3
                     }
                     if (TJAPlayer3.Tx.Gauge_Dan[2] != null)
                     {
-                        TJAPlayer3.Tx.Gauge_Dan[2].t2D描画(TJAPlayer3.app.Device, 492 + (TJAPlayer3.DTX.Dan_C[0].GetValue(false) / 2 * 14), 144, new Rectangle((TJAPlayer3.DTX.Dan_C[0].GetValue(false) / 2 * 14), 0, 700 - (TJAPlayer3.DTX.Dan_C[0].GetValue(false) / 2 * 14), 44));
+                        for (int i = 0; i < TJAPlayer3.DTX.Dan_C.Length; i++)
+                        {
+                            if (TJAPlayer3.DTX.Dan_C[i] != null)
+                            {
+                                if (TJAPlayer3.DTX.Dan_C[i].GetExamType() == Exam.Type.Gauge)
+                                {
+                                    TJAPlayer3.Tx.Gauge_Dan[2].t2D描画(TJAPlayer3.app.Device, 492 + (TJAPlayer3.DTX.Dan_C[i].GetValue(false) / 2 * 14), 144, new Rectangle((TJAPlayer3.DTX.Dan_C[i].GetValue(false) / 2 * 14), 0, 700 - (TJAPlayer3.DTX.Dan_C[i].GetValue(false) / 2 * 14), 44));
+                                }
+                            }
+                        }
                     }
                 }
                 else

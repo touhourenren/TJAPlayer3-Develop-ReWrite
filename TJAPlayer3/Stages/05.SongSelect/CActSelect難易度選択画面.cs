@@ -67,7 +67,10 @@ namespace TJAPlayer3
             {
                 ctBarAnime.t開始(0, 180, 1, TJAPlayer3.Timer);
                 nスイッチカウント = 0;
-                n現在の選択行--;
+                if(n現在の選択行 == 6)
+                    n現在の選択行 -= 2;
+                else
+                    n現在の選択行--;
             }
 		}
 
@@ -86,6 +89,8 @@ namespace TJAPlayer3
 
             this.txTitle = TJAPlayer3.tテクスチャの生成(pfTitle.DrawPrivateFont(TJAPlayer3.stage選曲.r現在選択中の曲.strタイトル, Color.White, Color.Black ));
             this.txSubTitle = TJAPlayer3.tテクスチャの生成(pfSubTitle.DrawPrivateFont(TJAPlayer3.stage選曲.r現在選択中の曲.strサブタイトル, Color.White, Color.Black));
+
+            this.n現在の選択行 = 0;
 
             this.b初めての進行描画 = true;
 		}
@@ -149,33 +154,36 @@ namespace TJAPlayer3
 
             #region [ キー入力 ]
 
-            if (TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.RBlue))
+            if (this.ctBarAnimeIn.b終了値に達した)
             {
-                TJAPlayer3.Skin.sound変更音.t再生する();
-                this.t次に移動();
-            }
-            else if (TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.LBlue))
-            {
-                TJAPlayer3.Skin.sound変更音.t再生する();
-                this.t前に移動();
-            }
-            else if (TJAPlayer3.Pad.b押されたDGB(Eパッド.Decide) || TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.LRed) || TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.RRed) || 
-                 (TJAPlayer3.ConfigIni.bEnterがキー割り当てのどこにも使用されていない && TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDX.DirectInput.Key.Return)))
-            {
-                if(n現在の選択行 == 0)
+                if (TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.RBlue))
                 {
-                    TJAPlayer3.Skin.sound決定音.t再生する();
-                    TJAPlayer3.stage選曲.act曲リスト.ctBarOpen.t開始(100, 260, 2, TJAPlayer3.Timer);
-                    this.bIsDifficltSelect = false;
+                    TJAPlayer3.Skin.sound変更音.t再生する();
+                    this.t次に移動();
                 }
-                else if (n現在の選択行 == 1)
+                else if (TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.LBlue))
                 {
-                    TJAPlayer3.Skin.sound決定音.t再生する();
+                    TJAPlayer3.Skin.sound変更音.t再生する();
+                    this.t前に移動();
                 }
-                else
+                else if (TJAPlayer3.Pad.b押されたDGB(Eパッド.Decide) || TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.LRed) || TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.RRed) ||
+                     (TJAPlayer3.ConfigIni.bEnterがキー割り当てのどこにも使用されていない && TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDX.DirectInput.Key.Return)))
                 {
-                    TJAPlayer3.Skin.sound曲決定音.t再生する();
-                    TJAPlayer3.stage選曲.t曲を選択する(n現在の選択行 - 2);
+                    if (n現在の選択行 == 0)
+                    {
+                        TJAPlayer3.Skin.sound決定音.t再生する();
+                        TJAPlayer3.stage選曲.act曲リスト.ctBarOpen.t開始(100, 260, 2, TJAPlayer3.Timer);
+                        this.bIsDifficltSelect = false;
+                    }
+                    else if (n現在の選択行 == 1)
+                    {
+                        TJAPlayer3.Skin.sound決定音.t再生する();
+                    }
+                    else
+                    {
+                        TJAPlayer3.Skin.sound曲決定音.t再生する();
+                        TJAPlayer3.stage選曲.t曲を選択する(n現在の選択行 - 2);
+                    }
                 }
             }
 

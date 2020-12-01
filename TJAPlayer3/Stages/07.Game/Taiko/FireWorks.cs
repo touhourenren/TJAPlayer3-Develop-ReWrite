@@ -26,7 +26,7 @@ namespace TJAPlayer3
         /// <param name="nLane"></param>
         public virtual void Start(int nLane, int nPlayer, double x, double y)
         {
-            for (int i = 0; i < 128; i++)
+            for (int i = 0; i < 32; i++)
             {
                 if(!FireWork[i].IsUsing)
                 {
@@ -45,7 +45,7 @@ namespace TJAPlayer3
 
         public override void On活性化()
         {
-            for (int i = 0; i < 128; i++)
+            for (int i = 0; i < 32; i++)
             {
                 FireWork[i] = new Status();
                 FireWork[i].IsUsing = false;
@@ -55,7 +55,7 @@ namespace TJAPlayer3
         }
         public override void On非活性化()
         {
-            for (int i = 0; i < 128; i++)
+            for (int i = 0; i < 32; i++)
             {
                 FireWork[i].Counter = null;
             }
@@ -79,7 +79,7 @@ namespace TJAPlayer3
         {
             if (!base.b活性化してない)
             {
-                for (int i = 0; i < 128; i++)
+                for (int i = 0; i < 32; i++)
                 {
                     if(FireWork[i].IsUsing)
                     {
@@ -111,7 +111,7 @@ namespace TJAPlayer3
             public double X;
             public double Y;
         }
-        private Status[] FireWork = new Status[128];
+        private Status[] FireWork = new Status[32];
 
         //-----------------
         #endregion

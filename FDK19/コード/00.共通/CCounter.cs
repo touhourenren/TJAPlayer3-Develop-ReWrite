@@ -30,7 +30,7 @@ namespace FDK
 		public float n終了値
 		{
 			get;
-			private set;
+			set;
 		}
 		public int n現在の値
 		{

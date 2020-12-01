@@ -23,7 +23,7 @@ namespace TJAPlayer3
 		{
             if(TJAPlayer3.Tx.Gauge_Soul_Explosion != null)
             {
-                for (int i = 0; i < 128; i++)
+                for (int i = 0; i < 32; i++)
                 {
                     if(!st[i].b使用中)
                     {
@@ -42,7 +42,7 @@ namespace TJAPlayer3
 
 		public override void On活性化()
 		{
-            for (int i = 0; i < 128; i++)
+            for (int i = 0; i < 32; i++)
             {
                 st[i] = new STチップエフェクト
                 {
@@ -55,7 +55,7 @@ namespace TJAPlayer3
 		}
 		public override void On非活性化()
 		{
-            for (int i = 0; i < 128; i++)
+            for (int i = 0; i < 32; i++)
             {
                 st[i].ct進行 = null;
                 st[i].ctChipEffect = null;
@@ -65,7 +65,7 @@ namespace TJAPlayer3
 		}
 		public override int On進行描画()
 		{
-            for (int i = 0; i < 128; i++)
+            for (int i = 0; i < 32; i++)
             {
                 if (st[i].b使用中)
                 {
@@ -126,7 +126,7 @@ namespace TJAPlayer3
             public int nプレイヤー;
             public int Lane;
         }
-        private STチップエフェクト[] st = new STチップエフェクト[128];
+        private STチップエフェクト[] st = new STチップエフェクト[32];
         //private struct ST連打キャラ
         //{
         //    public int nColor;

@@ -122,16 +122,39 @@ namespace TJAPlayer3
                 //CDTXMania.act文字コンソール.tPrint(0, 0, C文字コンソール.Eフォント種別.白, this.ct連打枠カウンター[player].n現在の値.ToString());
                 if ( this.ct連打枠カウンター[ player ].b終了値に達してない)
                 {
-                    if (ct連打枠カウンター[player].n現在の値 > 1333 && !FadeOut[player].Counter.b進行中)
+                    if (ct連打枠カウンター[player].n現在の値 > 66 && !FadeOut[player].Counter.b進行中)
                     {
                         FadeOut[player].Start();
                     }
                     var opacity = (int)FadeOut[player].GetAnimation();
-                    TJAPlayer3.Tx.Balloon_Roll.Opacity = opacity;
-                    TJAPlayer3.Tx.Balloon_Number_Roll.Opacity = opacity;
 
+                    if(ct連打枠カウンター[player].n現在の値 == 0 || ct連打枠カウンター[player].n現在の値 == 60)
+                    {
+                        bNowRollAnime = 0;
+                        TJAPlayer3.Tx.Balloon_Number_Roll.Opacity = 64;
+                    }
+                    else if (ct連打枠カウンター[player].n現在の値 == 1 || ct連打枠カウンター[player].n現在の値 == 59)
+                    {
+                        bNowRollAnime = 1;
+                        TJAPlayer3.Tx.Balloon_Number_Roll.Opacity = 128;
+                    }
+                    else if (ct連打枠カウンター[player].n現在の値 == 2 || ct連打枠カウンター[player].n現在の値 == 58)
+                    {
+                        bNowRollAnime = 2;
+                        TJAPlayer3.Tx.Balloon_Number_Roll.Opacity = 192;
+                    }
+                    else if (ct連打枠カウンター[player].n現在の値 == 3 || ct連打枠カウンター[player].n現在の値 == 57)
+                    {
+                        bNowRollAnime = 3;
+                        TJAPlayer3.Tx.Balloon_Number_Roll.Opacity = 255;
+                    }
+                    else if (ct連打枠カウンター[player].n現在の値 >= 4 || ct連打枠カウンター[player].n現在の値 <= 56)
+                    {
+                        bNowRollAnime = 4;
+                        TJAPlayer3.Tx.Balloon_Number_Roll.Opacity = 255;
+                    }
 
-                    TJAPlayer3.Tx.Balloon_Roll.t2D描画(TJAPlayer3.app.Device, TJAPlayer3.Skin.Game_Balloon_Roll_Frame_X[player], TJAPlayer3.Skin.Game_Balloon_Roll_Frame_Y[player]);
+                    TJAPlayer3.Tx.Balloon_Roll.t2D描画(TJAPlayer3.app.Device, TJAPlayer3.Skin.Game_Balloon_Roll_Frame_X[player], TJAPlayer3.Skin.Game_Balloon_Roll_Frame_Y[player], new RectangleF(0 + bNowRollAnime * 334, 0, 334, 204)); ;
                     this.t文字表示(TJAPlayer3.Skin.Game_Balloon_Roll_Number_X[player], TJAPlayer3.Skin.Game_Balloon_Roll_Number_Y[player], n連打数.ToString(), n連打数, player);
                 }
             }
@@ -139,14 +162,18 @@ namespace TJAPlayer3
             return base.On進行描画();
         }
 
-        public void t枠表示時間延長( int player )
+        public void t枠表示時間延長(int player, bool first)
         {
-            this.ct連打枠カウンター[ player ] = new CCounter( 0, 1500, 1, TJAPlayer3.Timer );
-            FadeOut[player].Counter.n現在の値 = 0;
-            FadeOut[player].Counter.t停止();
+            if ((this.ct連打枠カウンター[player].n現在の値 >= 6 && !first) || first)
+                this.ct連打枠カウンター[player] = new CCounter(0, 60, 40, TJAPlayer3.Timer);
+
+            if(!first)
+                this.ct連打枠カウンター[player].n現在の値 = 5;
+            else
+                this.ct連打枠カウンター[player].n現在の値 = 0;
         }
 
-
+        public int bNowRollAnime;
         public bool[] b表示;
         public int[] n連打数;
         public CCounter[] ct連打枠カウンター;
