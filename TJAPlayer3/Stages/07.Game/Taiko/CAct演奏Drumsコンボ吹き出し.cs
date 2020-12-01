@@ -32,7 +32,7 @@ namespace TJAPlayer3
 		{
             this.NowDrawBalloon = 0;
             this.ct進行[ player ] = new CCounter( 1, 42, 70, TJAPlayer3.Timer );
-            this.nCombo_渡[ player ] = nCombo;
+            this.nCombo_渡[player] = nCombo;
 		}
 
 		// CActivity 実装
@@ -143,6 +143,7 @@ namespace TJAPlayer3
                             else
                             {
                                 this.t小文字表示( TJAPlayer3.Skin.Game_Balloon_Combo_Number_Ex_X[ i], TJAPlayer3.Skin.Game_Balloon_Combo_Number_Ex_Y[ i ], string.Format( "{0,4:###0}", this.nCombo_渡[ i ] ), i );
+                                TJAPlayer3.Tx.Balloon_Number_Combo.vc拡大縮小倍率.X = 1.0f;
                                 TJAPlayer3.Tx.Balloon_Number_Combo.t2D描画( TJAPlayer3.app.Device, TJAPlayer3.Skin.Game_Balloon_Combo_Text_Ex_X[ i] + 6 - NowDrawBalloon * 3, TJAPlayer3.Skin.Game_Balloon_Combo_Text_Ex_Y[ i ], new Rectangle( 0, 124, 100, 30 ) );
                             }
                         }
@@ -188,12 +189,17 @@ namespace TJAPlayer3
 						Rectangle rectangle = new Rectangle( this.st小文字位置[ i ].pt.X, this.st小文字位置[ i ].pt.Y + player * 62, 53, 62 );
 						if(TJAPlayer3.Tx.Balloon_Number_Combo != null )
 						{
+                            if (int.Parse(str) >= 1000)
+                                TJAPlayer3.Tx.Balloon_Number_Combo.vc拡大縮小倍率.X = 0.8f;
+                            else
+                                TJAPlayer3.Tx.Balloon_Number_Combo.vc拡大縮小倍率.X = 1.0f;
+
                             TJAPlayer3.Tx.Balloon_Number_Combo.t2D描画( TJAPlayer3.app.Device, x, y, rectangle );
 						}
 						break;
 					}
 				}
-                x += 45;
+                x += (int)(45 * TJAPlayer3.Tx.Balloon_Number_Combo.vc拡大縮小倍率.X);
 			}
 		}
 		//-----------------

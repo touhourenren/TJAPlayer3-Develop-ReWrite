@@ -2611,10 +2611,10 @@ namespace TJAPlayer3
         public int[] Game_Taiko_Combo_Ex_Y = new int[] { 275, 452 };
         public int[] Game_Taiko_Combo_Ex4_X = new int[] { 267, 267 };
         public int[] Game_Taiko_Combo_Ex4_Y = new int[] { 270, 448 };
-        public int[] Game_Taiko_Combo_Padding = new int[] { 34, 34, 24 };
+        public int[] Game_Taiko_Combo_Padding = new int[] { 34, 34, 30 };
         public int[] Game_Taiko_Combo_Size = new int[] { 40, 48 };
         public int[] Game_Taiko_Combo_Size_Ex = new int[] { 40, 48 };
-        public float[] Game_Taiko_Combo_Scale = new float[] { 1.0f, 1.0f, 0.8f };
+        public float[] Game_Taiko_Combo_Scale = new float[] { 1.0f, 1.0f, 0.9f };
         public int[] Game_Taiko_Combo_Text_X = new int[] { 268, 268 };
         public int[] Game_Taiko_Combo_Text_Y = new int[] { 298, 475 };
         public int[] Game_Taiko_Combo_Text_Size = new int[] { 100, 50 };
@@ -2627,14 +2627,14 @@ namespace TJAPlayer3
         #region Balloon
         public int[] Game_Balloon_Combo_X = new int[] { 253, 253 };
         public int[] Game_Balloon_Combo_Y = new int[] { -11, 498 };
-        public int[] Game_Balloon_Combo_Number_X = new int[] { 257, 212 };
+        public int[] Game_Balloon_Combo_Number_X = new int[] { 257, 257 };
         public int[] Game_Balloon_Combo_Number_Y = new int[] { 54, 540 };
-        public int[] Game_Balloon_Combo_Number_Ex_X = new int[] { 365, 335 };
-        public int[] Game_Balloon_Combo_Number_Ex_Y = new int[] { 50, 540 };
-        public int[] Game_Balloon_Combo_Text_X = new int[] { 440, 385 };
+        public int[] Game_Balloon_Combo_Number_Ex_X = new int[] { 297, 297 };
+        public int[] Game_Balloon_Combo_Number_Ex_Y = new int[] { 54, 560 };
+        public int[] Game_Balloon_Combo_Text_X = new int[] { 440, 440 };
         public int[] Game_Balloon_Combo_Text_Y = new int[] { 85, 561 };
-        public int[] Game_Balloon_Combo_Text_Ex_X = new int[] { 491, 491 };
-        public int[] Game_Balloon_Combo_Text_Ex_Y = new int[] { 40, 561 };
+        public int[] Game_Balloon_Combo_Text_Ex_X = new int[] { 440, 440 };
+        public int[] Game_Balloon_Combo_Text_Ex_Y = new int[] { 85, 601 };
 
         public int[] Game_Balloon_Balloon_X = new int[] { 382, 382 };
         public int[] Game_Balloon_Balloon_Y = new int[] { 115, 290 };

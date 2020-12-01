@@ -314,7 +314,7 @@ namespace TJAPlayer3
 		protected virtual void tコンボ表示_太鼓(int nCombo値, int nジャンプインデックス, int nPlayer)
 		{
 			//テスト用コンボ数
-			//nCombo値 = 114;
+			nCombo値 = 1000;
 			#region [ 事前チェック。]
 			//-----------------
 			//if( CDTXMania.ConfigIni.bドラムコンボ表示 == false )
@@ -504,7 +504,7 @@ namespace TJAPlayer3
 					if (TJAPlayer3.Tx.Taiko_Combo[1] != null)
 					{
 						var yScalling = ComboScale_Ex[this.ctコンボ加算[nPlayer].n現在の値, 0];
-						TJAPlayer3.Tx.Taiko_Combo[1].vc拡大縮小倍率.Y = TJAPlayer3.Skin.Game_Taiko_Combo_Scale[2] + yScalling;
+						TJAPlayer3.Tx.Taiko_Combo[1].vc拡大縮小倍率.Y = 1.0f + yScalling;
 						TJAPlayer3.Tx.Taiko_Combo[1].vc拡大縮小倍率.X = TJAPlayer3.Skin.Game_Taiko_Combo_Scale[2];
 						var yJumping = TJAPlayer3.Skin.Game_Taiko_Combo_Ex_IsJumping ? (int)ComboScale_Ex[this.ctコンボ加算[nPlayer].n現在の値, 1] : 0;
 						TJAPlayer3.Tx.Taiko_Combo[1].t2D拡大率考慮下中心基準描画(TJAPlayer3.app.Device, rightX - TJAPlayer3.Skin.Game_Taiko_Combo_Padding[2] * i, TJAPlayer3.Skin.Game_Taiko_Combo_Ex4_Y[nPlayer] + yJumping, new Rectangle(n位の数[i] * TJAPlayer3.Skin.Game_Taiko_Combo_Size_Ex[0], 0, TJAPlayer3.Skin.Game_Taiko_Combo_Size_Ex[0], TJAPlayer3.Skin.Game_Taiko_Combo_Size_Ex[1]));

@@ -37,6 +37,19 @@ namespace FDK
 			get;
 			set;
 		}
+
+		public double _n間隔
+		{
+			get
+			{
+				return this.n間隔;
+			}
+			set
+			{
+				this.n間隔 = value >= 0 ? value : value * -1;
+			}
+		}
+
 		public float n現在の経過時間ms
 		{
 			get;
@@ -69,6 +82,7 @@ namespace FDK
 			this.n開始値 = 0;
 			this.n終了値 = 0;
 			this.n現在の値 = 0;
+			this.n現在の値 = 0;
 			this.n現在の経過時間ms = CSoundTimer.n未使用;
 		}
 
@@ -100,7 +114,7 @@ namespace FDK
 		{
 			this.n開始値 = n開始値;
 			this.n終了値 = n終了値;
-			this.n間隔 = n間隔ms;
+			this._n間隔 = n間隔ms;
 			this.timer = timer;
 			this.n現在の経過時間ms = this.timer.n現在時刻;
 			this.n現在の値 = (int)n開始値;
@@ -117,7 +131,7 @@ namespace FDK
 		{
 			this.n開始値 = (float)db開始値;
 			this.n終了値 = (float)db終了値;
-			this.n間隔 = db間隔;
+			this._n間隔 = db間隔;
 			this.timerdb = timer;
 			this.n現在の経過時間ms = (float)this.timerdb.dbシステム時刻;
 			this.n現在の値 = (int)db開始値;
@@ -222,7 +236,7 @@ namespace FDK
 
 		public void t間隔値変更(double Value)
         {
-			this.n間隔 = Value;
+			this._n間隔 = Value;
         }
 
 		// その他

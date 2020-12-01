@@ -91,6 +91,7 @@ namespace TJAPlayer3
             this.txSubTitle = TJAPlayer3.tテクスチャの生成(pfSubTitle.DrawPrivateFont(TJAPlayer3.stage選曲.r現在選択中の曲.strサブタイトル, Color.White, Color.Black));
 
             this.n現在の選択行 = 0;
+            this.bSelect = false;
 
             this.b初めての進行描画 = true;
 		}
@@ -154,7 +155,7 @@ namespace TJAPlayer3
 
             #region [ キー入力 ]
 
-            if (this.ctBarAnimeIn.b終了値に達した)
+            if (this.ctBarAnimeIn.b終了値に達した && !bSelect)
             {
                 if (TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.RBlue))
                 {
@@ -181,6 +182,7 @@ namespace TJAPlayer3
                     }
                     else
                     {
+                        this.bSelect = true;
                         TJAPlayer3.Skin.sound曲決定音.t再生する();
                         TJAPlayer3.stage選曲.t曲を選択する(n現在の選択行 - 2);
                     }
@@ -230,6 +232,8 @@ namespace TJAPlayer3
 
         #region [ private ]
         //-----------------
+
+        private bool bSelect;
 
         private CPrivateFastFont pfTitle;
         private CPrivateFastFont pfSubTitle;
