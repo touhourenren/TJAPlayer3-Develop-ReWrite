@@ -314,7 +314,7 @@ namespace TJAPlayer3
 		protected virtual void tコンボ表示_太鼓(int nCombo値, int nジャンプインデックス, int nPlayer)
 		{
 			//テスト用コンボ数
-			nCombo値 = 1000;
+			//nCombo値 = 1000;
 			#region [ 事前チェック。]
 			//-----------------
 			//if( CDTXMania.ConfigIni.bドラムコンボ表示 == false )
