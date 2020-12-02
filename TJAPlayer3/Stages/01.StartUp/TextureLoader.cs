@@ -147,8 +147,10 @@ namespace TJAPlayer3
 
             #region 4_読み込み画面
             SongLoading_Plate = TxC(SONGLOADING + @"Plate.png");
-            SongLoading_FadeIn = TxC(SONGLOADING + @"FadeIn.png");
-            SongLoading_FadeOut = TxC(SONGLOADING + @"FadeOut.png");
+            SongLoading_Bg = TxC(SONGLOADING + @"Bg.png");
+            SongLoading_BgWait = TxC(SONGLOADING + @"Bg_Wait.png");
+            SongLoading_Chara = TxC(SONGLOADING + @"Chara.png");
+            SongLoading_Fade = TxC(SONGLOADING + @"Fade.png");
             #endregion
 
             #region 5_演奏画面
@@ -645,9 +647,11 @@ namespace TJAPlayer3
             #endregion
 
             #region 4_読み込み画面
-        TJAPlayer3.tテクスチャの解放(ref SongLoading_Plate);
-            TJAPlayer3.tテクスチャの解放(ref SongLoading_FadeIn);
-            TJAPlayer3.tテクスチャの解放(ref SongLoading_FadeOut);
+            TJAPlayer3.tテクスチャの解放(ref SongLoading_Plate);
+            TJAPlayer3.tテクスチャの解放(ref SongLoading_Bg);
+            TJAPlayer3.tテクスチャの解放(ref SongLoading_BgWait);
+            TJAPlayer3.tテクスチャの解放(ref SongLoading_Chara);
+            TJAPlayer3.tテクスチャの解放(ref SongLoading_Fade);
             #endregion
 
             #region 5_演奏画面
@@ -982,14 +986,16 @@ namespace TJAPlayer3
         public CTexture Difficulty_Select_Bar;
 
         public CTexture[] Difficulty_Back = new CTexture[8];
-        #endregion 
+        #endregion
 
         #endregion
 
         #region 4_読み込み画面
         public CTexture SongLoading_Plate,
-            SongLoading_FadeIn,
-            SongLoading_FadeOut;
+            SongLoading_Bg,
+            SongLoading_BgWait,
+            SongLoading_Chara,
+            SongLoading_Fade;
         #endregion
 
         #region 5_演奏画面
