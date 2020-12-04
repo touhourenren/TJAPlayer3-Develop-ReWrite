@@ -394,8 +394,9 @@ namespace TJAPlayer3
 			    Trace.TraceInformation($"Calibration complete. Updating InputAdjustTime from {oldInputAdjustTimeMs}ms to {newInputAdjustTimeMs}ms.");
 			    TJAPlayer3.ConfigIni.nInputAdjustTimeMs = newInputAdjustTimeMs;
 			}
+            this.actDan.IsAnimating = false;// IsAnimating=trueのときにそのまま選曲画面に戻ると、文字列が描画されない問題修正用。
 
-			base.On非活性化();
+            base.On非活性化();
 		}
 		public override void OnManagedリソースの作成()
 		{
