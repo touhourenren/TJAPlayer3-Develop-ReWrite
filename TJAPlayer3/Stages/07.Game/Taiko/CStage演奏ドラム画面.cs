@@ -192,9 +192,10 @@ namespace TJAPlayer3
             this.actGame.t叩ききりまショー_初期化();
             base.ReSetScore(TJAPlayer3.DTX.nScoreInit[0, TJAPlayer3.stage選曲.n確定された曲の難易度], TJAPlayer3.DTX.nScoreDiff[TJAPlayer3.stage選曲.n確定された曲の難易度]);
 			base.On活性化();
+            base.eフェーズID = CStage.Eフェーズ.共通_通常状態;//初期化すれば、リザルト変遷は止まる。
 
-			// MODIFY_BEGIN #25398 2011.06.07 FROM
-			if( TJAPlayer3.bコンパクトモード )
+            // MODIFY_BEGIN #25398 2011.06.07 FROM
+            if ( TJAPlayer3.bコンパクトモード )
 			{
 				var score = new Cスコア();
 				TJAPlayer3.Songs管理.tScoreIniを読み込んで譜面情報を設定する( TJAPlayer3.strコンパクトモードファイル + ".score.ini", score );

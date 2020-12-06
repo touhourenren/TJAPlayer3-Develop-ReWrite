@@ -622,9 +622,9 @@ namespace TJAPlayer3
                     }
                 }
                 #endregion
-                if( TJAPlayer3.stage演奏ドラム画面.actCombo.n現在のコンボ数.P1最高値 != 0 )
+                if( TJAPlayer3.stage演奏ドラム画面.actCombo.n現在のコンボ数.最高値[0] != 0 )
                 {
-                    double db全体コンボ率 = ( (double)TJAPlayer3.stage演奏ドラム画面.actCombo.n現在のコンボ数.P1最高値 / this.st叩ききりまショー.n現在通過したノート数 ) * 100.0;
+                    double db全体コンボ率 = ( (double)TJAPlayer3.stage演奏ドラム画面.actCombo.n現在のコンボ数.最高値[0] / this.st叩ききりまショー.n現在通過したノート数 ) * 100.0;
                     for( int i = 0; i < this.n全体コンボ率ボーナス.Length; i++ )
                     {
                         if( db全体コンボ率 >= this.n全体コンボ率ボーナス[ i ].ret )
