@@ -401,13 +401,13 @@ namespace TJAPlayer3
                     }
                 }
 			}
-			return 0;
+            return 0;
 		}
 
 
 		// その他
 
-		#region [ private ]
+#region [ private ]
 		//-----------------
         protected STSTATUS[] st花火状態 = new STSTATUS[ 32 ];
         protected STSTATUS[] st花火状態2P = new STSTATUS[ 32 ];
@@ -421,6 +421,6 @@ namespace TJAPlayer3
             public int nLane;
         }
 		//-----------------
-		#endregion
+#endregion
 	}
 }

@@ -37,7 +37,16 @@ namespace FDK
 			get;
 			set;
 		}
-
+		public double db現在の値
+		{
+			get;
+			set;
+		}
+		public double db現在の経過時間
+		{
+			get;
+			set;
+		}
 		public double _n間隔
 		{
 			get
@@ -72,6 +81,12 @@ namespace FDK
 		public bool b終了値に達してない
 		{
 			get { return !this.b終了値に達した; }
+		}
+
+		/// <summary>通常のCCounterでは使用できません。</summary>
+		public bool b進行中db
+		{
+			get { return (this.db現在の経過時間 != -1); }
 		}
 
 		// コンストラクタ
