@@ -87,7 +87,7 @@ namespace TJAPlayer3
 
             if (TJAPlayer3.NamePlateConfig.data.Dan[player] != "" && TJAPlayer3.NamePlateConfig.data.Dan[player] != null)
             {
-                this.txdan[player].t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, x + 69, y + 45);
+                this.txdan[player].t2D拡大率考慮上中央基準描画(TJAPlayer3.app.Device, x + 69, y + 24);
                 if (TJAPlayer3.NamePlateConfig.data.DanGold[player])
                 {
                     TJAPlayer3.Tx.NamePlateBase.b乗算合成 = true;
@@ -104,14 +104,14 @@ namespace TJAPlayer3
                     txTitle[player].vc拡大縮小倍率.Y = 160.0f / txTitle[player].szテクスチャサイズ.Width;
                 }
 
-                txTitle[player].t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, x + 124, y + 21);
+                txTitle[player].t2D拡大率考慮上中央基準描画(TJAPlayer3.app.Device, x + 124, y + 8);
                 if (TJAPlayer3.NamePlateConfig.data.Dan[player] == "" || TJAPlayer3.NamePlateConfig.data.Dan[player] == null)
-                    this.txName[player].t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, x + 121, y + 46);
+                    this.txName[player].t2D拡大率考慮上中央基準描画(TJAPlayer3.app.Device, x + 121, y + 28);
                 else
-                    this.txName[player].t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, x + 144, y + 46);
+                    this.txName[player].t2D拡大率考慮上中央基準描画(TJAPlayer3.app.Device, x + 144, y + 28);
             }
             else
-                this.txName[player].t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, x + 121, y + 38);
+                this.txName[player].t2D拡大率考慮上中央基準描画(TJAPlayer3.app.Device, x + 121, y + 28);
         }
 
         private CPrivateFastFont pfName;
