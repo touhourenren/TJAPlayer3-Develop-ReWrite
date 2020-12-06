@@ -1595,6 +1595,7 @@ namespace TJAPlayer3
 										this.iSystemASIODevice.n現在選択されている項目番号,
 										this.iSystemSoundTimerType.bON );
 				TJAPlayer3.app.ShowWindowTitleWithSoundType();
+				TJAPlayer3.Skin.ReloadSkin();// 音声の再読み込みをすることによって、音量の初期化を防ぐ
 			}
 			#endregion
 			#region [ サウンドのタイムストレッチモード変更 ]
