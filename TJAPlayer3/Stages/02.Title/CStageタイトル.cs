@@ -92,7 +92,7 @@ namespace TJAPlayer3
 			{
 				#region [ 初めての進行描画 ]
 				//---------------------
-				if( base.b初めての進行描画 )
+				if ( base.b初めての進行描画 )
 				{
 					if( TJAPlayer3.r直前のステージ == TJAPlayer3.stage起動 )
 					{
@@ -115,7 +115,7 @@ namespace TJAPlayer3
 
 				#region [ カーソル上移動 ]
 				//---------------------
-				if( this.ct上移動用.b進行中 )
+				if ( this.ct上移動用.b進行中 )
 				{
 					this.ct上移動用.t進行();
 					if( this.ct上移動用.b終了値に達した )
@@ -248,12 +248,15 @@ namespace TJAPlayer3
                         System.Diagnostics.Process.Start(strCreator);
                 }
 
-                //CDTXMania.act文字コンソール.tPrint(0, 80, C文字コンソール.Eフォント種別.白, point.X.ToString());
-                //CDTXMania.act文字コンソール.tPrint(0, 100, C文字コンソール.Eフォント種別.白, point.Y.ToString());
-                //CDTXMania.act文字コンソール.tPrint(0, 120, C文字コンソール.Eフォント種別.白, scaling.ToString());
+				//CDTXMania.act文字コンソール.tPrint(0, 80, C文字コンソール.Eフォント種別.白, point.X.ToString());
+				//CDTXMania.act文字コンソール.tPrint(0, 100, C文字コンソール.Eフォント種別.白, point.Y.ToString());
+				//CDTXMania.act文字コンソール.tPrint(0, 120, C文字コンソール.Eフォント種別.白, scaling.ToString());
+
+				TJAPlayer3.NamePlate.tNamePlateDraw(0, 0, 0);
+				TJAPlayer3.NamePlate.tNamePlateDraw(0, 60, 1);
 
 
-                CStage.Eフェーズ eフェーズid = base.eフェーズID;
+				CStage.Eフェーズ eフェーズid = base.eフェーズID;
 				switch( eフェーズid )
 				{
 					case CStage.Eフェーズ.共通_フェードイン:

@@ -1083,7 +1083,7 @@ namespace TJAPlayer3
 
 				if (ctBoxOpen.n現在の値 > 1300 && ctBoxOpen.n現在の値 < 1940)
 				{
-					ctBoxOpen.t間隔値変更(0.7);
+					ctBoxOpen.t間隔値変更(0.6);
 					if (i == 1)
 						Box = 600.0f;
 					if (i == 2)

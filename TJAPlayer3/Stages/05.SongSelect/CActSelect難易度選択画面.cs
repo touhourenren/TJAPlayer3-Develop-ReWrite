@@ -92,6 +92,7 @@ namespace TJAPlayer3
 
             this.n現在の選択行 = 0;
             this.bSelect = false;
+            this.b裏譜面 = false;
 
             this.b初めての進行描画 = true;
 		}
@@ -182,6 +183,7 @@ namespace TJAPlayer3
                     }
                     else
                     {
+                        TJAPlayer3.stage選曲.ctDonchan_Jump.t開始(0, TJAPlayer3.Tx.SongSelect_Donchan_Jump.Length - 1, 1000 / 45, TJAPlayer3.Timer);
                         this.bSelect = true;
                         TJAPlayer3.Skin.sound曲決定音.t再生する();
                         TJAPlayer3.stage選曲.t曲を選択する(n現在の選択行 - 2);
@@ -233,7 +235,7 @@ namespace TJAPlayer3
         #region [ private ]
         //-----------------
 
-        private bool bSelect;
+        public bool bSelect;
 
         private CPrivateFastFont pfTitle;
         private CPrivateFastFont pfSubTitle;

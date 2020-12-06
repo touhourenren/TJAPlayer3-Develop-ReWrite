@@ -2213,8 +2213,8 @@ namespace TJAPlayer3
         private void t進行描画_ネームプレート()
         {
             //if( this.txNamePlate != null )
-                //this.txNamePlate.t2D描画( CDTXMania.app.Device, 0, 100 );
-            
+            //this.txNamePlate.t2D描画( CDTXMania.app.Device, 0, 100 );
+
             //if(CDTXMania.Tx.Taiko_NamePlate[0] != null) CDTXMania.Tx.Taiko_NamePlate[0].t2D描画(CDTXMania.app.Device, 0, 100);
             //if(CDTXMania.stage演奏ドラム画面.bDoublePlay && CDTXMania.Tx.Taiko_NamePlate[1] != null) CDTXMania.Tx.Taiko_NamePlate[0].t2D描画(CDTXMania.app.Device, 0, 600);
 

@@ -2565,7 +2565,7 @@ namespace TJAPlayer3
         #endregion
         #region CourseSymbol
         public int[] Game_CourseSymbol_X = new int[] { 64, 64 };
-        public int[] Game_CourseSymbol_Y = new int[] { 232, 432 };
+        public int[] Game_CourseSymbol_Y = new int[] { 232, 582 };
         #endregion
         #region PanelFont
         public int Game_MusicName_X = 1260;
@@ -2599,8 +2599,8 @@ namespace TJAPlayer3
         public int[] Game_Score_Size = new int[] { 24, 40 };
         #endregion
         #region Taiko
-        public int[] Game_Taiko_NamePlate_X = new int[] { -27, -27 };
-        public int[] Game_Taiko_NamePlate_Y = new int[] { 286, 366 };
+        public int[] Game_Taiko_NamePlate_X = new int[] { 0, 0 };
+        public int[] Game_Taiko_NamePlate_Y = new int[] { 300, 380 };
         public int[] Game_Taiko_PlayerNumber_X = new int[] { 4, 4 };
         public int[] Game_Taiko_PlayerNumber_Y = new int[] { 233, 435 };
         public int[] Game_Taiko_X = new int[] { 190, 190 };

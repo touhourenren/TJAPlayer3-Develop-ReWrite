@@ -80,6 +80,7 @@ namespace TJAPlayer3
             Scanning_Loudness = TxC(@"Scanning_Loudness.png");
             Overlay = TxC(@"Overlay.png");
             NamePlate = new CTexture[2];
+            NamePlateBase = TxC(@"NamePlate.png");
             NamePlate[0] = TxC(@"1P_NamePlate.png");
             NamePlate[1] = TxC(@"2P_NamePlate.png");
             #endregion
@@ -129,6 +130,10 @@ namespace TJAPlayer3
             for (int i = 0; i < SongSelect_Donchan_Normal.Length; i++)
             {
                 SongSelect_Donchan_Normal[i] = TxC(SONGSELECT + @"Donchan\Loop\" + i.ToString() + ".png");
+            }
+            for (int i = 0; i < SongSelect_Donchan_Jump.Length; i++)
+            {
+                SongSelect_Donchan_Jump[i] = TxC(SONGSELECT + @"Donchan\Start\" + i.ToString() + ".png");
             }
 
             for (int i = 0; i < SongSelect_GenreBack.Length; i++)
@@ -585,6 +590,7 @@ namespace TJAPlayer3
             Menu_Highlight,
             Enum_Song,
             Scanning_Loudness,
+            NamePlateBase,
             Overlay;
         public CTexture[] NamePlate;
         #endregion
@@ -626,6 +632,7 @@ namespace TJAPlayer3
             SongSelect_Bar_Genre = new CTexture[9],
             SongSelect_Donchan_Select = new CTexture[47],
             SongSelect_Donchan_Normal = new CTexture[49],
+            SongSelect_Donchan_Jump = new CTexture[18],
             SongSelect_NamePlate = new CTexture[1];
 
         #region [ 難易度選択画面 ]

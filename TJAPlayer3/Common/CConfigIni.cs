@@ -1273,10 +1273,10 @@ namespace TJAPlayer3
 			this.bScoreIniを出力する = true;
 			this.bランダムセレクトで子BOXを検索対象とする = true;
 			this.n表示可能な最小コンボ数 = new STDGBVALUE<int>();
-			this.n表示可能な最小コンボ数.Drums = 3;
-			this.n表示可能な最小コンボ数.Guitar = 2;
-			this.n表示可能な最小コンボ数.Bass = 2;
-			this.n表示可能な最小コンボ数.Taiko = 3;
+			this.n表示可能な最小コンボ数.Drums = 10;
+			this.n表示可能な最小コンボ数.Guitar = 10;
+			this.n表示可能な最小コンボ数.Bass = 10;
+			this.n表示可能な最小コンボ数.Taiko = 10;
             this.FontName = "MS UI Gothic";
 		    this.ApplyLoudnessMetadata = true;
 

@@ -222,6 +222,18 @@ namespace TJAPlayer3
 	        private set;
 	    }
 
+		public static CNamePlate NamePlate 
+		{
+			get; 
+			private set;
+		}
+
+		public static NamePlateConfig NamePlateConfig
+		{
+			get; 
+			private set;
+		}
+
 		public static CStage起動 stage起動 
 		{
 			get; 
@@ -1821,14 +1833,16 @@ for (int i = 0; i < 3; i++) {
 #if DEBUG
 			strEXEのあるフォルダ = Environment.CurrentDirectory + @"\";
 #else
-			strEXEのあるフォルダ = Path.GetDirectoryName( Application.ExecutablePath ) + @"\";	// #23629 2010.11.9 yyagi: set correct pathname where DTXManiaGR.exe is.
+			strEXEのあるフォルダ = Path.GetDirectoryName( Application.ExecutablePath ) + @"\"; // #23629 2010.11.9 yyagi: set correct pathname where DTXManiaGR.exe is.
 #endif
-// END #23629 2010.11.13 from
+			// END #23629 2010.11.13 from
 			//-----------------
 			#endregion
 
 			#region [ Config.ini の読込み ]
 			//---------------------
+			NamePlateConfig = new NamePlateConfig();
+			NamePlateConfig.tNamePlateConfig();
 			ConfigIni = new CConfigIni();
 			string path = strEXEのあるフォルダ + "Config.ini";
 			if( File.Exists( path ) )
@@ -2240,6 +2254,7 @@ for (int i = 0; i < 3; i++) {
 			stage結果 = new CStage結果();
 			stageChangeSkin = new CStageChangeSkin();
 			stage終了 = new CStage終了();
+			NamePlate = new CNamePlate();
 			this.listトップレベルActivities = new List<CActivity>();
 			this.listトップレベルActivities.Add( actEnumSongs );
 			this.listトップレベルActivities.Add( act文字コンソール );
@@ -2306,7 +2321,7 @@ for (int i = 0; i < 3; i++) {
             #endregion
 
             #region Discordの処理
-            Discord.Initialize("428233983025741855");
+            Discord.Initialize("784989629728161813");
             StartupTime = Discord.GetUnixTime();
             Discord.UpdatePresence("", Properties.Discord.Stage_StartUp, StartupTime);
             #endregion

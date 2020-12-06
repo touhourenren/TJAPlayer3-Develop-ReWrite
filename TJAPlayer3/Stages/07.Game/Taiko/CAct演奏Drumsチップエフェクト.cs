@@ -8,24 +8,24 @@ using FDK;
 
 namespace TJAPlayer3
 {
-	internal class CAct演奏Drumsチップエフェクト : CActivity
-	{
-		// コンストラクタ
+    internal class CAct演奏Drumsチップエフェクト : CActivity
+    {
+        // コンストラクタ
 
-		public CAct演奏Drumsチップエフェクト()
-		{
-			//base.b活性化してない = true;
-		}
-		
-		
-		// メソッド
+        public CAct演奏Drumsチップエフェクト()
+        {
+            //base.b活性化してない = true;
+        }
+
+
+        // メソッド
         public virtual void Start(int nPlayer, int Lane)
-		{
-            if(TJAPlayer3.Tx.Gauge_Soul_Explosion != null)
+        {
+            if (TJAPlayer3.Tx.Gauge_Soul_Explosion != null)
             {
-                for (int i = 0; i < 32; i++)
+                for (int i = 0; i < 128; i++)
                 {
-                    if(!st[i].b使用中)
+                    if (!st[i].b使用中)
                     {
                         st[i].b使用中 = true;
                         st[i].ct進行 = new CCounter(0, TJAPlayer3.Skin.Game_Effect_NotesFlash[2], TJAPlayer3.Skin.Game_Effect_NotesFlash_Timer, TJAPlayer3.Timer);
@@ -36,13 +36,13 @@ namespace TJAPlayer3
                     }
                 }
             }
-		}
+        }
 
-		// CActivity 実装
+        // CActivity 実装
 
-		public override void On活性化()
-		{
-            for (int i = 0; i < 32; i++)
+        public override void On活性化()
+        {
+            for (int i = 0; i < 128; i++)
             {
                 st[i] = new STチップエフェクト
                 {
@@ -52,20 +52,20 @@ namespace TJAPlayer3
                 };
             }
             base.On活性化();
-		}
-		public override void On非活性化()
-		{
-            for (int i = 0; i < 32; i++)
+        }
+        public override void On非活性化()
+        {
+            for (int i = 0; i < 128; i++)
             {
                 st[i].ct進行 = null;
                 st[i].ctChipEffect = null;
                 st[i].b使用中 = false;
             }
-			base.On非活性化();
-		}
-		public override int On進行描画()
-		{
-            for (int i = 0; i < 32; i++)
+            base.On非活性化();
+        }
+        public override int On進行描画()
+        {
+            for (int i = 0; i < 128; i++)
             {
                 if (st[i].b使用中)
                 {
@@ -75,26 +75,6 @@ namespace TJAPlayer3
                     {
                         st[i].ct進行.t停止();
                         st[i].b使用中 = false;
-                    }
-                    if (this.st[i].ctChipEffect.n現在の値 < 12)
-                    {
-                        TJAPlayer3.Tx.ChipEffect.color4 = new Color4(1.0f, 1.0f, 0.0f);
-                        TJAPlayer3.Tx.ChipEffect.Opacity = (int)(this.st[i].ctChipEffect.n現在の値 * (float)(225 / 11));
-
-                        if(st[i].nプレイヤー == 0)
-                            TJAPlayer3.Tx.ChipEffect.t2D中心基準描画(TJAPlayer3.app.Device, TJAPlayer3.Skin.Game_Effect_FlyingNotes_EndPoint_X[0], TJAPlayer3.Skin.Game_Effect_FlyingNotes_EndPoint_Y[0], new Rectangle(st[i].Lane * 130, 0, 130, 130));
-                        else if (st[i].nプレイヤー == 1)
-                            TJAPlayer3.Tx.ChipEffect.t2D中心基準描画(TJAPlayer3.app.Device, TJAPlayer3.Skin.Game_Effect_FlyingNotes_EndPoint_X[1], TJAPlayer3.Skin.Game_Effect_FlyingNotes_EndPoint_Y[1], new Rectangle(st[i].Lane * 130, 0, 130, 130));
-                    }
-                    if (this.st[i].ctChipEffect.n現在の値 > 12 && this.st[i].ctChipEffect.n現在の値 < 24)
-                    {
-                        TJAPlayer3.Tx.ChipEffect.color4 = new Color4(1.0f, 1.0f, 1.0f);
-                        TJAPlayer3.Tx.ChipEffect.Opacity = 255 - (int)((this.st[i].ctChipEffect.n現在の値 - 10) * (float)(255 / 14));
-
-                        if (st[i].nプレイヤー == 0)
-                            TJAPlayer3.Tx.ChipEffect.t2D中心基準描画(TJAPlayer3.app.Device, TJAPlayer3.Skin.Game_Effect_FlyingNotes_EndPoint_X[0], TJAPlayer3.Skin.Game_Effect_FlyingNotes_EndPoint_Y[0], new Rectangle(st[i].Lane * 130, 0, 130, 130));
-                        else if (st[i].nプレイヤー == 1)
-                            TJAPlayer3.Tx.ChipEffect.t2D中心基準描画(TJAPlayer3.app.Device, TJAPlayer3.Skin.Game_Effect_FlyingNotes_EndPoint_X[1], TJAPlayer3.Skin.Game_Effect_FlyingNotes_EndPoint_Y[1], new Rectangle(st[i].Lane * 130, 0, 130, 130));
                     }
                     switch (st[i].nプレイヤー)
                     {
@@ -113,16 +93,28 @@ namespace TJAPlayer3
                             break;
                     }
 
+                    if (this.st[i].ctChipEffect.n現在の値 < 12)
+                    {
+                        TJAPlayer3.Tx.ChipEffect.color4 = new Color4(1.0f, 1.0f, 0.0f);
+                        TJAPlayer3.Tx.ChipEffect.Opacity = (int)(this.st[i].ctChipEffect.n現在の値 * (float)(225 / 11));
+                        TJAPlayer3.Tx.ChipEffect.t2D中心基準描画(TJAPlayer3.app.Device, TJAPlayer3.Skin.Game_Effect_FlyingNotes_EndPoint_X[st[i].nプレイヤー], TJAPlayer3.Skin.Game_Effect_FlyingNotes_EndPoint_Y[st[i].nプレイヤー], new Rectangle(st[i].Lane * 130, 0, 130, 130));
+                    }
+                    if (this.st[i].ctChipEffect.n現在の値 > 12 && this.st[i].ctChipEffect.n現在の値 < 24)
+                    {
+                        TJAPlayer3.Tx.ChipEffect.color4 = new Color4(1.0f, 1.0f, 1.0f);
+                        TJAPlayer3.Tx.ChipEffect.Opacity = 255 - (int)((this.st[i].ctChipEffect.n現在の値 - 10) * (float)(255 / 14));
+                        TJAPlayer3.Tx.ChipEffect.t2D中心基準描画(TJAPlayer3.app.Device, TJAPlayer3.Skin.Game_Effect_FlyingNotes_EndPoint_X[st[i].nプレイヤー], TJAPlayer3.Skin.Game_Effect_FlyingNotes_EndPoint_Y[st[i].nプレイヤー], new Rectangle(st[i].Lane * 130, 0, 130, 130));
+                    }
                 }
             }
-			return 0;
-		}
-		
+            return 0;
+        }
 
-		// その他
 
-		#region [ private ]
-		//-----------------
+        // その他
+
+        #region [ private ]
+        //-----------------
         //private CTexture[] txChara;
 
         [StructLayout(LayoutKind.Sequential)]
@@ -134,7 +126,7 @@ namespace TJAPlayer3
             public int nプレイヤー;
             public int Lane;
         }
-        private STチップエフェクト[] st = new STチップエフェクト[32];
+        private STチップエフェクト[] st = new STチップエフェクト[128];
         //private struct ST連打キャラ
         //{
         //    public int nColor;
