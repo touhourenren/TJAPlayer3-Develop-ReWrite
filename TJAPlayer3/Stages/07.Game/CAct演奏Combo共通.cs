@@ -198,17 +198,17 @@ namespace TJAPlayer3
 		{
 			 0.000f,
 			 0.072f,
-			 0.170f,
-			 0.146f,
-			 0.108f,
-			 0.096f,
+			 0.200f,
+			 0.160f,
+			 0.130f,
+			 0.100f,
 			 0.084f,
-			 0.066f,
+			 0.076f,
 			 0.044f,
 			 0.033f,
 			 0.022f,
 			 0.011f,
-			 0.000f,
+			 0.000f
 		};
 		private float[,] ComboScale_Ex = new float[,]
 		{
