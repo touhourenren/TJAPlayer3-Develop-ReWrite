@@ -2626,13 +2626,13 @@ namespace TJAPlayer3
         #endregion
         #region Balloon
         public int[] Game_Balloon_Combo_X = new int[] { 253, 253 };
-        public int[] Game_Balloon_Combo_Y = new int[] { -11, 498 };
+        public int[] Game_Balloon_Combo_Y = new int[] { -11, 538 };
         public int[] Game_Balloon_Combo_Number_X = new int[] { 257, 257 };
-        public int[] Game_Balloon_Combo_Number_Y = new int[] { 54, 563 };
+        public int[] Game_Balloon_Combo_Number_Y = new int[] { 54, 603 };
         public int[] Game_Balloon_Combo_Number_Ex_X = new int[] { 297, 297 };
-        public int[] Game_Balloon_Combo_Number_Ex_Y = new int[] { 54, 563 };
+        public int[] Game_Balloon_Combo_Number_Ex_Y = new int[] { 54, 603 };
         public int[] Game_Balloon_Combo_Text_X = new int[] { 440, 440 };
-        public int[] Game_Balloon_Combo_Text_Y = new int[] { 85, 594 };
+        public int[] Game_Balloon_Combo_Text_Y = new int[] { 85, 634 };
         public int[] Game_Balloon_Combo_Text_Ex_X = new int[] { 440, 440 };
         public int[] Game_Balloon_Combo_Text_Ex_Y = new int[] { 85, 594 };
 
