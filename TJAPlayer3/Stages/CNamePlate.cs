@@ -111,7 +111,7 @@ namespace TJAPlayer3
                     this.txName[player].t2D拡大率考慮上中央基準描画(TJAPlayer3.app.Device, x + 144, y + 28);
             }
             else
-                this.txName[player].t2D拡大率考慮上中央基準描画(TJAPlayer3.app.Device, x + 121, y + 28);
+                this.txName[player].t2D拡大率考慮上中央基準描画(TJAPlayer3.app.Device, x + 121, y + 13);
         }
 
         private CPrivateFastFont pfName;

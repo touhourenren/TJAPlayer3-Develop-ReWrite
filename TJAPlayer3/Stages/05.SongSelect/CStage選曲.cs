@@ -594,7 +594,7 @@ namespace TJAPlayer3
                                 {
                                     if (TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.LBlue))
                                     {
-                                        this.ctDonchan_Jump.t開始(0, TJAPlayer3.Tx.SongSelect_Donchan_Jump.Length + 4, 1000 / 45, TJAPlayer3.Timer);
+                                        this.ctDonchan_Jump.t開始(0, TJAPlayer3.Tx.SongSelect_Donchan_Jump.Length + 8, 1000 / 45, TJAPlayer3.Timer);
                                         for (int i = 0; i < 7; i++) tカーソルスキップ(true);
                                     }
                                 }
@@ -613,7 +613,7 @@ namespace TJAPlayer3
                                 {
                                     if (TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.RBlue))
                                     {
-                                        this.ctDonchan_Jump.t開始(0, TJAPlayer3.Tx.SongSelect_Donchan_Jump.Length + 4, 1000 / 45, TJAPlayer3.Timer);
+                                        this.ctDonchan_Jump.t開始(0, TJAPlayer3.Tx.SongSelect_Donchan_Jump.Length + 8, 1000 / 45, TJAPlayer3.Timer);
                                         for (int i = 0; i < 7; i++) tカーソルスキップ(false);
                                     }
                                 }
@@ -700,7 +700,7 @@ namespace TJAPlayer3
                 {
                     this.ctDonchan_Jump.t停止();
 
-                    if (!this.act難易度選択画面.bSelect)
+                    if (!this.act難易度選択画面.bIsDifficltSelect)
                     {
                         this.ctDonchan_Jump.n現在の値 = 0;
                     }
