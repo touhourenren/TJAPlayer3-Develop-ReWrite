@@ -705,19 +705,28 @@ namespace TJAPlayer3
                         this.ctDonchan_Jump.n現在の値 = 0;
                     }
                 }
-                
+
                 if (this.ctDonchan_Select.b終了値に達してない)
                 {
+                    if(TJAPlayer3.ConfigIni.nPlayerCount == 2)
+                        TJAPlayer3.Tx.SongSelect_Donchan_Select[ctDonchan_Select.n現在の値].t2D左右反転描画(TJAPlayer3.app.Device, 981, 330);
+
                     TJAPlayer3.Tx.SongSelect_Donchan_Select[ctDonchan_Select.n現在の値].t2D描画(TJAPlayer3.app.Device, 0, 330);
                 }
                 else
                 {
                     if (this.ctDonchan_Jump.n現在の値 > 0)
                     {
+                        if (TJAPlayer3.ConfigIni.nPlayerCount == 2)
+                            TJAPlayer3.Tx.SongSelect_Donchan_Jump[ctDonchan_Jump.n現在の値 >= 17 ? 17 : ctDonchan_Jump.n現在の値].t2D左右反転描画(TJAPlayer3.app.Device, 981, 330);
+
                         TJAPlayer3.Tx.SongSelect_Donchan_Jump[ctDonchan_Jump.n現在の値 >= 17 ? 17 : ctDonchan_Jump.n現在の値].t2D描画(TJAPlayer3.app.Device, 0, 330);
                     }
                     else
                     {
+                        if (TJAPlayer3.ConfigIni.nPlayerCount == 2)
+                            TJAPlayer3.Tx.SongSelect_Donchan_Normal[ctDonchan_Normal.n現在の値].t2D左右反転描画(TJAPlayer3.app.Device, 981, 330);
+
                         TJAPlayer3.Tx.SongSelect_Donchan_Normal[ctDonchan_Normal.n現在の値].t2D描画(TJAPlayer3.app.Device, 0, 330);
                     }
                 }

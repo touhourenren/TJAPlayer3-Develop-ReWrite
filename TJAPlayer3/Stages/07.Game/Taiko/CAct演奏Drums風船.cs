@@ -165,9 +165,9 @@ namespace TJAPlayer3
                 this.t文字表示(TJAPlayer3.Skin.Game_Balloon_Balloon_Number_X[player], TJAPlayer3.Skin.Game_Balloon_Balloon_Number_Y[player], n連打数.ToString(), n連打数, player);
                 //CDTXMania.act文字コンソール.tPrint( 0, 0, C文字コンソール.Eフォント種別.白, n連打数.ToString() );
             }
-            if (n連打数 == 0 && TJAPlayer3.stage演奏ドラム画面.actChara.b風船連打中)
+            if (n連打数 == 0 && TJAPlayer3.stage演奏ドラム画面.actChara.b風船連打中[player])
             {
-                TJAPlayer3.stage演奏ドラム画面.actChara.b風船連打中 = false;
+                TJAPlayer3.stage演奏ドラム画面.actChara.b風船連打中[player] = false;
                 TJAPlayer3.stage演奏ドラム画面.b連打中[player] = false;
                 //this.tEnd();
                 ////this.ct風船終了.n現在の値 = 0;
