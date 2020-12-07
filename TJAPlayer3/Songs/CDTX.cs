@@ -1818,6 +1818,9 @@ namespace TJAPlayer3
         #region [ チップの再生と停止 ]
         public void tチップの再生(CChip pChip, long n再生開始システム時刻ms, int nLane)
         {
+            if (TJAPlayer3.ConfigIni.b演奏速度が一倍速であるとき以外音声を再生しない && TJAPlayer3.ConfigIni.n演奏速度 != 20)
+                return;
+
             if (pChip.n整数値_内部番号 >= 0)
             {
                 if ((nLane < (int)Eレーン.LC) || ((int)Eレーン.BGM < nLane))

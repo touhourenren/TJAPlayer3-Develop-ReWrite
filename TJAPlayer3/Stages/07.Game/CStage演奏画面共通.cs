@@ -4042,7 +4042,7 @@ namespace TJAPlayer3
             float bpm_time = 0;
             int last_input = 0;
             float last_bpm_change_time;
-            play_time = CSound管理.rc演奏用タイマ.n現在時刻ms - tja.nOFFSET;
+            play_time = CSound管理.rc演奏用タイマ.n現在時刻ms * (((float)TJAPlayer3.ConfigIni.n演奏速度) / 20.0f) - tja.nOFFSET;
 
             for (int i = 1; ; i++)
             {
@@ -4285,7 +4285,15 @@ namespace TJAPlayer3
 			{
 				cs.tサウンドを再生する();
 			}
-			pausedCSound.Clear();
+            #region [ PAUSEしていたサウンドを一斉に再生再開する(ただしタイマを止めているので、ここではまだ再生開始しない) ]
+
+            if (!(TJAPlayer3.ConfigIni.b演奏速度が一倍速であるとき以外音声を再生しない && TJAPlayer3.ConfigIni.n演奏速度 != 20))
+                foreach (CSound cs in pausedCSound)
+                {
+                    cs.tサウンドを再生する();
+                }
+            #endregion
+            pausedCSound.Clear();
 			pausedCSound = null;
 #endregion
 #region [ タイマを再開して、PAUSEから復帰する ]
