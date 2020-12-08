@@ -27,7 +27,12 @@ namespace TJAPlayer3
 
         public CActSelect難易度選択画面()
         {
-			base.b活性化してない = true;
+            for(int i = 0; i < 10; i++)
+            {
+                st小文字位置[i].ptX = i * 18;
+                st小文字位置[i].ch = i.ToString().ToCharArray()[0];
+            }
+            base.b活性化してない = true;
 		}
 
         public void t次に移動()
@@ -183,10 +188,13 @@ namespace TJAPlayer3
                     }
                     else
                     {
-                        TJAPlayer3.stage選曲.ctDonchan_Jump.t開始(0, TJAPlayer3.Tx.SongSelect_Donchan_Jump.Length - 1, 1000 / 45, TJAPlayer3.Timer);
-                        this.bSelect = true;
-                        TJAPlayer3.Skin.sound曲決定音.t再生する();
-                        TJAPlayer3.stage選曲.t曲を選択する(n現在の選択行 - 2);
+                        if(TJAPlayer3.stage選曲.r現在選択中のスコア.譜面情報.nレベル[n現在の選択行 - 2] > 0)
+                        {
+                            TJAPlayer3.stage選曲.ctDonchan_Jump.t開始(0, TJAPlayer3.Tx.SongSelect_Donchan_Jump.Length - 1, 1000 / 45, TJAPlayer3.Timer);
+                            this.bSelect = true;
+                            TJAPlayer3.Skin.sound曲決定音.t再生する();
+                            TJAPlayer3.stage選曲.t曲を選択する(n現在の選択行 - 2);
+                        }
                     }
                 }
             }
@@ -198,19 +206,52 @@ namespace TJAPlayer3
             TJAPlayer3.Tx.Difficulty_Back[TJAPlayer3.stage選曲.nStrジャンルtoNum(TJAPlayer3.stage選曲.r現在選択中の曲.strジャンル)].Opacity =
                 (TJAPlayer3.stage選曲.act曲リスト.ctDifficultyIn.n現在の値 - 1255);
             TJAPlayer3.Tx.Difficulty_Bar.Opacity = (TJAPlayer3.stage選曲.act曲リスト.ctDifficultyIn.n現在の値 - 1255);
+            TJAPlayer3.Tx.Difficulty_Number.Opacity = (TJAPlayer3.stage選曲.act曲リスト.ctDifficultyIn.n現在の値 - 1255);
 
             TJAPlayer3.Tx.Difficulty_Back[TJAPlayer3.stage選曲.nStrジャンルtoNum(TJAPlayer3.stage選曲.r現在選択中の曲.strジャンル)].t2D中心基準描画(TJAPlayer3.app.Device, 640, 290);
 
-            TJAPlayer3.Tx.Difficulty_Bar.t2D描画(TJAPlayer3.app.Device, 255, 270, new RectangleF(0, 0, 600, 236));    //閉じる～難しいまで
+            TJAPlayer3.Tx.Difficulty_Bar.color4 = new Color4(1.0f, 1.0f, 1.0f);
+            TJAPlayer3.Tx.Difficulty_Bar.t2D描画(TJAPlayer3.app.Device, 255, 270, new RectangleF(0, 0, 171, 236));    //閉じる、演奏オプション
+
+            for (int i = 0; i < 3; i++)
+            {
+                if(TJAPlayer3.stage選曲.r現在選択中のスコア.譜面情報.nレベル[i] > 0)
+                    TJAPlayer3.Tx.Difficulty_Bar.color4 = new Color4(1.0f, 1.0f, 1.0f);
+                else
+                    TJAPlayer3.Tx.Difficulty_Bar.color4 = new Color4(0.5f, 0.5f, 0.5f);
+
+                TJAPlayer3.Tx.Difficulty_Bar.t2D描画(TJAPlayer3.app.Device, 255 + 171 + 143 * i, 270, new RectangleF(171 + 143 * i, 0, 143, 236));    //閉じる～難しいまで
+
+                if (TJAPlayer3.stage選曲.r現在選択中のスコア.譜面情報.nレベル[i] > 0)
+                    t小文字表示(TJAPlayer3.stage選曲.r現在選択中のスコア.譜面情報.nレベル[i].ToString(), 498 + i * 144, 434.5f);
+            }
 
             if (b裏譜面)
             {
+                if (TJAPlayer3.stage選曲.r現在選択中のスコア.譜面情報.nレベル[4] > 0)
+                    TJAPlayer3.Tx.Difficulty_Bar.color4 = new Color4(1.0f, 1.0f, 1.0f);
+                else
+                    TJAPlayer3.Tx.Difficulty_Bar.color4 = new Color4(0.5f, 0.5f, 0.5f);
+
                 TJAPlayer3.Tx.Difficulty_Bar.t2D描画(TJAPlayer3.app.Device, 855, 270, new RectangleF(743, 0, 138, 236));
+
+                if (TJAPlayer3.stage選曲.r現在選択中のスコア.譜面情報.nレベル[4] > 0)
+                    t小文字表示(TJAPlayer3.stage選曲.r現在選択中のスコア.譜面情報.nレベル[4].ToString(), 498 + 3 * 143, 434.5f);
             }
             else
             {
+                if (TJAPlayer3.stage選曲.r現在選択中のスコア.譜面情報.nレベル[3] > 0)
+                    TJAPlayer3.Tx.Difficulty_Bar.color4 = new Color4(1.0f, 1.0f, 1.0f);
+                else
+                    TJAPlayer3.Tx.Difficulty_Bar.color4 = new Color4(0.5f, 0.5f, 0.5f);
+
                 TJAPlayer3.Tx.Difficulty_Bar.t2D描画(TJAPlayer3.app.Device, 855, 270, new RectangleF(600, 0, 143, 236));
+
+                if (TJAPlayer3.stage選曲.r現在選択中のスコア.譜面情報.nレベル[3] > 0)
+                    t小文字表示(TJAPlayer3.stage選曲.r現在選択中のスコア.譜面情報.nレベル[3].ToString(), 498 + 3 * 143, 434.5f);
             }
+
+
 
             TJAPlayer3.act文字コンソール.tPrint(0, 0, C文字コンソール.Eフォント種別.白, ctBarAnimeIn.n現在の値.ToString());
 
@@ -229,6 +270,33 @@ namespace TJAPlayer3
             return 0;
         }
 
+        [StructLayout(LayoutKind.Sequential)]
+        private struct STレベル数字
+        {
+            public char ch;
+            public int ptX;
+        }
+        private STレベル数字[] st小文字位置 = new STレベル数字[10];
+
+        private void t小文字表示(string str, float x, float y)
+        {
+            foreach (char ch in str)
+            {
+                for (int i = 0; i < this.st小文字位置.Length; i++)
+                {
+                    if (this.st小文字位置[i].ch == ch)
+                    {
+                        Rectangle rectangle = new Rectangle(this.st小文字位置[i].ptX, 0, 18, 23);
+                        if (TJAPlayer3.Tx.Difficulty_Number != null)
+                        {
+                            TJAPlayer3.Tx.Difficulty_Number.t2D描画(TJAPlayer3.app.Device, x, y, rectangle);
+                        }
+                        break;
+                    }
+                }
+                x += 11;
+            }
+        }
 
         // その他
 
