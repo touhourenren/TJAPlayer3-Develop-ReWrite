@@ -3709,11 +3709,11 @@ namespace TJAPlayer3
 #endregion
 #region[ f1: 歌詞 ]
                     case 0xF1:
-                        if ( !pChip.bHit && ( pChip.nバーからの距離dot.Drums < 0 ) )
-						{
-                            if( dTX.listLiryc.Count > ShownLyric[nPlayer] && dTX.nPlayerSide == nPlayer )
+                        if (!pChip.bHit && (pChip.nバーからの距離dot.Drums < 0))
+                        {
+                            if (dTX.listLyric.Count > ShownLyric[nPlayer] && dTX.nPlayerSide == nPlayer)
                             {
-                                this.actPanel.t歌詞テクスチャを生成する( dTX.listLiryc[ShownLyric[nPlayer]] );
+                                this.actPanel.t歌詞テクスチャを生成する(dTX.listLyric[ShownLyric[nPlayer]]);
                                 ShownLyric[nPlayer]++;
                             }
                             pChip.bHit = true;

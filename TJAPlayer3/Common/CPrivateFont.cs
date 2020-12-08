@@ -300,12 +300,12 @@ namespace TJAPlayer3
 		/// <returns>描画済テクスチャ</returns>
 		protected Bitmap DrawPrivateFont( string drawstr, DrawMode drawmode, Color fontColor, Color edgeColor, Color gradationTopColor, Color gradationBottomColor )
 		{
-			if ( this._fontfamily == null || drawstr == null || drawstr == "" )
-			{
-				// nullを返すと、その後bmp→texture処理や、textureのサイズを見て__の処理で全部例外が発生することになる。
-				// それは非常に面倒なので、最小限のbitmapを返してしまう。
-				// まずはこの仕様で進めますが、問題有れば(上位側からエラー検出が必要であれば)例外を出したりエラー状態であるプロパティを定義するなり検討します。
-				if ( drawstr != "" )
+            if (this._fontfamily == null || drawstr == null || drawstr == "" || drawstr == " " || drawstr == "　")
+            {
+                // nullを返すと、その後bmp→texture処理や、textureのサイズを見て__の処理で全部例外が発生することになる。
+                // それは非常に面倒なので、最小限のbitmapを返してしまう。
+                // まずはこの仕様で進めますが、問題有れば(上位側からエラー検出が必要であれば)例外を出したりエラー状態であるプロパティを定義するなり検討します。
+                if ( drawstr != "" )
 				{
 					Trace.TraceWarning( "DrawPrivateFont()の入力不正。最小値のbitmapを返します。" );
 				}

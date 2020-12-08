@@ -792,6 +792,13 @@ namespace TJAPlayer3
             }
         }
 
+        public struct STLYRIC
+        {
+            public long Time;
+            public Bitmap TextTex;
+            public string Text;
+            public int index;
+        }
 
         // 構造体
 
@@ -1184,6 +1191,7 @@ namespace TJAPlayer3
         public Eジャンル eジャンル;
         public bool HIDDENLEVEL;
         public STDGBVALUE<int> LEVEL;
+        public bool bLyrics;
         public int[] LEVELtaiko = new int[(int)Difficulty.Total] { -1, -1, -1, -1, -1, -1, -1 };
         public Dictionary<int, CAVI> listAVI;
         public Dictionary<int, CAVIPAN> listAVIPAN;
@@ -1289,7 +1297,8 @@ namespace TJAPlayer3
         private List<int> listBalloon_Master;
         private List<int> listBalloon; //旧構文用
 
-        public List<string> listLiryc; //歌詞を格納していくリスト。スペル忘れた(ぉい
+        public List<Bitmap> listLyric; //歌詞を格納していくリスト。スペル忘れた(ぉい
+        public List<STLYRIC> listLyric2;
 
         private int listBalloon_Normal_数値管理;
         private int listBalloon_Expert_数値管理;
@@ -2292,6 +2301,9 @@ namespace TJAPlayer3
                         int nCount = 0;
                         this.nNowRollCount = 0;
 
+                        List<STLYRIC> tmplistlyric = new List<STLYRIC>();
+                        int BGM番号 = 0;
+
                         foreach (CChip chip in this.listChip)
                         {
                             if (chip.nチャンネル番号 == 0x02) { }
@@ -2338,6 +2350,23 @@ namespace TJAPlayer3
                                         if (this.bOFFSETの値がマイナスである == false)
                                             chip.n発声時刻ms += this.nOFFSET;
                                         ms = chip.n発声時刻ms;
+
+                                        #region[listlyric2の時間合わせ]
+                                        for (int ind = 0; ind < listLyric2.Count; ind++)
+                                        {
+                                            if (listLyric2[ind].index == BGM番号)
+                                            {
+                                                STLYRIC lyrictmp = this.listLyric2[ind];
+
+                                                lyrictmp.Time += chip.n発声時刻ms;
+
+                                                tmplistlyric.Add(lyrictmp);
+                                            }
+                                        }
+
+
+                                        BGM番号++;
+                                        #endregion
                                         continue;
                                     }
                                 case 0x02:  // BarLength
@@ -2664,6 +2693,7 @@ namespace TJAPlayer3
                             }
                         }
                         #endregion
+
                         //span = (TimeSpan) ( DateTime.Now - timeBeginLoad );
                         //Trace.TraceInformation( "発声時刻計算:             {0}", span.ToString() );
                         //timeBeginLoad = DateTime.Now;
@@ -2672,6 +2702,12 @@ namespace TJAPlayer3
                         //span = (TimeSpan) ( DateTime.Now - timeBeginLoad );
                         //Trace.TraceInformation( "再生時刻変更:             {0}", span.ToString() );
                         //timeBeginLoad = DateTime.Now;
+
+                        #region[listlyricを時間順に並び替え。]
+                        this.listLyric2 = tmplistlyric;
+                        this.listLyric2.Sort((a, b) => a.Time.CompareTo(b.Time));
+                        #endregion
+
                         #region [ 可視チップ数カウント ]
                         for (int n = 0; n < 14; n++)
                         {
@@ -3021,7 +3057,7 @@ namespace TJAPlayer3
 
         private static readonly Regex regexForPrefixingCommaStartingLinesWithZero = new Regex(@"^,", RegexOptions.Multiline | RegexOptions.Compiled);
         private static readonly Regex regexForStrippingHeadingLines = new Regex(
-            @"^(?!(TITLE|LEVEL|BPM|WAVE|OFFSET|BALLOON|EXAM1|EXAM2|EXAM3|EXAM4|RENREN22|RENREN23|RENREN32|RENREN33|RENREN42|RENREN43|BALLOONNOR|BALLOONEXP|BALLOONMAS|SONGVOL|SEVOL|SCOREINIT|SCOREDIFF|COURSE|STYLE|GAME|LIFE|DEMOSTART|SIDE|SUBTITLE|SCOREMODE|GENRE|MOVIEOFFSET|BGIMAGE|BGMOVIE|HIDDENBRANCH|GAUGEINCR|#HBSCROLL|#BMSCROLL)).+\n",
+            @"^(?!(TITLE|LEVEL|BPM|WAVE|OFFSET|BALLOON|EXAM1|EXAM2|EXAM3|EXAM4|RENREN22|RENREN23|RENREN32|RENREN33|RENREN42|RENREN43|BALLOONNOR|BALLOONEXP|BALLOONMAS|SONGVOL|SEVOL|SCOREINIT|SCOREDIFF|COURSE|STYLE|GAME|LIFE|DEMOSTART|SIDE|SUBTITLE|SCOREMODE|GENRE|MOVIEOFFSET|BGIMAGE|BGMOVIE|HIDDENBRANCH|GAUGEINCR|LYRICFILE|#HBSCROLL|#BMSCROLL)).+\n",
             RegexOptions.Multiline | RegexOptions.Compiled);
 
         /// <summary>
@@ -3311,6 +3347,45 @@ namespace TJAPlayer3
 
         private static readonly Regex BranchStartArgumentRegex =
             new Regex(@"^([^,\s]+)\s*,\s*([^,\s]+)\s*,\s*([^,\s]+)$", RegexOptions.Compiled);
+
+        private string[] SplitComma(string input)
+        {
+            var result = new List<string>();
+            var workingIndex = 0;
+            for (int i = 0; i < input.Length; i++)
+            {
+                if (input[i].Equals(',')) // カンマにぶち当たった
+                {
+                    if (i - 1 >= 0)// &&演算子でも、例外が起きるので...
+                    {
+                        if (input[i - 1].Equals('\\')) // 1文字前がバックスラッシュ
+                        {
+                            input = input.Remove(i - 1, 1);
+                        }
+                        else
+                        {
+                            // workingIndexから今の位置までをリストにブチ込む
+                            result.Add(input.Substring(workingIndex, i - workingIndex));
+                            // workingIndexに今の位置+1を代入
+                            workingIndex = i + 1;
+                        }
+                    }
+                    else
+                    {
+                        // workingIndexから今の位置までをリストにブチ込む
+                        result.Add(input.Substring(workingIndex, i - workingIndex));
+                        // workingIndexに今の位置+1を代入
+                        workingIndex = i + 1;
+                    }
+                }
+                if (i + 1 == input.Length) // 最後に
+                {
+                    result.Add(input.Substring(workingIndex, input.Length - workingIndex));
+                }
+            }
+            return result.ToArray();
+        }
+
 
         /// <summary>
         /// 譜面読み込みメソッドV4で使用。
@@ -3842,9 +3917,11 @@ namespace TJAPlayer3
             }
             else if (command == "#LYRIC")
             {
-                this.listLiryc.Add(argument);
+                if (TJAPlayer3.r現在のステージ.eステージID == CStage.Eステージ.曲読み込み)//起動時に重たくなってしまう問題の修正用
+                    this.listLyric.Add(this.pf歌詞フォント.DrawPrivateFont(argument, TJAPlayer3.Skin.Game_Lyric_ForeColor, TJAPlayer3.Skin.Game_Lyric_BackColor));
 
                 var chip = new CChip();
+
 
                 chip.nチャンネル番号 = 0xF1;
                 chip.n発声時刻ms = (int)this.dbNowTime;
@@ -3856,6 +3933,7 @@ namespace TJAPlayer3
                 // チップを配置。
 
                 this.listChip.Add(chip);
+                this.bLyrics = true;
             }
             else if (command == "#DIRECTION")
             {
@@ -5039,6 +5117,32 @@ namespace TJAPlayer3
                     this.bHIDDENBRANCH = true;
                 }
             }
+            else if (strCommandName.Equals("LYRICFILE"))
+            {
+                if (!string.IsNullOrEmpty(strCommandParam))
+                {
+                    string[] strFiles = SplitComma(strCommandParam);
+                    string[] strFilePath = new string[strFiles.Length];
+                    for (int index = 0; index < strFiles.Length; index++)
+                    {
+                        strFilePath[index] = this.strフォルダ名 + strFiles[index];
+                        if (File.Exists(strFilePath[index]))
+                        {
+                            try
+                            {
+                                if (TJAPlayer3.r現在のステージ.eステージID == CStage.Eステージ.曲読み込み)//起動時に重たくなってしまう問題の修正用
+                                    this.LyricFileParser(strFilePath[index], index);
+                                this.bLyrics = true;
+                            }
+                            catch
+                            {
+                                Console.WriteLine("lrcファイルNo.{0}の読み込みに失敗しましたが、", index);
+                                Console.WriteLine("処理を続行します。");
+                            }
+                        }
+                    }
+                }
+            }
             if (this.nScoreModeTmp == 99)
             {
                 //2017.01.28 DD 
@@ -5131,6 +5235,61 @@ namespace TJAPlayer3
                     return 6;
                 default:
                     return 3;
+            }
+        }
+
+        /// <summary>
+        /// Lyricファイルのパースもどき
+        /// 自力で作ったので、うまくパースしてくれないかも
+        /// </summary>
+        /// <param name="strFilePath">lrcファイルのパス</param>
+		private void LyricFileParser(string strFilePath, int ordnumber)//lrcファイルのパース用
+        {
+            string str = CJudgeTextEncoding.ReadTextFile(strFilePath);
+            var strSplit後 = str.Split(this.dlmtEnter, StringSplitOptions.RemoveEmptyEntries);
+            Regex timeRegex = new Regex(@"^(\[)(\d{2})(:)(\d{2})([:.])(\d{2})(\])", RegexOptions.Multiline | RegexOptions.Compiled);
+            Regex timeRegexO = new Regex(@"^(\[)(\d{2})(:)(\d{2})(\])", RegexOptions.Multiline | RegexOptions.Compiled);
+            List<long> list;
+            for (int i = 0; i < strSplit後.Length; i++)
+            {
+                list = new List<long>();
+                if (!String.IsNullOrEmpty(strSplit後[i]))
+                {
+                    if (strSplit後[i].StartsWith("["))
+                    {
+                        Match timestring = timeRegex.Match(strSplit後[i]), timestringO = timeRegexO.Match(strSplit後[i]);
+                        while (timestringO.Success || timestring.Success)
+                        {
+                            long time;
+                            if (timestring.Success)
+                            {
+                                time = Int32.Parse(timestring.Groups[2].Value) * 60000 + Int32.Parse(timestring.Groups[4].Value) * 1000 + Int32.Parse(timestring.Groups[6].Value) * 10;
+                                strSplit後[i] = strSplit後[i].Remove(0, 10);
+                            }
+                            else if (timestringO.Success)
+                            {
+                                time = Int32.Parse(timestringO.Groups[2].Value) * 60000 + Int32.Parse(timestringO.Groups[4].Value) * 1000;
+                                strSplit後[i] = strSplit後[i].Remove(0, 7);
+                            }
+                            else
+                                break;
+                            list.Add(time);
+                            timestring = timeRegex.Match(strSplit後[i]);
+                            timestringO = timeRegexO.Match(strSplit後[i]);
+                        }
+                        strSplit後[i] = strSplit後[i].Replace("\r", "").Replace("\n", "");
+
+                        for (int listindex = 0; listindex < list.Count; listindex++)
+                        {
+                            STLYRIC stlrc;
+                            stlrc.Text = strSplit後[i];
+                            stlrc.TextTex = this.pf歌詞フォント.DrawPrivateFont(strSplit後[i], TJAPlayer3.Skin.Game_Lyric_ForeColor, TJAPlayer3.Skin.Game_Lyric_BackColor);
+                            stlrc.Time = list[listindex];
+                            stlrc.index = ordnumber;
+                            this.listLyric2.Add(stlrc);
+                        }
+                    }
+                }
             }
         }
 
@@ -6905,8 +7064,17 @@ namespace TJAPlayer3
 
         // CActivity 実装
 
+        private CPrivateFastFont pf歌詞フォント;
         public override void On活性化()
         {
+            if (!string.IsNullOrEmpty(TJAPlayer3.Skin.Game_Lyric_FontName))
+            {
+                this.pf歌詞フォント = new CPrivateFastFont(new FontFamily(TJAPlayer3.Skin.Game_Lyric_FontName), TJAPlayer3.Skin.Game_Lyric_FontSize);
+            }
+            else
+            {
+                this.pf歌詞フォント = new CPrivateFastFont(new FontFamily("MS UI Gothic"), TJAPlayer3.Skin.Game_Lyric_FontSize);
+            }
             this.listWAV = new Dictionary<int, CWAV>();
             this.listBPM = new Dictionary<int, CBPM>();
             this.listSCROLL = new Dictionary<int, CSCROLL>();
@@ -6925,10 +7093,13 @@ namespace TJAPlayer3
             this.listBalloon_Expert = new List<int>();
             this.listBalloon_Master = new List<int>();
             this.listLine = new List<CLine>();
-            this.listLiryc = new List<string>();
+            this.listLyric = new List<Bitmap>();
+            this.listLyric2 = new List<STLYRIC>();
             this.List_DanSongs = new List<DanSongs>();
             base.On活性化();
         }
+
+
         public override void On非活性化()
         {
             if (this.listWAV != null)
@@ -7028,11 +7199,14 @@ namespace TJAPlayer3
             {
                 this.listBalloon_Master.Clear();
             }
-            if (this.listLiryc != null)
+            if (this.listLyric != null)
             {
-                this.listLiryc.Clear();
+                this.listLyric.Clear();
             }
-
+            if (this.listLyric2 != null)
+            {
+                this.listLyric2.Clear();
+            }
             base.On非活性化();
         }
         public override void OnManagedリソースの作成()
@@ -7061,6 +7235,7 @@ namespace TJAPlayer3
                         cds.Dispose();
                     }
                 }
+                TJAPlayer3.t安全にDisposeする(ref this.pf歌詞フォント);
                 base.OnManagedリソースの解放();
             }
         }

@@ -135,19 +135,14 @@ namespace TJAPlayer3
 
 			    this.ct進行用 = new CCounter( 0, 2000, 2, TJAPlayer3.Timer );
 				this.Start();
-
-
-
 			}
 		}
 
-        public void t歌詞テクスチャを生成する( string str歌詞 )
-        {
-            using (var bmpleric = this.pf歌詞フォント.DrawPrivateFont( str歌詞, TJAPlayer3.Skin.Game_Lyric_ForeColor, TJAPlayer3.Skin.Game_Lyric_BackColor ))
-            {
-                this.tx歌詞テクスチャ = TJAPlayer3.tテクスチャの生成( bmpleric, false );
-            }
-        }
+		public void t歌詞テクスチャを生成する( Bitmap bmplyric )
+		{
+			TJAPlayer3.t安全にDisposeする(ref this.tx歌詞テクスチャ);
+			this.tx歌詞テクスチャ = TJAPlayer3.tテクスチャの生成( bmplyric );
+		}
 
         /// <summary>
         /// レイヤー管理のため、On進行描画から分離。
