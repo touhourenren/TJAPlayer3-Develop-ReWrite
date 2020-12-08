@@ -145,6 +145,7 @@ namespace TJAPlayer3
             #region [ 難易度選択画面 ]
             Difficulty_Bar = TxC(SONGSELECT + @"Difficulty_Select\Difficulty_Bar.png");
             Difficulty_Number = TxC(SONGSELECT + @"Difficulty_Select\Difficulty_Number.png");
+            Difficulty_Star = TxC(SONGSELECT + @"Difficulty_Select\Difficulty_Star.png");
             Difficulty_Select_Bar = TxC(SONGSELECT + @"Difficulty_Select\Difficulty_Select_Bar.png");
 
             for (int i = 0; i < Difficulty_Back.Length; i++)
@@ -640,6 +641,7 @@ namespace TJAPlayer3
         public CTexture Difficulty_Bar;
         public CTexture Difficulty_Select_Bar;
         public CTexture Difficulty_Number;
+        public CTexture Difficulty_Star;
 
         public CTexture[] Difficulty_Back = new CTexture[8];
         #endregion

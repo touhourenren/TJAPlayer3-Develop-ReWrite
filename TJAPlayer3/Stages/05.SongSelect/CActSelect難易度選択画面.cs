@@ -210,8 +210,11 @@ namespace TJAPlayer3
 
             TJAPlayer3.Tx.Difficulty_Back[TJAPlayer3.stage選曲.nStrジャンルtoNum(TJAPlayer3.stage選曲.r現在選択中の曲.strジャンル)].t2D中心基準描画(TJAPlayer3.app.Device, 640, 290);
 
+            TJAPlayer3.Tx.Difficulty_Select_Bar.t2D描画(TJAPlayer3.app.Device, (float)this.BarX[n現在の選択行], 242, new RectangleF(0, (n現在の選択行 >= 2 ? 114 : 387), 259, 275 - (n現在の選択行 >= 2 ? 0 : 164)));
+
             TJAPlayer3.Tx.Difficulty_Bar.color4 = new Color4(1.0f, 1.0f, 1.0f);
             TJAPlayer3.Tx.Difficulty_Bar.t2D描画(TJAPlayer3.app.Device, 255, 270, new RectangleF(0, 0, 171, 236));    //閉じる、演奏オプション
+
 
             for (int i = 0; i < 3; i++)
             {
@@ -224,6 +227,14 @@ namespace TJAPlayer3
 
                 if (TJAPlayer3.stage選曲.r現在選択中のスコア.譜面情報.nレベル[i] > 0)
                     t小文字表示(TJAPlayer3.stage選曲.r現在選択中のスコア.譜面情報.nレベル[i].ToString(), 498 + i * 144, 434.5f);
+
+                for(int g = 0; g < TJAPlayer3.stage選曲.r現在選択中のスコア.譜面情報.nレベル[i]; g++)
+                {
+                    if (TJAPlayer3.stage選曲.r現在選択中のスコア.譜面情報.nレベル[i] > 0)
+                    {
+                        TJAPlayer3.Tx.Difficulty_Star.t2D描画(TJAPlayer3.app.Device, 444 + i * 143 + g * 10, 459);
+                    }
+                }
             }
 
             if (b裏譜面)
@@ -237,6 +248,10 @@ namespace TJAPlayer3
 
                 if (TJAPlayer3.stage選曲.r現在選択中のスコア.譜面情報.nレベル[4] > 0)
                     t小文字表示(TJAPlayer3.stage選曲.r現在選択中のスコア.譜面情報.nレベル[4].ToString(), 498 + 3 * 143, 434.5f);
+
+                for (int g = 0; g < TJAPlayer3.stage選曲.r現在選択中のスコア.譜面情報.nレベル[4]; g++)
+                    if (TJAPlayer3.stage選曲.r現在選択中のスコア.譜面情報.nレベル[4] > 0)
+                        TJAPlayer3.Tx.Difficulty_Star.t2D描画(TJAPlayer3.app.Device, 444 + 3 * 143 + g * 10, 459);
             }
             else
             {
@@ -249,11 +264,11 @@ namespace TJAPlayer3
 
                 if (TJAPlayer3.stage選曲.r現在選択中のスコア.譜面情報.nレベル[3] > 0)
                     t小文字表示(TJAPlayer3.stage選曲.r現在選択中のスコア.譜面情報.nレベル[3].ToString(), 498 + 3 * 143, 434.5f);
+
+                for (int g = 0; g < TJAPlayer3.stage選曲.r現在選択中のスコア.譜面情報.nレベル[3]; g++)
+                    if (TJAPlayer3.stage選曲.r現在選択中のスコア.譜面情報.nレベル[3] > 0)
+                        TJAPlayer3.Tx.Difficulty_Star.t2D描画(TJAPlayer3.app.Device, 444 + 3 * 143 + g * 10, 459);
             }
-
-
-
-            TJAPlayer3.act文字コンソール.tPrint(0, 0, C文字コンソール.Eフォント種別.白, ctBarAnimeIn.n現在の値.ToString());
 
             this.txTitle.t2D中心基準描画(TJAPlayer3.app.Device, 640, 140);
             this.txSubTitle.t2D中心基準描画(TJAPlayer3.app.Device, 640, 180);
@@ -269,6 +284,31 @@ namespace TJAPlayer3
 
             return 0;
         }
+
+        // その他
+
+        #region [ private ]
+        //-----------------
+
+        public bool bSelect;
+
+        private CPrivateFastFont pfTitle;
+        private CPrivateFastFont pfSubTitle;
+        private CTexture txTitle;
+        private CTexture txSubTitle;
+
+        private CCounter ctBarAnimeIn;
+        private CCounter ctBarAnime;
+
+        //0 閉じる 1 演奏オプション 2~ 難易度
+		private int n現在の選択行;
+        private int nスイッチカウント;
+
+        private bool b裏譜面;
+        //176
+        private int[] BarX = new int[] { 163, 251, 367, 510, 653, 797, 797 };
+
+        private CSound soundSelectAnnounce;
 
         [StructLayout(LayoutKind.Sequential)]
         private struct STレベル数字
@@ -298,32 +338,7 @@ namespace TJAPlayer3
             }
         }
 
-        // その他
-
-        #region [ private ]
         //-----------------
-
-        public bool bSelect;
-
-        private CPrivateFastFont pfTitle;
-        private CPrivateFastFont pfSubTitle;
-        private CTexture txTitle;
-        private CTexture txSubTitle;
-
-        private CCounter ctBarAnimeIn;
-        private CCounter ctBarAnime;
-
-        //0 閉じる 1 演奏オプション 2~ 難易度
-		private int n現在の選択行;
-        private int nスイッチカウント;
-
-        private bool b裏譜面;
-        //176
-        private int[] BarX = new int[] { 164, 252, 367, 511, 655, 799, 799 };
-
-        private CSound soundSelectAnnounce;
-
-		//-----------------
-		#endregion
-	}
+        #endregion
+    }
 }
