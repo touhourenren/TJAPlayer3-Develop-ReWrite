@@ -1445,6 +1445,8 @@ namespace TJAPlayer3
 				if (bBoxClose)
 				{
 					this.tBOXを出る();
+					TJAPlayer3.stage選曲.bBGM再生済み = false;
+					TJAPlayer3.Skin.bgm選曲画面イン.t再生する();
 					bBoxClose = false;
 				}
 			}

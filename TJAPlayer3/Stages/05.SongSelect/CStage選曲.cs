@@ -185,6 +185,8 @@ namespace TJAPlayer3
 
                 ctBackgroundFade.n現在の値 = 600;
 
+                TJAPlayer3.Skin.bgm選曲画面イン.t再生する();
+
                 for (int i = 0; i < 3; i++)
                     r[i] = new Random();
 
@@ -396,7 +398,7 @@ namespace TJAPlayer3
 
                 this.actShowCurrentPosition.On進行描画();                               // #27648 2011.3.28 yyagi
 
-                if (!this.bBGM再生済み && (base.eフェーズID == CStage.Eフェーズ.共通_通常状態))
+                if (!this.bBGM再生済み && (base.eフェーズID == CStage.Eフェーズ.共通_通常状態) && !TJAPlayer3.Skin.bgm選曲画面イン.b再生中)
                 {
                     TJAPlayer3.Skin.bgm選曲画面.t再生する();
                     this.bBGM再生済み = true;
@@ -648,32 +650,6 @@ namespace TJAPlayer3
                                 }
                             }
                             #endregion
-                            #region [ 上: 難易度変更(上) ]
-                            if (TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDX.DirectInput.Key.UpArrow))
-                            {
-                                //CommandHistory.Add( E楽器パート.DRUMS, EパッドFlag.HH );
-                                //EパッドFlag[] comChangeDifficulty = new EパッドFlag[] { EパッドFlag.HH, EパッドFlag.HH };
-                                //if ( CommandHistory.CheckCommand( comChangeDifficulty, E楽器パート.DRUMS ) )
-                                {
-                                    Debug.WriteLine("ドラムス難易度変更");
-                                    this.act曲リスト.t難易度レベルをひとつ進める();
-                                    TJAPlayer3.Skin.sound変更音.t再生する();
-                                }
-                            }
-                            #endregion
-                            #region [ 下: 難易度変更(下) ]
-                            if (TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDX.DirectInput.Key.DownArrow))
-                            {
-                                //CommandHistory.Add( E楽器パート.DRUMS, EパッドFlag.HH );
-                                //EパッドFlag[] comChangeDifficulty = new EパッドFlag[] { EパッドFlag.HH, EパッドFlag.HH };
-                                //if ( CommandHistory.CheckCommand( comChangeDifficulty, E楽器パート.DRUMS ) )
-                                {
-                                    Debug.WriteLine("ドラムス難易度変更");
-                                    this.act曲リスト.t難易度レベルをひとつ戻す();
-                                    TJAPlayer3.Skin.sound変更音.t再生する();
-                                }
-                            }
-                            #endregion
                         }
                     }
 
@@ -814,6 +790,7 @@ namespace TJAPlayer3
                 }
             }
         }
+        private bool b音声再生;
         private Random[] r = new Random[3];
         private Color4 colCharaColor;
         public CCounter ctBackgroundFade;
@@ -842,7 +819,7 @@ namespace TJAPlayer3
         public CCounter ctDonchan_Jump;
         private int nGenreBack;
         private int nOldGenreBack;
-        private bool bBGM再生済み;
+        public bool bBGM再生済み;
         private STキー反復用カウンタ ctキー反復用;
         public CCounter ct登場時アニメ用共通;
         private CCounter ct背景スクロール用タイマー;

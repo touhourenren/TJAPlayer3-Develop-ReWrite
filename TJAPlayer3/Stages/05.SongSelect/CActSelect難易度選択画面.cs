@@ -210,6 +210,7 @@ namespace TJAPlayer3
 
             TJAPlayer3.Tx.Difficulty_Back[TJAPlayer3.stage選曲.nStrジャンルtoNum(TJAPlayer3.stage選曲.r現在選択中の曲.strジャンル)].t2D中心基準描画(TJAPlayer3.app.Device, 640, 290);
 
+            TJAPlayer3.Tx.Difficulty_Select_Bar.Opacity = (int)(ctBarAnimeIn.n現在の値 >= 80 ? (ctBarAnimeIn.n現在の値 - 80) * 2.84f : 0);
             TJAPlayer3.Tx.Difficulty_Select_Bar.t2D描画(TJAPlayer3.app.Device, (float)this.BarX[n現在の選択行], 242, new RectangleF(0, (n現在の選択行 >= 2 ? 114 : 387), 259, 275 - (n現在の選択行 >= 2 ? 0 : 164)));
 
             TJAPlayer3.Tx.Difficulty_Bar.color4 = new Color4(1.0f, 1.0f, 1.0f);
@@ -275,7 +276,6 @@ namespace TJAPlayer3
 
             #region [ バーの描画 ]
 
-            TJAPlayer3.Tx.Difficulty_Select_Bar.Opacity = (int)(ctBarAnimeIn.n現在の値 >= 80 ? (ctBarAnimeIn.n現在の値 - 80) * 2.84f : 0);
             TJAPlayer3.Tx.Difficulty_Select_Bar.t2D描画(TJAPlayer3.app.Device, (float)this.BarX[n現在の選択行], 126 + ((float)Math.Sin((float)(ctBarAnimeIn.n現在の値 >= 80 ? (ctBarAnimeIn.n現在の値 - 80) : 0) * (Math.PI / 180)) * 50) + (float)Math.Sin((float)ctBarAnime.n現在の値 * (Math.PI / 180)) * 10, new RectangleF(0, 0, 259, 114));
 
             #endregion

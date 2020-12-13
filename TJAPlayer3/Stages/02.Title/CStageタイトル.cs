@@ -30,6 +30,8 @@ namespace TJAPlayer3
 		{
 			Trace.TraceInformation( "タイトルステージを活性化します。" );
 			Trace.Indent();
+			TJAPlayer3.Skin.bgmタイトルイン.t再生する();
+			b音声再生 = false;
 			try
 			{
 				for( int i = 0; i < 4; i++ )
@@ -108,8 +110,17 @@ namespace TJAPlayer3
 					this.ctカーソルフラッシュ用.n現在の値 = 100;
 					base.b初めての進行描画 = false;
                 }
-				//---------------------
-				#endregion
+                //---------------------
+                #endregion
+
+                if (!TJAPlayer3.Skin.bgmタイトルイン.b再生中)
+                {
+                    if (!b音声再生)
+					{
+						TJAPlayer3.Skin.bgmタイトル.t再生する();
+						b音声再生 = true;
+					}
+                }
 
 				// 進行
 
@@ -200,7 +211,6 @@ namespace TJAPlayer3
                 TJAPlayer3.act文字コンソール.tPrint(4, (720 - 24), C文字コンソール.Eフォント種別.白, "TJAPlayer3 forked TJAPlayer2 forPC(kairera0467)");
                 #endregion
 
-                
 				if( TJAPlayer3.Tx.Title_Menu != null )
 				{
 					int x = MENU_X;
@@ -262,7 +272,6 @@ namespace TJAPlayer3
 					case CStage.Eフェーズ.共通_フェードイン:
 						if( this.actFI.On進行描画() != 0 )
 						{
-							TJAPlayer3.Skin.soundタイトル音.t再生する();
 							base.eフェーズID = CStage.Eフェーズ.共通_通常状態;
 						}
 						break;
@@ -270,6 +279,8 @@ namespace TJAPlayer3
 					case CStage.Eフェーズ.共通_フェードアウト:
 						if( this.actFO.On進行描画() == 0 )
 						{
+							TJAPlayer3.Skin.bgmタイトル.t停止する();
+							TJAPlayer3.Skin.bgmタイトルイン.t停止する();
 							break;
 						}
 						base.eフェーズID = CStage.Eフェーズ.共通_終了状態;
@@ -290,7 +301,6 @@ namespace TJAPlayer3
 					case CStage.Eフェーズ.タイトル_起動画面からのフェードイン:
 						if( this.actFIfromSetup.On進行描画() != 0 )
 						{
-							TJAPlayer3.Skin.soundタイトル音.t再生する();
 							base.eフェーズID = CStage.Eフェーズ.共通_通常状態;
 						}
 						break;
@@ -364,6 +374,7 @@ namespace TJAPlayer3
 			}
 		}
 
+		private bool b音声再生;
 		private CActFIFOWhite actFI;
 		private CActFIFOWhite actFIfromSetup;
 		private CActFIFOWhite actFO;

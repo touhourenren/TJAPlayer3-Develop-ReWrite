@@ -305,27 +305,28 @@ namespace TJAPlayer3
         public Cシステムサウンド bgmオプション画面 = null;
         public Cシステムサウンド bgmコンフィグ画面 = null;
         public Cシステムサウンド bgm起動画面 = null;
-        public Cシステムサウンド bgm選曲画面 = null;
         public Cシステムサウンド soundSTAGEFAILED音 = null;
         public Cシステムサウンド soundカーソル移動音 = null;
         public Cシステムサウンド soundゲーム開始音 = null;
         public Cシステムサウンド soundゲーム終了音 = null;
         public Cシステムサウンド soundステージクリア音 = null;
-        public Cシステムサウンド soundタイトル音 = null;
-        public Cシステムサウンド soundタイトルスタート音 = null;
         public Cシステムサウンド soundフルコンボ音 = null;
         public Cシステムサウンド sound歓声音 = null;
         public Cシステムサウンド sound曲読込開始音 = null;
         public Cシステムサウンド sound決定音 = null;
         public Cシステムサウンド sound取消音 = null;
         public Cシステムサウンド sound変更音 = null;
-        public Cシステムサウンド bgm選曲画面In = null;
         public Cシステムサウンド soundSongSelectChara = null;
         public Cシステムサウンド soundSkip = null;
         //add
         public Cシステムサウンド sound曲決定音 = null;
-        public Cシステムサウンド bgmリザルトイン音 = null;
-        public Cシステムサウンド bgmリザルト音 = null;
+
+        public Cシステムサウンド bgmタイトル = null;
+        public Cシステムサウンド bgmタイトルイン = null;
+        public Cシステムサウンド bgm選曲画面 = null;
+        public Cシステムサウンド bgm選曲画面イン = null;
+        public Cシステムサウンド bgmリザルト = null;
+        public Cシステムサウンド bgmリザルトイン = null;
 
         //public Cシステムサウンド soundRed = null;
         //public Cシステムサウンド soundBlue = null;
@@ -373,7 +374,7 @@ namespace TJAPlayer3
                         return this.sound曲読込開始音;
 
                     case Eシステムサウンド.SOUNDタイトル音:
-                        return this.soundタイトル音;
+                        return this.bgmタイトル;
 
                     case Eシステムサウンド.BGM起動画面:
                         return this.bgm起動画面;
@@ -400,7 +401,7 @@ namespace TJAPlayer3
                         return this.sound曲決定音;
 
                     case Eシステムサウンド.SOUND成績発表:
-                        return this.bgmリザルトイン音;
+                        return this.bgmリザルト;
                 }
                 throw new IndexOutOfRangeException();
             }
@@ -445,7 +446,7 @@ namespace TJAPlayer3
                         return this.sound曲読込開始音;
 
                     case 11:
-                        return this.soundタイトル音;
+                        return this.bgmタイトル;
 
                     case 12:
                         return this.bgm起動画面;
@@ -472,7 +473,7 @@ namespace TJAPlayer3
                         return this.sound曲決定音;
 
                     case 18:
-                        return this.bgmリザルトイン音;
+                        return this.bgmリザルト;
                 }
                 throw new IndexOutOfRangeException();
             }
@@ -605,7 +606,7 @@ namespace TJAPlayer3
                     this[i].Dispose();
                 }
             }
-            this.soundタイトルスタート音 = new Cシステムサウンド(@"Sounds\Title_Start.ogg", false, true, false, ESoundGroup.SongPreview);
+
             this.soundカーソル移動音 = new Cシステムサウンド(@"Sounds\Move.ogg", false, false, false, ESoundGroup.SoundEffect);
             this.sound決定音 = new Cシステムサウンド(@"Sounds\Decide.ogg", false, false, false, ESoundGroup.SoundEffect);
             this.sound変更音 = new Cシステムサウンド(@"Sounds\Change.ogg", false, false, false, ESoundGroup.SoundEffect);
@@ -617,12 +618,10 @@ namespace TJAPlayer3
             this.soundステージクリア音 = new Cシステムサウンド(@"Sounds\Stage clear.ogg", false, true, true, ESoundGroup.Voice);
             this.soundフルコンボ音 = new Cシステムサウンド(@"Sounds\Full combo.ogg", false, false, true, ESoundGroup.Voice);
             this.sound曲読込開始音 = new Cシステムサウンド(@"Sounds\Now loading.ogg", false, true, true, ESoundGroup.Unknown);
-            this.soundタイトル音 = new Cシステムサウンド(@"Sounds\Title.ogg", true, true, false, ESoundGroup.SongPreview);
             this.bgm起動画面 = new Cシステムサウンド(@"Sounds\Setup BGM.ogg", true, true, false, ESoundGroup.SongPlayback);
             this.bgmオプション画面 = new Cシステムサウンド(@"Sounds\Option BGM.ogg", true, true, false, ESoundGroup.SongPlayback);
             this.bgmコンフィグ画面 = new Cシステムサウンド(@"Sounds\Config BGM.ogg", true, true, false, ESoundGroup.SongPlayback);
             this.bgm選曲画面 = new Cシステムサウンド(@"Sounds\Select BGM.ogg", true, true, false, ESoundGroup.SongPreview);
-            this.bgm選曲画面In = new Cシステムサウンド(@"Sounds\Select BGM start.ogg", false, true, false, ESoundGroup.SongPreview);
             this.soundSongSelectChara = new Cシステムサウンド(@"Sounds\SongSelect Chara.ogg", false, false, false, ESoundGroup.SongPreview);
             this.soundSkip = new Cシステムサウンド(@"Sounds\Skip.ogg", false, false, false, ESoundGroup.SoundEffect);
 
@@ -630,8 +629,15 @@ namespace TJAPlayer3
             //this.soundBlue              = new Cシステムサウンド( @"Sounds\ka.ogg",              false, false, true, ESoundType.SoundEffect );
             this.soundBalloon = new Cシステムサウンド(@"Sounds\balloon.ogg", false, false, true, ESoundGroup.SoundEffect);
             this.sound曲決定音 = new Cシステムサウンド(@"Sounds\SongDecide.ogg", false, false, true, ESoundGroup.Voice);
-            this.bgmリザルトイン音 = new Cシステムサウンド(@"Sounds\ResultIn.ogg", false, false, false, ESoundGroup.Voice);
-            this.bgmリザルト音 = new Cシステムサウンド(@"Sounds\Result.ogg", true, false, false, ESoundGroup.Voice);
+
+            this.bgmタイトルイン = new Cシステムサウンド(@"Sounds\BGM\Title_Start.ogg", false, false, true, ESoundGroup.Voice);
+            this.bgmタイトル = new Cシステムサウンド(@"Sounds\BGM\Title.ogg", true, false, true, ESoundGroup.Voice);
+            this.bgm選曲画面イン = new Cシステムサウンド(@"Sounds\BGM\SongSelect_Start.ogg", false, false, true, ESoundGroup.Voice);
+            this.bgm選曲画面 = new Cシステムサウンド(@"Sounds\BGM\SongSelect.ogg", true, false, true, ESoundGroup.Voice);
+            this.bgmリザルトイン = new Cシステムサウンド(@"Sounds\BGM\Result_In.ogg", false, false, true, ESoundGroup.Voice);
+            this.bgmリザルト = new Cシステムサウンド(@"Sounds\BGM\Result.ogg", true, false, true, ESoundGroup.Voice);
+
+
             ReloadSkin();
             tReadSkinConfig();
         }
