@@ -28,6 +28,7 @@ namespace TJAPlayer3
         [StructLayout( LayoutKind.Sequential )]
         protected struct STスコア
         {
+            public bool bAddEnd;
             public bool b使用中;
             public bool b表示中;
             public bool bBonusScore;
@@ -203,6 +204,7 @@ namespace TJAPlayer3
                         this.stScore[ i ].nAddScore = (int)delta;
                         this.stScore[ i ].ctTimer = new CCounter( 0, 500, 1, TJAPlayer3.Timer );
                         this.stScore[ i ].bBonusScore = false;
+                        this.stScore[ i ].bAddEnd = false;
                         this.stScore[ i ].nPlayer = player;
                         this.n現在表示中のAddScore++;
                         break;
@@ -226,6 +228,7 @@ namespace TJAPlayer3
                         this.stScore[ i ].nAddScore = 10000;
                         this.stScore[ i ].ctTimer = new CCounter( 0, 400, 1, TJAPlayer3.Timer );
                         this.stScore[ i ].bBonusScore = true;
+                        this.stScore[ i ].bAddEnd = true;
                         this.stScore[ i ].nPlayer = player;
                         this.n現在表示中のAddScore++;
                         break;
@@ -255,6 +258,7 @@ namespace TJAPlayer3
                 this.stScore[ sc ].ctTimer = new CCounter();
                 this.stScore[ sc ].nAddScore = 0;
                 this.stScore[ sc ].bBonusScore = false;
+                this.stScore[ sc ].bAddEnd = false;
             }
 
             this.n現在表示中のAddScore = 0;

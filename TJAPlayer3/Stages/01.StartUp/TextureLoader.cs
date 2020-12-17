@@ -115,10 +115,8 @@ namespace TJAPlayer3
             SongSelect_Bar_Genre_Back = TxC(SONGSELECT + @"Bar_Genre_Back.png");
             SongSelect_Bar_Select = TxC(SONGSELECT + @"Bar_Select.png");
             SongSelect_Level_Number = TxC(SONGSELECT + @"Level_Number.png");
-            for (int i = 0; i < SongSelect_Bar_Genre.Length; i++)
-            {
-                SongSelect_Bar_Genre[i] = TxC(SONGSELECT + @"Bar_Genre_" + i.ToString() + ".png");
-            }
+            SongSelect_Bar_Genre_Overlay = TxC(SONGSELECT + @"Bar_Genre_Overlay.png");
+            
             for (int i = 0; i < (int)Difficulty.Total; i++)
             {
                 SongSelect_ScoreWindow[i] = TxC(SONGSELECT + @"ScoreWindow_" + i.ToString() + ".png");
@@ -136,11 +134,29 @@ namespace TJAPlayer3
                 SongSelect_Donchan_Jump[i] = TxC(SONGSELECT + @"Donchan\Start\" + i.ToString() + ".png");
             }
 
-            for (int i = 0; i < SongSelect_GenreBack.Length; i++)
-            {
-                SongSelect_GenreBack[i] = TxC(SONGSELECT + @"GenreBackground_" + i.ToString() + ".png");
-            }
             SongSelect_ScoreWindow_Text = TxC(SONGSELECT + @"ScoreWindow_Text.png");
+
+            TJAPlayer3.Skin.SongSelect_Bar_Genre_Count = TJAPlayer3.t連番画像の枚数を数える(CSkin.Path(BASE + SONGSELECT + @"Bar_Genre\"), "Bar_Genre_");
+
+            if (TJAPlayer3.Skin.SongSelect_Bar_Genre_Count != 0)
+            {
+                SongSelect_Bar_Genre = new CTexture[TJAPlayer3.Skin.SongSelect_Bar_Genre_Count];
+                for (int i = 0; i < SongSelect_Bar_Genre.Length; i++)
+                {
+                    SongSelect_Bar_Genre[i] = TxC(SONGSELECT + @"Bar_Genre\Bar_Genre_" + i.ToString() + ".png");
+                }
+            }
+
+            TJAPlayer3.Skin.SongSelect_Genre_Background_Count = TJAPlayer3.t連番画像の枚数を数える(CSkin.Path(BASE + SONGSELECT + @"Genre_Background\"), "GenreBackground_");
+
+            if (TJAPlayer3.Skin.SongSelect_Genre_Background_Count != 0)
+            {
+                SongSelect_GenreBack = new CTexture[TJAPlayer3.Skin.SongSelect_Genre_Background_Count];
+                for (int i = 0; i < SongSelect_GenreBack.Length; i++)
+                {
+                    SongSelect_GenreBack[i] = TxC(SONGSELECT + @"Genre_Background\GenreBackground_" + i.ToString() + ".png");
+                }
+            }
 
             #region [ 難易度選択画面 ]
             Difficulty_Bar = TxC(SONGSELECT + @"Difficulty_Select\Difficulty_Bar.png");
@@ -357,9 +373,10 @@ namespace TJAPlayer3
 
             #endregion
             #region 太鼓
-            Taiko_Background = new CTexture[2];
+            Taiko_Background = new CTexture[3];
             Taiko_Background[0] = TxC(GAME + TAIKO + @"1P_Background.png");
             Taiko_Background[1] = TxC(GAME + TAIKO + @"2P_Background.png");
+            Taiko_Background[2] = TxC(GAME + TAIKO + @"Dan_Background.png");
             Taiko_Frame = new CTexture[2];
             Taiko_Frame[0] = TxC(GAME + TAIKO + @"1P_Frame.png");
             Taiko_Frame[1] = TxC(GAME + TAIKO + @"2P_Frame.png");
@@ -628,10 +645,11 @@ namespace TJAPlayer3
             SongSelect_Bar_Genre_Back,
             SongSelect_Level_Number,
             SongSelect_Bar_Select,
+            SongSelect_Bar_Genre_Overlay,
             SongSelect_ScoreWindow_Text;
-        public CTexture[] SongSelect_GenreBack = new CTexture[9],
+        public CTexture[] SongSelect_GenreBack,
             SongSelect_ScoreWindow = new CTexture[(int)Difficulty.Total],
-            SongSelect_Bar_Genre = new CTexture[9],
+            SongSelect_Bar_Genre,
             SongSelect_Donchan_Select = new CTexture[47],
             SongSelect_Donchan_Normal = new CTexture[49],
             SongSelect_Donchan_Jump = new CTexture[18],

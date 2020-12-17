@@ -770,7 +770,7 @@ namespace TJAPlayer3
         /// フルパス名を与えると、スキン名として、ディレクトリ名末尾の要素を返す
         /// 例: C:\foo\bar\ なら、barを返す
         /// </summary>
-        /// <param name="skinpath">スキンが格納されたパス名(フルパス)</param>
+        /// <param name="skinPathFullName">スキンが格納されたパス名(フルパス)</param>
         /// <returns>スキン名</returns>
         public static string GetSkinName(string skinPathFullName)
         {
@@ -1031,6 +1031,10 @@ namespace TJAPlayer3
                             else if (strCommand == "SongSelect_Title_X")
                             {
                                 SongSelect_Title_Y = int.Parse(strParam);
+                            }
+                            else if (strCommand == "SongSelect_GenreName")
+                            {
+                                SongSelect_GenreName = this.strStringを配列に直す(strParam);
                             }
                             else if (strCommand == "SongSelect_Title_Y")
                             {
@@ -2448,6 +2452,12 @@ namespace TJAPlayer3
         public int nResultGaugeBodyP1Y = 125;
         #endregion
 
+        public string[] strStringを配列に直す(string str)
+        {
+            string[] strArray = str.Split(',');
+            return strArray;
+        }
+
         public enum RollColorMode
         {
             None, // PS4, Switchなど
@@ -2478,7 +2488,8 @@ namespace TJAPlayer3
         public int SongSelect_Title_X = 0;
         public int SongSelect_Title_Y = 0;
         public int Difficulty_Title_X = 0;
-        public int Difficulty_Title_Y = 0; 
+        public int Difficulty_Title_Y = 0;
+        public string[] SongSelect_GenreName = { "ポップス", "アニメ", "ゲームバラエティ", "ナムコオリジナル", "クラシック", "キッズ", "ボーカロイド"};
         public int[] SongSelect_NamePlate_X = new int[] { 30, 1020 };
         public int[] SongSelect_NamePlate_Y = new int[] { 615, 615 };
         public int[] SongSelect_Auto_X = new int[] { 60, 950 };
@@ -2499,6 +2510,8 @@ namespace TJAPlayer3
         public Color SongSelect_BackColor_Classic = ColorTranslator.FromHtml("#875600");
         public Color SongSelect_BackColor_GameMusic = ColorTranslator.FromHtml("#412080");
         public Color SongSelect_BackColor_Namco = ColorTranslator.FromHtml("#980E00");
+        public int SongSelect_Bar_Genre_Count,
+            SongSelect_Genre_Background_Count;
         public string[] SongSelect_CorrectionX_Chara = { "ここにX座標を補正したい文字をカンマで区切って記入" };
         public string[] SongSelect_CorrectionY_Chara = { "ここにY座標を補正したい文字をカンマで区切って記入" };
         public int SongSelect_CorrectionX_Chara_Value = 0;

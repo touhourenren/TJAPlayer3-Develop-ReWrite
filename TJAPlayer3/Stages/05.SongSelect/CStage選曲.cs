@@ -820,6 +820,7 @@ namespace TJAPlayer3
         private int nGenreBack;
         private int nOldGenreBack;
         public bool bBGM再生済み;
+        public bool bBGMIn再生した;
         private STキー反復用カウンタ ctキー反復用;
         public CCounter ct登場時アニメ用共通;
         private CCounter ct背景スクロール用タイマー;
@@ -927,6 +928,23 @@ namespace TJAPlayer3
 
         private void tカーソルを下へ移動する()
         {
+            if ((this.act曲リスト.r次の曲(r現在選択中の曲).eノード種別 == C曲リストノード.Eノード種別.SCORE) || this.act曲リスト.r次の曲(r現在選択中の曲).eノード種別 == C曲リストノード.Eノード種別.BACKBOX)
+            {
+                TJAPlayer3.stage選曲.bBGMIn再生した = false;
+                TJAPlayer3.Skin.bgm選曲画面イン.n位置_現在のサウンド = 0;
+                TJAPlayer3.Skin.bgm選曲画面.n位置_現在のサウンド = 0;
+                TJAPlayer3.Skin.bgm選曲画面イン.t停止する();
+                TJAPlayer3.Skin.bgm選曲画面.t停止する();
+            }
+            else
+            {
+                if (!bBGMIn再生した)
+                {
+                    TJAPlayer3.stage選曲.bBGM再生済み = false;
+                    TJAPlayer3.Skin.bgm選曲画面イン.t再生する();
+                    bBGMIn再生した = true;
+                }
+            }
             this.ctBackgroundFade.t開始(0, 600, 1, TJAPlayer3.Timer);
             if (this.act曲リスト.ctBarOpen.n現在の値 >= 200 || this.ctBackgroundFade.n現在の値 >= 600 - 255)
                 TJAPlayer3.stage選曲.OldGenre = this.r現在選択中の曲.strジャンル;
@@ -935,8 +953,23 @@ namespace TJAPlayer3
         }
         private void tカーソルを上へ移動する()
         {
+            if ((this.act曲リスト.r前の曲(r現在選択中の曲).eノード種別 == C曲リストノード.Eノード種別.SCORE) || this.act曲リスト.r前の曲(r現在選択中の曲).eノード種別 == C曲リストノード.Eノード種別.BACKBOX)
+            {
+                TJAPlayer3.stage選曲.bBGMIn再生した = false;
+                TJAPlayer3.Skin.bgm選曲画面.t停止する();
+                TJAPlayer3.Skin.bgm選曲画面イン.t停止する();
+            }
+            else
+            {
+                if (!bBGMIn再生した)
+                {
+                    TJAPlayer3.stage選曲.bBGM再生済み = false;
+                    TJAPlayer3.Skin.bgm選曲画面イン.t再生する();
+                    bBGMIn再生した = true;
+                }
+            }
             this.ctBackgroundFade.t開始(0, 600, 1, TJAPlayer3.Timer);
-            if (this.act曲リスト.ctBarOpen.n現在の値 >= 200 || this.ctBackgroundFade.n現在の値 >= 600 - 255)
+            if (this.act曲リスト.ctBarOpen.n現在の値 >= 200 || this.ctBackgroundFade.n現在の値 >= 600 - 255)                
                 TJAPlayer3.stage選曲.OldGenre = this.r現在選択中の曲.strジャンル;
             this.act曲リスト.t前に移動();
             TJAPlayer3.Skin.soundカーソル移動音.t再生する();
@@ -1093,36 +1126,25 @@ namespace TJAPlayer3
         public int nStrジャンルtoNum(string strジャンル)
         {
             int nGenre = 8;
-            switch (strジャンル)
+            for(int i = 0; i < TJAPlayer3.Skin.SongSelect_GenreName.Length; i++)
             {
-                case "ポップス":
-                    nGenre = 1;
+                if(TJAPlayer3.Skin.SongSelect_GenreName[i] == strジャンル)
+                {
+                    if (i + 1 >= TJAPlayer3.Skin.SongSelect_Genre_Background_Count)
+                    {
+                        nGenre = 0;
+                    }
+                    else
+                    {
+                        nGenre = i + 1;
+                    }
                     break;
-                case "アニメ":
-                    nGenre = 2;
-                    break;
-                case "ゲームバラエティ":
-                    nGenre = 3;
-                    break;
-                case "ナムコオリジナル":
-                    nGenre = 4;
-                    break;
-                case "クラシック":
-                    nGenre = 5;
-                    break;
-                case "キッズ":
-                    nGenre = 6;
-                    break;
-                case "ボーカロイド":
-                case "VOCALOID":
-                    nGenre = 7;
-                    break;
-                default:
+                }
+                else
+                {
                     nGenre = 0;
-                    break;
-
+                }
             }
-
             return nGenre;
         }
         //-----------------

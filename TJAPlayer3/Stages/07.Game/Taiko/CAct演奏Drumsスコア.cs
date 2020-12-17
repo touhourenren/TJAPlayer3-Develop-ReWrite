@@ -86,11 +86,17 @@ namespace TJAPlayer3
                             this.stScore[ i ].ctTimer.t進行();
                             if( this.stScore[ i ].ctTimer.b終了値に達した )
                             {
-                                this.n現在表示中のスコア[ this.stScore[ i ].nPlayer ].Taiko += (long)this.stScore[ i ].nAddScore;
                                 if( this.stScore[ i ].b表示中 == true )
                                     this.n現在表示中のAddScore--;
                                 this.stScore[ i ].ctTimer.t停止();
                                 this.stScore[ i ].b使用中 = false;
+                                TJAPlayer3.stage演奏ドラム画面.actDan.Update();
+                            }
+
+                            if (!stScore[i].bAddEnd)
+                            {
+                                this.n現在表示中のスコア[this.stScore[i].nPlayer].Taiko += (long)this.stScore[i].nAddScore;
+                                stScore[i].bAddEnd = true;
                                 if (ct点数アニメタイマ[stScore[i].nPlayer].b終了値に達してない)
                                 {
                                     this.ct点数アニメタイマ[stScore[i].nPlayer] = new CCounter(0, 11, 12, TJAPlayer3.Timer);
@@ -100,7 +106,6 @@ namespace TJAPlayer3
                                 {
                                     this.ct点数アニメタイマ[stScore[i].nPlayer] = new CCounter(0, 11, 12, TJAPlayer3.Timer);
                                 }
-                                TJAPlayer3.stage演奏ドラム画面.actDan.Update();
                             }
 
                             int xAdd = 0;

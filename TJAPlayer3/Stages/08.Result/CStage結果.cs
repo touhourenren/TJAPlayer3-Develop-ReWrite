@@ -412,15 +412,18 @@ namespace TJAPlayer3
 							{
 								this.actParameterPanel.ct全体アニメ.n現在の値 = 2000 + (int)(this.actParameterPanel.ctゲージアニメーション.n終了値 * 66) + 8360 - 85;
 								this.actParameterPanel.ctゲージアニメーション.n現在の値 = (int)actParameterPanel.ctゲージアニメーション.n終了値;
-								EndAnime = true;
+								this.EndAnime = true;
 								this.actParameterPanel.ctEndAnime.t開始(0, 360, 1, TJAPlayer3.Timer);
 								this.actParameterPanel.ctMountain_ClearIn.t開始(0, 515, 3, TJAPlayer3.Timer);
 							}
 							else
 							{
-								//TJAPlayer3.Skin.bgmリザルト音.t停止する();
 								TJAPlayer3.Skin.sound決定音.t再生する();
 								actFI.tフェードアウト開始();
+
+								if (TJAPlayer3.stage選曲.r確定された曲.r親ノード != null)
+									TJAPlayer3.stage選曲.act曲リスト.tBOXを出る();
+
 								base.eフェーズID = CStage.Eフェーズ.共通_フェードアウト;
 								this.eフェードアウト完了時の戻り値 = E戻り値.完了;
 							}
