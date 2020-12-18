@@ -2,6 +2,8 @@
 using System.IO;
 using System.Diagnostics;
 using FDK;
+using System.Drawing;
+using System.Collections.Generic;
 
 namespace TJAPlayer3
 {
@@ -421,6 +423,26 @@ namespace TJAPlayer3
 								TJAPlayer3.Skin.sound決定音.t再生する();
 								actFI.tフェードアウト開始();
 
+								foreach(var song in TJAPlayer3.Songs管理.list曲ルート)
+                                {
+									if(song.strジャンル == "最近遊んだ曲" && song.eノード種別 == C曲リストノード.Eノード種別.BOX)
+                                    {
+										song.list子リスト.Add(TJAPlayer3.stage選曲.r確定された曲.Clone());
+
+										foreach (var song2 in song.list子リスト)
+                                        {
+											song2.r親ノード = song;
+											song2.strジャンル = "最近遊んだ曲";
+											song2.BackColor = ColorTranslator.FromHtml("#164748");
+										}
+
+										if(song.list子リスト.Count >= 6)
+                                        {
+											song.list子リスト.RemoveAt(0);
+                                        }
+									}
+								}
+
 								if (TJAPlayer3.stage選曲.r確定された曲.r親ノード != null)
 									TJAPlayer3.stage選曲.act曲リスト.tBOXを出る();
 
@@ -439,7 +461,6 @@ namespace TJAPlayer3
 			継続,
 			完了
 		}
-
 
 		// その他
 

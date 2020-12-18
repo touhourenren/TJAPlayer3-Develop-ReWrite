@@ -203,12 +203,12 @@ namespace TJAPlayer3
 
             #region [ 画像描画 ]
 
-            TJAPlayer3.Tx.Difficulty_Back[TJAPlayer3.stage選曲.nStrジャンルtoNum(TJAPlayer3.stage選曲.r現在選択中の曲.strジャンル)].Opacity =
+            TJAPlayer3.Tx.Difficulty_Back[nStrジャンルtoNum(TJAPlayer3.stage選曲.r現在選択中の曲.strジャンル)].Opacity =
                 (TJAPlayer3.stage選曲.act曲リスト.ctDifficultyIn.n現在の値 - 1255);
             TJAPlayer3.Tx.Difficulty_Bar.Opacity = (TJAPlayer3.stage選曲.act曲リスト.ctDifficultyIn.n現在の値 - 1255);
             TJAPlayer3.Tx.Difficulty_Number.Opacity = (TJAPlayer3.stage選曲.act曲リスト.ctDifficultyIn.n現在の値 - 1255);
 
-            TJAPlayer3.Tx.Difficulty_Back[TJAPlayer3.stage選曲.nStrジャンルtoNum(TJAPlayer3.stage選曲.r現在選択中の曲.strジャンル)].t2D中心基準描画(TJAPlayer3.app.Device, 640, 290);
+            TJAPlayer3.Tx.Difficulty_Back[nStrジャンルtoNum(TJAPlayer3.stage選曲.r現在選択中の曲.strジャンル)].t2D中心基準描画(TJAPlayer3.app.Device, 640, 290);
 
             TJAPlayer3.Tx.Difficulty_Select_Bar.Opacity = (int)(ctBarAnimeIn.n現在の値 >= 80 ? (ctBarAnimeIn.n現在の値 - 80) * 2.84f : 0);
             TJAPlayer3.Tx.Difficulty_Select_Bar.t2D描画(TJAPlayer3.app.Device, (float)this.BarX[n現在の選択行], 242, new RectangleF(0, (n現在の選択行 >= 2 ? 114 : 387), 259, 275 - (n現在の選択行 >= 2 ? 0 : 164)));
@@ -338,6 +338,30 @@ namespace TJAPlayer3
             }
         }
 
+        public int nStrジャンルtoNum(string strジャンル)
+        {
+            int nGenre = 8;
+            for (int i = 0; i < TJAPlayer3.Skin.SongSelect_GenreName.Length; i++)
+            {
+                if (TJAPlayer3.Skin.SongSelect_GenreName[i] == strジャンル)
+                {
+                    if (i + 1 >= TJAPlayer3.Skin.SongSelect_Difficulty_Background_Count)
+                    {
+                        nGenre = 0;
+                    }
+                    else
+                    {
+                        nGenre = i + 1;
+                    }
+                    break;
+                }
+                else
+                {
+                    nGenre = 0;
+                }
+            }
+            return nGenre;
+        }
         //-----------------
         #endregion
     }

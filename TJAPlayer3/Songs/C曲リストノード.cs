@@ -50,6 +50,7 @@ namespace TJAPlayer3
 		public int Openindex;
 		public Stack<int> stackランダム演奏番号 = new Stack<int>();
 		public string strジャンル = "";
+		public string str本当のジャンル = "";
 		public string strタイトル = "";
         public string strサブタイトル = "";
 		public string strBreadcrumbs = "";		// #27060 2011.2.27 yyagi; MUSIC BOXのパンくずリスト (曲リスト構造内の絶対位置捕捉のために使う)
@@ -64,6 +65,11 @@ namespace TJAPlayer3
 		public C曲リストノード()
 		{
 			this.nID = id++;
+		}
+
+		public C曲リストノード Clone()
+		{
+			return (C曲リストノード)MemberwiseClone();
 		}
 
 

@@ -218,6 +218,7 @@ namespace TJAPlayer3
 											c曲リストノード.strジャンル = "キッズ";
 											break;
 									}
+									c曲リストノード.str本当のジャンル = c曲リストノード.strジャンル;
 
 
 									c曲リストノード.arスコア[ n ] = new Cスコア();
@@ -299,14 +300,16 @@ namespace TJAPlayer3
                                 if (!string.IsNullOrEmpty(dtx.GENRE))
                                 {
                                     c曲リストノード.strジャンル = dtx.GENRE;
-                                }
+									c曲リストノード.str本当のジャンル = c曲リストノード.strジャンル;
+								}
                                 else
                                 {
                                     if (c曲リストノード.r親ノード != null && c曲リストノード.r親ノード.strジャンル != "")
                                     {
-                                        // .tjaのジャンルが存在しなくて、かつ親ノードにジャンルが指定されていればそちらを読み込む。
-                                        c曲リストノード.strジャンル = c曲リストノード.r親ノード.strジャンル;
-                                    }
+										// .tjaのジャンルが存在しなくて、かつ親ノードにジャンルが指定されていればそちらを読み込む。
+										c曲リストノード.str本当のジャンル = dtx.GENRE;
+										c曲リストノード.strジャンル = c曲リストノード.r親ノード.strジャンル;
+									}
                                 }
 
 								switch (c曲リストノード.strジャンル)
@@ -321,6 +324,21 @@ namespace TJAPlayer3
 										break;
 									case "どうよう":
 										c曲リストノード.strジャンル = "キッズ";
+										break;
+								}
+
+								switch (c曲リストノード.str本当のジャンル)
+								{
+									case "J-POP":
+										c曲リストノード.str本当のジャンル = "ポップス";
+										break;
+									case "ゲームミュージック":
+									case "バラエティー":
+									case "バラエティ":
+										c曲リストノード.str本当のジャンル = "ゲームバラエティ";
+										break;
+									case "どうよう":
+										c曲リストノード.str本当のジャンル = "キッズ";
 										break;
 								}
 
@@ -1003,6 +1021,31 @@ namespace TJAPlayer3
 				}
 			}
 
+			#region [ "最近遊んだ曲"BOXを生成する ]
+
+			C曲リストノード crecentryplaysong = new C曲リストノード();
+			crecentryplaysong.eノード種別 = C曲リストノード.Eノード種別.BOX;
+			crecentryplaysong.strタイトル = "最近あそんだ曲";
+			crecentryplaysong.strBoxText[0] = "";
+			crecentryplaysong.strBoxText[1] = "最近あそんだ曲を集めたよ！";
+			crecentryplaysong.strBoxText[2] = "";
+			crecentryplaysong.strジャンル = "最近遊んだ曲";
+			crecentryplaysong.nスコア数 = 1;
+			crecentryplaysong.list子リスト = new List<C曲リストノード>();
+			crecentryplaysong.BackColor = ColorTranslator.FromHtml("#164748");
+
+			crecentryplaysong.arスコア[0] = new Cスコア();
+			crecentryplaysong.arスコア[0].ファイル情報.フォルダの絶対パス = "";
+			crecentryplaysong.arスコア[0].譜面情報.タイトル = crecentryplaysong.strタイトル;
+			crecentryplaysong.arスコア[0].譜面情報.コメント =
+				(CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ja") ?
+				"最近遊んだ曲" :
+				"Recentry play songs";
+
+			list曲ルート.Add(crecentryplaysong);
+
+			#endregion
+
 			this.t曲リストへ後処理を適用する( this.list曲ルート );
 
 			#region [ skin名で比較して、systemスキンとboxdefスキンに重複があれば、boxdefスキン側を削除する ]
@@ -1025,13 +1068,13 @@ namespace TJAPlayer3
 		private void t曲リストへ後処理を適用する( List<C曲リストノード> ノードリスト )
 		{
 			// すべてのノードについて…
-			foreach( C曲リストノード c曲リストノード in ノードリスト )
+			foreach ( C曲リストノード c曲リストノード in ノードリスト )
 			{
-				SlowOrSuspendSearchTask();		// #27060 中断要求があったら、解除要求が来るまで待機, #PREMOVIE再生中は検索負荷を落とす
+				SlowOrSuspendSearchTask();      // #27060 中断要求があったら、解除要求が来るまで待機, #PREMOVIE再生中は検索負荷を落とす
 
 				#region [ BOXノードなら子リストに <<BACK を入れ、子リストに後処理を適用する ]
 				//-----------------------------
-				if( c曲リストノード.eノード種別 == C曲リストノード.Eノード種別.BOX )
+				if ( c曲リストノード.eノード種別 == C曲リストノード.Eノード種別.BOX )
 				{
 					int 曲数 = c曲リストノード.list子リスト.Count;
 					for (int index = 0; index < (曲数 / 7) + 1; index++)
@@ -1110,9 +1153,9 @@ namespace TJAPlayer3
 				#endregion
 			}
 
-			#region [ ノードをソートする ]
-			//-----------------------------
-            if( TJAPlayer3.ConfigIni.nDefaultSongSort == 0 )
+            #region [ ノードをソートする ]
+            //-----------------------------
+            if ( TJAPlayer3.ConfigIni.nDefaultSongSort == 0 )
             {
 			    t曲リストのソート1_絶対パス順( ノードリスト );
             }
