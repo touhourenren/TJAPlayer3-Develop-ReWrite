@@ -899,6 +899,11 @@ namespace TJAPlayer3
                             break;
                     }
 
+                    if (!TJAPlayer3.ConfigIni.bTokkunMode && TJAPlayer3.ConfigIni.b太鼓パートAutoPlay && (nPad >= 12 && nPad <= 15))//特訓モード以外オート時の入力キャンセル
+                        break;
+                    else if (TJAPlayer3.ConfigIni.b太鼓パートAutoPlay && (nPad >= 16 && nPad <= 19))
+                        break;
+
                     var padTo = nUsePlayer == 0 ? nPad - 12 : nPad - 12 - 4;
                     var isDon = padTo < 2 ? true : false;
 
