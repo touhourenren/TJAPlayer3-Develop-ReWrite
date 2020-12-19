@@ -11,15 +11,15 @@ namespace TJAPlayer3
 	{
 		// メソッド
 
-		public void tフェードアウト開始()
+		public void tフェードアウト開始(int start = 0, int end = 100, int interval = 5)
 		{
 			this.mode = EFIFOモード.フェードアウト;
-			this.counter = new CCounter( 0, 100, 5, TJAPlayer3.Timer );
+			this.counter = new CCounter(start, end, interval, TJAPlayer3.Timer );
 		}
-		public void tフェードイン開始()
+		public void tフェードイン開始(int start = 0, int end = 100, int interval = 5)
 		{
 			this.mode = EFIFOモード.フェードイン;
-			this.counter = new CCounter( 0, 100, 5, TJAPlayer3.Timer );
+			this.counter = new CCounter(start, end, interval, TJAPlayer3.Timer );
 		}
 
 		
@@ -60,7 +60,7 @@ namespace TJAPlayer3
 					}
 				}
 			}
-			if( this.counter.n現在の値 != 100 )
+			if( this.counter.n現在の値 != this.counter.n終了値 )
 			{
 				return 0;
 			}

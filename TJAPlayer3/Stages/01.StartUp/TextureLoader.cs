@@ -49,7 +49,6 @@ namespace TJAPlayer3
         public TextureLoader()
         {
             // コンストラクタ
-
         }
 
         internal CTexture TxC(string FileName)
@@ -87,6 +86,21 @@ namespace TJAPlayer3
             #region 1_タイトル画面
             Title_Background = TxC(TITLE + @"Background.png");
             Title_Menu = TxC(TITLE + @"Menu.png");
+            Entry_Header = TxC(TITLE + @"Header.png");
+            Entry_Bar = TxC(TITLE + @"Entry_Bar.png");
+            Entry_Bar_Text = TxC(TITLE + @"Entry_Bar_Text.png");
+
+            Banapas_Load[0] = TxC(TITLE + @"Banapas_Load.png");
+            Banapas_Load[1] = TxC(TITLE + @"Banapas_Load_Text.png");
+            Banapas_Load[2] = TxC(TITLE + @"Banapas_Load_Anime.png");
+
+            Banapas_Load_Clear[0] = TxC(TITLE + @"Banapas_Load_Clear.png");
+            Banapas_Load_Clear[1] = TxC(TITLE + @"Banapas_Load_Clear_Anime.png");
+
+            Entry_Player[0] = TxC(TITLE + @"Entry_Player.png");
+            Entry_Player[1] = TxC(TITLE + @"Entry_Player_Select_Bar.png");
+            Entry_Player[2] = TxC(TITLE + @"Entry_Player_Select.png");
+
             #endregion
 
             #region 2_コンフィグ画面
@@ -622,7 +636,14 @@ namespace TJAPlayer3
         #endregion
         #region 1_タイトル画面
         public CTexture Title_Background,
+            Entry_Bar,
+            Entry_Bar_Text,
+            Entry_Header,
             Title_Menu;
+
+        public CTexture[] Banapas_Load = new CTexture[3];
+        public CTexture[] Banapas_Load_Clear = new CTexture[2];
+        public CTexture[] Entry_Player = new CTexture[3];
         #endregion
 
         #region 2_コンフィグ画面

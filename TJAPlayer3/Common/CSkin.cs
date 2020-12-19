@@ -51,6 +51,7 @@ namespace TJAPlayer3
 
             // フィールド、プロパティ
 
+            public bool bPlayed;
             public bool bCompact対象;
             public bool bループ;
             public bool b読み込み未試行;
@@ -161,6 +162,7 @@ namespace TJAPlayer3
                 this.bCompact対象 = bCompact対象;
                 _soundGroup = soundGroup;
                 this.b読み込み未試行 = true;
+                this.bPlayed = false;
             }
 
 
@@ -241,10 +243,12 @@ namespace TJAPlayer3
                 if (sound != null)
                     sound.t再生を開始する(this.bループ);
 
+                this.bPlayed = true;
                 this.n次に鳴るサウンド番号 = 1 - this.n次に鳴るサウンド番号;
             }
             public void t停止する()
             {
+                this.bPlayed = false;
                 if (this.rSound[0] != null)
                     this.rSound[0].t再生を停止する();
 
@@ -318,6 +322,7 @@ namespace TJAPlayer3
         public Cシステムサウンド sound変更音 = null;
         public Cシステムサウンド soundSongSelectChara = null;
         public Cシステムサウンド soundSkip = null;
+        public Cシステムサウンド soundEntry = null;
         //add
         public Cシステムサウンド sound曲決定音 = null;
 
@@ -327,6 +332,9 @@ namespace TJAPlayer3
         public Cシステムサウンド bgm選曲画面イン = null;
         public Cシステムサウンド bgmリザルト = null;
         public Cシステムサウンド bgmリザルトイン = null;
+
+        public Cシステムサウンド SoundBanapas = null;
+
 
         //public Cシステムサウンド soundRed = null;
         //public Cシステムサウンド soundBlue = null;
@@ -624,6 +632,8 @@ namespace TJAPlayer3
             this.bgm選曲画面 = new Cシステムサウンド(@"Sounds\Select BGM.ogg", true, true, false, ESoundGroup.SongPreview);
             this.soundSongSelectChara = new Cシステムサウンド(@"Sounds\SongSelect Chara.ogg", false, false, false, ESoundGroup.SongPreview);
             this.soundSkip = new Cシステムサウンド(@"Sounds\Skip.ogg", false, false, false, ESoundGroup.SoundEffect);
+            this.SoundBanapas = new Cシステムサウンド(@"Sounds\Banapas.wav", false, false, false, ESoundGroup.Voice);
+            this.soundEntry = new Cシステムサウンド(@"Sounds\Entry.ogg", true, false, false, ESoundGroup.Voice);
 
             //this.soundRed               = new Cシステムサウンド( @"Sounds\dong.ogg",            false, false, true, ESoundType.SoundEffect );
             //this.soundBlue              = new Cシステムサウンド( @"Sounds\ka.ogg",              false, false, true, ESoundType.SoundEffect );
