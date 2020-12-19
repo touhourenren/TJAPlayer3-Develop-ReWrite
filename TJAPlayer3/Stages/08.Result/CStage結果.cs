@@ -447,13 +447,11 @@ namespace TJAPlayer3
 
 								if (TJAPlayer3.stage選曲.r確定された曲.r親ノード != null)
 									TJAPlayer3.stage選曲.act曲リスト.tBOXを出る();
-                                else
-                                {
-									base.eフェーズID = CStage.Eフェーズ.共通_フェードアウト;
-									this.eフェードアウト完了時の戻り値 = E戻り値.完了;
+
 									TJAPlayer3.Skin.bgmリザルト音.t停止する();
 									TJAPlayer3.Skin.sound決定音.t再生する();
-								}
+								base.eフェーズID = CStage.Eフェーズ.共通_フェードアウト;
+								this.eフェードアウト完了時の戻り値 = E戻り値.完了;
 							}
 						}
 					}
