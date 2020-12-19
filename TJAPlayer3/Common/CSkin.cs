@@ -326,6 +326,8 @@ namespace TJAPlayer3
         public Cシステムサウンド soundError = null;
         //add
         public Cシステムサウンド sound曲決定音 = null;
+        public Cシステムサウンド bgmリザルトイン音 = null;
+        public Cシステムサウンド bgmリザルト音 = null;
 
         public Cシステムサウンド bgmタイトル = null;
         public Cシステムサウンド bgmタイトルイン = null;
@@ -410,7 +412,7 @@ namespace TJAPlayer3
                         return this.sound曲決定音;
 
                     case Eシステムサウンド.SOUND成績発表:
-                        return this.bgmリザルト;
+                        return this.bgmリザルトイン音;
                 }
                 throw new IndexOutOfRangeException();
             }
@@ -482,7 +484,7 @@ namespace TJAPlayer3
                         return this.sound曲決定音;
 
                     case 18:
-                        return this.bgmリザルト;
+                        return this.bgmリザルトイン音;
                 }
                 throw new IndexOutOfRangeException();
             }
@@ -646,8 +648,8 @@ namespace TJAPlayer3
             this.bgmタイトル = new Cシステムサウンド(@"Sounds\BGM\Title.ogg", true, false, true, ESoundGroup.SongPlayback);
             this.bgm選曲画面イン = new Cシステムサウンド(@"Sounds\BGM\SongSelect_Start.ogg", false, false, true, ESoundGroup.SongPlayback);
             this.bgm選曲画面 = new Cシステムサウンド(@"Sounds\BGM\SongSelect.ogg", true, false, true, ESoundGroup.SongPlayback);
-            this.bgmリザルトイン = new Cシステムサウンド(@"Sounds\BGM\Result_In.ogg", false, false, true, ESoundGroup.SongPlayback);
-            this.bgmリザルト = new Cシステムサウンド(@"Sounds\BGM\Result.ogg", true, false, true, ESoundGroup.SongPlayback);
+            this.bgmリザルトイン音 = new Cシステムサウンド(@"Sounds\BGM\Result_In.ogg", false, false, true, ESoundGroup.SongPlayback);
+            this.bgmリザルト音 = new Cシステムサウンド(@"Sounds\BGM\Result.ogg", true, false, true, ESoundGroup.SongPlayback);
 
 
             ReloadSkin();
