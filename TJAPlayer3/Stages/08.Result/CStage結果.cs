@@ -430,10 +430,12 @@ namespace TJAPlayer3
 										song.list子リスト.Add(TJAPlayer3.stage選曲.r確定された曲.Clone());
 
 										foreach (var song2 in song.list子リスト)
-                                        {
+										{
 											song2.r親ノード = song;
 											song2.strジャンル = "最近遊んだ曲";
-											song2.BackColor = ColorTranslator.FromHtml("#164748");
+
+											if (song2.eノード種別 != C曲リストノード.Eノード種別.BACKBOX)
+												song2.BackColor = ColorTranslator.FromHtml("#164748");
 										}
 
 										if(song.list子リスト.Count >= 6)

@@ -141,12 +141,10 @@ namespace TJAPlayer3
 			}
 		}
 
-        public void t歌詞テクスチャを生成する( string str歌詞 )
+        public void t歌詞テクスチャを生成する(Bitmap bmplyric)
         {
-            using (var bmpleric = this.pf歌詞フォント.DrawPrivateFont( str歌詞, TJAPlayer3.Skin.Game_Lyric_ForeColor, TJAPlayer3.Skin.Game_Lyric_BackColor ))
-            {
-                this.tx歌詞テクスチャ = TJAPlayer3.tテクスチャの生成( bmpleric, false );
-            }
+            TJAPlayer3.t安全にDisposeする(ref this.tx歌詞テクスチャ);
+            this.tx歌詞テクスチャ = TJAPlayer3.tテクスチャの生成(bmplyric);
         }
 
         /// <summary>

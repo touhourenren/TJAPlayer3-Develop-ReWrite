@@ -648,7 +648,8 @@ namespace TJAPlayer3
         public CKeyAssign KeyAssign;
 		public int n非フォーカス時スリープms;       // #23568 2010.11.04 ikanick add
 		public int nフレーム毎スリープms;			// #xxxxx 2011.11.27 yyagi add
-		public int n演奏速度;
+		public int n演奏速度; 
+		public bool b演奏速度が一倍速であるとき以外音声を再生しない;
 		public int n曲が選択されてからプレビュー音が鳴るまでのウェイトms;
 		public int n曲が選択されてからプレビュー画像が表示開始されるまでのウェイトms;
 
@@ -1333,6 +1334,7 @@ namespace TJAPlayer3
 				//this.e判定表示優先度[ i ] = E判定表示優先度.Chipより下;
 			}
 			this.n演奏速度 = 20;
+			this.b演奏速度が一倍速であるとき以外音声を再生しない = false;
 			#region [ AutoPlay ]
 			this.bAutoPlay = new STAUTOPLAY();
 
@@ -1871,8 +1873,11 @@ namespace TJAPlayer3
 			sw.WriteLine( "PlaySpeed={0}", this.n演奏速度 );
 			sw.WriteLine();
 
-            sw.WriteLine("; デフォルトで選択される難易度");
-            sw.WriteLine("DefaultCourse={0}", this.nDefaultCourse);
+			sw.WriteLine("; 演奏速度が一倍速であるときのみBGMを再生する(0:OFF, 1:ON)");
+			sw.WriteLine("PlaySpeedNotEqualOneNoSound={0}", this.b演奏速度が一倍速であるとき以外音声を再生しない ? 1 : 0);
+			sw.WriteLine();
+			sw.WriteLine("; デフォルトで選択される難易度");
+			sw.WriteLine("DefaultCourse={0}", this.nDefaultCourse);
             sw.WriteLine();
             sw.WriteLine( "; 譜面分岐のガイド表示(0:OFF, 1:ON)" );
 			sw.WriteLine( "BranchGuide={0}", this.bGraph.Drums ? 1 : 0 );
@@ -2625,6 +2630,10 @@ namespace TJAPlayer3
 											else if( str3.Equals( "PlaySpeed" ) )
 											{
 												this.n演奏速度 = C変換.n値を文字列から取得して範囲内に丸めて返す( str4, 5, 40, this.n演奏速度 );
+											}
+											else if (str3.Equals("PlaySpeedNotEqualOneNoSound"))
+											{
+												this.b演奏速度が一倍速であるとき以外音声を再生しない = C変換.bONorOFF(str4[0]);
 											}
 											//else if ( str3.Equals( "JudgeDispPriorityDrums" ) )
 											//{

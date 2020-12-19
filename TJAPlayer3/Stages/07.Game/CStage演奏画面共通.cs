@@ -33,8 +33,8 @@ namespace TJAPlayer3
 			//if (  )
 			{
 				Drums.nスコア = (long) this.actScore.Get( E楽器パート.DRUMS, 0 );
-				Drums.dbゲーム型スキル値 = CScoreIni.tゲーム型スキルを計算して返す( TJAPlayer3.DTX.LEVEL.Drums, TJAPlayer3.DTX.n可視チップ数.Drums, this.nヒット数_Auto含まない.Drums.Perfect, this.actCombo.n現在のコンボ数.P1最高値, E楽器パート.DRUMS, bIsAutoPlay );
-				Drums.db演奏型スキル値 = CScoreIni.t演奏型スキルを計算して返す( TJAPlayer3.DTX.n可視チップ数.Drums, this.nヒット数_Auto含まない.Drums.Perfect, this.nヒット数_Auto含まない.Drums.Great, this.nヒット数_Auto含まない.Drums.Good, this.nヒット数_Auto含まない.Drums.Poor, this.nヒット数_Auto含まない.Drums.Miss, E楽器パート.DRUMS, bIsAutoPlay );
+                Drums.dbゲーム型スキル値 = CScoreIni.tゲーム型スキルを計算して返す(TJAPlayer3.DTX.LEVEL.Drums, TJAPlayer3.DTX.n可視チップ数.Drums, this.nヒット数_Auto含まない.Drums.Perfect, this.actCombo.n現在のコンボ数.最高値[0], E楽器パート.DRUMS, bIsAutoPlay);
+                Drums.db演奏型スキル値 = CScoreIni.t演奏型スキルを計算して返す( TJAPlayer3.DTX.n可視チップ数.Drums, this.nヒット数_Auto含まない.Drums.Perfect, this.nヒット数_Auto含まない.Drums.Great, this.nヒット数_Auto含まない.Drums.Good, this.nヒット数_Auto含まない.Drums.Poor, this.nヒット数_Auto含まない.Drums.Miss, E楽器パート.DRUMS, bIsAutoPlay );
 				Drums.nPerfect数 = TJAPlayer3.ConfigIni.b太鼓パートAutoPlay ? this.nヒット数_Auto含む.Drums.Perfect : this.nヒット数_Auto含まない.Drums.Perfect;
 				Drums.nGreat数 = TJAPlayer3.ConfigIni.b太鼓パートAutoPlay ? this.nヒット数_Auto含む.Drums.Great : this.nヒット数_Auto含まない.Drums.Great;
 				Drums.nGood数 = TJAPlayer3.ConfigIni.b太鼓パートAutoPlay ? this.nヒット数_Auto含む.Drums.Good : this.nヒット数_Auto含まない.Drums.Good;
@@ -45,9 +45,9 @@ namespace TJAPlayer3
 				Drums.nGood数_Auto含まない = this.nヒット数_Auto含まない.Drums.Good;
 				Drums.nPoor数_Auto含まない = this.nヒット数_Auto含まない.Drums.Poor;
 				Drums.nMiss数_Auto含まない = this.nヒット数_Auto含まない.Drums.Miss;
-                Drums.n連打数 = this.n合計連打数[ 0 ];
-				Drums.n最大コンボ数 = this.actCombo.n現在のコンボ数.P1最高値;
-				Drums.n全チップ数 = TJAPlayer3.DTX.n可視チップ数.Drums;
+                Drums.n連打数 = this.n合計連打数[ 0 ]; 
+                Drums.n最大コンボ数 = this.actCombo.n現在のコンボ数.最高値[0];
+                Drums.n全チップ数 = TJAPlayer3.DTX.n可視チップ数.Drums;
 				for ( int i = 0; i < (int) Eレーン.MAX;  i++ )
 				{
 					Drums.bAutoPlay[ i ] = bIsAutoPlay[ i ];
@@ -3918,11 +3918,11 @@ namespace TJAPlayer3
 #endregion
 #region[ f1: 歌詞 ]
                     case 0xF1:
-                        if ( !pChip.bHit && ( pChip.nバーからの距離dot.Drums < 0 ) )
-						{
-                            if( dTX.listLiryc.Count > ShownLyric[nPlayer] && dTX.nPlayerSide == nPlayer )
+                        if (!pChip.bHit && (pChip.nバーからの距離dot.Drums < 0))
+                        {
+                            if (dTX.listLyric.Count > ShownLyric[nPlayer] && dTX.nPlayerSide == nPlayer)
                             {
-                                this.actPanel.t歌詞テクスチャを生成する( dTX.listLiryc[ShownLyric[nPlayer]] );
+                                this.actPanel.t歌詞テクスチャを生成する(dTX.listLyric[ShownLyric[nPlayer]]);
                                 ShownLyric[nPlayer]++;
                             }
                             pChip.bHit = true;
@@ -3934,6 +3934,7 @@ namespace TJAPlayer3
                     case 0xFF:
                         if ( !pChip.bHit && ( pChip.nバーからの距離dot.Drums < 0 ) )
 						{
+                            pChip.bHit = true;
                             return true;
                         }
                         break;
@@ -4222,7 +4223,7 @@ namespace TJAPlayer3
             float bpm_time = 0;
             int last_input = 0;
             float last_bpm_change_time;
-            play_time = CSound管理.rc演奏用タイマ.n現在時刻ms - tja.nOFFSET;
+            play_time = CSound管理.rc演奏用タイマ.n現在時刻ms * (((float)TJAPlayer3.ConfigIni.n演奏速度) / 20.0f) - tja.nOFFSET;
 
             for (int i = 1; ; i++)
             {
@@ -4456,17 +4457,18 @@ namespace TJAPlayer3
 #endregion
 #region [ 演奏開始時点で既に表示されているBGAとAVIの、シークと再生 ]
 			this.actAVI.SkipStart( nStartTime );
-#endregion
-#region [ PAUSEしていたサウンドを一斉に再生再開する(ただしタイマを止めているので、ここではまだ再生開始しない) ]
-			foreach ( CSound cs in pausedCSound )
-			{
-				cs.tサウンドを再生する();
-			}
-			pausedCSound.Clear();
-			pausedCSound = null;
-#endregion
-#region [ タイマを再開して、PAUSEから復帰する ]
-			CSound管理.rc演奏用タイマ.n現在時刻 = nStartTime;
+            #endregion
+            #region [ PAUSEしていたサウンドを一斉に再生再開する(ただしタイマを止めているので、ここではまだ再生開始しない) ]
+
+            if (!(TJAPlayer3.ConfigIni.b演奏速度が一倍速であるとき以外音声を再生しない && TJAPlayer3.ConfigIni.n演奏速度 != 20))
+                foreach (CSound cs in pausedCSound)
+                {
+                    cs.tサウンドを再生する();
+                }
+            #endregion
+            pausedCSound.Clear();
+            #region [ タイマを再開して、PAUSEから復帰する ]
+            CSound管理.rc演奏用タイマ.n現在時刻 = nStartTime;
 			TJAPlayer3.Timer.tリセット();						// これでPAUSE解除されるので、3行先の再開()は不要
 			TJAPlayer3.Timer.n現在時刻 = nStartTime;				// Debug表示のTime: 表記を正しくするために必要
 			CSound管理.rc演奏用タイマ.t再開();

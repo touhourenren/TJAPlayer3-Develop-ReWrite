@@ -192,9 +192,10 @@ namespace TJAPlayer3
             this.actGame.t叩ききりまショー_初期化();
             base.ReSetScore(TJAPlayer3.DTX.nScoreInit[0, TJAPlayer3.stage選曲.n確定された曲の難易度], TJAPlayer3.DTX.nScoreDiff[TJAPlayer3.stage選曲.n確定された曲の難易度]);
 			base.On活性化();
+            base.eフェーズID = CStage.Eフェーズ.共通_通常状態;//初期化すれば、リザルト変遷は止まる。
 
-			// MODIFY_BEGIN #25398 2011.06.07 FROM
-			if( TJAPlayer3.bコンパクトモード )
+            // MODIFY_BEGIN #25398 2011.06.07 FROM
+            if ( TJAPlayer3.bコンパクトモード )
 			{
 				var score = new Cスコア();
 				TJAPlayer3.Songs管理.tScoreIniを読み込んで譜面情報を設定する( TJAPlayer3.strコンパクトモードファイル + ".score.ini", score );
@@ -513,6 +514,12 @@ namespace TJAPlayer3
                     this.t進行描画_判定文字列1_通常位置指定の場合();
 
                 this.t進行描画_演奏情報();
+
+                if (TJAPlayer3.DTX.listLyric2.Count > ShownLyric2 && TJAPlayer3.DTX.listLyric2[ShownLyric2].Time < (long)(CSound管理.rc演奏用タイマ.n現在時刻 * (((double)TJAPlayer3.ConfigIni.n演奏速度) / 20.0)))
+                {
+                    this.actPanel.t歌詞テクスチャを生成する(TJAPlayer3.DTX.listLyric2[ShownLyric2++].TextTex);
+                }
+
                 this.actPanel.t歌詞テクスチャを描画する();
                 actChara.OnDraw_Balloon();
                 this.t全体制御メソッド();
@@ -635,7 +642,8 @@ namespace TJAPlayer3
 
         private CTexture txMovie; //2016.08.30 kairera0467 ウィンドウ表示
 
-        public float nGauge = 0.0f;
+        public float nGauge = 0.0f; 
+        private int ShownLyric2 = 0;
 
         private StreamWriter stream;
 
@@ -1533,7 +1541,7 @@ namespace TJAPlayer3
                             {
                                 case 0x11:
 
-                                    if( TJAPlayer3.Tx.Notes != null )
+                                    if( TJAPlayer3.Tx.Notes != null && pChip.bShow)
                                     {
                                         if( TJAPlayer3.ConfigIni.eSTEALTH != Eステルスモード.DORON )
                                             TJAPlayer3.Tx.Notes.t2D描画( device, x, y, new Rectangle( 130, num9, 130, 130 ) );
@@ -1543,7 +1551,7 @@ namespace TJAPlayer3
                                     break;
 
                                 case 0x12:
-                                    if( TJAPlayer3.Tx.Notes != null )
+                                    if( TJAPlayer3.Tx.Notes != null && pChip.bShow)
                                     {
                                         if( TJAPlayer3.ConfigIni.eSTEALTH != Eステルスモード.DORON )
                                             TJAPlayer3.Tx.Notes.t2D描画( device, x, y, new Rectangle( 260, num9, 130, 130) );
@@ -1554,7 +1562,7 @@ namespace TJAPlayer3
                                     break;
                                   
                                 case 0x13:
-                                    if( TJAPlayer3.Tx.Notes != null )
+                                    if( TJAPlayer3.Tx.Notes != null && pChip.bShow)
                                     {
                                         if( TJAPlayer3.ConfigIni.eSTEALTH != Eステルスモード.DORON )
                                         {
@@ -1567,7 +1575,7 @@ namespace TJAPlayer3
                                     break;
 
                                 case 0x14:
-                                    if( TJAPlayer3.Tx.Notes != null )
+                                    if( TJAPlayer3.Tx.Notes != null && pChip.bShow)
                                     {
                                         if( TJAPlayer3.ConfigIni.eSTEALTH != Eステルスモード.DORON )
                                             TJAPlayer3.Tx.Notes.t2D描画( device, x, y, new Rectangle( 520, num9, 130, 130 ) );
@@ -1849,7 +1857,7 @@ namespace TJAPlayer3
                         var normalColor = new Color4(1.0f, 1.0f, 1.0f);
                         float f末端ノーツのテクスチャ位置調整 = 65f;
 
-                        if ( pChip.nチャンネル番号 == 0x15 ) //連打(小)
+                        if ( pChip.nチャンネル番号 == 0x15 && pChip.bShow) //連打(小)
                         {
                             int index = x末端 - x; //連打の距離
                             if ( TJAPlayer3.ConfigIni.eSTEALTH != Eステルスモード.DORON )
@@ -1890,7 +1898,7 @@ namespace TJAPlayer3
                             TJAPlayer3.Tx.SENotes.t2D描画( TJAPlayer3.app.Device, x + 30, y + nSenotesY, new Rectangle(0, 240, 60, 30));
                             TJAPlayer3.Tx.SENotes.t2D描画(TJAPlayer3.app.Device, x, y + nSenotesY, new Rectangle(0, 30 * pChip.nSenote, 136, 30));
                         }
-                        if( pChip.nチャンネル番号 == 0x16 )
+                        if( pChip.nチャンネル番号 == 0x16 && pChip.bShow)
                         {
                             int index = x末端 - x; //連打の距離
 
