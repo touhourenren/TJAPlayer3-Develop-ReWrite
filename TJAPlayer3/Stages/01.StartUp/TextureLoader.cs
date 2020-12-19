@@ -97,6 +97,9 @@ namespace TJAPlayer3
             Banapas_Load_Clear[0] = TxC(TITLE + @"Banapas_Load_Clear.png");
             Banapas_Load_Clear[1] = TxC(TITLE + @"Banapas_Load_Clear_Anime.png");
 
+            Banapas_Load_Failure[0] = TxC(TITLE + @"Banapas_Load_Failure.png");
+            Banapas_Load_Failure[1] = TxC(TITLE + @"Banapas_Load_Clear_Anime.png");
+
             Entry_Player[0] = TxC(TITLE + @"Entry_Player.png");
             Entry_Player[1] = TxC(TITLE + @"Entry_Player_Select_Bar.png");
             Entry_Player[2] = TxC(TITLE + @"Entry_Player_Select.png");
@@ -643,6 +646,7 @@ namespace TJAPlayer3
 
         public CTexture[] Banapas_Load = new CTexture[3];
         public CTexture[] Banapas_Load_Clear = new CTexture[2];
+        public CTexture[] Banapas_Load_Failure = new CTexture[2];
         public CTexture[] Entry_Player = new CTexture[3];
         #endregion
 
