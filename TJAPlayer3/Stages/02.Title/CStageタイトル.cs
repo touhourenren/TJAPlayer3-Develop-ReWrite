@@ -257,9 +257,6 @@ namespace TJAPlayer3
                 if (TJAPlayer3.Tx.Title_Background != null )
                     TJAPlayer3.Tx.Title_Background.t2D描画( TJAPlayer3.app.Device, 0, 0 );
 				
-                if (TJAPlayer3.Tx.Entry_Header != null )
-                    TJAPlayer3.Tx.Entry_Header.t2D描画( TJAPlayer3.app.Device, 0, 0 );
-
                 #endregion
 
                 #region [ バナパス読み込み ]
