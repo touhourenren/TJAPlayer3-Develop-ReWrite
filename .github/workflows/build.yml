@@ -24,3 +24,9 @@ jobs:
       with:
         name: TJAPlayer3-Develop-ReWrite
         path: Test
+    - name: Create a Release
+      uses: actions/create-release@v1
+      with:
+        tag_name: TJAPlayer3-Develop-ReWrite
+        release_name: ${{ github.event.head_commit.message }}
+        body_path: Test
