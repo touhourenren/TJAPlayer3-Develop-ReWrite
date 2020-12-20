@@ -225,6 +225,9 @@ namespace TJAPlayer3
                     {
                         if (!bモード選択)
                         {
+							if (!TJAPlayer3.Skin.soundsanka.bPlayed)
+								TJAPlayer3.Skin.soundsanka.t再生する();
+
 							ctどんちゃんイン.t開始(0, 180, 2, TJAPlayer3.Timer);
 							bモード選択 = true;
                         }
