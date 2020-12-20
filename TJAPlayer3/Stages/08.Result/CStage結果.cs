@@ -57,7 +57,7 @@ namespace TJAPlayer3
 
 		public override void On活性化()
 		{
-			//TJAPlayer3.Skin.bgmリザルトイン音.t再生する();
+			TJAPlayer3.Skin.bgmリザルトイン音.t再生する();
 			Trace.TraceInformation("結果ステージを活性化します。");
 			Trace.Indent();
 			try
@@ -331,13 +331,13 @@ namespace TJAPlayer3
 				{
 					num = 0;
 				}
-				//if (!b音声再生 && !TJAPlayer3.Skin.bgmリザルトイン音.b再生中)
-				//{
-				//	TJAPlayer3.Skin.bgmリザルト音.t再生する();
-				//	b音声再生 = true;
-				//}
+                if (!b音声再生 && !TJAPlayer3.Skin.bgmリザルトイン音.b再生中)
+                {
+                    TJAPlayer3.Skin.bgmリザルト音.t再生する();
+                    b音声再生 = true;
+                }
 
-				if (TJAPlayer3.Tx.Result_Header != null)
+                if (TJAPlayer3.Tx.Result_Header != null)
 				{
 					TJAPlayer3.Tx.Result_Header.t2D描画(TJAPlayer3.app.Device, 0, 0);
 				}
@@ -399,7 +399,7 @@ namespace TJAPlayer3
 					{
 						if (TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDX.DirectInput.Key.Escape))
 						{
-							//TJAPlayer3.Skin.bgmリザルト音.t停止する();
+							TJAPlayer3.Skin.bgmリザルト音.t停止する();
 							TJAPlayer3.Skin.sound決定音.t再生する();
 							actFI.tフェードアウト開始();
 							base.eフェーズID = CStage.Eフェーズ.共通_フェードアウト;
@@ -444,9 +444,13 @@ namespace TJAPlayer3
 
 								if (TJAPlayer3.stage選曲.r現在選択中の曲.r親ノード != null)
 									TJAPlayer3.stage選曲.act曲リスト.tBOXを出る();
-
-								base.eフェーズID = CStage.Eフェーズ.共通_フェードアウト;
-								this.eフェードアウト完了時の戻り値 = E戻り値.完了;
+                                else
+                                {
+									base.eフェーズID = CStage.Eフェーズ.共通_フェードアウト;
+									this.eフェードアウト完了時の戻り値 = E戻り値.完了;
+									TJAPlayer3.Skin.bgmリザルト音.t停止する();
+									TJAPlayer3.Skin.sound決定音.t再生する();
+								}
 							}
 						}
 					}
