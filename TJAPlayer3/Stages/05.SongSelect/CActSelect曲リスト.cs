@@ -600,13 +600,20 @@ namespace TJAPlayer3
 
 			this.ctBarFlash = new CCounter();
 
-			for (int i = 0; i < 3; i++)
+            if (this.r現在選択中の曲 != null)
 			{
-				using (var texture = pfBoxText.DrawPrivateFont(this.r現在選択中の曲.strBoxText[i], r現在選択中の曲.ForeColor, r現在選択中の曲.BackColor))
-                {
-					this.txBoxText[i] = TJAPlayer3.tテクスチャの生成(texture);
-					this.strBoxText = this.r現在選択中の曲.strBoxText[0] + this.r現在選択中の曲.strBoxText[1] + this.r現在選択中の曲.strBoxText[2];
+				for (int i = 0; i < 3; i++)
+				{
+					using (var texture = pfBoxText.DrawPrivateFont(this.r現在選択中の曲.strBoxText[i], r現在選択中の曲.ForeColor, r現在選択中の曲.BackColor))
+					{
+						this.txBoxText[i] = TJAPlayer3.tテクスチャの生成(texture);
+						this.strBoxText = this.r現在選択中の曲.strBoxText[0] + this.r現在選択中の曲.strBoxText[1] + this.r現在選択中の曲.strBoxText[2];
+					}
 				}
+			}
+            else
+            {
+				strBoxText = "null";
 			}
 
 			base.On活性化();

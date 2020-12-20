@@ -358,10 +358,7 @@ namespace TJAPlayer3
 				#region ネームプレート
 				for (int i = 0; i < TJAPlayer3.ConfigIni.nPlayerCount; i++)
 				{
-					if (TJAPlayer3.Tx.NamePlate[i] != null)
-					{
-						TJAPlayer3.Tx.NamePlate[i].t2D描画(TJAPlayer3.app.Device, TJAPlayer3.Skin.Result_NamePlate_X[i], TJAPlayer3.Skin.Result_NamePlate_Y[i]);
-					}
+					TJAPlayer3.NamePlate.tNamePlateDraw(28, 621, i);
 				}
 				#endregion
 
@@ -445,7 +442,7 @@ namespace TJAPlayer3
 									}
 								}
 
-								if (TJAPlayer3.stage選曲.r確定された曲.r親ノード != null)
+								if (TJAPlayer3.stage選曲.r現在選択中の曲.r親ノード != null)
 									TJAPlayer3.stage選曲.act曲リスト.tBOXを出る();
 
 								base.eフェーズID = CStage.Eフェーズ.共通_フェードアウト;

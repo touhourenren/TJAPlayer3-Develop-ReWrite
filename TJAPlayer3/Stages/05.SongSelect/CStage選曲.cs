@@ -117,6 +117,18 @@ namespace TJAPlayer3
             base.list子Activities.Add(this.actQuickConfig = new CActSelectQuickConfig());
             base.list子Activities.Add(this.act難易度選択画面 = new CActSelect難易度選択画面());
 
+            for(int i = 0; i < 10; i++)
+            {
+                stTimer[i].ch = i.ToString().ToCharArray()[0];
+                stTimer[i].pt = new Point(46 * i, 0);
+            }
+
+            for(int i = 0; i < 10; i++)
+            {
+                stSongNumber[i].ch = i.ToString().ToCharArray()[0];
+                stSongNumber[i].pt = new Point(27 * i, 0);
+            }
+
             this.CommandHistory = new CCommandHistory();        // #24063 2011.1.16 yyagi
         }
 
@@ -182,6 +194,9 @@ namespace TJAPlayer3
                 ctDonchan_Select = new CCounter();
                 ctDonchan_Jump = new CCounter();
                 ctBackgroundFade = new CCounter();
+                ctCreditAnime = new CCounter(0, 4500, 1, TJAPlayer3.Timer);
+                ctTimer = new CCounter(0, 100, 1000, TJAPlayer3.Timer);
+
 
                 ctBackgroundFade.n現在の値 = 600;
 
@@ -309,6 +324,9 @@ namespace TJAPlayer3
                 //---------------------
                 #endregion
 
+
+                ctTimer.t進行();
+                ctCreditAnime.t進行Loop();
                 ctBackgroundFade.t進行();
                 ctDonchan_Select.t進行();
                 ctDonchan_Jump.t進行();
@@ -354,6 +372,11 @@ namespace TJAPlayer3
                 }
                 if (TJAPlayer3.Tx.SongSelect_Header != null)
                     TJAPlayer3.Tx.SongSelect_Header.t2D描画(TJAPlayer3.app.Device, 0, 0);
+
+                tTimerDraw((100 - ctTimer.n現在の値).ToString());
+
+                tSongNumberDraw(1097, 167, NowSong.ToString());
+                tSongNumberDraw(1190, 167, MaxSong.ToString());
 
                 this.actInformation.On進行描画();
 
@@ -441,8 +464,10 @@ namespace TJAPlayer3
                                 if (this.act曲リスト.ctBoxOpen.b終了値に達した || this.act曲リスト.ctBoxOpen.n現在の値 == 0)
                                 {
                                     TJAPlayer3.Skin.sound取消音.t再生する();
+                                    this.act曲リスト.ctBarFlash.t開始(0, 2700, 1, TJAPlayer3.Timer);
                                     this.act曲リスト.ctBoxOpen.t開始(200, 2700, 1.3f, TJAPlayer3.Timer);
                                     this.act曲リスト.bBoxClose = true;
+                                    this.ctDonchan_Select.t開始(0, TJAPlayer3.Tx.SongSelect_Donchan_Select.Length - 1, 1000 / 45, TJAPlayer3.Timer);
                                 }
                             }
                         #endregion
@@ -672,7 +697,24 @@ namespace TJAPlayer3
                 }
                 //------------------------------
 
-                if(this.ctDonchan_Jump.n現在の値 >= this.ctDonchan_Jump.n終了値)
+
+                if (TJAPlayer3.ConfigIni.nPlayerCount == 1)
+                {
+                    var opacity = 0;
+
+                    if (ctCreditAnime.n現在の値 <= 510)
+                        opacity = ctCreditAnime.n現在の値 / 2;
+                    else if (ctCreditAnime.n現在の値 <= 4500 - 510)
+                        opacity = 255;
+                    else
+                        opacity = 255 - ((ctCreditAnime.n現在の値 - (4500 - 510)) / 2);
+
+                    TJAPlayer3.Tx.SongSelect_Credit.Opacity = opacity;
+
+                    TJAPlayer3.Tx.SongSelect_Credit.t2D描画(TJAPlayer3.app.Device, 0, 0);
+                }
+
+                if (this.ctDonchan_Jump.n現在の値 >= this.ctDonchan_Jump.n終了値)
                 {
                     this.ctDonchan_Jump.t停止();
 
@@ -790,7 +832,8 @@ namespace TJAPlayer3
                 }
             }
         }
-        private bool b音声再生;
+        private CCounter ctTimer;
+        private CCounter ctCreditAnime;
         private Random[] r = new Random[3];
         private Color4 colCharaColor;
         public CCounter ctBackgroundFade;
@@ -814,6 +857,9 @@ namespace TJAPlayer3
         public CActSortSongs actSortSongs;
         private CActSelectQuickConfig actQuickConfig;
 
+        private const int MaxSong = 3;
+        public int NowSong = 1;
+
         private CCounter ctDonchan_Normal;
         private CCounter ctDonchan_Select;
         public CCounter ctDonchan_Jump;
@@ -835,12 +881,53 @@ namespace TJAPlayer3
         //      private CTexture tx下部テキスト;
         private CCounter ctDiffSelect移動待ち;
 
+        private STNumber[] stTimer = new STNumber[10];
+        private STNumber[] stSongNumber = new STNumber[10];
+
+        private struct STNumber
+        {
+            public char ch;
+            public Point pt;
+        }
         private struct STCommandTime        // #24063 2011.1.16 yyagi コマンド入力時刻の記録用
         {
             public E楽器パート eInst;        // 使用楽器
             public EパッドFlag ePad;       // 押されたコマンド(同時押しはOR演算で列挙する)
             public long time;               // コマンド入力時刻
         }
+        
+        private void tSongNumberDraw(int x, int y, string str)
+        {
+            for (int j = 0; j < str.Length; j++)
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    if (str[j] == stSongNumber[i].ch)
+                    {
+                        TJAPlayer3.Tx.SongSelect_Song_Number.t2D描画(TJAPlayer3.app.Device, x - (str.Length * 27 + 27 * str.Length - str.Length * 27) / 2 + 27 / 2, (float)y, new RectangleF(stSongNumber[i].pt.X, stSongNumber[i].pt.Y, 27, 29));
+                        x += str.Length >= 2 ? 16 : 27;
+                    }
+                }
+            }
+        }
+
+        private void tTimerDraw(string str)
+        {
+            int x = 1171, y = 57;
+
+            for (int j = 0; j < str.Length; j++)
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    if(str[j] == stTimer[i].ch)
+                    {
+                        TJAPlayer3.Tx.SongSelect_Timer.t2D描画(TJAPlayer3.app.Device, x - (str.Length * 46 + 46 * str.Length - str.Length * 46) / 2 + 46 / 2, (float)y, new RectangleF(stTimer[i].pt.X, stTimer[i].pt.Y, 46, 64));
+                        x += str.Length >= 3 ? 40 : 46;
+                    }
+                }
+            }
+        }
+
         private class CCommandHistory       // #24063 2011.1.16 yyagi コマンド入力履歴を保持_確認するクラス
         {
             readonly int buffersize = 16;

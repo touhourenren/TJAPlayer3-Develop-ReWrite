@@ -1487,6 +1487,7 @@ for (int i = 0; i < 3; i++) {
 								stage選曲.On活性化();
 								r直前のステージ = r現在のステージ;
 								r現在のステージ = stage選曲;
+								stage選曲.NowSong++;
 
 								foreach( STPlugin pg in this.listプラグイン )
 								{

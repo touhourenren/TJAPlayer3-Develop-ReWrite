@@ -86,7 +86,6 @@ namespace TJAPlayer3
             #region 1_タイトル画面
             Title_Background = TxC(TITLE + @"Background.png");
             Title_Menu = TxC(TITLE + @"Menu.png");
-            Entry_Header = TxC(TITLE + @"Header.png");
             Entry_Bar = TxC(TITLE + @"Entry_Bar.png");
             Entry_Bar_Text = TxC(TITLE + @"Entry_Bar_Text.png");
 
@@ -133,6 +132,9 @@ namespace TJAPlayer3
             SongSelect_Bar_Genre_RecentryPlaySong = TxC(SONGSELECT + @"Bar_Genre_RecentryPlaySong.png");
             SongSelect_Bar_Select = TxC(SONGSELECT + @"Bar_Select.png");
             SongSelect_Level_Number = TxC(SONGSELECT + @"Level_Number.png");
+            SongSelect_Credit = TxC(SONGSELECT + @"Credit.png");
+            SongSelect_Timer = TxC(SONGSELECT + @"Timer.png");
+            SongSelect_Song_Number = TxC(SONGSELECT + @"Song_Number.png");
             SongSelect_Bar_Genre_Overlay = TxC(SONGSELECT + @"Bar_Genre_Overlay.png");
             
             for (int i = 0; i < (int)Difficulty.Total; i++)
@@ -641,7 +643,6 @@ namespace TJAPlayer3
         public CTexture Title_Background,
             Entry_Bar,
             Entry_Bar_Text,
-            Entry_Header,
             Title_Menu;
 
         public CTexture[] Banapas_Load = new CTexture[3];
@@ -679,6 +680,9 @@ namespace TJAPlayer3
             SongSelect_Level_Number,
             SongSelect_Bar_Select,
             SongSelect_Bar_Genre_Overlay,
+            SongSelect_Credit,
+            SongSelect_Timer,
+            SongSelect_Song_Number,
             SongSelect_ScoreWindow_Text;
         public CTexture[] SongSelect_GenreBack,
             SongSelect_ScoreWindow = new CTexture[(int)Difficulty.Total],
