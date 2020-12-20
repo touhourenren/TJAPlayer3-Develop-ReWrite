@@ -19,16 +19,27 @@ jobs:
     - name: Build the Solution
       run: MSBuild.exe $Env:GITHUB_WORKSPACE\TJAPlayer3.sln -p:Configuration=Release
       timeout-minutes: 5
-    - name: Upload artifacts
-      uses: actions/upload-artifact@v1.0.0
-      with:
-        name: TJAPlayer3-Develop-ReWrite
-        path: Test
+    - name: Create Archive
+      run: |
+        cd $Env:GITHUB_WORKSPACE
+        tar -a -cvf TJAPlayer3-Develop-ReWrite.zip -C Test *
     - name: Create a Release
+      id: create_release
       uses: actions/create-release@v1
       env: 
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
       with:
-        tag_name: TJAPlayer3-Develop-ReWrite
-        release_name: ${{ github.event.head_commit.message }}
-        body_path: Test
+        tag_name: ${{ github.event.head_commit.message }}
+        release_name: TJAPlayer3-Develop-ReWrite
+        draft: false
+        prerelease: false
+    - name: Upload Release Asset
+      id: upload-release-asset 
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./TJAPlayer3-Develop-ReWrite.zip
+        asset_name: TJAPlayer3-Develop-ReWrite.zip
+        asset_content_type: application/zip
