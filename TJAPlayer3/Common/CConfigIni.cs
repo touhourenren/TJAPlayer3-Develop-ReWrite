@@ -740,8 +740,10 @@ namespace TJAPlayer3
 
         public bool bJudgeCountDisplay;
 
-        // 各画像の表示・非表示設定
-        public bool ShowChara;
+		public bool bEnableCountdownTimer;
+
+		// 各画像の表示・非表示設定
+		public bool ShowChara;
         public bool ShowDancer;
         public bool ShowRunner;
         public bool ShowFooter;
@@ -1280,23 +1282,24 @@ namespace TJAPlayer3
 			this.n表示可能な最小コンボ数.Taiko = 10;
             this.FontName = "MS UI Gothic";
 		    this.ApplyLoudnessMetadata = true;
+			this.bEnableCountdownTimer = true;
 
-		    // 2018-08-28 twopointzero:
-            // There exists a particular large, well-known, well-curated, and
-            // regularly-updated collection of content for use with Taiko no
-            // Tatsujin simulators. A statistical analysis was performed on the
-            // the integrated loudness and true peak loudness of the thousands
-            // of songs within this collection as of late August 2018.
-            //
-            // The analysis allows us to select a target loudness which
-            // results in the smallest total amount of loudness adjustment
-            // applied to the songs of that collection. The selected target
-            // loudness should result in the least-noticeable average
-            // adjustment for the most users, assuming their collection is
-            // similar to the exemplar.
-            //
-            // The target loudness which achieves this is -7.4 LUFS.
-		    this.TargetLoudness = -7.4;
+			// 2018-08-28 twopointzero:
+			// There exists a particular large, well-known, well-curated, and
+			// regularly-updated collection of content for use with Taiko no
+			// Tatsujin simulators. A statistical analysis was performed on the
+			// the integrated loudness and true peak loudness of the thousands
+			// of songs within this collection as of late August 2018.
+			//
+			// The analysis allows us to select a target loudness which
+			// results in the smallest total amount of loudness adjustment
+			// applied to the songs of that collection. The selected target
+			// loudness should result in the least-noticeable average
+			// adjustment for the most users, assuming their collection is
+			// similar to the exemplar.
+			//
+			// The target loudness which achieves this is -7.4 LUFS.
+			this.TargetLoudness = -7.4;
 
 		    this.ApplySongVol = false;
 		    this.SoundEffectLevel = CSound.DefaultSoundEffectLevel;
@@ -1827,12 +1830,11 @@ namespace TJAPlayer3
 			sw.WriteLine( "; DARKモード(0:OFF, 1:HALF, 2:FULL)" );
 			sw.WriteLine( "Dark={0}", (int) this.eDark );
 			sw.WriteLine();
-            /*
-            sw.WriteLine( "; スクロール方法(※β版)" );
-            sw.WriteLine( "; (0:通常, 1:BMSCROLL, 2:HSSCROLL)" );
-            sw.WriteLine( "ScrollMode={0}", (int)this.eScrollMode );
-            sw.WriteLine();
-            */
+			sw.WriteLine();
+			sw.WriteLine("; 選曲画面でのタイマーを有効にするかどうか(0:無効,1:有効)"); 
+			sw.WriteLine("; Enable countdown in songselect.(0:No, 1:Yes)");
+			sw.WriteLine("EnableCountDownTimer={0}", this.bEnableCountdownTimer ? 1 : 0);
+			sw.WriteLine();
 			#region [ SUDDEN ]
 			sw.WriteLine( "; ドラムSUDDENモード(0:OFF, 1:ON)" );
 			sw.WriteLine( "DrumsSudden={0}", this.bSudden.Drums ? 1 : 0 );
@@ -2583,12 +2585,10 @@ namespace TJAPlayer3
                                             {
                                                 this.eScrollMode = ( EScrollMode )C変換.n値を文字列から取得して範囲内に丸めて返す( str4, 0, 2, 0 );
                                             }
-                                            /*
-											else if( str3.Equals( "DrumsGraph" ) )  // #24074 2011.01.23 addikanick
+											else if (str3.Equals("EnableCountDownTimer"))
 											{
-												this.bGraph.Drums = C変換.bONorOFF( str4[ 0 ] );
+												this.bEnableCountdownTimer = C変換.bONorOFF(str4[0]);
 											}
-                                            */
 											#region [ Sudden ]
 											else if( str3.Equals( "DrumsSudden" ) )
 											{

@@ -919,10 +919,13 @@ namespace TJAPlayer3
             {
                 for (int i = 0; i < 10; i++)
                 {
-                    if(str[j] == stTimer[i].ch)
+                    if (TJAPlayer3.ConfigIni.bEnableCountdownTimer)
                     {
-                        TJAPlayer3.Tx.SongSelect_Timer.t2D描画(TJAPlayer3.app.Device, x - (str.Length * 46 + 46 * str.Length - str.Length * 46) / 2 + 46 / 2, (float)y, new RectangleF(stTimer[i].pt.X, stTimer[i].pt.Y, 46, 64));
-                        x += str.Length >= 3 ? 40 : 46;
+                        if (str[j] == stTimer[i].ch)
+                        {
+                            TJAPlayer3.Tx.SongSelect_Timer.t2D描画(TJAPlayer3.app.Device, x - (str.Length * 46 + 46 * str.Length - str.Length * 46) / 2 + 46 / 2, (float)y, new RectangleF(stTimer[i].pt.X, stTimer[i].pt.Y, 46, 64));
+                            x += str.Length >= 3 ? 40 : 46;
+                        }
                     }
                 }
             }
