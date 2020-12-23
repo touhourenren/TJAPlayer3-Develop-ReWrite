@@ -2762,8 +2762,8 @@ namespace TJAPlayer3
 		protected void ChangeInputAdjustTimeInPlaying( IInputDevice keyboard, int plusminus )		// #23580 2011.1.16 yyagi UI for InputAdjustTime in playing screen.
 		{
 			int offset;
-			if (keyboard.bキーが押されている((int) SlimDX.DirectInput.Key.LeftControl) ||
-				keyboard.bキーが押されている((int) SlimDX.DirectInput.Key.RightControl))
+			if (keyboard.bキーが押されている((int)SlimDXKeys.Key.LeftControl) ||
+				keyboard.bキーが押されている((int)SlimDXKeys.Key.RightControl))
 			{
 				offset = plusminus;
 			}
@@ -2782,8 +2782,8 @@ namespace TJAPlayer3
 		protected void tキー入力()
 		{
 			IInputDevice keyboard = TJAPlayer3.Input管理.Keyboard;
-			if ( keyboard.bキーが押された( (int) SlimDX.DirectInput.Key.F1 ) &&
-				( keyboard.bキーが押されている( (int) SlimDX.DirectInput.Key.RightShift ) || keyboard.bキーが押されている( (int) SlimDX.DirectInput.Key.LeftShift ) ) )
+			if ( keyboard.bキーが押された( (int)SlimDXKeys.Key.F1 ) &&
+				( keyboard.bキーが押されている( (int)SlimDXKeys.Key.RightShift ) || keyboard.bキーが押されている( (int)SlimDXKeys.Key.LeftShift ) ) )
 			{	// shift+f1 (pause)
                 //this.bPAUSE = !this.bPAUSE;
                 //if ( this.bPAUSE )
@@ -2802,41 +2802,41 @@ namespace TJAPlayer3
 			if ( ( !this.bPAUSE && ( base.eフェーズID != CStage.Eフェーズ.演奏_STAGE_FAILED ) ) && ( base.eフェーズID != CStage.Eフェーズ.演奏_STAGE_FAILED_フェードアウト ) )
 			{
 				this.t入力処理_ドラム();
-				if ( keyboard.bキーが押された( (int) SlimDX.DirectInput.Key.UpArrow ) && ( keyboard.bキーが押されている( (int) SlimDX.DirectInput.Key.RightShift ) || keyboard.bキーが押されている( (int) SlimDX.DirectInput.Key.LeftShift ) ) )
+				if ( keyboard.bキーが押された( (int)SlimDXKeys.Key.UpArrow ) && ( keyboard.bキーが押されている( (int)SlimDXKeys.Key.RightShift ) || keyboard.bキーが押されている( (int)SlimDXKeys.Key.LeftShift ) ) )
 				{	// shift (+ctrl) + UpArrow (BGMAdjust)
-					TJAPlayer3.DTX.t各自動再生音チップの再生時刻を変更する( ( keyboard.bキーが押されている( (int) SlimDX.DirectInput.Key.LeftControl ) || keyboard.bキーが押されている( (int) SlimDX.DirectInput.Key.RightControl ) ) ? 1 : 10 );
+					TJAPlayer3.DTX.t各自動再生音チップの再生時刻を変更する( ( keyboard.bキーが押されている( (int)SlimDXKeys.Key.LeftControl ) || keyboard.bキーが押されている( (int)SlimDXKeys.Key.RightControl ) ) ? 1 : 10 );
 					TJAPlayer3.DTX.tWave再生位置自動補正();
 				}
-				else if ( keyboard.bキーが押された( (int) SlimDX.DirectInput.Key.DownArrow ) && ( keyboard.bキーが押されている( (int) SlimDX.DirectInput.Key.RightShift ) || keyboard.bキーが押されている( (int) SlimDX.DirectInput.Key.LeftShift ) ) )
+				else if ( keyboard.bキーが押された( (int)SlimDXKeys.Key.DownArrow ) && ( keyboard.bキーが押されている( (int)SlimDXKeys.Key.RightShift ) || keyboard.bキーが押されている( (int)SlimDXKeys.Key.LeftShift ) ) )
 				{	// shift + DownArrow (BGMAdjust)
-					TJAPlayer3.DTX.t各自動再生音チップの再生時刻を変更する( ( keyboard.bキーが押されている( (int) SlimDX.DirectInput.Key.LeftControl ) || keyboard.bキーが押されている( (int) SlimDX.DirectInput.Key.RightControl ) ) ? -1 : -10 );
+					TJAPlayer3.DTX.t各自動再生音チップの再生時刻を変更する( ( keyboard.bキーが押されている( (int)SlimDXKeys.Key.LeftControl ) || keyboard.bキーが押されている( (int)SlimDXKeys.Key.RightControl ) ) ? -1 : -10 );
 					TJAPlayer3.DTX.tWave再生位置自動補正();
 				}
-				else if ( keyboard.bキーが押された( (int) SlimDX.DirectInput.Key.UpArrow ) )
+				else if ( keyboard.bキーが押された( (int)SlimDXKeys.Key.UpArrow ) )
 				{	// UpArrow(scrollspeed up)
 					ドラムスクロール速度アップ();
 				}
-				else if ( keyboard.bキーが押された( (int) SlimDX.DirectInput.Key.DownArrow ) )
+				else if ( keyboard.bキーが押された( (int)SlimDXKeys.Key.DownArrow ) )
 				{	// DownArrow (scrollspeed down)
 					ドラムスクロール速度ダウン();
 				}
-				else if ( keyboard.bキーが押された( (int) SlimDX.DirectInput.Key.Delete ) )
+				else if ( keyboard.bキーが押された( (int)SlimDXKeys.Key.Delete ) )
 				{	// del (debug info)
 					TJAPlayer3.ConfigIni.b演奏情報を表示する = !TJAPlayer3.ConfigIni.b演奏情報を表示する;
 				}
-				else if ( keyboard.bキーが押された( (int) SlimDX.DirectInput.Key.LeftArrow ) )		// #24243 2011.1.16 yyagi UI for InputAdjustTime in playing screen.
+				else if ( keyboard.bキーが押された( (int)SlimDXKeys.Key.LeftArrow ) )		// #24243 2011.1.16 yyagi UI for InputAdjustTime in playing screen.
 				{
 					ChangeInputAdjustTimeInPlaying( keyboard, -1 );
 				}
-				else if ( keyboard.bキーが押された( (int) SlimDX.DirectInput.Key.RightArrow ) )		// #24243 2011.1.16 yyagi UI for InputAdjustTime in playing screen.
+				else if ( keyboard.bキーが押された( (int)SlimDXKeys.Key.RightArrow ) )		// #24243 2011.1.16 yyagi UI for InputAdjustTime in playing screen.
 				{
 					ChangeInputAdjustTimeInPlaying( keyboard, +1 );
 				}
-				else if ( ( base.eフェーズID == CStage.Eフェーズ.共通_通常状態 ) && ( keyboard.bキーが押された( (int) SlimDX.DirectInput.Key.Escape ) || TJAPlayer3.Pad.b押されたGB( Eパッド.FT ) ) && !this.actPauseMenu.bIsActivePopupMenu )
+				else if ( ( base.eフェーズID == CStage.Eフェーズ.共通_通常状態 ) && ( keyboard.bキーが押された( (int)SlimDXKeys.Key.Escape ) || TJAPlayer3.Pad.b押されたGB( Eパッド.FT ) ) && !this.actPauseMenu.bIsActivePopupMenu )
 				{	// escape (exit)
                     this.t演奏中止();
 				}
-                else if ( keyboard.bキーが押された( (int) SlimDX.DirectInput.Key.D1 ) )
+                else if ( keyboard.bキーが押された( (int)SlimDXKeys.Key.D1 ) )
                 {
                     if (!TJAPlayer3.DTX.bHasBranch[TJAPlayer3.stage選曲.n確定された曲の難易度]) return;
 
@@ -2848,7 +2848,7 @@ namespace TJAPlayer3
                     this.n次回のコース[ 0 ] = 0;
                     this.b強制的に分岐させた[ 0 ] = true;
                 }
-                else if ( keyboard.bキーが押された( (int) SlimDX.DirectInput.Key.D2 ) )		// #24243 2011.1.16 yyagi UI for InputAdjustTime in playing screen.
+                else if ( keyboard.bキーが押された( (int)SlimDXKeys.Key.D2 ) )		// #24243 2011.1.16 yyagi UI for InputAdjustTime in playing screen.
                 {
                     if (!TJAPlayer3.DTX.bHasBranch[TJAPlayer3.stage選曲.n確定された曲の難易度]) return;
 
@@ -2860,7 +2860,7 @@ namespace TJAPlayer3
                     this.n次回のコース[ 0 ] = 1;
                     this.b強制的に分岐させた[ 0 ] = true;
                 }
-                else if ( keyboard.bキーが押された( (int) SlimDX.DirectInput.Key.D3 ) )		// #24243 2011.1.16 yyagi UI for InputAdjustTime in playing screen.
+                else if ( keyboard.bキーが押された( (int)SlimDXKeys.Key.D3 ) )		// #24243 2011.1.16 yyagi UI for InputAdjustTime in playing screen.
                 {
                     if (!TJAPlayer3.DTX.bHasBranch[TJAPlayer3.stage選曲.n確定された曲の難易度]) return;
 
@@ -2872,7 +2872,7 @@ namespace TJAPlayer3
                     this.n次回のコース[ 0 ] = 2;
                     this.b強制的に分岐させた[ 0 ] = true;
                 }
-                //else if (keyboard.bキーが押された((int)SlimDX.DirectInput.Key.D1))
+                //else if (keyboard.bキーが押された((int)SlimDXKeys.Key.D1))
                 //{
                 //    if (this.n分岐した回数[1] < CDTXMania.DTX.listBRANCH.Count)
                 //        this.t分岐処理(0, CDTXMania.DTX.listBRANCH[this.n分岐した回数[1]].n命令時のChipList番号, 1);
@@ -2882,7 +2882,7 @@ namespace TJAPlayer3
                 //    this.n次回のコース[1] = 0;
                 //    this.b強制的に分岐させた = true;
                 //}
-                //else if (keyboard.bキーが押された((int)SlimDX.DirectInput.Key.D2))		// #24243 2011.1.16 yyagi UI for InputAdjustTime in playing screen.
+                //else if (keyboard.bキーが押された((int)SlimDXKeys.Key.D2))		// #24243 2011.1.16 yyagi UI for InputAdjustTime in playing screen.
                 //{
                 //    if (this.n分岐した回数[1] < CDTXMania.DTX.listBRANCH.Count)
                 //        this.t分岐処理(1, CDTXMania.DTX.listBRANCH[this.n分岐した回数[1]].n命令時のChipList番号, 1);
@@ -2892,7 +2892,7 @@ namespace TJAPlayer3
                 //    this.n次回のコース[1] = 1;
                 //    this.b強制的に分岐させた = true;
                 //}
-                //else if (keyboard.bキーが押された((int)SlimDX.DirectInput.Key.D3))		// #24243 2011.1.16 yyagi UI for InputAdjustTime in playing screen.
+                //else if (keyboard.bキーが押された((int)SlimDXKeys.Key.D3))		// #24243 2011.1.16 yyagi UI for InputAdjustTime in playing screen.
                 //{
                 //    if (this.n分岐した回数[1] < CDTXMania.DTX.listBRANCH.Count)
                 //        this.t分岐処理(2, CDTXMania.DTX.listBRANCH[this.n分岐した回数[0]].n命令時のChipList番号, 1);
@@ -2903,14 +2903,14 @@ namespace TJAPlayer3
                 //    this.b強制的に分岐させた = true;
                 //}
 
-				if ( keyboard.bキーが押された( (int) SlimDX.DirectInput.Key.F4 ) )
+                if ( keyboard.bキーが押された( (int)SlimDXKeys.Key.F4 ) )
 				{
                     if( TJAPlayer3.ConfigIni.bJudgeCountDisplay == false )
                         TJAPlayer3.ConfigIni.bJudgeCountDisplay = true;
                     else
                         TJAPlayer3.ConfigIni.bJudgeCountDisplay = false;
 				}
-				else if ( keyboard.bキーが押された( (int) SlimDX.DirectInput.Key.F5 ) )
+				else if ( keyboard.bキーが押された( (int)SlimDXKeys.Key.F5 ) )
 				{
                     switch( TJAPlayer3.ConfigIni.eClipDispType  )
                     {
@@ -2929,14 +2929,14 @@ namespace TJAPlayer3
                     }
 				}
 #if DEBUG
-                if ( keyboard.bキーが押された( (int) SlimDX.DirectInput.Key.F6 ) )
+                if ( keyboard.bキーが押された( (int) SlimDXKeys.Key.F6 ) )
                 {
                     if( TJAPlayer3.ConfigIni.b太鼓パートAutoPlay == false )
                         TJAPlayer3.ConfigIni.b太鼓パートAutoPlay = true;
                     else
                         TJAPlayer3.ConfigIni.b太鼓パートAutoPlay = false;
                 }
-                if ( keyboard.bキーが押された( (int) SlimDX.DirectInput.Key.F7 ) )
+                if ( keyboard.bキーが押された( (int) SlimDXKeys.Key.F7 ) )
                 {
                     if(TJAPlayer3.ConfigIni.b太鼓パートAutoPlay2P == false )
                         TJAPlayer3.ConfigIni.b太鼓パートAutoPlay2P = true;
@@ -2944,18 +2944,18 @@ namespace TJAPlayer3
                         TJAPlayer3.ConfigIni.b太鼓パートAutoPlay2P = false;
                 }
 #endif
-			}
-            if( !this.actPauseMenu.bIsActivePopupMenu && this.bPAUSE && ( ( base.eフェーズID != CStage.Eフェーズ.演奏_STAGE_FAILED ) ) && ( base.eフェーズID != CStage.Eフェーズ.演奏_STAGE_FAILED_フェードアウト ) )
+            }
+            if ( !this.actPauseMenu.bIsActivePopupMenu && this.bPAUSE && ( ( base.eフェーズID != CStage.Eフェーズ.演奏_STAGE_FAILED ) ) && ( base.eフェーズID != CStage.Eフェーズ.演奏_STAGE_FAILED_フェードアウト ) )
 			{
-				if ( keyboard.bキーが押された( (int) SlimDX.DirectInput.Key.UpArrow ) )
+				if ( keyboard.bキーが押された( (int)SlimDXKeys.Key.UpArrow ) )
 				{	// UpArrow(scrollspeed up)
 					ドラムスクロール速度アップ();
 				}
-				else if ( keyboard.bキーが押された( (int) SlimDX.DirectInput.Key.DownArrow ) )
+				else if ( keyboard.bキーが押された( (int)SlimDXKeys.Key.DownArrow ) )
 				{	// DownArrow (scrollspeed down)
 					ドラムスクロール速度ダウン();
 				}
-				else if ( keyboard.bキーが押された( (int) SlimDX.DirectInput.Key.Delete ) )
+				else if ( keyboard.bキーが押された( (int)SlimDXKeys.Key.Delete ) )
 				{	// del (debug info)
 					TJAPlayer3.ConfigIni.b演奏情報を表示する = !TJAPlayer3.ConfigIni.b演奏情報を表示する;
 				}

@@ -115,7 +115,7 @@ namespace TJAPlayer3
 			{
 				if( this.bキー入力待ち )
 				{
-					if( TJAPlayer3.Input管理.Keyboard.bキーが押された( (int)SlimDX.DirectInput.Key.Escape ) )
+					if( TJAPlayer3.Input管理.Keyboard.bキーが押された( (int)SlimDXKeys.Key.Escape ) )
 					{
 						TJAPlayer3.Skin.sound取消音.t再生する();
 						this.bキー入力待ち = false;
@@ -127,7 +127,7 @@ namespace TJAPlayer3
 						TJAPlayer3.Input管理.tポーリング( TJAPlayer3.app.bApplicationActive, false );
 					}
 				}
-				else if( ( TJAPlayer3.Input管理.Keyboard.bキーが押された( (int)SlimDX.DirectInput.Key.Delete ) && ( this.n現在の選択行 >= 0 ) ) && ( this.n現在の選択行 <= 15 ) )
+				else if( ( TJAPlayer3.Input管理.Keyboard.bキーが押された( (int)SlimDXKeys.Key.Delete ) && ( this.n現在の選択行 >= 0 ) ) && ( this.n現在の選択行 <= 15 ) )
 				{
 					TJAPlayer3.Skin.sound決定音.t再生する();
 					TJAPlayer3.ConfigIni.KeyAssign[ (int) this.part ][ (int) this.pad ][ this.n現在の選択行 ].入力デバイス = E入力デバイス.不明;
@@ -259,14 +259,22 @@ namespace TJAPlayer3
 					str = "Back";
 					break;
 
+				case 6:
+					str = "CCW";
+					break;
+
+				case 7:
+					str = "CW";
+					break;
+
 				default:
-					if( ( 6 <= nCode ) && ( nCode < 6 + 128 ) )				// other buttons (128 types)
+					if ((8 <= nCode) && (nCode < 8 + 128))              // other buttons (128 types)
 					{
-						str = string.Format( "Button{0}", nCode - 5 );
+						str = string.Format("Button{0}", nCode - 7);
 					}
-					else if ( ( 6 + 128 <= nCode ) && ( nCode < 6 + 128 + 8 ) )		// POV HAT ( 8 types; 45 degrees per HATs)
+					else if ((8 + 128 <= nCode) && (nCode < 8 + 128 + 8))       // POV HAT ( 8 types; 45 degrees per HATs)
 					{
-						str = string.Format( "POV {0}", ( nCode - 6 - 128 ) * 45 );
+						str = string.Format("POV {0}", (nCode - 8 - 128) * 45);
 					}
 					else
 					{
@@ -307,9 +315,9 @@ namespace TJAPlayer3
 			{
 				if( device.e入力デバイス種別 == E入力デバイス種別.Joystick )
 				{
-					for( int i = 0; i < 6 + 0x80 + 8; i++ )		// +6 for Axis, +8 for HAT
+					for (int i = 0; i < 8 + 0x80 + 8; i++)      // +8 for Axis, +8 for HAT
 					{
-						if( device.bキーが押された( i ) )
+						if (device.bキーが押された(i))
 						{
 							TJAPlayer3.Skin.sound決定音.t再生する();
 							TJAPlayer3.ConfigIni.t指定した入力が既にアサイン済みである場合はそれを全削除する( E入力デバイス.ジョイパッド, device.ID, i );
@@ -327,13 +335,13 @@ namespace TJAPlayer3
 		{
 			for( int i = 0; i < 0x100; i++ )
 			{
-				if( i != (int)SlimDX.DirectInput.Key.Escape &&
-					i != (int)SlimDX.DirectInput.Key.Return &&
-					i != (int)SlimDX.DirectInput.Key.UpArrow &&
-					i != (int)SlimDX.DirectInput.Key.DownArrow &&
-					i != (int)SlimDX.DirectInput.Key.LeftArrow &&
-					i != (int)SlimDX.DirectInput.Key.RightArrow &&
-					i != (int)SlimDX.DirectInput.Key.Delete &&
+				if (i != (int)SlimDXKeys.Key.Escape &&
+					i != (int)SlimDXKeys.Key.Return &&
+					i != (int)SlimDXKeys.Key.UpArrow &&
+					i != (int)SlimDXKeys.Key.DownArrow &&
+					i != (int)SlimDXKeys.Key.LeftArrow &&
+					i != (int)SlimDXKeys.Key.RightArrow &&
+					i != (int)SlimDXKeys.Key.Delete &&
 					 TJAPlayer3.Input管理.Keyboard.bキーが押された( i ) )
 				{
 					TJAPlayer3.Skin.sound決定音.t再生する();

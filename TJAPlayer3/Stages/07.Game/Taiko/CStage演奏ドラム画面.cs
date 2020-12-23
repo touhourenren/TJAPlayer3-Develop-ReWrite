@@ -2212,7 +2212,7 @@ namespace TJAPlayer3
             #endregion
 
             string strNull = "Found";
-            if( TJAPlayer3.Input管理.Keyboard.bキーが押された( (int)SlimDX.DirectInput.Key.F1 ) )
+            if( TJAPlayer3.Input管理.Keyboard.bキーが押された( (int)SlimDXKeys.Key.F1 ) )
             {
                 if( !this.actPauseMenu.bIsActivePopupMenu )
                 {
@@ -2228,11 +2228,6 @@ namespace TJAPlayer3
                 }
 
             }
-            //if( CDTXMania.Input管理.Keyboard.bキーが押された( (int)SlimDX.DirectInput.Key.F8 ) )
-            //{
-                //this.actChipFireD.Start紙吹雪();
-                //this.actDancer.t入退場( 0, 0, 0.4 );
-            //}
         }
 
         private void t進行描画_ネームプレート()

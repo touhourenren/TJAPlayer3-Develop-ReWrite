@@ -333,26 +333,6 @@ namespace TJAPlayer3
             {
                 TJAPlayer3.Tx.Taiko_PlayerNumber[1].t2D描画(TJAPlayer3.app.Device, TJAPlayer3.Skin.Game_Taiko_PlayerNumber_X[1], TJAPlayer3.Skin.Game_Taiko_PlayerNumber_Y[1]);
             }
-
-            //if (CDTXMania.Input管理.Keyboard.bキーが押された((int)SlimDX.DirectInput.Key.V))
-            //{
-            //    this.tMtaikoEvent( 0x11, 0, 1 );
-            //}
-            //if (CDTXMania.Input管理.Keyboard.bキーが押された((int)SlimDX.DirectInput.Key.N))
-            //{
-            //    this.tMtaikoEvent( 0x11, 1, 1 );
-            //}
-            //if (CDTXMania.Input管理.Keyboard.bキーが押された((int)SlimDX.DirectInput.Key.C))
-            //{
-            //    this.tMtaikoEvent( 0x12, 0, 1 );
-            //}
-            //if (CDTXMania.Input管理.Keyboard.bキーが押された((int)SlimDX.DirectInput.Key.M))
-            //{
-            //    this.tMtaikoEvent( 0x12, 1, 1 );
-            //}
-
-
-
             return base.On進行描画();
         }
 
