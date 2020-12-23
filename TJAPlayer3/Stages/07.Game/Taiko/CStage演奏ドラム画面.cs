@@ -1444,14 +1444,25 @@ namespace TJAPlayer3
 
                     if( pChip.dbSCROLL_Y != 0.0 )
                     {
-                        y = TJAPlayer3.Skin.nScrollFieldY[ nPlayer ];
-                        if( TJAPlayer3.ConfigIni.eScrollMode == EScrollMode.Normal )
-                            y += (int) ( ( ( pChip.n発声時刻ms - CSound管理.rc演奏用タイマ.n現在時刻 ) * pChip.dbBPM * pChip.dbSCROLL_Y * ( this.act譜面スクロール速度.db現在の譜面スクロール速度.Drums + 1.5 ) ) / 628.7 );
-                        else if( TJAPlayer3.ConfigIni.eScrollMode == EScrollMode.BMSCROLL || TJAPlayer3.ConfigIni.eScrollMode == EScrollMode.HBSCROLL )
-                            y += pChip.nバーからの距離dot.Taiko;
+                        var dbSCROLL = configIni.eScrollMode == EScrollMode.BMSCROLL ? 1.0 : pChip.dbSCROLL;
+
+                        y = TJAPlayer3.Skin.nScrollFieldY[nPlayer];
+                        if (TJAPlayer3.ConfigIni.eScrollMode == EScrollMode.Normal)
+                            y += (int)(((pChip.n発声時刻ms - ((CSound管理.rc演奏用タイマ.n現在時刻 * (((double)TJAPlayer3.ConfigIni.n演奏速度) / 20.0)) * (((double)TJAPlayer3.ConfigIni.n演奏速度) / 20.0))) * pChip.dbBPM * pChip.dbSCROLL_Y * (this.act譜面スクロール速度.db現在の譜面スクロール速度[nPlayer] + 1.0)) / 502.8594 / 5.0); //rhimm様のコードを参考にばいそくの計算の修正
+                        else if (TJAPlayer3.ConfigIni.eScrollMode == EScrollMode.BMSCROLL || TJAPlayer3.ConfigIni.eScrollMode == EScrollMode.HBSCROLL)
+                        {
+                            float? play_bpm_time = null;
+                            if (!play_bpm_time.HasValue)
+                            {
+                                play_bpm_time = this.GetNowPBMTime(dTX, 0);
+                            }
+                            var dbSCROLL_Y = configIni.eScrollMode == EScrollMode.BMSCROLL ? 1.0 : pChip.dbSCROLL_Y;
+
+                            y += (int)(3 * 0.8335 * ((pChip.fBMSCROLLTime * NOTE_GAP) - (play_bpm_time * NOTE_GAP)) * dbSCROLL_Y * (this.act譜面スクロール速度.db現在の譜面スクロール速度[nPlayer] + 1.0) / 2 / 5.0);
+                        }
                     }
 
-                    if( pChip.nバーからの距離dot.Drums < 0 )
+                    if ( pChip.nバーからの距離dot.Drums < 0 )
                     {
                         this.actGame.st叩ききりまショー.b最初のチップが叩かれた = true;
                     }
