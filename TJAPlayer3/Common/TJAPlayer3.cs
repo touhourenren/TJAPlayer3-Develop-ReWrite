@@ -439,9 +439,9 @@ namespace TJAPlayer3
 				{
 					Directory.CreateDirectory( strSavePath );
 				}
-				catch (Exception e)
+				catch
 				{
-					Trace.TraceError( e.ToString() );
+					Trace.TraceError(ToString());
 					Trace.TraceError( "例外が発生しましたが処理を継続します。 (0bfe6bff-2a56-4df4-9333-2df26d9b765b)" );
 					return false;
 				}
@@ -622,9 +622,9 @@ namespace TJAPlayer3
 								this.previewSound.t再生を開始する();
 								Trace.TraceInformation( "DTXCからの指示で、サウンドを生成しました。({0})", strPreviewFilename );
 							}
-							catch (Exception e)
+							catch
 							{
-								Trace.TraceError( e.ToString() );
+								Trace.TraceError(ToString());
 								Trace.TraceError( "DTXCからの指示での、サウンドの生成に失敗しました。({0})", strPreviewFilename );
 								if ( this.previewSound != null )
 								{

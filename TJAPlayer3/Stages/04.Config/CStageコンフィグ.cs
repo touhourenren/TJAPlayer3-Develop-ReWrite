@@ -490,31 +490,11 @@ namespace TJAPlayer3
 						this.actList.t項目リストの設定_System();
 						break;
 
-					//case 1:
-					//    this.actList.t項目リストの設定_KeyAssignDrums();
-					//    break;
-
-					//case 2:
-					//    this.actList.t項目リストの設定_KeyAssignGuitar();
-					//    break;
-
-					//case 3:
-					//    this.actList.t項目リストの設定_KeyAssignBass();
-					//    break;
-
 					case 1:
 						this.actList.t項目リストの設定_Drums();
 						break;
 
-					//case 2:
-					//	this.actList.t項目リストの設定_Guitar();
-					//	break;
-
-					//case 3:
-					//	this.actList.t項目リストの設定_Bass();
-					//	break;
-
-					case 4:
+					case 2:
 						this.actList.t項目リストの設定_Exit();
 						break;
 				}
@@ -539,35 +519,16 @@ namespace TJAPlayer3
 			else
 			{
 				TJAPlayer3.Skin.soundカーソル移動音.t再生する();
-				this.n現在のメニュー番号 = ( ( this.n現在のメニュー番号 - 1 ) + 3 ) % 3;
-				switch( this.n現在のメニュー番号 )
+				this.n現在のメニュー番号 = ((this.n現在のメニュー番号 - 1) + 3) % 3;
+				switch ( this.n現在のメニュー番号 )
 				{
 					case 0:
 						this.actList.t項目リストの設定_System();
 						break;
 
-					//case 1:
-					//    this.actList.t項目リストの設定_KeyAssignDrums();
-					//    break;
-
-					//case 2:
-					//    this.actList.t項目リストの設定_KeyAssignGuitar();
-					//    break;
-
-					//case 3:
-					//    this.actList.t項目リストの設定_KeyAssignBass();
-					//    break;
 					case 1:
 						this.actList.t項目リストの設定_Drums();
 						break;
-
-					//case 2:
-					//	this.actList.t項目リストの設定_Guitar();
-					//	break;
-
-					//case 3:
-					//	this.actList.t項目リストの設定_Bass();
-					//	break;
 
 					case 2:
 						this.actList.t項目リストの設定_Exit();
@@ -594,46 +555,12 @@ namespace TJAPlayer3
 						str[ 1, 0 ] = "Settings for an overall systems.";
 						break;
 
-					//case 1:
-					//    str[0, 0] = "ドラムのキー入力に関する項目を設";
-					//    str[0, 1] = "定します。";
-					//    str[1, 0] = "Settings for the drums key/pad inputs.";
-					//    str[1, 1] = "";
-					//    break;
-
-					//case 2:
-					//    str[0, 0] = "ギターのキー入力に関する項目を設";
-					//    str[0, 1] = "定します。";
-					//    str[1, 0] = "Settings for the guitar key/pad inputs.";
-					//    str[1, 1] = "";
-					//    break;
-
-					//case 3:
-					//    str[0, 0] = "ベースのキー入力に関する項目を設";
-					//    str[0, 1] = "定します。";
-					//    str[1, 0] = "Settings for the bass key/pad inputs.";
-					//    str[1, 1] = "";
-					//    break;
 					case 1:
 						str[ 0, 0 ] = "ドラムの演奏に関する項目を設定します。";
 						str[ 0, 1 ] = "";
 						str[ 1, 0 ] = "Settings to play the drums.";
 						str[ 1, 1 ] = "";
 						break;
-
-					//case 2:
-					//	str[ 0, 0 ] = "ギターの演奏に関する項目を設定します。";
-					//	str[ 0, 1 ] = "";
-					//	str[ 1, 0 ] = "Settings to play the guitar.";
-					//	str[ 1, 1 ] = "";
-					//	break;
-
-					//case 3:
-					//	str[ 0, 0 ] = "ベースの演奏に関する項目を設定します。";
-					//	str[ 0, 1 ] = "";
-					//	str[ 1, 0 ] = "Settings to play the bass.";
-					//	str[ 1, 1 ] = "";
-					//	break;
 
 					case 2:
 						str[ 0, 0 ] = "設定を保存し、コンフィグ画面を終了します。";
