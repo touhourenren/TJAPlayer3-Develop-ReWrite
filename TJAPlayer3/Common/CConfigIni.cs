@@ -622,7 +622,7 @@ namespace TJAPlayer3
 		public bool bLog曲検索ログ出力;
 		public bool bLog作成解放ログ出力;
 		public STDGBVALUE<bool> bReverse;
-		//public STDGBVALUE<E判定表示優先度> e判定表示優先度;
+
 		public E判定表示優先度 e判定表示優先度;
 		public STDGBVALUE<E判定位置> e判定位置;			// #33891 2014.6.26 yyagi
 		public bool bScoreIniを出力する;
