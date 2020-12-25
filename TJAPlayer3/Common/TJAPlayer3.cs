@@ -5,15 +5,16 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Diagnostics;
-using System.Runtime.InteropServices;
 using System.IO;
 using System.Threading;
+using System.Net.NetworkInformation;
 using System.Runtime.Serialization.Formatters.Binary;
 using SlimDX;
 using SlimDX.Direct3D9;
 using FDK;
 using SampleFramework;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace TJAPlayer3
 {
@@ -1538,11 +1539,28 @@ for (int i = 0; i < 3; i++) {
 
 			    actScanningLoudness.On進行描画();
 
-                // オーバレイを描画する(テクスチャの生成されていない起動ステージは例外
-                if(r現在のステージ != null && r現在のステージ.eステージID != CStage.Eステージ.起動 && TJAPlayer3.Tx.Overlay != null)
-                {
-                    TJAPlayer3.Tx.Overlay.t2D描画(app.Device, 0, 0);
-                }
+				if (r現在のステージ != null && r現在のステージ.eステージID != CStage.Eステージ.起動 && TJAPlayer3.Tx.Overlay_Online != null && TJAPlayer3.Tx.Overlay_Offline != null)
+				{
+					if (Math.Abs(CSound管理.rc演奏用タイマ.nシステム時刻ms - this.前回のシステム時刻ms) > 10000)
+					{
+						this.前回のシステム時刻ms = CSound管理.rc演奏用タイマ.nシステム時刻ms;
+						Task.Factory.StartNew(() =>
+						{
+							//IPv4 8.8.8.8にPingを送信する(timeout 5000ms)
+							PingReply reply = new Ping().Send("8.8.8.8", 5000);
+							this.bネットワークに接続中 = reply.Status == IPStatus.Success;
+						});
+					}
+					if (this.bネットワークに接続中)
+						TJAPlayer3.Tx.Overlay_Online.t2D描画(app.Device, 0, 0);
+					else
+						TJAPlayer3.Tx.Overlay_Offline.t2D描画(app.Device, 0, 0);
+				}
+				// オーバレイを描画する(テクスチャの生成されていない起動ステージは例外
+				if (r現在のステージ != null && r現在のステージ.eステージID != CStage.Eステージ.起動 && TJAPlayer3.Tx.Overlay != null)
+				{
+					TJAPlayer3.Tx.Overlay.t2D描画(app.Device, 0, 0);
+				}
 			}
 			this.Device.EndScene();			// Present()は game.csのOnFrameEnd()に登録された、GraphicsDeviceManager.game_FrameEnd() 内で実行されるので不要
 											// (つまり、Present()は、Draw()完了後に実行される)
@@ -1802,6 +1820,8 @@ for (int i = 0; i < 3; i++) {
         //-----------------
         private bool bマウスカーソル表示中 = true;
 		private bool b終了処理完了済み;
+		private bool bネットワークに接続中 = false;
+		private long 前回のシステム時刻ms = long.MinValue;
 		private static CDTX[] dtx = new CDTX[ 4 ];
 
         public static TextureLoader Tx = new TextureLoader();
