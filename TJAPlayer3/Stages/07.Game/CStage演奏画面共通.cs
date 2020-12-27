@@ -3130,11 +3130,8 @@ namespace TJAPlayer3
 				pChip.nバーからの距離dot.Guitar = (int) ( time * ScrollSpeedGuitar );
 				pChip.nバーからの距離dot.Bass = (int) ( time * ScrollSpeedBass );
                 pChip.nバーからの距離dot.Taiko = (int) ( ( time * pChip.dbBPM * pChip.dbSCROLL * (db現在の譜面スクロール速度.Drums + 1.5 ) ) / 628.7 );
-                pChip.nバーからのノーツ末端距離dot.Drums = 0;
-                pChip.nバーからのノーツ末端距離dot.Guitar = 0;
-                pChip.nバーからのノーツ末端距離dot.Bass = 0;
                 if( pChip.nノーツ終了時刻ms != 0 )
-                    pChip.nバーからのノーツ末端距離dot.Taiko = (int) ( ( ( pChip.nノーツ終了時刻ms - n現在時刻ms) * pChip.dbBPM * pChip.dbSCROLL * (db現在の譜面スクロール速度.Drums + 1.5 ) ) / 628.7 );
+                    pChip.nバーからのノーツ末端距離dot = (int) ( ( ( pChip.nノーツ終了時刻ms - n現在時刻ms) * pChip.dbBPM * pChip.dbSCROLL * (db現在の譜面スクロール速度.Drums + 1.5 ) ) / 628.7 );
 
                 if( configIni.eScrollMode == EScrollMode.BMSCROLL || configIni.eScrollMode == EScrollMode.HBSCROLL )
                 {
@@ -3147,7 +3144,7 @@ namespace TJAPlayer3
 
                     pChip.nバーからの距離dot.Taiko = (int)( ( ( pChip.fBMSCROLLTime * NOTE_GAP ) - ( play_bpm_time * NOTE_GAP ) ) * dbSCROLL * ( db現在の譜面スクロール速度.Drums + 1.5 ) );
                     if( pChip.nノーツ終了時刻ms != 0 )
-                        pChip.nバーからのノーツ末端距離dot.Taiko = (int)( ( ( pChip.fBMSCROLLTime_end * NOTE_GAP) - ( play_bpm_time * NOTE_GAP ) ) * pChip.dbSCROLL * ( db現在の譜面スクロール速度.Drums + 1.5 ) );
+                        pChip.nバーからのノーツ末端距離dot = (int)( ( ( pChip.fBMSCROLLTime_end * NOTE_GAP) - ( play_bpm_time * NOTE_GAP ) ) * pChip.dbSCROLL * ( db現在の譜面スクロール速度.Drums + 1.5 ) );
                 }
 
 				int instIndex = (int) pChip.e楽器パート;
@@ -3582,6 +3579,7 @@ namespace TJAPlayer3
                         if ( !pChip.bHit && ( pChip.nバーからの距離dot.Drums < 0))
                         {
                             pChip.bHit = true;
+                            this.actPanel.t歌詞テクスチャを削除する();
                             if (pChip.nコース == this.n現在のコース[nPlayer])
                             {
                                 if (this.actDan.GetFailedAllChallenges())
@@ -4276,6 +4274,7 @@ namespace TJAPlayer3
 			TJAPlayer3.DTX.t全チップの再生停止とミキサーからの削除();
             this.t数値の初期化( true, true );
             this.actAVI.tReset();
+            this.actPanel.t歌詞テクスチャを削除する();
             this.t演奏位置の変更( 0, 0 );
             this.t演奏位置の変更( 0, 1 );
             TJAPlayer3.stage演奏ドラム画面.On活性化();

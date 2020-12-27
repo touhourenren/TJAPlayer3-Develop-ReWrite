@@ -268,6 +268,7 @@ namespace TJAPlayer3
             }
 
             this.ct手つなぎ = new CCounter( 0, 60, 20, TJAPlayer3.Timer );
+            this.ShownLyric2 = 0;
 
             //try
             //{
@@ -280,7 +281,7 @@ namespace TJAPlayer3
             //}
             // Discord Presence の更新
             var difficultyName = TJAPlayer3.DifficultyNumberToEnum(TJAPlayer3.stage選曲.n確定された曲の難易度).ToString();
-            Discord.UpdatePresence(TJAPlayer3.ConfigIni.SendDiscordPlayingInformation ? TJAPlayer3.DTX.TITLE + ".tja" : "",
+            Discord.UpdatePresence(TJAPlayer3.ConfigIni.SendDiscordPlayingInformation ? TJAPlayer3.DTX.strファイル名 : "",
                 Properties.Discord.Stage_InGame + (TJAPlayer3.ConfigIni.b太鼓パートAutoPlay == true ? " (" + Properties.Discord.Info_IsAuto + ")" : ""),
                 0,
                 Discord.GetUnixTime() + (long)TJAPlayer3.DTX.listChip[TJAPlayer3.DTX.listChip.Count - 1].n発声時刻ms / 1000,
@@ -513,9 +514,10 @@ namespace TJAPlayer3
                 }
 
                 this.actPanel.t歌詞テクスチャを描画する();
-                actChara.OnDraw_Balloon();
-                this.t全体制御メソッド();
 
+                actChara.OnDraw_Balloon();
+
+                this.t全体制御メソッド();
                 
                 this.actPauseMenu.t進行描画();
                 //this.actEnd.On進行描画();
@@ -1718,7 +1720,7 @@ namespace TJAPlayer3
                 }
 
                 int x = 349 + pChip.nバーからの距離dot.Taiko + 10;
-                int x末端 = 349 + pChip.nバーからのノーツ末端距離dot.Taiko + 10;
+                int x末端 = 349 + pChip.nバーからのノーツ末端距離dot + 10;
                 int y = TJAPlayer3.Skin.nScrollFieldY[ nPlayer ];
 
                 if( pChip.nチャンネル番号 >= 0x15 && pChip.nチャンネル番号 <= 0x17 )
@@ -1731,7 +1733,7 @@ namespace TJAPlayer3
                     else
                     {
                         x = 349 + pChip.nバーからの距離dot.Taiko + 10;
-                        x末端 = 349 + pChip.nバーからのノーツ末端距離dot.Taiko + 10;
+                        x末端 = 349 + pChip.nバーからのノーツ末端距離dot + 10;
                     }
                 }
                 else if( pChip.nチャンネル番号 == 0x18 )
