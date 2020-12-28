@@ -215,6 +215,8 @@ namespace TJAPlayer3
             public int[] n連打 = new int[(int)Difficulty.Total];
             public int[] nハイスコア = new int[(int)Difficulty.Total];
             public Dan_C[] Dan_C;
+			public int[] nクリア;		//0:未クリア 1:クリア 2:フルコンボ 3:ドンダフルコンボ
+			public int[] nスコアランク;  //0:未取得 1:白粋 2:銅粋 3:銀粋 4:金雅 5:桃雅 6:紫雅 7:虹極
 
 			public C演奏記録()
 			{
@@ -288,6 +290,8 @@ namespace TJAPlayer3
 				this.レーン9モード = true;
 				this.nRisky = 0;									// #23559 2011.6.20 yyagi
                 this.fゲージ = 0.0f;
+				this.nクリア = new int[5];
+				this.nスコアランク = new int[5];
                 Dan_C = new Dan_C[4];
 			}
 
@@ -1162,6 +1166,20 @@ namespace TJAPlayer3
                                             {
                                                 c演奏記録.nハイスコア[ 3 ] = int.Parse( para );
                                             }
+                                            else
+											{
+												for (int i = 0; i < 5; i++)
+												{
+													if (item.Equals("Clear" + i.ToString()))
+													{
+														c演奏記録.nクリア[i] = int.Parse(para);
+													}
+													else if (item.Equals("ScoreRank" + i.ToString()))
+													{
+														c演奏記録.nスコアランク[i] = int.Parse(para);
+													}
+												}
+											}
                                             //else if ( item.Equals( "HiScore5" ) )
                                             //{
                                             //    c演奏記録.nハイスコア[ 4 ] = int.Parse( para );
@@ -1221,7 +1239,7 @@ namespace TJAPlayer3
 			writer.WriteLine( "History4={0}", this.stファイル.History[ 4 ] );
 			writer.WriteLine( "BGMAdjust={0}", this.stファイル.BGMAdjust );
 			writer.WriteLine();
-			for( int i = 0; i < 9; i++ )
+			for ( int i = 0; i < 9; i++ )
 			{
                 string[] strArray = { "HiScore.Drums", "HiSkill.Drums", "HiScore.Guitar", "HiSkill.Guitar", "HiScore.Bass", "HiSkill.Bass", "LastPlay.Drums", "LastPlay.Guitar", "LastPlay.Bass" };
 				writer.WriteLine( "[{0}]", strArray[ i ] );
@@ -1291,8 +1309,17 @@ namespace TJAPlayer3
                 writer.WriteLine( "Roll3={0}", this.stセクション[ i ].n連打[ 2 ] );
                 writer.WriteLine( "Roll4={0}", this.stセクション[ i ].n連打[ 3 ] );
                 writer.WriteLine( "Roll5={0}", this.stセクション[ i ].n連打[ 4 ] );
+				writer.WriteLine("Clear0={0}", this.stセクション[i].nクリア[0]);
+				writer.WriteLine("Clear1={0}", this.stセクション[i].nクリア[1]);
+				writer.WriteLine("Clear2={0}", this.stセクション[i].nクリア[2]);
+				writer.WriteLine("Clear3={0}", this.stセクション[i].nクリア[3]);
+				writer.WriteLine("Clear4={0}", this.stセクション[i].nクリア[4]);
+				writer.WriteLine("ScoreRank0={0}", this.stセクション[i].nスコアランク[0]);
+				writer.WriteLine("ScoreRank1={0}", this.stセクション[i].nスコアランク[1]);
+				writer.WriteLine("ScoreRank2={0}", this.stセクション[i].nスコアランク[2]);
+				writer.WriteLine("ScoreRank3={0}", this.stセクション[i].nスコアランク[3]);
+				writer.WriteLine("ScoreRank4={0}", this.stセクション[i].nスコアランク[4]);
 			}
-
 			writer.Close();
 		}
 		internal void t全演奏記録セクションの整合性をチェックし不整合があればリセットする()

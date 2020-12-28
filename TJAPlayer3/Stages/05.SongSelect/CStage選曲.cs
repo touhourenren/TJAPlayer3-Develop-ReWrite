@@ -214,7 +214,8 @@ namespace TJAPlayer3
 
                 colCharaColor = new Color4();
 
-                NowGenre = r現在選択中の曲.strジャンル;
+                if(r現在選択中の曲 != null)
+                    NowGenre = r現在選択中の曲.strジャンル;
             }
             finally
             {
