@@ -78,6 +78,8 @@ namespace TJAPlayer3
             public int[] nハイスコア;
             public string strサブタイトル;
             public int[] nレベル;
+			public int nクリア;		//1:クリア 2:フルコンボ 3:ドンダフルコンボ
+			public int nスコアランク;  //1:クリア 2:フルコンボ 3:ドンダフルコンボ
 
 			[Serializable]
 			[StructLayout( LayoutKind.Sequential )]

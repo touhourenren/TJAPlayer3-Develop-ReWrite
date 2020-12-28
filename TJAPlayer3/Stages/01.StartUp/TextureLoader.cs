@@ -103,6 +103,11 @@ namespace TJAPlayer3
             Entry_Player[1] = TxC(TITLE + @"Entry_Player_Select_Bar.png");
             Entry_Player[2] = TxC(TITLE + @"Entry_Player_Select.png");
 
+            for(int i = 0; i < Donchan_Entry.Length; i++)
+            {
+                Donchan_Entry[i] = TxC(TITLE + @"Donchan_Entry\" + i.ToString() + ".png");
+            }
+
             #endregion
 
             #region 2_コンフィグ画面
@@ -214,6 +219,7 @@ namespace TJAPlayer3
             Notes_Arm = TxC(GAME + @"Notes_Arm.png");
             Judge = TxC(GAME + @"Judge.png");
             ChipEffect = TxC(GAME + @"ChipEffect.png");
+            ScoreRank = TxC(GAME + @"ScoreRank.png");
 
             Judge_Meter = TxC(GAME + @"Judge_Meter.png");
             Bar = TxC(GAME + @"Bar.png");
@@ -649,6 +655,7 @@ namespace TJAPlayer3
         public CTexture[] Banapas_Load_Clear = new CTexture[2];
         public CTexture[] Banapas_Load_Failure = new CTexture[2];
         public CTexture[] Entry_Player = new CTexture[3];
+        public CTexture[] Donchan_Entry = new CTexture[22];
         #endregion
 
         #region 2_コンフィグ画面
@@ -718,6 +725,7 @@ namespace TJAPlayer3
             SENotes,
             Notes_Arm,
             ChipEffect,
+            ScoreRank,
             Judge;
         public CTexture Judge_Meter,
             Bar,

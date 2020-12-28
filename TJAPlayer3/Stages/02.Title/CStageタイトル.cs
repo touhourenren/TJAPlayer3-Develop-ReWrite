@@ -42,6 +42,8 @@ namespace TJAPlayer3
 				this.ctエントリーバー点滅 = new CCounter(0, 510, 2, TJAPlayer3.Timer);
 				this.ctエントリーバー決定点滅 = new CCounter();
 
+				this.ctどんちゃんエントリーループ = new CCounter();
+
 				this.ctどんちゃんイン = new CCounter();
 				this.ctどんちゃんループ = new CCounter(0, TJAPlayer3.Tx.SongSelect_Donchan_Normal.Length - 1, 1000 / 45, TJAPlayer3.Timer);
 
@@ -50,6 +52,7 @@ namespace TJAPlayer3
 				this.bプレイヤーエントリー = false;
 				this.bプレイヤーエントリー決定 = false;
 				this.bモード選択 = false;
+				this.bどんちゃんカウンター初期化 = false;
 
 				this.n現在の選択行プレイヤーエントリー = 1;
 
@@ -118,6 +121,7 @@ namespace TJAPlayer3
 				this.ctエントリーバー決定点滅.t進行();
 				this.ctどんちゃんイン.t進行();
 				this.ctどんちゃんループ.t進行Loop();
+				this.ctどんちゃんエントリーループ.t進行Loop();
 
 				if (!TJAPlayer3.Skin.bgmタイトルイン.b再生中)
                 {
@@ -391,10 +395,19 @@ namespace TJAPlayer3
 
                 if (bプレイヤーエントリー)
                 {
+                    if (!this.bどんちゃんカウンター初期化)
+					{
+						this.ctどんちゃんエントリーループ = new CCounter(0, 21, 1000 / 30, TJAPlayer3.Timer);
+						this.bどんちゃんカウンター初期化 = true;
+					}
+
 					TJAPlayer3.Tx.Entry_Player[0].Opacity = ctエントリーバー決定点滅.n現在の値 >= 800 ? 255 - (ctエントリーバー決定点滅.n現在の値 - 800) : (this.ctバナパス読み込み成功.n現在の値 - 3400); 
 					TJAPlayer3.Tx.Entry_Player[1].Opacity = ctエントリーバー決定点滅.n現在の値 >= 800 ? 255 - (ctエントリーバー決定点滅.n現在の値 - 800) : (this.ctバナパス読み込み成功.n現在の値 - 3400);
+					TJAPlayer3.Tx.Donchan_Entry[this.ctどんちゃんエントリーループ.n現在の値].Opacity = ctエントリーバー決定点滅.n現在の値 >= 800 ? 255 - (ctエントリーバー決定点滅.n現在の値 - 800) : (this.ctバナパス読み込み成功.n現在の値 - 3400);
 
 					TJAPlayer3.Tx.Entry_Player[0].t2D描画(TJAPlayer3.app.Device, 0, 0);
+
+					TJAPlayer3.Tx.Donchan_Entry[this.ctどんちゃんエントリーループ.n現在の値].t2D描画(TJAPlayer3.app.Device, 485, 140);
 
 					TJAPlayer3.Tx.Entry_Player[2].Opacity = ctエントリーバー決定点滅.n現在の値 >= 800 ? 255 - (ctエントリーバー決定点滅.n現在の値 - 800 ) : (this.ctバナパス読み込み成功.n現在の値 - 3400) - (this.ctエントリーバー点滅.n現在の値 <= 255 ? this.ctエントリーバー点滅.n現在の値 : 255 - (this.ctエントリーバー点滅.n現在の値 - 255));
 					TJAPlayer3.Tx.Entry_Player[2].t2D描画(TJAPlayer3.app.Device, ptプレイヤーエントリーバー座標[n現在の選択行プレイヤーエントリー].X, ptプレイヤーエントリーバー座標[n現在の選択行プレイヤーエントリー].Y,
@@ -533,6 +546,7 @@ namespace TJAPlayer3
 		private CCounter ctエントリーバー点滅;
 		private CCounter ctエントリーバー決定点滅;
 
+		private CCounter ctどんちゃんエントリーループ;
 		private CCounter ctどんちゃんイン;
 		private CCounter ctどんちゃんループ;
 
@@ -541,6 +555,7 @@ namespace TJAPlayer3
 		private bool bプレイヤーエントリー;
 		private bool bプレイヤーエントリー決定;
 		private bool bモード選択;
+		private bool bどんちゃんカウンター初期化;
 
 		private int n現在の選択行プレイヤーエントリー;
 		private int n現在の選択行モード選択;

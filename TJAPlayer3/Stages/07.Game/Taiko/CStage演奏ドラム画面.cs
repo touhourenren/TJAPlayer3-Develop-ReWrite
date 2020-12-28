@@ -65,6 +65,7 @@ namespace TJAPlayer3
             base.list子Activities.Add(this.FlyingNotes = new FlyingNotes());
             base.list子Activities.Add(this.FireWorks = new FireWorks());
             base.list子Activities.Add(this.PuchiChara = new PuchiChara());
+            base.list子Activities.Add(this.ScoreRank = new CAct演奏Drumsスコアランク());
 
             base.list子Activities.Add(this.actDan = new Dan_Cert());
             #region[ 文字初期化 ]
@@ -529,7 +530,7 @@ namespace TJAPlayer3
                 //this.actEnd.On進行描画();
 				this.t進行描画_STAGEFAILED();
 
-               
+                this.ScoreRank.On進行描画();
 
                 bIsFinishedEndAnime = this.actEnd.On進行描画() == 1 ? true : false;
 				bIsFinishedFadeout = this.t進行描画_フェードイン_アウト();
@@ -616,6 +617,7 @@ namespace TJAPlayer3
         public FlyingNotes FlyingNotes;
         public FireWorks FireWorks;
         public PuchiChara PuchiChara;
+        public CAct演奏Drumsスコアランク ScoreRank;
         private bool bフィルイン中;
 		private readonly Eパッド[] eチャンネルtoパッド = new Eパッド[]
 		{
