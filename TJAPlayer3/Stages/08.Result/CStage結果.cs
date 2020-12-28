@@ -21,10 +21,13 @@ namespace TJAPlayer3
 		public STDGBVALUE<float> fMiss率;
 		public STDGBVALUE<bool> bオート;        // #23596 10.11.16 add ikanick
 											 //        10.11.17 change (int to bool) ikanick
+
 		public STDGBVALUE<int> nランク値;
 		public STDGBVALUE<int> n演奏回数;
 		public STDGBVALUE<int> nScoreRank;
 		public int n総合ランク値;
+		public int nクリア;        //0:未クリア 1:クリア 2:フルコンボ 3:ドンダフルコンボ
+		public int nスコアランク;  //0:未取得 1:白粋 2:銅粋 3:銀粋 4:金雅 5:桃雅 6:紫雅 7:虹極
 		public CDTX.CChip[] r空うちドラムチップ;
 		public STDGBVALUE<CScoreIni.C演奏記録> st演奏記録;
 
@@ -70,6 +73,7 @@ namespace TJAPlayer3
 					this.bIsCheckedWhetherResultScreenShouldSaveOrNot = false;              // #24609 2011.3.14 yyagi
 					this.n最後に再生したHHのWAV番号 = -1;
 					this.n最後に再生したHHのチャンネル番号 = 0;
+					
 					for (int i = 0; i < 3; i++)
 					{
 						this.b新記録スキル[i] = false;
@@ -114,6 +118,22 @@ namespace TJAPlayer3
 						}
 					}
 					this.n総合ランク値 = CScoreIni.t総合ランク値を計算して返す(this.st演奏記録.Drums, this.st演奏記録.Guitar, this.st演奏記録.Bass);
+					this.nクリア = (this.st演奏記録.Drums.nMiss数 == 0 && this.st演奏記録.Drums.fゲージ == 100) ? this.st演奏記録.Drums.nGreat数 == 0 ? 3 : 2 : this.st演奏記録.Drums.fゲージ >= 80 ? 1 : 0;
+
+					if (this.st演奏記録.Drums.nスコア < 500000)
+					{
+						this.nスコアランク = 0;
+					}
+					else
+					{
+						for (int i = 0; i < 7; i++)
+						{
+							if (this.st演奏記録.Drums.nスコア >= TJAPlayer3.stage演奏ドラム画面.ScoreRank.ScoreRank[i])
+							{
+								this.nスコアランク = i + 1;
+							}
+						}
+					}
 					//---------------------
 					#endregion
 
@@ -153,6 +173,9 @@ namespace TJAPlayer3
 						ini.stセクション[0] = this.st演奏記録[0];
 					}
 
+					ini.stセクション[0].nクリア[TJAPlayer3.stage選曲.n確定された曲の難易度] = this.nクリア;
+					ini.stセクション[0].nスコアランク[TJAPlayer3.stage選曲.n確定された曲の難易度] = this.nスコアランク;
+
 					// ラストプレイ #23595 2011.1.9 ikanick
 					// オートじゃなければプレイ結果を書き込む
 					if (TJAPlayer3.ConfigIni.b太鼓パートAutoPlay == false)
@@ -190,6 +213,13 @@ namespace TJAPlayer3
 				//---------------------
 				if (!TJAPlayer3.bコンパクトモード)
 				{
+					Cスコア cスコア = TJAPlayer3.stage選曲.r確定されたスコア;
+
+					if(cスコア.譜面情報.nクリア[TJAPlayer3.stage選曲.n確定された曲の難易度] < nクリア)
+						cスコア.譜面情報.nクリア[TJAPlayer3.stage選曲.n確定された曲の難易度] = this.nクリア;
+
+					if (cスコア.譜面情報.nスコアランク[TJAPlayer3.stage選曲.n確定された曲の難易度] < nスコアランク)
+						cスコア.譜面情報.nスコアランク[TJAPlayer3.stage選曲.n確定された曲の難易度] = this.nスコアランク;
 				}
 				//---------------------
 				#endregion

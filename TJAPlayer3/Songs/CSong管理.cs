@@ -859,6 +859,16 @@ namespace TJAPlayer3
             cスコア.譜面情報.nレベル[4] = br.ReadInt32();
             cスコア.譜面情報.nレベル[5] = br.ReadInt32();
             cスコア.譜面情報.nレベル[6] = br.ReadInt32();
+			cスコア.譜面情報.nクリア[0] = br.ReadInt32();
+			cスコア.譜面情報.nクリア[1] = br.ReadInt32();
+			cスコア.譜面情報.nクリア[2] = br.ReadInt32();
+			cスコア.譜面情報.nクリア[3] = br.ReadInt32();
+			cスコア.譜面情報.nクリア[4] = br.ReadInt32();
+			cスコア.譜面情報.nスコアランク[0] = br.ReadInt32();
+			cスコア.譜面情報.nスコアランク[1] = br.ReadInt32();
+			cスコア.譜面情報.nスコアランク[2] = br.ReadInt32();
+			cスコア.譜面情報.nスコアランク[3] = br.ReadInt32();
+			cスコア.譜面情報.nスコアランク[4] = br.ReadInt32();
 
 
             //Debug.WriteLine( "songs.db: " + cスコア.ファイル情報.ファイルの絶対パス );
@@ -1274,6 +1284,16 @@ namespace TJAPlayer3
                     bw.Write( node.arスコア[ i ].譜面情報.nレベル[4] );
                     bw.Write(node.arスコア[i].譜面情報.nレベル[5]);
                     bw.Write(node.arスコア[i].譜面情報.nレベル[6]);
+					bw.Write(node.arスコア[i].譜面情報.nクリア[0]);
+					bw.Write(node.arスコア[i].譜面情報.nクリア[1]);
+					bw.Write(node.arスコア[i].譜面情報.nクリア[2]);
+					bw.Write(node.arスコア[i].譜面情報.nクリア[3]);
+					bw.Write(node.arスコア[i].譜面情報.nクリア[4]);
+					bw.Write(node.arスコア[i].譜面情報.nスコアランク[0]);
+					bw.Write(node.arスコア[i].譜面情報.nスコアランク[1]);
+					bw.Write(node.arスコア[i].譜面情報.nスコアランク[2]);
+					bw.Write(node.arスコア[i].譜面情報.nスコアランク[3]);
+					bw.Write(node.arスコア[i].譜面情報.nスコアランク[4]);
                     this.nSongsDBへ出力できたスコア数++;
 				}
 			}
@@ -1706,6 +1726,8 @@ Debug.WriteLine( dBPM + ":" + c曲リストノード.strタイトル );
 					score.譜面情報.最大スキル[ n楽器番号 ] = ini.stセクション[ n ].db演奏型スキル値;
 					score.譜面情報.フルコンボ[ n楽器番号 ] = ini.stセクション[ n ].bフルコンボである;
                     score.譜面情報.ハイスコア = (int)ini.stセクション.HiScoreDrums.nスコア;
+					score.譜面情報.nクリア = ini.stセクション.HiScoreDrums.nクリア;
+					score.譜面情報.nスコアランク = ini.stセクション.HiScoreDrums.nスコアランク;
                     for( int i = 0; i < (int)Difficulty.Total; i++ )
                     {
                         score.譜面情報.nハイスコア[ i ] = (int)ini.stセクション.HiScoreDrums.nハイスコア[ i ];

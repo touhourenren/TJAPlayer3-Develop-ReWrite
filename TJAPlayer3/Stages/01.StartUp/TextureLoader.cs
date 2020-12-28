@@ -105,6 +105,11 @@ namespace TJAPlayer3
             Entry_Player[1] = TxC(TITLE + @"Entry_Player_Select_Bar.png");
             Entry_Player[2] = TxC(TITLE + @"Entry_Player_Select.png");
 
+            for(int i = 0; i < Donchan_Entry.Length; i++)
+            {
+                Donchan_Entry[i] = TxC(TITLE + @"Donchan_Entry\" + i.ToString() + ".png");
+            }
+
             #endregion
 
             #region 2_コンフィグ画面
@@ -138,6 +143,8 @@ namespace TJAPlayer3
             SongSelect_Timer = TxC(SONGSELECT + @"Timer.png");
             SongSelect_Song_Number = TxC(SONGSELECT + @"Song_Number.png");
             SongSelect_Bar_Genre_Overlay = TxC(SONGSELECT + @"Bar_Genre_Overlay.png");
+            SongSelect_Crown = TxC(SONGSELECT + @"SongSelect_Crown.png");
+            SongSelect_ScoreRank = TxC(SONGSELECT + @"ScoreRank.png");
             
             for (int i = 0; i < (int)Difficulty.Total; i++)
             {
@@ -185,6 +192,7 @@ namespace TJAPlayer3
             Difficulty_Number = TxC(SONGSELECT + @"Difficulty_Select\Difficulty_Number.png");
             Difficulty_Star = TxC(SONGSELECT + @"Difficulty_Select\Difficulty_Star.png");
             Difficulty_Select_Bar = TxC(SONGSELECT + @"Difficulty_Select\Difficulty_Select_Bar.png");
+            Difficulty_Crown = TxC(SONGSELECT + @"Difficulty_Select\Difficulty_Crown.png");
 
             TJAPlayer3.Skin.SongSelect_Difficulty_Background_Count = TJAPlayer3.t連番画像の枚数を数える(CSkin.Path(BASE + SONGSELECT + @"Difficulty_Select\Difficulty_Back\"), "Difficulty_Back_");
 
@@ -216,6 +224,7 @@ namespace TJAPlayer3
             Notes_Arm = TxC(GAME + @"Notes_Arm.png");
             Judge = TxC(GAME + @"Judge.png");
             ChipEffect = TxC(GAME + @"ChipEffect.png");
+            ScoreRank = TxC(GAME + @"ScoreRank.png");
 
             Judge_Meter = TxC(GAME + @"Judge_Meter.png");
             Bar = TxC(GAME + @"Bar.png");
@@ -653,6 +662,7 @@ namespace TJAPlayer3
         public CTexture[] Banapas_Load_Clear = new CTexture[2];
         public CTexture[] Banapas_Load_Failure = new CTexture[2];
         public CTexture[] Entry_Player = new CTexture[3];
+        public CTexture[] Donchan_Entry = new CTexture[22];
         #endregion
 
         #region 2_コンフィグ画面
@@ -686,6 +696,8 @@ namespace TJAPlayer3
             SongSelect_Bar_Genre_Overlay,
             SongSelect_Credit,
             SongSelect_Timer,
+            SongSelect_Crown,
+            SongSelect_ScoreRank,
             SongSelect_Song_Number,
             SongSelect_ScoreWindow_Text;
         public CTexture[] SongSelect_GenreBack,
@@ -701,6 +713,7 @@ namespace TJAPlayer3
         public CTexture Difficulty_Select_Bar;
         public CTexture Difficulty_Number;
         public CTexture Difficulty_Star;
+        public CTexture Difficulty_Crown;
 
         public CTexture[] Difficulty_Back = new CTexture[8];
         #endregion
@@ -722,6 +735,7 @@ namespace TJAPlayer3
             SENotes,
             Notes_Arm,
             ChipEffect,
+            ScoreRank,
             Judge;
         public CTexture Judge_Meter,
             Bar,

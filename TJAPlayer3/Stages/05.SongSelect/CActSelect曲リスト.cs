@@ -866,7 +866,22 @@ namespace TJAPlayer3
 								this.stバー情報[index].b分岐 = song.arスコア[f].譜面情報.b譜面分岐;
 						}
 
+						if (stバー情報[index].nクリア == null)
+							this.stバー情報[index].nクリア = new int[5];
+						if (stバー情報[index].nスコアランク == null)
+							this.stバー情報[index].nスコアランク = new int[5];
 
+						if (this.stバー情報[index].eバー種別 == Eバー種別.Score)
+						{
+							for (int j = 0; j < 5; j++)
+							{
+								if (song.arスコア[3] != null)
+								{
+									this.stバー情報[index].nクリア[j] = song.arスコア[3].譜面情報.nクリア[j];
+									this.stバー情報[index].nスコアランク[j] = song.arスコア[3].譜面情報.nスコアランク[j];
+								}
+							}
+						}
 						// stバー情報[] の内容を1行ずつずらす。
 
 						C曲リストノード song2 = this.r現在選択中の曲;
@@ -937,6 +952,22 @@ namespace TJAPlayer3
 								this.stバー情報[index].b分岐 = song.arスコア[f].譜面情報.b譜面分岐;
 						}
 
+						if (stバー情報[index].nクリア == null)
+							this.stバー情報[index].nクリア = new int[5];
+						if (stバー情報[index].nスコアランク == null)
+							this.stバー情報[index].nスコアランク = new int[5];
+
+						if (this.stバー情報[index].eバー種別 == Eバー種別.Score)
+						{
+							for (int j = 0; j < 5; j++)
+							{
+								if (song.arスコア[3] != null)
+								{
+									this.stバー情報[index].nクリア[j] = song.arスコア[3].譜面情報.nクリア[j];
+									this.stバー情報[index].nスコアランク[j] = song.arスコア[3].譜面情報.nスコアランク[j];
+								}
+							}
+						}
 						// stバー情報[] の内容を1行ずつずらす。
 
 						C曲リストノード song2 = this.r現在選択中の曲;
@@ -1163,9 +1194,9 @@ namespace TJAPlayer3
 				TJAPlayer3.Tx.SongSelect_Bar_Genre_Overlay.vc拡大縮小倍率.X = 1.0f;
 				TJAPlayer3.Tx.SongSelect_Bar_Genre_Back.vc拡大縮小倍率.X = 1.0f;
 				if (n現在のスクロールカウンタ != 0)
-					this.tジャンル別選択されていない曲バーの描画(xAnime - (int)Box, y - ((int)Box * 3), this.stバー情報[nパネル番号].strジャンル, stバー情報[nパネル番号].eバー種別);
+					this.tジャンル別選択されていない曲バーの描画(xAnime - (int)Box, y - ((int)Box * 3), this.stバー情報[nパネル番号].strジャンル, stバー情報[nパネル番号].eバー種別, stバー情報[nパネル番号].nクリア, stバー情報[nパネル番号].nスコアランク);
 				else if (n見た目の行番号 != 4)
-					this.tジャンル別選択されていない曲バーの描画(xAnime - (int)Box, y - ((int)Box * 3), this.stバー情報[nパネル番号].strジャンル, stバー情報[nパネル番号].eバー種別);
+					this.tジャンル別選択されていない曲バーの描画(xAnime - (int)Box, y - ((int)Box * 3), this.stバー情報[nパネル番号].strジャンル, stバー情報[nパネル番号].eバー種別, stバー情報[nパネル番号].nクリア, stバー情報[nパネル番号].nスコアランク);
 				//-----------------
 				#endregion
 
@@ -1239,9 +1270,11 @@ namespace TJAPlayer3
 
 				if (r現在選択中の曲.eノード種別 == C曲リストノード.Eノード種別.SCORE)
                 {
-					#region [ Score ]
+                    #region [ Score ]
 
-					if (ctBoxOpen.n現在の値 >= 1300 && ctBoxOpen.n現在の値 <= 1940)
+                    #region [ Bar ]
+
+                    if (ctBoxOpen.n現在の値 >= 1300 && ctBoxOpen.n現在の値 <= 1940)
 					{
 						TJAPlayer3.Tx.SongSelect_Bar_Genre_Overlay.vc拡大縮小倍率.X = 1.0f - (float)Math.Sin(((ctBoxOpen.n現在の値 - 1300) * 0.28125f) * (Math.PI / 180)) * 1.0f;
 						TJAPlayer3.Tx.SongSelect_Bar_Genre[nStrジャンルtoNum(r現在選択中の曲.strジャンル)].vc拡大縮小倍率.X = 1.0f - (float)Math.Sin(((ctBoxOpen.n現在の値 - 1300) * 0.28125f) * (Math.PI / 180)) * 1.0f;
@@ -1265,7 +1298,7 @@ namespace TJAPlayer3
 						TJAPlayer3.Tx.SongSelect_Bar_Genre_Overlay.t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, 640, 326 - BarAnimeCount, new Rectangle(0, 0, 632, 21));
 
 						TJAPlayer3.Tx.SongSelect_Bar_Genre_Overlay.vc拡大縮小倍率.Y = BarAnimeCount == 0 ? 1.0f : 1.0f + (float)(BarAnimeCount) /  24.5f;
-						TJAPlayer3.Tx.SongSelect_Bar_Genre_Overlay.t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, 640, 360, new Rectangle(0, 21, 632, 48));
+						TJAPlayer3.Tx.SongSelect_Bar_Genre_Overlay.t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, 640, 359, new Rectangle(0, 21, 632, 48));
 						TJAPlayer3.Tx.SongSelect_Bar_Genre_Overlay.vc拡大縮小倍率.Y = 1.0f;
 
 						TJAPlayer3.Tx.SongSelect_Bar_Genre_Overlay.t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, 640, 394 + BarAnimeCount, new Rectangle(0, 69, 632, 23));
@@ -1275,8 +1308,35 @@ namespace TJAPlayer3
 						TJAPlayer3.Tx.SongSelect_Bar_Genre_Overlay.t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, 640, 360, new Rectangle(0, 0, 632, 92));
 					}
 					#endregion
+
+					#region [ Crown and ScoreRank ]
+
+					if (this.r現在選択中の曲.arスコア[3] != null)
+					{
+						var クリア = this.r現在選択中の曲.arスコア[3].譜面情報.nクリア;
+						var スコアランク = this.r現在選択中の曲.arスコア[3].譜面情報.nスコアランク;
+
+						TJAPlayer3.Tx.SongSelect_Crown.vc拡大縮小倍率.X = 0.8f + BarAnimeCount / 620f;
+						TJAPlayer3.Tx.SongSelect_Crown.vc拡大縮小倍率.Y = 0.8f + BarAnimeCount / 620f;
+						TJAPlayer3.Tx.SongSelect_ScoreRank.vc拡大縮小倍率.X = 0.8f + BarAnimeCount / 620f;
+						TJAPlayer3.Tx.SongSelect_ScoreRank.vc拡大縮小倍率.Y = 0.8f + BarAnimeCount / 620f;
+
+						if (クリア[3] != 0)
+							TJAPlayer3.Tx.SongSelect_Crown.t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, 354, 344 - BarAnimeCount / 1.1f, new RectangleF(9 * 43.2f + (クリア[3] - 1) * 43.2f, 0, 43.2f, 39));
+						else if (クリア[4] != 0)
+							TJAPlayer3.Tx.SongSelect_Crown.t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, 354, 344 - BarAnimeCount / 1.1f, new RectangleF(12 * 43.2f + (クリア[4] - 1) * 43.2f, 0, 43.2f, 39));
+
+						if (スコアランク[3] != 0)
+							TJAPlayer3.Tx.SongSelect_ScoreRank.t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, 354, 374 - BarAnimeCount / 1.15f, new RectangleF(0, (スコアランク[3] - 1) * 42.71f, 50, 42.71f));
+						else if (スコアランク[4] != 0)
+							TJAPlayer3.Tx.SongSelect_ScoreRank.t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, 354, 374 - BarAnimeCount / 1.15f, new RectangleF(0, (スコアランク[4] - 1) * 42.71f, 50, 42.71f));
+					}
+
+					#endregion
+
+					#endregion
 				}
-				if(r現在選択中の曲.eノード種別 == C曲リストノード.Eノード種別.BOX)
+                if (r現在選択中の曲.eノード種別 == C曲リストノード.Eノード種別.BOX)
                 {
 					#region [ Box ]
 					if (ctBoxOpen.n現在の値 >= 1300 && ctBoxOpen.n現在の値 <= 1940)
@@ -1624,6 +1684,8 @@ namespace TJAPlayer3
             public string strジャンル;
             public string strサブタイトル;
             public TitleTextureKey ttkタイトル;
+			public int[] nクリア;
+			public int[] nスコアランク;
 		}
 
 		public CCounter ctBarFlash;
@@ -1809,8 +1871,26 @@ namespace TJAPlayer3
                     if( song.arスコア[ f ] != null )
                         this.stバー情報[ i ].b分岐 = song.arスコア[ f ].譜面情報.b譜面分岐;
                 }
-				
-				for( int j = 0; j < 3; j++ )
+
+
+				if (stバー情報[i].nクリア == null)
+					this.stバー情報[i].nクリア = new int[5];
+				if (stバー情報[i].nスコアランク == null)
+					this.stバー情報[i].nスコアランク = new int[5];
+
+				if(this.stバー情報[i].eバー種別 == Eバー種別.Score)
+				{
+					for (int j = 0; j < 5; j++)
+					{
+						if (song.arスコア[3] != null)
+						{
+							this.stバー情報[i].nクリア[j] = song.arスコア[3].譜面情報.nクリア[j];
+							this.stバー情報[i].nスコアランク[j] = song.arスコア[3].譜面情報.nスコアランク[j];
+						}
+					}
+				}
+
+				for ( int j = 0; j < 3; j++ )
 					this.stバー情報[ i ].nスキル値[ j ] = (int) song.arスコア[ this.n現在のアンカ難易度レベルに最も近い難易度レベルを返す( song ) ].譜面情報.最大スキル[ j ];
 
                 this.stバー情報[ i ].ttkタイトル = this.ttk曲名テクスチャを生成する( this.stバー情報[ i ].strタイトル文字列, this.stバー情報[i].ForeColor, this.stバー情報[i].BackColor, stバー情報[i].eバー種別 == Eバー種別.Box ? this.pfBoxName : this.pfMusicName);
@@ -1821,12 +1901,12 @@ namespace TJAPlayer3
 			this.n現在の選択行 = 4;
 		}
 
-		private void tジャンル別選択されていない曲バーの描画( int x, int y, string strジャンル, Eバー種別 eバー種別 )
+		private void tジャンル別選択されていない曲バーの描画(int x, int y, string strジャンル, Eバー種別 eバー種別, int[] クリア, int[] スコアランク)
 		{
-			if( x >= SampleFramework.GameWindowSize.Width || y >= SampleFramework.GameWindowSize.Height )
+			if (x >= SampleFramework.GameWindowSize.Width || y >= SampleFramework.GameWindowSize.Height)
 				return;
 
-			var rc = new Rectangle( 0, 48, 128, 48 );
+			var rc = new Rectangle(0, 48, 128, 48);
 
 			for (int i = 0; i < TJAPlayer3.Skin.SongSelect_Bar_Genre_Count; i++)
 			{
@@ -1836,6 +1916,8 @@ namespace TJAPlayer3
 					{
 						if (ctDifficultyIn.n現在の値 <= 1255)
 						{
+							TJAPlayer3.Tx.SongSelect_Crown.Opacity = (int)255.0f - (ctDifficultyIn.n現在の値 - 1000);
+							TJAPlayer3.Tx.SongSelect_ScoreRank.Opacity = (int)255.0f - (ctDifficultyIn.n現在の値 - 1000);
 							TJAPlayer3.Tx.SongSelect_Bar_Genre[i].Opacity = (int)255.0f - (ctDifficultyIn.n現在の値 - 1000);
 							TJAPlayer3.Tx.SongSelect_Bar_Genre_Back.Opacity = (int)255.0f - (ctDifficultyIn.n現在の値 - 1000);
 							TJAPlayer3.Tx.SongSelect_Bar_Genre_Overlay.Opacity = (int)255.0f - (ctDifficultyIn.n現在の値 - 1000);
@@ -1844,6 +1926,8 @@ namespace TJAPlayer3
 				}
 				else
 				{
+					TJAPlayer3.Tx.SongSelect_Crown.Opacity = (int)255.0f;
+					TJAPlayer3.Tx.SongSelect_ScoreRank.Opacity = (int)255.0f;
 					TJAPlayer3.Tx.SongSelect_Bar_Genre[i].Opacity = (int)255.0f;
 					TJAPlayer3.Tx.SongSelect_Bar_Genre_Back.Opacity = (int)255.0f;
 					TJAPlayer3.Tx.SongSelect_Bar_Genre_Overlay.Opacity = (int)255.0f;
@@ -1851,13 +1935,13 @@ namespace TJAPlayer3
 			}
 
 			if (eバー種別 != Eバー種別.BackBox)
-            {
+			{
 				if (this.nStrジャンルtoNum(strジャンル) == 0)
 				{
 					if (TJAPlayer3.Tx.SongSelect_Bar_Genre[0] != null)
 						TJAPlayer3.Tx.SongSelect_Bar_Genre[0].t2D描画(TJAPlayer3.app.Device, x, y);
 				}
-                else
+				else
 				{
 					for (int i = 0; i < TJAPlayer3.Skin.SongSelect_GenreName.Length; i++)
 					{
@@ -1882,11 +1966,28 @@ namespace TJAPlayer3
 				if (TJAPlayer3.Tx.SongSelect_Bar_Genre_Overlay != null)
 					TJAPlayer3.Tx.SongSelect_Bar_Genre_Overlay.t2D描画(TJAPlayer3.app.Device, x, y);
 			}
-            else
+			else
 			{
 				TJAPlayer3.Tx.SongSelect_Bar_Genre_Back.t2D描画(TJAPlayer3.app.Device, x, y);
 			}
 
+			if (eバー種別 == Eバー種別.Score)
+			{
+				TJAPlayer3.Tx.SongSelect_Crown.vc拡大縮小倍率.X = 0.8f;
+				TJAPlayer3.Tx.SongSelect_Crown.vc拡大縮小倍率.Y = 0.8f;
+				TJAPlayer3.Tx.SongSelect_ScoreRank.vc拡大縮小倍率.X = 0.8f;
+				TJAPlayer3.Tx.SongSelect_ScoreRank.vc拡大縮小倍率.Y = 0.8f;
+
+				if (クリア[3] != 0)
+					TJAPlayer3.Tx.SongSelect_Crown.t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, x + 30, y + 30, new RectangleF(9 * 43.2f + (クリア[3] - 1) * 43.2f, 0, 43.2f, 39));
+				else if (クリア[4] != 0)
+					TJAPlayer3.Tx.SongSelect_Crown.t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, x + 30, y + 30, new RectangleF(12 * 43.2f + (クリア[4] - 1) * 43.2f, 0, 43.2f, 39));
+
+				if (スコアランク[3] != 0)
+					TJAPlayer3.Tx.SongSelect_ScoreRank.t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, x + 30, y + 60, new RectangleF(0, (スコアランク[3] - 1) * 42.71f, 50, 42.71f));
+				else if (スコアランク[4] != 0)
+					TJAPlayer3.Tx.SongSelect_ScoreRank.t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, x + 30, y + 60, new RectangleF(0, (スコアランク[4] - 1) * 42.71f, 50, 42.71f));
+			}
 		}
 
 		public int nStrジャンルtoNum(string strジャンル)
