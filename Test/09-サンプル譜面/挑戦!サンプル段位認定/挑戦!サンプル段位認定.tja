@@ -7,6 +7,8 @@ LYRICFILE:,,,タイフーンパレード.lrc
 
 //歌詞の指定例  LYRICFILE:hoge1.lrc,hoge2.lrc,hoge3.lrc
 //#NEXTSONGを使用した場合、上記のようにカンマ区切りで複数ファイルを指定できますが、#STARTに対してのlrc,1つめの#NEXTSONGに対してのlrc,2つめの#NEXTSONGに対してのlrcとなるため、#START直後に#NEXTSONGを使用する場合、hoge1.lrcの部分は空白(スペースなし)にする必要があります。
+//* ファイル名に`,`(カンマ)が含まれている場合、`\,`と表記すれば、ファイル名の一部として扱われます。
+//* (#LYRICと併用した場合、字幕挙動が変になります)
 
 COURSE:Dan
 LEVEL:8
