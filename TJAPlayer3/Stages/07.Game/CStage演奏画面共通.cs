@@ -1190,9 +1190,9 @@ namespace TJAPlayer3
                     if( TJAPlayer3.DTX.nScoreModeTmp == 0 || TJAPlayer3.DTX.nScoreModeTmp == 1 )
                     {
                         if( pChip.nチャンネル番号 == 0x15 )
-                            this.actScore.Add( E楽器パート.TAIKO, this.bIsAutoPlay, 300L, nPlayer );
+                            this.actScore.Add( E楽器パート.TAIKO, this.bIsAutoPlay, 100L, nPlayer );
                         else
-                            this.actScore.Add( E楽器パート.TAIKO, this.bIsAutoPlay, 360L, nPlayer );
+                            this.actScore.Add( E楽器パート.TAIKO, this.bIsAutoPlay, 100L, nPlayer );
                     }
                     // 新配点
                     else
@@ -1296,9 +1296,6 @@ namespace TJAPlayer3
                     if(pChip.bGOGOTIME && !TJAPlayer3.ConfigIni.ShinuchiMode)
                     {
                         this.actScore.Add(E楽器パート.TAIKO, this.bIsAutoPlay, 6000L, player);
-                    } else
-                    {
-                        this.actScore.Add(E楽器パート.TAIKO, this.bIsAutoPlay, 5000L, player);
                     }
                     pChip.bHit = true;
                     pChip.IsHitted = true;

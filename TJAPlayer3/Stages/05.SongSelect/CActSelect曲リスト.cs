@@ -1242,9 +1242,9 @@ namespace TJAPlayer3
 					ResolveTitleTexture(this.stバー情報[nパネル番号].ttkタイトル).Opacity = 255;
 
 				if (n現在のスクロールカウンタ != 0)
-					ResolveTitleTexture(this.stバー情報[nパネル番号].ttkタイトル).t2D中心基準描画(TJAPlayer3.app.Device, xAnime + 316 - Box, y + 59 - (Box * 3));
+					ResolveTitleTexture(this.stバー情報[nパネル番号].ttkタイトル).t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, xAnime + 316 - Box, y + 59 - (Box * 3));
 				else if (n見た目の行番号 != 4)
-					ResolveTitleTexture(this.stバー情報[nパネル番号].ttkタイトル).t2D中心基準描画(TJAPlayer3.app.Device, xAnime + 316 - Box, y + 62 - (Box * 3));
+					ResolveTitleTexture(this.stバー情報[nパネル番号].ttkタイトル).t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, xAnime + 316 - Box, y + 62 - (Box * 3));
 				#endregion
 
 				//-----------------					
@@ -1633,17 +1633,17 @@ namespace TJAPlayer3
 									tx選択している曲のサブタイトル.Opacity = (int)255.0f - (ctDifficultyIn.n現在の値 - 1000);
 						} 
 
-						tx選択している曲のサブタイトル.t2D中心基準描画(TJAPlayer3.app.Device, 640, y + 90 - (this.stバー情報[nパネル番号].eバー種別 == Eバー種別.Box ? BarAnimeCount : BarAnimeCount / 1.1f));
+						tx選択している曲のサブタイトル.t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, 640, y + 90 - (this.stバー情報[nパネル番号].eバー種別 == Eバー種別.Box ? BarAnimeCount : BarAnimeCount / 1.1f));
 						if (this.ttk選択している曲の曲名 != null)
 						{
-							ResolveTitleTexture(this.ttk選択している曲の曲名).t2D中心基準描画(TJAPlayer3.app.Device, 640, y + 62 - (r現在選択中の曲.eノード種別 != C曲リストノード.Eノード種別.BACKBOX ? (this.stバー情報[nパネル番号].eバー種別 == Eバー種別.Box ? BarAnimeCount : BarAnimeCount / 1.1f) : 0));
+							ResolveTitleTexture(this.ttk選択している曲の曲名).t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, 640, y + 62 - (r現在選択中の曲.eノード種別 != C曲リストノード.Eノード種別.BACKBOX ? (this.stバー情報[nパネル番号].eバー種別 == Eバー種別.Box ? BarAnimeCount : BarAnimeCount / 1.1f) : 0));
 						}
 					}
 					else
 					{
 						if (this.ttk選択している曲の曲名 != null)
 						{
-							ResolveTitleTexture(this.ttk選択している曲の曲名).t2D中心基準描画(TJAPlayer3.app.Device, 640, y + 62 - (r現在選択中の曲.eノード種別 != C曲リストノード.Eノード種別.BACKBOX ? (this.stバー情報[nパネル番号].eバー種別 == Eバー種別.Box ? BarAnimeCount : BarAnimeCount / 1.1f) : 0));
+							ResolveTitleTexture(this.ttk選択している曲の曲名).t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, 640, y + 62 - (r現在選択中の曲.eノード種別 != C曲リストノード.Eノード種別.BACKBOX ? (this.stバー情報[nパネル番号].eバー種別 == Eバー種別.Box ? BarAnimeCount : BarAnimeCount / 1.1f) : 0));
 						}
 					}
 					//-----------------
@@ -2064,12 +2064,12 @@ namespace TJAPlayer3
 
 		private TitleTextureKey ttk曲名テクスチャを生成する( string str文字, Color forecolor, Color backcolor, CPrivateFastFont pf)
         {
-            return new TitleTextureKey(str文字, pf, forecolor, backcolor, 410);
+            return new TitleTextureKey(str文字, pf, forecolor, backcolor, 550);
         }
 
 	    private TitleTextureKey ttkサブタイトルテクスチャを生成する( string str文字, Color forecolor, Color backcolor)
         {
-            return new TitleTextureKey(str文字, pfSubtitle, forecolor, backcolor, 390);
+            return new TitleTextureKey(str文字, pfSubtitle, forecolor, backcolor, 510);
         }
 
 	    private CTexture ResolveTitleTexture(TitleTextureKey titleTextureKey)
@@ -2089,9 +2089,9 @@ namespace TJAPlayer3
 	            titleTextureKey.str文字, titleTextureKey.forecolor, titleTextureKey.backcolor)))
 	        {
 	            CTexture tx文字テクスチャ = TJAPlayer3.tテクスチャの生成(bmp, false);
-	            if (tx文字テクスチャ.szテクスチャサイズ.Height > titleTextureKey.maxHeight)
+	            if (tx文字テクスチャ.szテクスチャサイズ.Width > titleTextureKey.maxWidth)
 	            {
-	                tx文字テクスチャ.vc拡大縮小倍率.Y = (float) (((double) titleTextureKey.maxHeight) / tx文字テクスチャ.szテクスチャサイズ.Height);
+	                tx文字テクスチャ.vc拡大縮小倍率.X = (float) (((double) titleTextureKey.maxWidth) / tx文字テクスチャ.szテクスチャサイズ.Width);
 	            }
 
 	            return tx文字テクスチャ;
@@ -2126,7 +2126,7 @@ namespace TJAPlayer3
 	        public readonly CPrivateFastFont cPrivateFastFont;
 	        public readonly Color forecolor;
 	        public readonly Color backcolor;
-	        public readonly int maxHeight;
+	        public readonly int maxWidth;
 
 	        public TitleTextureKey(string str文字, CPrivateFastFont cPrivateFastFont, Color forecolor, Color backcolor, int maxHeight)
 	        {
@@ -2134,7 +2134,7 @@ namespace TJAPlayer3
 	            this.cPrivateFastFont = cPrivateFastFont;
 	            this.forecolor = forecolor;
 	            this.backcolor = backcolor;
-	            this.maxHeight = maxHeight;
+	            this.maxWidth = maxHeight;
 	        }
 
 	        private bool Equals(TitleTextureKey other)
@@ -2143,7 +2143,7 @@ namespace TJAPlayer3
 	                   cPrivateFastFont.Equals(other.cPrivateFastFont) &&
 	                   forecolor.Equals(other.forecolor) &&
 	                   backcolor.Equals(other.backcolor) &&
-	                   maxHeight == other.maxHeight;
+	                   maxWidth == other.maxWidth;
 	        }
 
 	        public override bool Equals(object obj)
@@ -2161,7 +2161,7 @@ namespace TJAPlayer3
 	                hashCode = (hashCode * 397) ^ cPrivateFastFont.GetHashCode();
 	                hashCode = (hashCode * 397) ^ forecolor.GetHashCode();
 	                hashCode = (hashCode * 397) ^ backcolor.GetHashCode();
-	                hashCode = (hashCode * 397) ^ maxHeight;
+	                hashCode = (hashCode * 397) ^ maxWidth;
 	                return hashCode;
 	            }
 	        }
