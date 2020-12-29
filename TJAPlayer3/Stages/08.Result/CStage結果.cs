@@ -487,7 +487,7 @@ namespace TJAPlayer3
 										else if (TJAPlayer3.stage選曲.r確定されたスコア.譜面情報.nクリア[TJAPlayer3.stage選曲.n確定された曲の難易度] < nクリア)
 										{
 											TJAPlayer3.stage選曲.act曲リスト.CrownCount[nクリア - 1] += 1;
-											TJAPlayer3.stage選曲.act曲リスト.CrownCount[TJAPlayer3.stage選曲.r確定されたスコア.譜面情報.nクリア[TJAPlayer3.stage選曲.n確定された曲の難易度] - 1] += 1;
+											TJAPlayer3.stage選曲.act曲リスト.CrownCount[TJAPlayer3.stage選曲.r確定されたスコア.譜面情報.nクリア[TJAPlayer3.stage選曲.n確定された曲の難易度] - 1] -= 1;
 										}
 										
 									}
