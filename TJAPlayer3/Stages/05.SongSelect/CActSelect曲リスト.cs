@@ -601,11 +601,11 @@ namespace TJAPlayer3
 
                 try
 				{
-					this.pfBoxText = new CPrivateFastFont(new FontFamily("ＤＦＰ太丸ゴシック体"), 15);
+					this.pfBoxText = new CPrivateFastFont(new FontFamily("ＤＦＰ太丸ゴシック体"), 14);
 				}
                 catch
 				{
-					this.pfBoxText = new CPrivateFastFont(new FontFamily(TJAPlayer3.ConfigIni.FontName), 15);
+					this.pfBoxText = new CPrivateFastFont(new FontFamily(TJAPlayer3.ConfigIni.FontName), 14);
 				}
 			}
             else
@@ -613,7 +613,7 @@ namespace TJAPlayer3
                 this.pfBoxName = new CPrivateFastFont(new FontFamily("MS UI Gothic"), 28);
                 this.pfMusicName = new CPrivateFastFont(new FontFamily("MS UI Gothic"), 22);
                 this.pfSubtitle = new CPrivateFastFont(new FontFamily("MS UI Gothic"), 13);
-                this.pfBoxText = new CPrivateFastFont(new FontFamily("MS UI Gothic"), 15);
+                this.pfBoxText = new CPrivateFastFont(new FontFamily("MS UI Gothic"), 14);
             }
 
 		    _titleTextures.ItemRemoved += OnTitleTexturesOnItemRemoved;
@@ -649,7 +649,7 @@ namespace TJAPlayer3
 			{
 				for (int i = 0; i < 3; i++)
 				{
-					using (var texture = pfBoxText.DrawPrivateFont(this.r現在選択中の曲.strBoxText[i], r現在選択中の曲.ForeColor, r現在選択中の曲.BackColor))
+					using (var texture = pfBoxText.DrawPrivateFont(this.r現在選択中の曲.strBoxText[i], r現在選択中の曲.ForeColor, r現在選択中の曲.BackColor, 26))
 					{
 						this.txBoxText[i] = TJAPlayer3.tテクスチャの生成(texture);
 						this.strBoxText = this.r現在選択中の曲.strBoxText[0] + this.r現在選択中の曲.strBoxText[1] + this.r現在選択中の曲.strBoxText[2];
@@ -810,7 +810,7 @@ namespace TJAPlayer3
 			{
 				for (int i = 0; i < 3; i++)
 				{
-					using (var texture = pfBoxText.DrawPrivateFont(this.r現在選択中の曲.strBoxText[i], r現在選択中の曲.ForeColor, r現在選択中の曲.BackColor))
+					using (var texture = pfBoxText.DrawPrivateFont(this.r現在選択中の曲.strBoxText[i], r現在選択中の曲.ForeColor, r現在選択中の曲.BackColor, 26))
 					{
 						this.txBoxText[i] = TJAPlayer3.tテクスチャの生成(texture);
 						this.strBoxText = this.r現在選択中の曲.strBoxText[0] + this.r現在選択中の曲.strBoxText[1] + this.r現在選択中の曲.strBoxText[2];
@@ -1514,8 +1514,49 @@ namespace TJAPlayer3
 						break;
 
 					case C曲リストノード.Eノード種別.BOX:
-						if (TJAPlayer3.Tx.SongSelect_Frame_Box != null)
-							TJAPlayer3.Tx.SongSelect_Frame_Box.t2D描画(TJAPlayer3.app.Device, 450, TJAPlayer3.Skin.SongSelect_Overall_Y);
+						{
+							for (int j = 0; j < 3; j++)
+							{
+								if (!ctBoxOpen.b終了値に達した && ctBoxOpen.n現在の値 != 0)
+								{
+									if (txBoxText[j] != null)
+										this.txBoxText[j].Opacity = (int)(ctBoxOpen.n現在の値 >= 1200 && ctBoxOpen.n現在の値 <= 1620 ? 255 - (ctBoxOpen.n現在の値 - 1200) * 2.55f :
+										ctBoxOpen.n現在の値 >= 2000 ? (ctBoxOpen.n現在の値 - 2000) * 2.55f : ctBoxOpen.n現在の値 <= 1200 ? 255 : 0);
+								}
+								else
+									if (txBoxText[j] != null)
+									this.txBoxText[j].Opacity = (int)(BarAnimeCount * 4.25f);
+
+								if (this.txBoxText[j].szテクスチャサイズ.Width >= 510)
+									this.txBoxText[j].vc拡大縮小倍率.X = 510f / this.txBoxText[j].szテクスチャサイズ.Width;
+
+								this.txBoxText[j].t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, 640 + TJAPlayer3.Skin.SongSelect_BoxExplanation_X, 360 + j * 30 + TJAPlayer3.Skin.SongSelect_BoxExplanation_Y);
+							}
+
+							if (!ctBoxOpen.b終了値に達した)
+								TJAPlayer3.Tx.SongSelect_Box_Chara[this.nStrジャンルtoNumBox(r現在選択中の曲.strジャンル)].Opacity = (int)(ctBoxOpen.n現在の値 >= 1200 && ctBoxOpen.n現在の値 <= 1620 ? 255 - (ctBoxOpen.n現在の値 - 1200) * 2.55f :
+								ctBoxOpen.n現在の値 >= 2000 ? (ctBoxOpen.n現在の値 - 2000) * 2.55f : ctBoxOpen.n現在の値 <= 1200 ? 255 : 0);
+							else
+							{
+								if (!TJAPlayer3.stage選曲.act難易度選択画面.bIsDifficltSelect)
+									TJAPlayer3.Tx.SongSelect_Box_Chara[this.nStrジャンルtoNumBox(r現在選択中の曲.strジャンル)].Opacity = (int)(BarAnimeCount * 4.25f);
+								else if (ctDifficultyIn.n現在の値 >= 1000)
+									TJAPlayer3.Tx.SongSelect_Box_Chara[this.nStrジャンルtoNumBox(r現在選択中の曲.strジャンル)].Opacity = (int)255.0f - (ctDifficultyIn.n現在の値 - 1000);
+							}
+
+							float anime = 0;
+
+							if(BarAnimeCount <= 45)
+								anime = BarAnimeCount * 3.333333333f;
+                            else
+								anime = 150 - (BarAnimeCount - 45) * 2.11764705f;
+
+							TJAPlayer3.Tx.SongSelect_Box_Chara[this.nStrジャンルtoNumBox(r現在選択中の曲.strジャンル)].t2D中心基準描画(TJAPlayer3.app.Device, 640 - TJAPlayer3.Tx.SongSelect_Box_Chara[this.nStrジャンルtoNumBox(r現在選択中の曲.strジャンル)].szテクスチャサイズ.Width / 4 + 114 - anime, 360, 
+								new Rectangle(0, 0, TJAPlayer3.Tx.SongSelect_Box_Chara[this.nStrジャンルtoNumBox(r現在選択中の曲.strジャンル)].szテクスチャサイズ.Width / 2, TJAPlayer3.Tx.SongSelect_Box_Chara[this.nStrジャンルtoNumBox(r現在選択中の曲.strジャンル)].szテクスチャサイズ.Height));
+
+							TJAPlayer3.Tx.SongSelect_Box_Chara[this.nStrジャンルtoNumBox(r現在選択中の曲.strジャンル)].t2D中心基準描画(TJAPlayer3.app.Device, 640 + TJAPlayer3.Tx.SongSelect_Box_Chara[this.nStrジャンルtoNumBox(r現在選択中の曲.strジャンル)].szテクスチャサイズ.Width / 4 - 114 + anime, 360, 
+								new Rectangle(TJAPlayer3.Tx.SongSelect_Box_Chara[this.nStrジャンルtoNumBox(r現在選択中の曲.strジャンル)].szテクスチャサイズ.Width / 2, 0, TJAPlayer3.Tx.SongSelect_Box_Chara[this.nStrジャンルtoNumBox(r現在選択中の曲.strジャンル)].szテクスチャサイズ.Width / 2, TJAPlayer3.Tx.SongSelect_Box_Chara[this.nStrジャンルtoNumBox(r現在選択中の曲.strジャンル)].szテクスチャサイズ.Height));
+						}
 						break;
 
 					case C曲リストノード.Eノード種別.BACKBOX:
@@ -1601,25 +1642,6 @@ namespace TJAPlayer3
 						}
 					}
 
-
-					for(int j = 0; j < 3; j++)
-					{
-						if (!ctBoxOpen.b終了値に達した && ctBoxOpen.n現在の値 != 0)
-						{
-							if (txBoxText[j] != null)
-								this.txBoxText[j].Opacity = (int)(ctBoxOpen.n現在の値 >= 1200 && ctBoxOpen.n現在の値 <= 1620 ? 255 - (ctBoxOpen.n現在の値 - 1200) * 2.55f :
-								ctBoxOpen.n現在の値 >= 2000 ? (ctBoxOpen.n現在の値 - 2000) * 2.55f : ctBoxOpen.n現在の値 <= 1200 ? 255 : 0);
-						}
-						else
-							if (txBoxText[j] != null)
-								this.txBoxText[j].Opacity = (int)(BarAnimeCount * 4.25f);
-
-						if(this.txBoxText[j].szテクスチャサイズ.Width >= 540)
-							this.txBoxText[j].vc拡大縮小倍率.X = 540f / this.txBoxText[j].szテクスチャサイズ.Width;
-
-						this.txBoxText[j].t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, 640 + TJAPlayer3.Skin.SongSelect_BoxExplanation_X, 355 + j * 35 + TJAPlayer3.Skin.SongSelect_BoxExplanation_Y);
-					}
-
 					if (this.ttk選択している曲のサブタイトル != null)
 					{
 						if (!ctBoxOpen.b終了値に達した)
@@ -1636,14 +1658,14 @@ namespace TJAPlayer3
 						tx選択している曲のサブタイトル.t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, 640, y + 90 - (this.stバー情報[nパネル番号].eバー種別 == Eバー種別.Box ? BarAnimeCount : BarAnimeCount / 1.1f));
 						if (this.ttk選択している曲の曲名 != null)
 						{
-							ResolveTitleTexture(this.ttk選択している曲の曲名).t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, 640, y + 62 - (r現在選択中の曲.eノード種別 != C曲リストノード.Eノード種別.BACKBOX ? (this.stバー情報[nパネル番号].eバー種別 == Eバー種別.Box ? BarAnimeCount : BarAnimeCount / 1.1f) : 0));
+							ResolveTitleTexture(this.ttk選択している曲の曲名).t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, 640, y + 61 - (r現在選択中の曲.eノード種別 != C曲リストノード.Eノード種別.BACKBOX ? (this.stバー情報[nパネル番号].eバー種別 == Eバー種別.Box ? BarAnimeCount : BarAnimeCount / 1.1f) : 0));
 						}
 					}
 					else
 					{
 						if (this.ttk選択している曲の曲名 != null)
 						{
-							ResolveTitleTexture(this.ttk選択している曲の曲名).t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, 640, y + 62 - (r現在選択中の曲.eノード種別 != C曲リストノード.Eノード種別.BACKBOX ? (this.stバー情報[nパネル番号].eバー種別 == Eバー種別.Box ? BarAnimeCount : BarAnimeCount / 1.1f) : 0));
+							ResolveTitleTexture(this.ttk選択している曲の曲名).t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, 640, y + 61 - (r現在選択中の曲.eノード種別 != C曲リストノード.Eノード種別.BACKBOX ? (this.stバー情報[nパネル番号].eバー種別 == Eバー種別.Box ? BarAnimeCount : BarAnimeCount / 1.1f) : 0));
 						}
 					}
 					//-----------------
@@ -1751,7 +1773,7 @@ namespace TJAPlayer3
         private CPrivateFastFont pfBoxName;
 
 		private string strBoxText;
-		private CPrivateFont pfBoxText;
+		private CPrivateFastFont pfBoxText;
 		private CTexture[] txBoxText = new CTexture[3];
 
 	    // 2018-09-17 twopointzero: I can scroll through 2300 songs consuming approx. 200MB of memory.
@@ -2061,6 +2083,31 @@ namespace TJAPlayer3
 			}
 			return nGenre;
 		}
+		
+		public int nStrジャンルtoNumBox(string strジャンル)
+		{
+			int nGenre = 8;
+			for (int i = 0; i < TJAPlayer3.Skin.SongSelect_GenreName.Length; i++)
+			{
+				if (TJAPlayer3.Skin.SongSelect_GenreName[i] == strジャンル)
+				{
+					if (i + 1 >= TJAPlayer3.Skin.SongSelect_Box_Chara_Count)
+					{
+						nGenre = 0;
+					}
+					else
+					{
+						nGenre = i + 1;
+					}
+					break;
+				}
+				else
+				{
+					nGenre = 0;
+				}
+			}
+			return nGenre;
+		}
 
 		private TitleTextureKey ttk曲名テクスチャを生成する( string str文字, Color forecolor, Color backcolor, CPrivateFastFont pf)
         {
@@ -2092,6 +2139,7 @@ namespace TJAPlayer3
 	            if (tx文字テクスチャ.szテクスチャサイズ.Width > titleTextureKey.maxWidth)
 	            {
 	                tx文字テクスチャ.vc拡大縮小倍率.X = (float) (((double) titleTextureKey.maxWidth) / tx文字テクスチャ.szテクスチャサイズ.Width);
+	                tx文字テクスチャ.vc拡大縮小倍率.Y = (float) (((double) titleTextureKey.maxWidth) / tx文字テクスチャ.szテクスチャサイズ.Width);
 	            }
 
 	            return tx文字テクスチャ;

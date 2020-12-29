@@ -186,6 +186,17 @@ namespace TJAPlayer3
                 }
             }
 
+            TJAPlayer3.Skin.SongSelect_Box_Chara_Count = TJAPlayer3.t連番画像の枚数を数える(CSkin.Path(BASE + SONGSELECT + @"Box_Chara\"), "Box_Chara_");
+
+            if (TJAPlayer3.Skin.SongSelect_Box_Chara_Count != 0)
+            {
+                SongSelect_Box_Chara = new CTexture[TJAPlayer3.Skin.SongSelect_Box_Chara_Count];
+                for (int i = 0; i < SongSelect_Box_Chara.Length; i++)
+                {
+                    SongSelect_Box_Chara[i] = TxC(SONGSELECT + @"Box_Chara\Box_Chara_" + i.ToString() + ".png");
+                }
+            }
+
             #region [ 難易度選択画面 ]
             Difficulty_Bar = TxC(SONGSELECT + @"Difficulty_Select\Difficulty_Bar.png");
             Difficulty_Number = TxC(SONGSELECT + @"Difficulty_Select\Difficulty_Number.png");
@@ -699,8 +710,9 @@ namespace TJAPlayer3
             SongSelect_BoardNumber,
             SongSelect_ScoreWindow_Text;
         public CTexture[] SongSelect_GenreBack,
-            SongSelect_ScoreWindow = new CTexture[(int)Difficulty.Total],
             SongSelect_Bar_Genre,
+            SongSelect_Box_Chara,
+            SongSelect_ScoreWindow = new CTexture[(int)Difficulty.Total],
             SongSelect_Donchan_Select = new CTexture[47],
             SongSelect_Donchan_Normal = new CTexture[49],
             SongSelect_Donchan_Jump = new CTexture[18],
