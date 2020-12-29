@@ -194,9 +194,9 @@ namespace TJAPlayer3
 		private float[] ComboScale = new float[]
 		{
 			 0.000f,
-			 0.062f,
-			 0.140f,
-			 0.230f,
+			 0.042f,
+			 0.110f,
+			 0.180f,
 			 0.170f,
 			 0.140f,
 			 0.114f,
@@ -210,9 +210,9 @@ namespace TJAPlayer3
 		private float[,] ComboScale_Ex = new float[,]
 		{
 			{ 0.000f, 0},
-			{ 0.062f, 0},
-			{ 0.140f, 0},
-			{ 0.230f, 0},
+			{ 0.042f, 0},
+			{ 0.110f, 0},
+			{ 0.180f, 0},
 			{ 0.170f, 0},
 			{ 0.140f, 0},
 			{ 0.114f, 0},
@@ -684,7 +684,6 @@ namespace TJAPlayer3
 				}
 			//-----------------
 			#endregion
-
 
 			Retry:  // モードが変化した場合はここからリトライする。
 

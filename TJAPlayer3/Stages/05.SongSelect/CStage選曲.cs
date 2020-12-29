@@ -129,6 +129,12 @@ namespace TJAPlayer3
                 stSongNumber[i].pt = new Point(27 * i, 0);
             }
 
+            for(int i = 0; i < 10; i++)
+            {
+                stBoardNumber[i].ch = i.ToString().ToCharArray()[0];
+                stBoardNumber[i].pt = new Point(15 * i, 0);
+            }
+
             this.CommandHistory = new CCommandHistory();        // #24063 2011.1.16 yyagi
         }
 
@@ -750,6 +756,11 @@ namespace TJAPlayer3
                     }
                 }
 
+                for(int i = 0; i < 10; i++)
+                {
+                    tBoardNumberDraw(this.ptBoardNumber[i].X - 10, this.ptBoardNumber[i].Y, i < 7 ? this.act曲リスト.ScoreRankCount[i].ToString() : this.act曲リスト.CrownCount[i - 7].ToString());
+                }
+
                 switch (base.eフェーズID)
                 {
                     case CStage.Eフェーズ.共通_フェードイン:
@@ -884,6 +895,7 @@ namespace TJAPlayer3
 
         private STNumber[] stTimer = new STNumber[10];
         private STNumber[] stSongNumber = new STNumber[10];
+        private STNumber[] stBoardNumber = new STNumber[10];
 
         private struct STNumber
         {
@@ -896,7 +908,25 @@ namespace TJAPlayer3
             public EパッドFlag ePad;       // 押されたコマンド(同時押しはOR演算で列挙する)
             public long time;               // コマンド入力時刻
         }
-        
+
+        private Point[] ptBoardNumber =
+            { new Point(72, 283), new Point(135, 283), new Point(200, 283), new Point(72, 258), new Point(135, 258), new Point(200, 258), new Point(200, 233), new Point(72, 311), new Point(135, 311), new Point(200, 311) };
+
+        public void tBoardNumberDraw(int x, int y, string str)
+        {
+            for (int j = 0; j < str.Length; j++)
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    if (str[j] == stSongNumber[i].ch)
+                    {
+                        TJAPlayer3.Tx.SongSelect_BoardNumber.t2D描画(TJAPlayer3.app.Device, x - (str.Length * 15 + 9 * str.Length - str.Length * 15) / 2 + 15 / 2, (float)y - 17 / 2, new RectangleF(stBoardNumber[i].pt.X, stBoardNumber[i].pt.Y, 15, 17));
+                        x += 9;
+                    }
+                }
+            }
+        }
+
         private void tSongNumberDraw(int x, int y, string str)
         {
             for (int j = 0; j < str.Length; j++)

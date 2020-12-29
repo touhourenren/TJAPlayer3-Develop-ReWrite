@@ -160,6 +160,9 @@
     <Compile Include="コード\06.Tempo\CBeatDetect.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="コード\01.フレームワーク\Core\GameWindow.resx">
+      <DependentUpon>GameWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="コード\01.フレームワーク\Properties\Resources.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>

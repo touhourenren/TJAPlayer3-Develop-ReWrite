@@ -110,6 +110,11 @@ namespace TJAPlayer3
                 Donchan_Entry[i] = TxC(TITLE + @"Donchan_Entry\" + i.ToString() + ".png");
             }
 
+            for(int i = 0; i < Entry_Donchan_Normal.Length; i++)
+            {
+                Entry_Donchan_Normal[i] = TxC(TITLE + @"Donchan_Normal\" + i.ToString() + ".png");
+            }
+
             #endregion
 
             #region 2_コンフィグ画面
@@ -145,6 +150,7 @@ namespace TJAPlayer3
             SongSelect_Bar_Genre_Overlay = TxC(SONGSELECT + @"Bar_Genre_Overlay.png");
             SongSelect_Crown = TxC(SONGSELECT + @"SongSelect_Crown.png");
             SongSelect_ScoreRank = TxC(SONGSELECT + @"ScoreRank.png");
+            SongSelect_BoardNumber = TxC(SONGSELECT + @"BoardNumber.png");
             
             for (int i = 0; i < (int)Difficulty.Total; i++)
             {
@@ -184,6 +190,17 @@ namespace TJAPlayer3
                 for (int i = 0; i < SongSelect_GenreBack.Length; i++)
                 {
                     SongSelect_GenreBack[i] = TxC(SONGSELECT + @"Genre_Background\GenreBackground_" + i.ToString() + ".png");
+                }
+            }
+
+            TJAPlayer3.Skin.SongSelect_Box_Chara_Count = TJAPlayer3.t連番画像の枚数を数える(CSkin.Path(BASE + SONGSELECT + @"Box_Chara\"), "Box_Chara_");
+
+            if (TJAPlayer3.Skin.SongSelect_Box_Chara_Count != 0)
+            {
+                SongSelect_Box_Chara = new CTexture[TJAPlayer3.Skin.SongSelect_Box_Chara_Count];
+                for (int i = 0; i < SongSelect_Box_Chara.Length; i++)
+                {
+                    SongSelect_Box_Chara[i] = TxC(SONGSELECT + @"Box_Chara\Box_Chara_" + i.ToString() + ".png");
                 }
             }
 
@@ -663,6 +680,7 @@ namespace TJAPlayer3
         public CTexture[] Banapas_Load_Failure = new CTexture[2];
         public CTexture[] Entry_Player = new CTexture[3];
         public CTexture[] Donchan_Entry = new CTexture[22];
+        public CTexture[] Entry_Donchan_Normal = new CTexture[13];
         #endregion
 
         #region 2_コンフィグ画面
@@ -699,10 +717,12 @@ namespace TJAPlayer3
             SongSelect_Crown,
             SongSelect_ScoreRank,
             SongSelect_Song_Number,
+            SongSelect_BoardNumber,
             SongSelect_ScoreWindow_Text;
         public CTexture[] SongSelect_GenreBack,
-            SongSelect_ScoreWindow = new CTexture[(int)Difficulty.Total],
             SongSelect_Bar_Genre,
+            SongSelect_Box_Chara,
+            SongSelect_ScoreWindow = new CTexture[(int)Difficulty.Total],
             SongSelect_Donchan_Select = new CTexture[47],
             SongSelect_Donchan_Normal = new CTexture[49],
             SongSelect_Donchan_Jump = new CTexture[18],
