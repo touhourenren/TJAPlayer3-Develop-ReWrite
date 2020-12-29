@@ -143,6 +143,7 @@ namespace TJAPlayer3
             SongSelect_Bar_Genre_Overlay = TxC(SONGSELECT + @"Bar_Genre_Overlay.png");
             SongSelect_Crown = TxC(SONGSELECT + @"SongSelect_Crown.png");
             SongSelect_ScoreRank = TxC(SONGSELECT + @"ScoreRank.png");
+            SongSelect_BoardNumber = TxC(SONGSELECT + @"BoardNumber.png");
             
             for (int i = 0; i < (int)Difficulty.Total; i++)
             {
@@ -695,6 +696,7 @@ namespace TJAPlayer3
             SongSelect_Crown,
             SongSelect_ScoreRank,
             SongSelect_Song_Number,
+            SongSelect_BoardNumber,
             SongSelect_ScoreWindow_Text;
         public CTexture[] SongSelect_GenreBack,
             SongSelect_ScoreWindow = new CTexture[(int)Difficulty.Total],

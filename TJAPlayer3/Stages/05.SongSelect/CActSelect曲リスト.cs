@@ -10,6 +10,7 @@ using System.Drawing.Text;
 using CSharpTest.Net.Collections;
 using SlimDX;
 using FDK;
+using System.Linq;
 
 namespace TJAPlayer3
 {
@@ -123,8 +124,6 @@ namespace TJAPlayer3
 			stレベル数字Ar[9] = st数字9;
 			this.st小文字位置 = stレベル数字Ar;
 			#endregion
-
-
 
 			this.r現在選択中の曲 = null;
             this.n現在のアンカ難易度レベル = TJAPlayer3.ConfigIni.nDefaultCourse;
@@ -544,7 +543,53 @@ namespace TJAPlayer3
 			if( this.b活性化してる )
 				return;
 
-            TJAPlayer3.IsPerformingCalibration = false;
+            if (!bFirstCrownLoad)
+            {
+
+				for (int i = 0; i < ScoreRankCount.Length; i++)
+					ScoreRankCount[i] = 0;
+
+				for (int i = 0; i < CrownCount.Length; i++)
+					CrownCount[i] = 0;
+
+				foreach (var song in TJAPlayer3.Songs管理.list曲ルート)
+				{
+					if (song.eノード種別 == C曲リストノード.Eノード種別.BOX)
+					{
+						for (int i = 0; i < ScoreRankCount.Length; i++)
+						{
+							ScoreRankCount[i] += song.list子リスト.Where(a => a.eノード種別 == C曲リストノード.Eノード種別.SCORE && a.arスコア[3] != null && a.arスコア[3].譜面情報.nスコアランク[3] == (i + 1)).Count();
+							ScoreRankCount[i] += song.list子リスト.Where(a => a.eノード種別 == C曲リストノード.Eノード種別.SCORE && a.arスコア[3] != null && a.arスコア[3].譜面情報.nスコアランク[4] == (i + 1)).Count();
+						}
+						for (int i = 0; i < CrownCount.Length; i++)
+						{
+							CrownCount[i] += song.list子リスト.Where(a => a.eノード種別 == C曲リストノード.Eノード種別.SCORE && a.arスコア[3] != null && a.arスコア[3].譜面情報.nクリア[3] == (i + 1)).Count();
+							CrownCount[i] += song.list子リスト.Where(a => a.eノード種別 == C曲リストノード.Eノード種別.SCORE && a.arスコア[3] != null && a.arスコア[3].譜面情報.nクリア[4] == (i + 1)).Count();
+						}
+					}
+					else
+					{
+						if (song.eノード種別 == C曲リストノード.Eノード種別.SCORE)
+						{
+							for (int i = 0; i < ScoreRankCount.Length; i++)
+							{
+								ScoreRankCount[i] += TJAPlayer3.Songs管理.list曲ルート.Where(a => a.eノード種別 == C曲リストノード.Eノード種別.SCORE && a.arスコア[3] != null && a.arスコア[3].譜面情報.nスコアランク[3] == (i + 1)).Count();
+								ScoreRankCount[i] += TJAPlayer3.Songs管理.list曲ルート.Where(a => a.eノード種別 == C曲リストノード.Eノード種別.SCORE && a.arスコア[3] != null && a.arスコア[3].譜面情報.nスコアランク[4] == (i + 1)).Count();
+							}
+							for (int i = 0; i < CrownCount.Length; i++)
+							{
+								CrownCount[i] += TJAPlayer3.Songs管理.list曲ルート.Where(a => a.eノード種別 == C曲リストノード.Eノード種別.SCORE && a.arスコア[3] != null && a.arスコア[3].譜面情報.nクリア[3] == (i + 1)).Count();
+								CrownCount[i] += TJAPlayer3.Songs管理.list曲ルート.Where(a => a.eノード種別 == C曲リストノード.Eノード種別.SCORE && a.arスコア[3] != null && a.arスコア[3].譜面情報.nクリア[4] == (i + 1)).Count();
+							}
+						}
+					}
+				}
+
+				bFirstCrownLoad = true;
+
+			}
+
+			TJAPlayer3.IsPerformingCalibration = false;
 
 			TJAPlayer3.stage選曲.act難易度選択画面.bIsDifficltSelect = false;
 			
@@ -871,17 +916,12 @@ namespace TJAPlayer3
 						if (stバー情報[index].nスコアランク == null)
 							this.stバー情報[index].nスコアランク = new int[5];
 
-						if (this.stバー情報[index].eバー種別 == Eバー種別.Score)
+						if (song.arスコア[3] != null)
 						{
-							for (int j = 0; j < 5; j++)
-							{
-								if (song.arスコア[3] != null)
-								{
-									this.stバー情報[index].nクリア[j] = song.arスコア[3].譜面情報.nクリア[j];
-									this.stバー情報[index].nスコアランク[j] = song.arスコア[3].譜面情報.nスコアランク[j];
-								}
-							}
+							this.stバー情報[index].nクリア = song.arスコア[3].譜面情報.nクリア;
+							this.stバー情報[index].nスコアランク = song.arスコア[3].譜面情報.nスコアランク;
 						}
+
 						// stバー情報[] の内容を1行ずつずらす。
 
 						C曲リストノード song2 = this.r現在選択中の曲;
@@ -957,17 +997,12 @@ namespace TJAPlayer3
 						if (stバー情報[index].nスコアランク == null)
 							this.stバー情報[index].nスコアランク = new int[5];
 
-						if (this.stバー情報[index].eバー種別 == Eバー種別.Score)
+						if (song.arスコア[3] != null)
 						{
-							for (int j = 0; j < 5; j++)
-							{
-								if (song.arスコア[3] != null)
-								{
-									this.stバー情報[index].nクリア[j] = song.arスコア[3].譜面情報.nクリア[j];
-									this.stバー情報[index].nスコアランク[j] = song.arスコア[3].譜面情報.nスコアランク[j];
-								}
-							}
+							this.stバー情報[index].nクリア = song.arスコア[3].譜面情報.nクリア;
+							this.stバー情報[index].nスコアランク = song.arスコア[3].譜面情報.nスコアランク;
 						}
+
 						// stバー情報[] の内容を1行ずつずらす。
 
 						C曲リストノード song2 = this.r現在選択中の曲;
@@ -1363,7 +1398,7 @@ namespace TJAPlayer3
 						TJAPlayer3.Tx.SongSelect_Bar_Genre_Overlay.t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, 640, 326, new Rectangle(0, 0, 632, 21));
 
 						TJAPlayer3.Tx.SongSelect_Bar_Genre_Overlay.vc拡大縮小倍率.Y = BarAnimeCount == 0 ? 1.0f : 1.0f + (float)(BarAnimeCount) /  50;
-						TJAPlayer3.Tx.SongSelect_Bar_Genre_Overlay.t2D拡大率考慮上中央基準描画(TJAPlayer3.app.Device, 640, 337, new Rectangle(0, 21, 632, 48));
+						TJAPlayer3.Tx.SongSelect_Bar_Genre_Overlay.t2D拡大率考慮上中央基準描画(TJAPlayer3.app.Device, 640, 336, new Rectangle(0, 21, 632, 48));
 						TJAPlayer3.Tx.SongSelect_Bar_Genre_Overlay.vc拡大縮小倍率.Y = 1.0f;
 
 						TJAPlayer3.Tx.SongSelect_Bar_Genre_Overlay.t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, 640, 394 + BarAnimeCount, new Rectangle(0, 69, 632, 23));
@@ -1616,7 +1651,13 @@ namespace TJAPlayer3
 				}
 			}
 			//-----------------
-			
+
+			for(int i = 0; i < 7; i++)
+				TJAPlayer3.act文字コンソール.tPrint(50 * i, 0, C文字コンソール.Eフォント種別.白, ScoreRankCount[i].ToString());
+
+			for(int i = 0; i < 3; i++)
+				TJAPlayer3.act文字コンソール.tPrint(50 * i, 13, C文字コンソール.Eフォント種別.白, CrownCount[i].ToString());
+
 			return 0;
 		}
 		
@@ -1626,6 +1667,9 @@ namespace TJAPlayer3
 		#region [ private ]
 		//-----------------
 		private enum Eバー種別 { Score, Box, Other, BackBox }
+
+		public int[] ScoreRankCount = new int[7];
+		public int[] CrownCount = new int[3];
 
 		private struct STバー
 		{
@@ -1687,6 +1731,8 @@ namespace TJAPlayer3
 			public int[] nクリア;
 			public int[] nスコアランク;
 		}
+
+		private bool bFirstCrownLoad;
 
 		public CCounter ctBarFlash;
 		public CCounter ctDifficultyIn;
@@ -1880,13 +1926,10 @@ namespace TJAPlayer3
 
 				if(this.stバー情報[i].eバー種別 == Eバー種別.Score)
 				{
-					for (int j = 0; j < 5; j++)
+					if (song.arスコア[3] != null)
 					{
-						if (song.arスコア[3] != null)
-						{
-							this.stバー情報[i].nクリア[j] = song.arスコア[3].譜面情報.nクリア[j];
-							this.stバー情報[i].nスコアランク[j] = song.arスコア[3].譜面情報.nスコアランク[j];
-						}
+						this.stバー情報[i].nクリア = song.arスコア[3].譜面情報.nクリア;
+						this.stバー情報[i].nスコアランク = song.arスコア[3].譜面情報.nスコアランク;
 					}
 				}
 
@@ -1914,13 +1957,17 @@ namespace TJAPlayer3
 				{
 					if (ctDifficultyIn.n現在の値 >= 1000)
 					{
-						if (ctDifficultyIn.n現在の値 <= 1255)
+                        if (ctDifficultyIn.n現在の値 <= 1255)
+                        {
+                            TJAPlayer3.Tx.SongSelect_Crown.Opacity = (int)255.0f - (ctDifficultyIn.n現在の値 - 1000);
+                            TJAPlayer3.Tx.SongSelect_ScoreRank.Opacity = (int)255.0f - (ctDifficultyIn.n現在の値 - 1000);
+                            TJAPlayer3.Tx.SongSelect_Bar_Genre[i].Opacity = (int)255.0f - (ctDifficultyIn.n現在の値 - 1000);
+                            TJAPlayer3.Tx.SongSelect_Bar_Genre_Back.Opacity = (int)255.0f - (ctDifficultyIn.n現在の値 - 1000);
+                            TJAPlayer3.Tx.SongSelect_Bar_Genre_Overlay.Opacity = (int)255.0f - (ctDifficultyIn.n現在の値 - 1000);
+                        }
+                        else
 						{
-							TJAPlayer3.Tx.SongSelect_Crown.Opacity = (int)255.0f - (ctDifficultyIn.n現在の値 - 1000);
-							TJAPlayer3.Tx.SongSelect_ScoreRank.Opacity = (int)255.0f - (ctDifficultyIn.n現在の値 - 1000);
-							TJAPlayer3.Tx.SongSelect_Bar_Genre[i].Opacity = (int)255.0f - (ctDifficultyIn.n現在の値 - 1000);
-							TJAPlayer3.Tx.SongSelect_Bar_Genre_Back.Opacity = (int)255.0f - (ctDifficultyIn.n現在の値 - 1000);
-							TJAPlayer3.Tx.SongSelect_Bar_Genre_Overlay.Opacity = (int)255.0f - (ctDifficultyIn.n現在の値 - 1000);
+							TJAPlayer3.Tx.SongSelect_ScoreRank.Opacity = 0;
 						}
 					}
 				}
