@@ -327,6 +327,8 @@ namespace TJAPlayer3
 		{
 			if( this.r現在選択中の曲 != null )
 			{
+				ctScoreFrameAnime.t停止();
+				ctScoreFrameAnime.n現在の値 = 0;
 				ctBarOpen.t停止();
 				ctBarOpen.n現在の値 = 0;
 				this.n目標のスクロールカウンタ += 100;
@@ -337,6 +339,8 @@ namespace TJAPlayer3
 		{
 			if( this.r現在選択中の曲 != null )
 			{
+				ctScoreFrameAnime.t停止();
+				ctScoreFrameAnime.n現在の値 = 0;
 				ctBarOpen.t停止();
 				ctBarOpen.n現在の値 = 0;
 				this.n目標のスクロールカウンタ -= 100;
@@ -645,7 +649,9 @@ namespace TJAPlayer3
 
 			this.ctBarFlash = new CCounter();
 
-            if (this.r現在選択中の曲 != null)
+			this.ctScoreFrameAnime = new CCounter();
+
+			if (this.r現在選択中の曲 != null)
 			{
 				for (int i = 0; i < 3; i++)
 				{
@@ -797,6 +803,9 @@ namespace TJAPlayer3
 			ctDifficultyIn.t進行();
 
 			int BarAnimeCount = this.ctBarOpen.n現在の値 <= 200 ? 0 : (int)(Math.Sin(((this.ctBarOpen.n現在の値 - 200) * 1.5f) * (Math.PI / 180)) * 62.0f);
+
+			if (BarAnimeCount == 62)
+				ctScoreFrameAnime.t進行Loop();
 
 			// まだ選択中の曲が決まってなければ、曲ツリールートの最初の曲にセットする。
 
@@ -957,6 +966,7 @@ namespace TJAPlayer3
 							TJAPlayer3.stage選曲.t選択曲変更通知();      // スクロール完了＝選択曲変更！
 							ctBarOpen.t開始(0, 260, 2, TJAPlayer3.Timer);
 							TJAPlayer3.stage選曲.NowGenre = this.r現在選択中の曲.strジャンル;
+							ctScoreFrameAnime.t開始(0, 6000, 1, TJAPlayer3.Timer);
 						}
 
 						//-----------------
@@ -1039,6 +1049,7 @@ namespace TJAPlayer3
 							TJAPlayer3.stage選曲.t選択曲変更通知();      // スクロール完了＝選択曲変更！
 							ctBarOpen.t開始(0, 260, 2, TJAPlayer3.Timer);
 							TJAPlayer3.stage選曲.NowGenre = this.r現在選択中の曲.strジャンル;
+							ctScoreFrameAnime.t開始(0, 6000, 1, TJAPlayer3.Timer);
 						}
 																//-----------------
 						#endregion
@@ -1444,35 +1455,59 @@ namespace TJAPlayer3
 									{
 										if (ctBarOpen.n現在の値 >= 100)
 										{
-											if (!TJAPlayer3.stage選曲.act難易度選択画面.bIsDifficltSelect)
-                                            {
-												TJAPlayer3.Tx.SongSelect_Frame_Score.Opacity = (int)(BarAnimeCount * 4.25f);
-												TJAPlayer3.Tx.SongSelect_Level_Number.Opacity = (int)(BarAnimeCount * 4.25f);
-											}
-											else if (ctDifficultyIn.n現在の値 >= 1000)
-                                            {
-												TJAPlayer3.Tx.SongSelect_Frame_Score.Opacity = (int)255.0f - (ctDifficultyIn.n現在の値 - 1000);
-												TJAPlayer3.Tx.SongSelect_Level_Number.Opacity = (int)255.0f - (ctDifficultyIn.n現在の値 - 1000);
-											}
 											if (TJAPlayer3.stage選曲.r現在選択中のスコア.譜面情報.nレベル[i] >= 0)
 											{
-												// レベルが0以上
 												TJAPlayer3.Tx.SongSelect_Frame_Score.color4 = new Color4(1f, 1f, 1f);
-												if (i == 4 && TJAPlayer3.stage選曲.n現在選択中の曲の難易度 == 4)
+
+												int opacity = 0;
+
+												if(BarAnimeCount == 62)
 												{
-													// エディット
+													if (ctScoreFrameAnime.n現在の値 <= 3000 - 255)
+														opacity = 0;
+													else if (ctScoreFrameAnime.n現在の値 <= 3000)
+														opacity = ctScoreFrameAnime.n現在の値 - (3000 - 255);
+													else if (ctScoreFrameAnime.n現在の値 <= 6000 - 255)
+														opacity = 255;
+													else
+														opacity = 255 - (ctScoreFrameAnime.n現在の値 - (6000 - 255));
+												}
+
+												if (i == 4)
+												{
+													if (!TJAPlayer3.stage選曲.act難易度選択画面.bIsDifficltSelect)
+														TJAPlayer3.Tx.SongSelect_Frame_Score.Opacity = BarAnimeCount < 62 ? 0 : opacity;
+													else if (ctDifficultyIn.n現在の値 >= 1000)
+														TJAPlayer3.Tx.SongSelect_Frame_Score.Opacity = (int)255.0f - (ctDifficultyIn.n現在の値 - 1000);
+
 													TJAPlayer3.Tx.SongSelect_Frame_Score.t2D下中央基準描画(TJAPlayer3.app.Device, 494 + (3 * 122) - 31, TJAPlayer3.Skin.SongSelect_Overall_Y + 465, new Rectangle(122 * i, 0, 122, 360));
 												}
 												else if (i != 4)
 												{
+													if (!TJAPlayer3.stage選曲.act難易度選択画面.bIsDifficltSelect)
+														TJAPlayer3.Tx.SongSelect_Frame_Score.Opacity = (int)(BarAnimeCount * 4.25f);
+													else if (ctDifficultyIn.n現在の値 >= 1000)
+														TJAPlayer3.Tx.SongSelect_Frame_Score.Opacity = (int)255.0f - (ctDifficultyIn.n現在の値 - 1000);
+
 													TJAPlayer3.Tx.SongSelect_Frame_Score.t2D下中央基準描画(TJAPlayer3.app.Device, 494 + (i * 122) - 31, TJAPlayer3.Skin.SongSelect_Overall_Y + 465, new Rectangle(122 * i, 0, 122, 360));
 												}
-												if (i == 4 && TJAPlayer3.stage選曲.n現在選択中の曲の難易度 == 4)
+
+												if (i == 4)
 												{
+													if (!TJAPlayer3.stage選曲.act難易度選択画面.bIsDifficltSelect)
+														TJAPlayer3.Tx.SongSelect_Level_Number.Opacity = BarAnimeCount < 62 ? 0 : opacity;
+													else if (ctDifficultyIn.n現在の値 >= 1000)
+														TJAPlayer3.Tx.SongSelect_Level_Number.Opacity = (int)255.0f - (ctDifficultyIn.n現在の値 - 1000);
+
 													t小文字表示(TJAPlayer3.stage選曲.r現在選択中のスコア.譜面情報.nレベル[4] < 10 ? 497 + (3 * 122) - 5 : 492 + (3 * 122) - 5, TJAPlayer3.Skin.SongSelect_Overall_Y + 277, TJAPlayer3.stage選曲.r現在選択中のスコア.譜面情報.nレベル[4].ToString());
 												}
 												else if (i != 4)
 												{
+													if (!TJAPlayer3.stage選曲.act難易度選択画面.bIsDifficltSelect)
+														TJAPlayer3.Tx.SongSelect_Level_Number.Opacity = (int)(BarAnimeCount * 4.25f);
+													else if (ctDifficultyIn.n現在の値 >= 1000)
+														TJAPlayer3.Tx.SongSelect_Level_Number.Opacity = (int)255.0f - (ctDifficultyIn.n現在の値 - 1000);
+
 													t小文字表示(TJAPlayer3.stage選曲.r現在選択中のスコア.譜面情報.nレベル[i] < 10 ? 497 + (i * 122) - 5 : 492 + (i * 122) - 5, TJAPlayer3.Skin.SongSelect_Overall_Y + 277, TJAPlayer3.stage選曲.r現在選択中のスコア.譜面情報.nレベル[i].ToString());
 												}
 
@@ -1758,6 +1793,8 @@ namespace TJAPlayer3
 
 		public CCounter ctBarFlash;
 		public CCounter ctDifficultyIn;
+
+		private CCounter ctScoreFrameAnime;
 
 		public CCounter ctBarOpen;
 		public CCounter ctBoxOpen;

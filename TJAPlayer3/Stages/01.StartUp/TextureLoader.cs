@@ -108,6 +108,11 @@ namespace TJAPlayer3
                 Donchan_Entry[i] = TxC(TITLE + @"Donchan_Entry\" + i.ToString() + ".png");
             }
 
+            for(int i = 0; i < Entry_Donchan_Normal.Length; i++)
+            {
+                Entry_Donchan_Normal[i] = TxC(TITLE + @"Donchan_Normal\" + i.ToString() + ".png");
+            }
+
             #endregion
 
             #region 2_コンフィグ画面
@@ -671,6 +676,7 @@ namespace TJAPlayer3
         public CTexture[] Banapas_Load_Failure = new CTexture[2];
         public CTexture[] Entry_Player = new CTexture[3];
         public CTexture[] Donchan_Entry = new CTexture[22];
+        public CTexture[] Entry_Donchan_Normal = new CTexture[13];
         #endregion
 
         #region 2_コンフィグ画面
