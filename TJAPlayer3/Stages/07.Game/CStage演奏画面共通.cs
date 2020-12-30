@@ -3927,6 +3927,19 @@ namespace TJAPlayer3
                     case 0xFF:
                         if ( !pChip.bHit && ( pChip.nバーからの距離dot.Drums < 0 ) )
 						{
+                            if (TJAPlayer3.ConfigIni.bTokkunMode)
+                            {
+                                foreach (CDTX.CWAV cwav in TJAPlayer3.DTX.listWAV.Values)
+                                {
+                                    for (int i = 0; i < nPolyphonicSounds; i++)
+                                    {
+                                        if ((cwav.rSound[i] != null) && cwav.rSound[i].b再生中)
+                                        {
+                                            return false;
+                                        }
+                                    }
+                                }
+                            }
                             pChip.bHit = true;
                             return true;
                         }

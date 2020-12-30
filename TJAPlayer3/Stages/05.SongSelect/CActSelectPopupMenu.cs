@@ -287,9 +287,11 @@ namespace TJAPlayer3
 						eAction = ESortAction.Decide;
 					}
 					else if (
-						TJAPlayer3.Pad.b押された( E楽器パート.DRUMS, Eパッド.Decide )	// #24756 2011.4.1 yyagi: Add condition "Drum-Decide" to enable CY in Sort Menu.
-						|| TJAPlayer3.Pad.b押された( E楽器パート.DRUMS, Eパッド.RD )
-						|| TJAPlayer3.Pad.b押された( E楽器パート.DRUMS, Eパッド.LC )
+						TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.Decide)	// #24756 2011.4.1 yyagi: Add condition "Drum-Decide" to enable CY in Sort Menu.
+						|| TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.RD)
+						|| TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.LC)
+						|| TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.LRed)
+						|| TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.RRed)
 						|| ( TJAPlayer3.ConfigIni.bEnterがキー割り当てのどこにも使用されていない && TJAPlayer3.Input管理.Keyboard.bキーが押された( (int)SlimDXKeys.Key.Return ) ) )
 					{
 						eInst = E楽器パート.DRUMS;
@@ -303,7 +305,7 @@ namespace TJAPlayer3
 					#region [ キー入力: 前に移動 ]
 					this.ctキー反復用.Up.tキー反復( TJAPlayer3.Input管理.Keyboard.bキーが押されている( (int)SlimDXKeys.Key.UpArrow ), new CCounter.DGキー処理( this.t前に移動 ) );
 					this.ctキー反復用.R.tキー反復( TJAPlayer3.Pad.b押されているGB( Eパッド.R ), new CCounter.DGキー処理( this.t前に移動 ) );
-					if ( TJAPlayer3.Pad.b押された( E楽器パート.DRUMS, Eパッド.SD ) )
+					if ( TJAPlayer3.Pad.b押された( E楽器パート.DRUMS, Eパッド.SD ) || TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.LBlue))
 					{
 						this.t前に移動();
 					}
@@ -311,7 +313,7 @@ namespace TJAPlayer3
 					#region [ キー入力: 次に移動 ]
 					this.ctキー反復用.Down.tキー反復( TJAPlayer3.Input管理.Keyboard.bキーが押されている( (int)SlimDXKeys.Key.DownArrow ), new CCounter.DGキー処理( this.t次に移動 ) );
 					this.ctキー反復用.B.tキー反復( TJAPlayer3.Pad.b押されているGB( Eパッド.B ), new CCounter.DGキー処理( this.t次に移動 ) );
-					if ( TJAPlayer3.Pad.b押された( E楽器パート.DRUMS, Eパッド.LT ) )
+					if ( TJAPlayer3.Pad.b押された( E楽器パート.DRUMS, Eパッド.LT ) || TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.RBlue))
 					{
 						this.t次に移動();
 					}
