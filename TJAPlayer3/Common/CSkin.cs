@@ -338,7 +338,9 @@ namespace TJAPlayer3
         public Cシステムサウンド bgmリザルトイン = null;
 
         public Cシステムサウンド SoundBanapas = null;
-
+        public Cシステムサウンド sound特訓再生音 = null;
+        public Cシステムサウンド sound特訓停止音 = null;
+        public Cシステムサウンド sound特訓スクロール音 = null;
 
         //public Cシステムサウンド soundRed = null;
         //public Cシステムサウンド soundBlue = null;
@@ -653,6 +655,9 @@ namespace TJAPlayer3
             this.bgmリザルトイン音 = new Cシステムサウンド(@"Sounds\BGM\Result_In.ogg", false, false, true, ESoundGroup.SongPlayback);
             this.bgmリザルト音 = new Cシステムサウンド(@"Sounds\BGM\Result.ogg", true, false, true, ESoundGroup.SongPlayback);
 
+            this.sound特訓再生音 = new Cシステムサウンド(@"Sounds\Resume.ogg", false, false, false, ESoundGroup.SoundEffect);
+            this.sound特訓停止音 = new Cシステムサウンド(@"Sounds\Pause.ogg", false, false, false, ESoundGroup.SoundEffect);
+            this.sound特訓スクロール音 = new Cシステムサウンド(@"Sounds\Scroll.ogg", false, false, false, ESoundGroup.SoundEffect);
 
             ReloadSkin();
             tReadSkinConfig();
@@ -2219,6 +2224,43 @@ namespace TJAPlayer3
                                 Game_PuchiChara_SineTimer = double.Parse(strParam);
                             }
                             #endregion
+                            else if (strCommand == nameof(Game_Training_ScrollTime))
+                            {
+                                Game_Training_ScrollTime = int.Parse(strParam);
+                            }
+                            else if (strCommand == nameof(Game_Training_ProgressBar_XY))
+                            {
+                                Game_Training_ProgressBar_XY = strParam.Split(',').Select(int.Parse).ToArray();
+                            }
+                            else if (strCommand == nameof(Game_Training_GoGoPoint_Y))
+                            {
+                                Game_Training_GoGoPoint_Y = int.Parse(strParam);
+                            }
+                            else if (strCommand == nameof(Game_Training_JumpPoint_Y))
+                            {
+                                Game_Training_JumpPoint_Y = int.Parse(strParam);
+                            }
+                            else if (strCommand == nameof(Game_Training_MaxMeasureCount_XY))
+                            {
+                                Game_Training_MaxMeasureCount_XY = strParam.Split(',').Select(int.Parse).ToArray();
+                            }
+                            else if (strCommand == nameof(Game_Training_CurrentMeasureCount_XY))
+                            {
+                                Game_Training_CurrentMeasureCount_XY = strParam.Split(',').Select(int.Parse).ToArray();
+                            }
+                            else if (strCommand == nameof(Game_Training_SpeedDisplay_XY))
+                            {
+                                Game_Training_CurrentMeasureCount_XY = strParam.Split(',').Select(int.Parse).ToArray();
+                            }
+                            else if (strCommand == nameof(Game_Training_SmallNumber_Width))
+                            {
+                                Game_Training_SmallNumber_Width = int.Parse(strParam);
+                            }
+                            else if (strCommand == nameof(Game_Training_BigNumber_Width))
+                            {
+                                Game_Training_BigNumber_Width = int.Parse(strParam);
+                            }
+                            #endregion
                             #endregion
                             #region Result
                             else if (strCommand == nameof(Result_MusicName_X))
@@ -2331,7 +2373,6 @@ namespace TJAPlayer3
                             {
                                 Text_Correction_Y = int.Parse(strParam);
                             }
-                            #endregion
                             #endregion
                         }
                         continue;
@@ -2773,6 +2814,17 @@ namespace TJAPlayer3
         public float Game_DanC_Exam_Number_Scale = 0.47f;
         public int[] Game_DanC_Exam_Offset = new int[] { 222, 27 };
         public int[] Game_DanC_Dan_Plate = new int[] { 149, 416 };
+        #endregion
+        #region Training
+        public int Game_Training_ScrollTime = 350;
+        public int[] Game_Training_ProgressBar_XY = { 333, 378 };
+        public int Game_Training_GoGoPoint_Y = 396;
+        public int Game_Training_JumpPoint_Y = 375;
+        public int[] Game_Training_MaxMeasureCount_XY = { 284, 377 };
+        public int[] Game_Training_CurrentMeasureCount_XY = { 254, 370 };
+        public int[] Game_Training_SpeedDisplay_XY = { 110, 370 };
+        public int Game_Training_SmallNumber_Width = 17;
+        public int Game_Training_BigNumber_Width = 20;
         #endregion
         #endregion
         #region Result

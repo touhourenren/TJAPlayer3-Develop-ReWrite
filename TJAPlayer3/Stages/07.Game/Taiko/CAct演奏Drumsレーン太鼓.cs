@@ -948,6 +948,17 @@ namespace TJAPlayer3
             else
                 this.n移動目的場所X2 = TJAPlayer3.Skin.nScrollFieldX[1] + n移動px;
         }
+
+        public void t判定枠Reset()
+        {
+            TJAPlayer3.Skin.nScrollFieldX[0] = this.nDefaultJudgePos[0, 0];
+            TJAPlayer3.Skin.nScrollFieldY[0] = this.nDefaultJudgePos[0, 1];
+            TJAPlayer3.Skin.nScrollFieldX[1] = this.nDefaultJudgePos[1, 0];
+            TJAPlayer3.Skin.nScrollFieldY[1] = this.nDefaultJudgePos[1, 1];
+            TJAPlayer3.stage演奏ドラム画面.FlyingNotes.StartPointX[0] = this.nDefaultJudgePos[0, 0];
+            TJAPlayer3.stage演奏ドラム画面.FlyingNotes.StartPointX[1] = this.nDefaultJudgePos[1, 0];
+        }
+
         #region[ private ]
         //-----------------
         //private CTexture txLane;

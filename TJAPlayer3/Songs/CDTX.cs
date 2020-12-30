@@ -351,6 +351,7 @@ namespace TJAPlayer3
             public int nBalloon;
             public int nProcessTime;
             public int nスクロール方向;
+            public bool b描画優先度 = false; //(特殊)現状連打との判断目的で使用
             public int n描画優先度; //(特殊)現状連打との判断目的で使用
             public ENoteState eNoteState;
             public EAVI種別 eAVI種別;
@@ -1528,7 +1529,16 @@ namespace TJAPlayer3
                             //    wc.rSound[ 0 ].n総演奏時間ms
                             //);
                             // wc.rSound[ i ].t再生位置を変更する( wc.rSound[ i ].t時刻から位置を返す( nAbsTimeFromStartPlaying ) );
-                            wc.rSound[i].t再生位置を変更する(nAbsTimeFromStartPlaying);  // WASAPI/ASIO用
+                            // WASAPI/ASIO用↓
+                            if (!TJAPlayer3.stage演奏ドラム画面.bPAUSE)
+                            {
+                                if (wc.rSound[i].b一時停止中) wc.rSound[i].t再生を再開する(nAbsTimeFromStartPlaying);
+                                else wc.rSound[i].t再生位置を変更する(nAbsTimeFromStartPlaying);
+                            }
+                            else
+                            {
+                                wc.rSound[i].t再生を一時停止する();
+                            }
                         }
                     }
                 }

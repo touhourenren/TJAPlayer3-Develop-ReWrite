@@ -103,6 +103,7 @@
     <Compile Include="Animations\Linear.cs" />
     <Compile Include="Common\ConfigManager.cs" />
     <Compile Include="Common\Discord.cs" />
+    <Compile Include="Common\Easing.cs .cs" />
     <Compile Include="Common\NamePlateConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Discord.resx">
@@ -202,6 +203,7 @@
     <Compile Include="Stages\07.Game\CStage演奏画面共通.cs" />
     <Compile Include="Stages\07.Game\C演奏判定ライン座標共通.cs" />
     <Compile Include="Stages\07.Game\Taiko\CAct演奏Drumsスコアランク.cs" />
+    <Compile Include="Stages\07.Game\Taiko\CAct特訓モード .cs" />
     <Compile Include="Stages\07.Game\Taiko\Dan_Cert.cs" />
     <Compile Include="Stages\07.Game\Taiko\CAct演奏DrumsFooter.cs" />
     <Compile Include="Stages\07.Game\Taiko\CAct演奏DrumsMob.cs" />

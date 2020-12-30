@@ -302,6 +302,7 @@ namespace TJAPlayer3
 			get;
 			private set;
 		}
+
 		public static Format TextureFormat = Format.A8R8G8B8;
 		internal static IPluginActivity act現在入力を占有中のプラグイン = null;
 		public bool bApplicationActive
