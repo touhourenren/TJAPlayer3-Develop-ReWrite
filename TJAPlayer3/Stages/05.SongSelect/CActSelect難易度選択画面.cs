@@ -163,12 +163,12 @@ namespace TJAPlayer3
 
             if (this.ctBarAnimeIn.b終了値に達した && !bSelect)
             {
-                if (TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.RBlue))
+                if (TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.RBlue) || TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDXKeys.Key.RightArrow))
                 {
                     TJAPlayer3.Skin.sound変更音.t再生する();
                     this.t次に移動();
                 }
-                else if (TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.LBlue))
+                else if (TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.LBlue) || TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDXKeys.Key.LeftArrow))
                 {
                     TJAPlayer3.Skin.sound変更音.t再生する();
                     this.t前に移動();
