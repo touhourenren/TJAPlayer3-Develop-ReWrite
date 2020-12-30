@@ -448,7 +448,7 @@ namespace TJAPlayer3
                 if( TJAPlayer3.ConfigIni.ShowChara )
                     this.actChara.On進行描画();
 
-                if(!TJAPlayer3.ConfigIni.bAVI有効 && TJAPlayer3.ConfigIni.ShowMob)
+                if(!TJAPlayer3.ConfigIni.bAVI有効 && TJAPlayer3.ConfigIni.ShowMob && !TJAPlayer3.ConfigIni.bTokkunMode)
                     this.actMob.On進行描画();
 
                 if ( TJAPlayer3.ConfigIni.eGameMode != EGame.OFF )
@@ -483,11 +483,11 @@ namespace TJAPlayer3
                 this.t進行描画_リアルタイム判定数表示();
 
                 if (TJAPlayer3.ConfigIni.bTokkunMode)
-                    this.actTokkun.On進行描画_背景();
+                    this.actTokkun.On進行描画_小節_速度();
 
                 if ( !TJAPlayer3.ConfigIni.bNoInfo )
 			        this.t進行描画_コンボ();
-                if( !TJAPlayer3.ConfigIni.bNoInfo && TJAPlayer3.ConfigIni.bTokkunMode)
+                if( !TJAPlayer3.ConfigIni.bNoInfo && !TJAPlayer3.ConfigIni.bTokkunMode)
 				    this.t進行描画_スコア();
 
                 if (TJAPlayer3.ConfigIni.bTokkunMode)
@@ -522,7 +522,8 @@ namespace TJAPlayer3
 
                 this.actPanel.t歌詞テクスチャを描画する();
 
-                actChara.OnDraw_Balloon();
+                if (TJAPlayer3.ConfigIni.ShowChara)
+                    actChara.OnDraw_Balloon();
 
                 this.t全体制御メソッド();
                 
@@ -540,11 +541,11 @@ namespace TJAPlayer3
                 {
                     if (TJAPlayer3.ConfigIni.bTokkunMode)
                     {
-                        bIsFinishedPlaying = false;
                         TJAPlayer3.Skin.sound特訓停止音.t再生する();
                         actTokkun.t演奏を停止する();
 
-                        actTokkun.t譜面の表示位置を合わせる(true);
+                        actTokkun.n現在の小節線 = TJAPlayer3.stage演奏ドラム画面.actPlayInfo.NowMeasure[0];
+                        actTokkun.t譜面の表示位置を合わせる(false);
                     }
                     else
                     {
