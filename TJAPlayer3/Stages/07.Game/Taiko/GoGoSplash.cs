@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using SlimDX;
 using FDK;
 using System.Drawing;
 
@@ -34,8 +33,6 @@ namespace TJAPlayer3
         public override int On進行描画()
         {
             if (Splash == null) return base.On進行描画();
-            // for Debug
-            // if (CDTXMania.Input管理.Keyboard.bキーが押された((int)SlimDX.DirectInput.Key.A)) StartSplash();
             Splash.t進行();
             if (Splash.b終了値に達した)
             {

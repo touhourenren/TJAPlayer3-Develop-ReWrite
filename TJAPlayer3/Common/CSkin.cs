@@ -324,6 +324,7 @@ namespace TJAPlayer3
         public Cシステムサウンド soundSkip = null;
         public Cシステムサウンド soundEntry = null;
         public Cシステムサウンド soundError = null;
+        public Cシステムサウンド soundsanka = null;
         //add
         public Cシステムサウンド sound曲決定音 = null;
         public Cシステムサウンド bgmリザルトイン音 = null;
@@ -635,9 +636,10 @@ namespace TJAPlayer3
             this.bgm選曲画面 = new Cシステムサウンド(@"Sounds\Select BGM.ogg", true, true, false, ESoundGroup.SongPreview);
             this.soundSongSelectChara = new Cシステムサウンド(@"Sounds\SongSelect Chara.ogg", false, false, false, ESoundGroup.SongPreview);
             this.soundSkip = new Cシステムサウンド(@"Sounds\Skip.ogg", false, false, false, ESoundGroup.SoundEffect);
-            this.SoundBanapas = new Cシステムサウンド(@"Sounds\Banapas.wav", false, false, false, ESoundGroup.SoundEffect);
+            this.SoundBanapas = new Cシステムサウンド(@"Sounds\Banapas.ogg", false, false, false, ESoundGroup.SoundEffect);
             this.soundEntry = new Cシステムサウンド(@"Sounds\Entry.ogg", true, false, false, ESoundGroup.Voice);
             this.soundError = new Cシステムサウンド(@"Sounds\Error.ogg", false, false, false, ESoundGroup.SoundEffect);
+            this.soundsanka = new Cシステムサウンド(@"Sounds\sanka.ogg", false, false, false, ESoundGroup.Voice);
 
             //this.soundRed               = new Cシステムサウンド( @"Sounds\dong.ogg",            false, false, true, ESoundType.SoundEffect );
             //this.soundBlue              = new Cシステムサウンド( @"Sounds\ka.ogg",              false, false, true, ESoundType.SoundEffect );

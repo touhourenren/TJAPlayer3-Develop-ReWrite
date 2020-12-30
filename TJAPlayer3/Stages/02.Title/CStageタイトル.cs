@@ -4,7 +4,6 @@ using System.Text;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 using System.Drawing;
-using SlimDX.DirectInput;
 using FDK;
 using System.Reflection;
 
@@ -139,16 +138,16 @@ namespace TJAPlayer3
                 if (base.eフェーズID == CStage.Eフェーズ.共通_通常状態        // 通常状態、かつ
 					&& TJAPlayer3.act現在入力を占有中のプラグイン == null)    // プラグインの入力占有がない
 				{
-					if (TJAPlayer3.Input管理.Keyboard.bキーが押された((int)Key.Escape))
+					if (TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDXKeys.Key.Escape))
 						return (int)E戻り値.EXIT;
 
 					if(!bバナパス読み込み && !bバナパス読み込み失敗)
 					{
-						if (TJAPlayer3.Input管理.Keyboard.bキーが押された((int)Key.P))
+						if (TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDXKeys.Key.P))
 							this.ctバナパス読み込み待機.t開始(0, 600, 1, TJAPlayer3.Timer);
-						if (TJAPlayer3.Input管理.Keyboard.bキーが押されている((int)Key.P))
+						if (TJAPlayer3.Input管理.Keyboard.bキーが押されている((int)SlimDXKeys.Key.P))
 							ctバナパス読み込み待機.t進行();
-						if (TJAPlayer3.Input管理.Keyboard.bキーが離された((int)Key.P))
+						if (TJAPlayer3.Input管理.Keyboard.bキーが離された((int)SlimDXKeys.Key.P))
 						{
 							this.ctバナパス読み込み待機.t停止();
 							if (this.ctバナパス読み込み待機.n現在の値 < 600 && !bバナパス読み込み失敗)
@@ -159,7 +158,7 @@ namespace TJAPlayer3
 						}
 					}
 
-					if (TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.RBlue))
+					if (TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.RBlue) || TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDXKeys.Key.RightArrow))
                     {
 						if(bプレイヤーエントリー && !bプレイヤーエントリー決定)
                         {
@@ -171,7 +170,7 @@ namespace TJAPlayer3
                         }							
                     }
 
-					if (TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.LBlue))
+					if (TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.LBlue)||TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDXKeys.Key.LeftArrow))
                     {
 						if(bプレイヤーエントリー && !bプレイヤーエントリー決定)
                         {
@@ -184,7 +183,7 @@ namespace TJAPlayer3
                     }
 
 
-					if (TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.RRed) || TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.LRed))
+					if (TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.RRed) || TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.LRed) || TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDXKeys.Key.Return))
 					{
 						if (bプレイヤーエントリー)
 						{
@@ -229,13 +228,16 @@ namespace TJAPlayer3
                     {
                         if (!bモード選択)
                         {
+							if (!TJAPlayer3.Skin.soundsanka.bPlayed)
+								TJAPlayer3.Skin.soundsanka.t再生する();
+
 							ctどんちゃんイン.t開始(0, 180, 2, TJAPlayer3.Timer);
 							bモード選択 = true;
                         }
                     }
 
 					/*
-					if ((TJAPlayer3.Pad.b押されたDGB(Eパッド.CY) || TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.RD)) || (TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.LC) || (TJAPlayer3.ConfigIni.bEnterがキー割り当てのどこにも使用されていない && TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDX.DirectInput.Key.Return))))
+					if ((TJAPlayer3.Pad.b押されたDGB(Eパッド.CY) || TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.RD)) || (TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.LC) || (TJAPlayer3.ConfigIni.bEnterがキー割り当てのどこにも使用されていない && TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDXKeys.Key.Return))))
 					{
 						if ((this.n現在のカーソル行 == (int)E戻り値.GAMESTART - 1) && TJAPlayer3.Skin.soundゲーム開始音.b読み込み成功)
 						{
@@ -254,11 +256,11 @@ namespace TJAPlayer3
 					}*/
 				}
 
-                #endregion
+				#endregion
 
-                #region [ 背景描画 ]
+				#region [ 背景描画 ]
 
-                if (TJAPlayer3.Tx.Title_Background != null )
+				if (TJAPlayer3.Tx.Title_Background != null )
                     TJAPlayer3.Tx.Title_Background.t2D描画( TJAPlayer3.app.Device, 0, 0 );
 				
                 #endregion

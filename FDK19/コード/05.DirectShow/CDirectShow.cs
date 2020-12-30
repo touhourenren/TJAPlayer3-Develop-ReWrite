@@ -8,7 +8,7 @@ using System.Drawing.Imaging;
 using System.Threading;
 using SlimDX;
 using SlimDX.Direct3D9;
-using SlimDX.Multimedia;
+using SharpDX.Multimedia;
 using DirectShowLib;
 
 namespace FDK
@@ -763,12 +763,7 @@ namespace FDK
 					//-----------------
 					var wfxTemp = new WaveFormatEx();	// SlimDX.Multimedia.WaveFormat は Marshal.PtrToStructure() で使えないので、それが使える DirectShowLib.WaveFormatEx を介して取得する。（面倒…）
 					Marshal.PtrToStructure( type.formatPtr, (object) wfxTemp );
-					wfx.AverageBytesPerSecond = wfxTemp.nAvgBytesPerSec;
-					wfx.BitsPerSample = wfxTemp.wBitsPerSample;
-					wfx.BlockAlignment = wfxTemp.nBlockAlign;
-					wfx.Channels = wfxTemp.nChannels;
-					wfx.FormatTag = (WaveFormatTag) ( (ushort) wfxTemp.wFormatTag );	// DirectShowLib.WaveFormatEx.wFormatTag は short だが、SlimDX.Mulrimedia.WaveFormat.FormatTag は ushort である。（面倒…）
-					wfx.SamplesPerSecond = wfxTemp.nSamplesPerSec;
+					wfx = WaveFormat.CreateCustomFormat((WaveFormatEncoding)wfxTemp.wFormatTag, wfxTemp.nSamplesPerSec, wfxTemp.nChannels, wfxTemp.nAvgBytesPerSec, wfxTemp.nBlockAlign, wfxTemp.wBitsPerSample);
 					//-----------------
 					#endregion
 					#region [ 拡張領域が存在するならそれを wfx拡張データ に格納する。 ]

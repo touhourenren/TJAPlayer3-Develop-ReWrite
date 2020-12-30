@@ -357,7 +357,7 @@ namespace TJAPlayer3
             public E楽器パート e楽器パート = E楽器パート.UNKNOWN;
             public int nチャンネル番号;
             public STDGBVALUE<int> nバーからの距離dot;
-            public STDGBVALUE<int> nバーからのノーツ末端距離dot;
+            public int nバーからのノーツ末端距離dot;
             public int n整数値;
             public int n整数値_内部番号;
             public int n総移動時間;
@@ -436,6 +436,7 @@ namespace TJAPlayer3
                     Drums = 0,
                     Guitar = 0,
                     Bass = 0,
+                    Taiko = 0
                 };
             }
             public void t初期化()
@@ -465,10 +466,7 @@ namespace TJAPlayer3
                 this.nバーからの距離dot.Guitar = 0;
                 this.nバーからの距離dot.Bass = 0;
                 this.nバーからの距離dot.Taiko = 0;
-                this.nバーからのノーツ末端距離dot.Drums = 0;
-                this.nバーからのノーツ末端距離dot.Guitar = 0;
-                this.nバーからのノーツ末端距離dot.Bass = 0;
-                this.nバーからのノーツ末端距離dot.Taiko = 0;
+                this.nバーからのノーツ末端距離dot = 0;
                 this.n総移動時間 = 0;
                 this.dbBPM = 120.0;
                 this.nスクロール方向 = 0;
@@ -1313,6 +1311,7 @@ namespace TJAPlayer3
             this.COMMENT = "";
             this.PANEL = "";
             this.GENRE = "";
+            this.bLyrics = false;
             this.eジャンル = Eジャンル.None;
             this.PREVIEW = "";
             this.PREIMAGE = "";
@@ -2630,16 +2629,17 @@ namespace TJAPlayer3
                         //span = (TimeSpan) ( DateTime.Now - timeBeginLoad );
                         //Trace.TraceInformation( "発声時刻計算:             {0}", span.ToString() );
                         //timeBeginLoad = DateTime.Now;
-                        this.nBGMAdjust = 0;
-                        this.t各自動再生音チップの再生時刻を変更する(nBGMAdjust);
-                        //span = (TimeSpan) ( DateTime.Now - timeBeginLoad );
-                        //Trace.TraceInformation( "再生時刻変更:             {0}", span.ToString() );
-                        //timeBeginLoad = DateTime.Now;
 
                         #region[listlyricを時間順に並び替え。]
                         this.listLyric2 = tmplistlyric;
                         this.listLyric2.Sort((a, b) => a.Time.CompareTo(b.Time));
                         #endregion
+
+                        this.nBGMAdjust = 0;
+                        this.t各自動再生音チップの再生時刻を変更する(nBGMAdjust);
+                        //span = (TimeSpan) ( DateTime.Now - timeBeginLoad );
+                        //Trace.TraceInformation( "再生時刻変更:             {0}", span.ToString() );
+                        //timeBeginLoad = DateTime.Now;
 
                         #region [ 可視チップ数カウント ]
                         for (int n = 0; n < 14; n++)
@@ -4292,15 +4292,17 @@ namespace TJAPlayer3
         /// <param name="InputText"></param>
         private void t難易度別ヘッダ(string InputText)
         {
-            if (InputText.Equals("#HBSCROLL") && TJAPlayer3.ConfigIni.bスクロールモードを上書き == false)
+            if (TJAPlayer3.actEnumSongs.b活性化してない)
             {
-                TJAPlayer3.ConfigIni.eScrollMode = EScrollMode.HBSCROLL;
+                if (InputText.Equals("#HBSCROLL") && TJAPlayer3.ConfigIni.bスクロールモードを上書き == false)
+                {
+                    TJAPlayer3.ConfigIni.eScrollMode = EScrollMode.HBSCROLL;
+                }
+                if (InputText.Equals("#BMSCROLL") && TJAPlayer3.ConfigIni.bスクロールモードを上書き == false)
+                {
+                    TJAPlayer3.ConfigIni.eScrollMode = EScrollMode.BMSCROLL;
+                }
             }
-            if (InputText.Equals("#BMSCROLL") && TJAPlayer3.ConfigIni.bスクロールモードを上書き == false)
-            {
-                TJAPlayer3.ConfigIni.eScrollMode = EScrollMode.BMSCROLL;
-            }
-
 
             string[] strArray = InputText.Split(new char[] { ':' });
             string strCommandName = "";

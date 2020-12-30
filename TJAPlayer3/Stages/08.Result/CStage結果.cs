@@ -409,7 +409,7 @@ namespace TJAPlayer3
 				if (TJAPlayer3.act現在入力を占有中のプラグイン == null)
 				{
 					#region [ #24609 2011.4.7 yyagi リザルト画面で[F12]を押下すると、リザルト画像をpngで保存する機能は、CDTXManiaに移管。 ]
-					//					if ( CDTXMania.Input管理.Keyboard.bキーが押された( (int) SlimDX.DirectInput.Key.F12 ) &&
+					//					if ( CDTXMania.Input管理.Keyboard.bキーが押された( (int) SlimDXKeys.Key.F12 ) &&
 					//						CDTXMania.ConfigIni.bScoreIniを出力する )
 					//					{
 					//						CheckAndSaveResultScreen(false);
@@ -418,7 +418,7 @@ namespace TJAPlayer3
 					#endregion
 					if (base.eフェーズID == CStage.Eフェーズ.共通_通常状態)
 					{
-						if (TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDX.DirectInput.Key.Escape))
+						if (TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDXKeys.Key.Escape))
 						{
 							TJAPlayer3.Skin.bgmリザルト音.t停止する();
 							TJAPlayer3.Skin.sound決定音.t再生する();
@@ -426,7 +426,7 @@ namespace TJAPlayer3
 							base.eフェーズID = CStage.Eフェーズ.共通_フェードアウト;
 							this.eフェードアウト完了時の戻り値 = E戻り値.完了;
 						}
-						if (((TJAPlayer3.Pad.b押されたDGB(Eパッド.CY) || TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.RD)) || (TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.LC) || (TJAPlayer3.Pad.b押されたDGB(Eパッド.LRed) || (TJAPlayer3.Pad.b押されたDGB(Eパッド.RRed) || TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDX.DirectInput.Key.Return))))))
+						if (((TJAPlayer3.Pad.b押されたDGB(Eパッド.CY) || TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.RD)) || (TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.LC) || (TJAPlayer3.Pad.b押されたDGB(Eパッド.LRed) || (TJAPlayer3.Pad.b押されたDGB(Eパッド.RRed) || TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDXKeys.Key.Return))))))
 						{
 							if (this.actParameterPanel.ct全体アニメ.n現在の値 <= 2000 + (this.actParameterPanel.ctゲージアニメーション.n終了値 * 66) + 8360 - 85)
 							{
@@ -513,11 +513,13 @@ namespace TJAPlayer3
 
 								if (TJAPlayer3.stage選曲.r現在選択中の曲.r親ノード != null)
 									TJAPlayer3.stage選曲.act曲リスト.tBOXを出る();
-
-								base.eフェーズID = CStage.Eフェーズ.共通_フェードアウト;
-								this.eフェードアウト完了時の戻り値 = E戻り値.完了;
-								TJAPlayer3.Skin.bgmリザルト音.t停止する();
-								TJAPlayer3.Skin.sound決定音.t再生する();
+                                else
+                                {
+									base.eフェーズID = CStage.Eフェーズ.共通_フェードアウト;
+									this.eフェードアウト完了時の戻り値 = E戻り値.完了;
+									TJAPlayer3.Skin.bgmリザルト音.t停止する();
+									TJAPlayer3.Skin.sound決定音.t再生する();
+								}
 							}
 						}
 					}

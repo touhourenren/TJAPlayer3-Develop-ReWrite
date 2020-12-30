@@ -5,15 +5,16 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Diagnostics;
-using System.Runtime.InteropServices;
 using System.IO;
 using System.Threading;
+using System.Net.NetworkInformation;
 using System.Runtime.Serialization.Formatters.Binary;
 using SlimDX;
 using SlimDX.Direct3D9;
 using FDK;
 using SampleFramework;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace TJAPlayer3
 {
@@ -439,9 +440,9 @@ namespace TJAPlayer3
 				{
 					Directory.CreateDirectory( strSavePath );
 				}
-				catch (Exception e)
+				catch
 				{
-					Trace.TraceError( e.ToString() );
+					Trace.TraceError(ToString());
 					Trace.TraceError( "例外が発生しましたが処理を継続します。 (0bfe6bff-2a56-4df4-9333-2df26d9b765b)" );
 					return false;
 				}
@@ -622,9 +623,9 @@ namespace TJAPlayer3
 								this.previewSound.t再生を開始する();
 								Trace.TraceInformation( "DTXCからの指示で、サウンドを生成しました。({0})", strPreviewFilename );
 							}
-							catch (Exception e)
+							catch
 							{
-								Trace.TraceError( e.ToString() );
+								Trace.TraceError(ToString());
 								Trace.TraceError( "DTXCからの指示での、サウンドの生成に失敗しました。({0})", strPreviewFilename );
 								if ( this.previewSound != null )
 								{
@@ -1538,11 +1539,28 @@ for (int i = 0; i < 3; i++) {
 
 			    actScanningLoudness.On進行描画();
 
-                // オーバレイを描画する(テクスチャの生成されていない起動ステージは例外
-                if(r現在のステージ != null && r現在のステージ.eステージID != CStage.Eステージ.起動 && TJAPlayer3.Tx.Overlay != null)
-                {
-                    TJAPlayer3.Tx.Overlay.t2D描画(app.Device, 0, 0);
-                }
+				if (r現在のステージ != null && r現在のステージ.eステージID != CStage.Eステージ.起動 && TJAPlayer3.Tx.Overlay_Online != null && TJAPlayer3.Tx.Overlay_Offline != null)
+				{
+					if (Math.Abs(CSound管理.rc演奏用タイマ.nシステム時刻ms - this.前回のシステム時刻ms) > 10000)
+					{
+						this.前回のシステム時刻ms = CSound管理.rc演奏用タイマ.nシステム時刻ms;
+						Task.Factory.StartNew(() =>
+						{
+							//IPv4 8.8.8.8にPingを送信する(timeout 5000ms)
+							PingReply reply = new Ping().Send("8.8.8.8", 5000);
+							this.bネットワークに接続中 = reply.Status == IPStatus.Success;
+						});
+					}
+					if (this.bネットワークに接続中)
+						TJAPlayer3.Tx.Overlay_Online.t2D描画(app.Device, 0, 0);
+					else
+						TJAPlayer3.Tx.Overlay_Offline.t2D描画(app.Device, 0, 0);
+				}
+				// オーバレイを描画する(テクスチャの生成されていない起動ステージは例外
+				if (r現在のステージ != null && r現在のステージ.eステージID != CStage.Eステージ.起動 && TJAPlayer3.Tx.Overlay != null)
+				{
+					TJAPlayer3.Tx.Overlay.t2D描画(app.Device, 0, 0);
+				}
 			}
 			this.Device.EndScene();			// Present()は game.csのOnFrameEnd()に登録された、GraphicsDeviceManager.game_FrameEnd() 内で実行されるので不要
 											// (つまり、Present()は、Draw()完了後に実行される)
@@ -1802,6 +1820,8 @@ for (int i = 0; i < 3; i++) {
         //-----------------
         private bool bマウスカーソル表示中 = true;
 		private bool b終了処理完了済み;
+		private bool bネットワークに接続中 = false;
+		private long 前回のシステム時刻ms = long.MinValue;
 		private static CDTX[] dtx = new CDTX[ 4 ];
 
         public static TextureLoader Tx = new TextureLoader();
@@ -2879,7 +2899,7 @@ for (int i = 0; i < 3; i++) {
 				for ( int i = 0; i < 0x10; i++ )
 				{
 					if ( ConfigIni.KeyAssign.System.Capture[ i ].コード > 0 &&
-						 e.KeyCode == DeviceConstantConverter.KeyToKeyCode( (SlimDX.DirectInput.Key) ConfigIni.KeyAssign.System.Capture[ i ].コード ) )
+						 e.KeyCode == DeviceConstantConverter.KeyToKeyCode( (SlimDXKeys.Key) ConfigIni.KeyAssign.System.Capture[ i ].コード ) )
 					{
 						// Debug.WriteLine( "capture: " + string.Format( "{0:2x}", (int) e.KeyCode ) + " " + (int) e.KeyCode );
 						string strFullPath =
