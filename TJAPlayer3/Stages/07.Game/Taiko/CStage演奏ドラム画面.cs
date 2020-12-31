@@ -67,7 +67,7 @@ namespace TJAPlayer3
             base.list子Activities.Add(this.PuchiChara = new PuchiChara());
             base.list子Activities.Add(this.ScoreRank = new CAct演奏Drumsスコアランク());
             base.list子Activities.Add(this.actDan = new Dan_Cert());
-            base.list子Activities.Add(this.actTokkun = new CAct特訓モード());
+            base.list子Activities.Add(this.actTokkun = new CAct演奏Drums特訓モード());
             #region[ 文字初期化 ]
             ST文字位置[] st文字位置Array = new ST文字位置[ 12 ];
 			ST文字位置 st文字位置 = new ST文字位置();
@@ -410,12 +410,12 @@ namespace TJAPlayer3
 					TJAPlayer3.DTX.t全チップの再生停止();
 					base.eフェーズID = CStage.Eフェーズ.演奏_STAGE_FAILED;
 				}
-                if( !String.IsNullOrEmpty( TJAPlayer3.DTX.strBGIMAGE_PATH ) || ( TJAPlayer3.DTX.listAVI.Count == 0 ) ) //背景動画があったら背景画像を描画しない。
+                if( !String.IsNullOrEmpty( TJAPlayer3.DTX.strBGIMAGE_PATH ) || ( TJAPlayer3.DTX.listAVI.Count == 0 ) || !TJAPlayer3.ConfigIni.bAVI有効) //背景動画があったら背景画像を描画しない。
                 {
 				    this.t進行描画_背景();
                 }
 
-                if (TJAPlayer3.ConfigIni.bAVI有効 && TJAPlayer3.DTX.listAVI.Count > 0)
+                if (TJAPlayer3.ConfigIni.bAVI有効 && TJAPlayer3.DTX.listAVI.Count > 0 && !TJAPlayer3.ConfigIni.bTokkunMode)
                 {
                     this.t進行描画_AVI();
                 }
@@ -626,7 +626,7 @@ namespace TJAPlayer3
         public CAct演奏Drums演奏終了演出 actEnd;
         private CAct演奏Drumsゲームモード actGame;
         public CAct演奏Drums背景 actBackground;
-        public CAct特訓モード actTokkun;
+        public CAct演奏Drums特訓モード actTokkun;
         public GoGoSplash GoGoSplash;
         public FlyingNotes FlyingNotes;
         public FireWorks FireWorks;

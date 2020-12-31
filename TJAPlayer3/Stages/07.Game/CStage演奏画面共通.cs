@@ -628,7 +628,7 @@ namespace TJAPlayer3
         public CAct演奏DrumsFooter actFooter;
         public CAct演奏DrumsMob actMob;
         public Dan_Cert actDan;
-        public CAct特訓モード actTokkun;
+        public CAct演奏Drums特訓モード actTokkun;
         public bool bPAUSE;
         public bool[] bIsAlreadyCleared;
         public bool[] bIsAlreadyMaxed;

@@ -761,7 +761,9 @@ namespace TJAPlayer3
         public int nDefaultSongSort;
 
         public EGame eGameMode;
-        public bool bSuperHard = false;
+		public int TokkunSkipMeasures;
+		public int TokkunMashInterval;
+		public bool bSuperHard = false;
         public bool bTokkunMode = false;
         public bool bJust;
 
