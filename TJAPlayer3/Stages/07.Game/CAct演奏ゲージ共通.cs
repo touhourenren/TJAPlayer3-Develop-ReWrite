@@ -134,6 +134,7 @@ namespace TJAPlayer3
 			}
 
             this.dbゲージ値 = 0;
+            this.dbゲージ値2P = 0;
 
             //ゲージのMAXまでの最低コンボ数を計算
             float dbGaugeMaxComboValue = 0;
