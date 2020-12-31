@@ -48,6 +48,7 @@ namespace TJAPlayer3
             {
                 if(TJAPlayer3.DTX.Dan_C[i] != null) Challenge[i] = new Dan_C(TJAPlayer3.DTX.Dan_C[i]);
             }
+            FirstSectionAnime = false;
             // 始点を決定する。
             ExamCount = 0;
             for (int i = 0; i < 4; i++)

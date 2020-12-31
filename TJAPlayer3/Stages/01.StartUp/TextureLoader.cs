@@ -233,6 +233,7 @@ namespace TJAPlayer3
             Dani_Level_Number = TxC(DANISELECT + "Level_Number.png");
             Dani_Soul_Number = TxC(DANISELECT + "SoulNumber.png");
             Dani_Exam_Number = TxC(DANISELECT + "ExamNumber.png");
+            Dani_Bar_Center = TxC(DANISELECT + "Bar_Center.png");
 
             #endregion
 
@@ -759,6 +760,7 @@ namespace TJAPlayer3
         public CTexture Dani_Level_Number;
         public CTexture Dani_Soul_Number;
         public CTexture Dani_Exam_Number;
+        public CTexture Dani_Bar_Center;
 
         #endregion
 

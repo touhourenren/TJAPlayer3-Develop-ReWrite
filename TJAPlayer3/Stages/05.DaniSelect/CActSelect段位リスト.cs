@@ -95,7 +95,8 @@ namespace TJAPlayer3
 
                 float Anime = ctDanAnimeIn.n現在の値 == 90 ? bLeftMove ? (float)Math.Sin(ctDaniMoveAnime.n現在の値 * (Math.PI / 180)) * 1280 : -((float)Math.Sin(ctDaniMoveAnime.n現在の値 * (Math.PI / 180)) * 1280) : 1280 - (float)Math.Sin(ctDanAnimeIn.n現在の値 * (Math.PI / 180)) * 1280;
 
-                stバー情報[n現在の選択行].txBarCenter?.t2D描画(TJAPlayer3.app.Device, Anime, 0);
+                if (stバー情報[n現在の選択行].txBarCenter != null) stバー情報[n現在の選択行].txBarCenter?.t2D描画(TJAPlayer3.app.Device, Anime, 0);
+                else TJAPlayer3.Tx.Dani_Bar_Center.t2D描画(TJAPlayer3.app.Device, Anime, 0);
                 if (stバー情報[n現在の選択行].txDanPlate != null) stバー情報[n現在の選択行].txDanPlate.Opacity = 255;
                 stバー情報[n現在の選択行].txDanPlate?.t2D中心基準描画(TJAPlayer3.app.Device, 173 + Anime, 301);
                 tSoulDraw(370 + Anime, 462, stバー情報[n現在の選択行].dan_c[0].Value[0].ToString());
@@ -114,7 +115,9 @@ namespace TJAPlayer3
                     }
                 if (bLeftMove && n現在の選択行 - 1 >= 0)
                 {
-                    stバー情報[n現在の選択行 - 1].txBarCenter?.t2D描画(TJAPlayer3.app.Device, -1280 + Anime, 0);
+                    if (stバー情報[n現在の選択行 - 1].txBarCenter != null) stバー情報[n現在の選択行 - 1].txBarCenter?.t2D描画(TJAPlayer3.app.Device, -1280 + Anime, 0);
+                    else TJAPlayer3.Tx.Dani_Bar_Center.t2D描画(TJAPlayer3.app.Device, -1280 + Anime, 0);
+                    
                     if (stバー情報[n現在の選択行 - 1].txDanPlate != null) stバー情報[n現在の選択行 - 1].txDanPlate.Opacity = 255;
                     stバー情報[n現在の選択行 - 1].txDanPlate?.t2D中心基準描画(TJAPlayer3.app.Device, -1280 + 173 + Anime, 301);
                     tSoulDraw(-1280 + 370 + Anime, 462, stバー情報[n現在の選択行 - 1].dan_c[0].Value[0].ToString());
@@ -134,7 +137,9 @@ namespace TJAPlayer3
                 }
                 if (!bLeftMove && n現在の選択行 + 1 <= stバー情報.Length - 1)
                 {
-                    stバー情報[n現在の選択行 + 1].txBarCenter?.t2D描画(TJAPlayer3.app.Device, 1280 + Anime, 0);
+                    if (stバー情報[n現在の選択行 + 1].txBarCenter != null) stバー情報[n現在の選択行 + 1].txBarCenter?.t2D描画(TJAPlayer3.app.Device, 1280 + Anime, 0);
+                    else TJAPlayer3.Tx.Dani_Bar_Center.t2D描画(TJAPlayer3.app.Device, 1280 + Anime, 0);
+
                     if(stバー情報[n現在の選択行 + 1].txDanPlate != null) stバー情報[n現在の選択行 + 1].txDanPlate.Opacity = 255;
                     stバー情報[n現在の選択行 + 1].txDanPlate?.t2D中心基準描画(TJAPlayer3.app.Device, 1280 + 173 + Anime, 301);
                     tSoulDraw(1280 + 370 + Anime, 462, stバー情報[n現在の選択行 + 1].dan_c[0].Value[0].ToString());

@@ -1064,7 +1064,47 @@ namespace TJAPlayer3
 
 			#endregion
 
-			this.t曲リストへ後処理を適用する( this.list曲ルート );
+			this.t曲リストへ後処理を適用する(this.list曲ルート);
+
+			foreach (C曲リストノード c曲リストノード in list曲ルート)
+			{
+				if(c曲リストノード.eノード種別 == C曲リストノード.Eノード種別.BOX)
+				{
+					if (c曲リストノード.strタイトル == "段位道場")
+					{
+						list曲ルート.Remove(c曲リストノード);
+						for (int i = 0; i < c曲リストノード.list子リスト.Count; i++)
+						{
+							if(c曲リストノード.list子リスト[i].eノード種別 == C曲リストノード.Eノード種別.SCORE)
+							{
+								list曲ルート_Dan.Add(c曲リストノード.list子リスト[i]);
+								continue;
+							}
+						}
+					}
+                    else
+					{
+						for (int i = 0; i < c曲リストノード.list子リスト.Count; i++)
+                        {
+							if(c曲リストノード.list子リスト[i].arスコア[6] != null)
+							{
+								list曲ルート_Dan.Add(c曲リストノード.list子リスト[i]);
+								c曲リストノード.list子リスト.Remove(c曲リストノード.list子リスト[i]);
+								continue;
+							}
+                        }
+					}
+				}
+                else
+				{
+					if (c曲リストノード.arスコア[5] != null)
+					{
+						c曲リストノード.list子リスト.Remove(c曲リストノード);
+						list曲ルート_Dan.Add(c曲リストノード);
+						continue;
+					}
+				}
+			}
 
 			#region [ skin名で比較して、systemスキンとboxdefスキンに重複があれば、boxdefスキン側を削除する ]
 			string[] systemSkinNames = CSkin.GetSkinName( TJAPlayer3.Skin.strSystemSkinSubfolders );
@@ -1094,15 +1134,6 @@ namespace TJAPlayer3
 				//-----------------------------
 				if ( c曲リストノード.eノード種別 == C曲リストノード.Eノード種別.BOX )
 				{
-					if(c曲リストノード.strタイトル == "段位道場")
-					{
-						list曲ルート.Remove(c曲リストノード);
-						for (int i = 0; i < c曲リストノード.list子リスト.Count; i++)
-                        {
-							list曲ルート_Dan.Add(c曲リストノード.list子リスト[i]);
-						}
-					}
-
 					int 曲数 = c曲リストノード.list子リスト.Count;
 					for (int index = 0; index < (曲数 / 7) + 1; index++)
 					{
@@ -1154,6 +1185,7 @@ namespace TJAPlayer3
 						//-----------------------------
 						#endregion
 					}
+
 					continue;
 				}
 				//-----------------------------
@@ -1161,7 +1193,7 @@ namespace TJAPlayer3
 
 				#region [ ノードにタイトルがないなら、最初に見つけたスコアのタイトルを設定する ]
 				//-----------------------------
-				if( string.IsNullOrEmpty( c曲リストノード.strタイトル ) )
+				if ( string.IsNullOrEmpty( c曲リストノード.strタイトル ) )
 				{
 					for( int j = 0; j < (int)Difficulty.Total; j++ )
 					{
