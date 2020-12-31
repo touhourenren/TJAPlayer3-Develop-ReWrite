@@ -20,8 +20,12 @@ namespace FDK
 	/// </remarks>
 	public class CCounter
 	{
+		public bool b開始した
+		{
+			get;
+			set;
+		}
 		// 値プロパティ
-
 		public float n開始値
 		{
 			get;
@@ -118,6 +122,7 @@ namespace FDK
 			this.timer = timer;
 			this.n現在の経過時間ms = this.timer.n現在時刻;
 			this.n現在の値 = (int)n開始値;
+			this.b開始した = true;
 		}
 
 		/// <summary>
@@ -135,6 +140,7 @@ namespace FDK
 			this.timerdb = timer;
 			this.n現在の経過時間ms = (float)this.timerdb.dbシステム時刻;
 			this.n現在の値 = (int)db開始値;
+			this.b開始した = true;
 		}
 
 		/// <summary>

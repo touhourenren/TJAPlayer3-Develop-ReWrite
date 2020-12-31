@@ -50,6 +50,7 @@ namespace TJAPlayer3
 		[NonSerialized]
 		public List<Cスコア> listSongsDB;					// songs.dbから構築されるlist
 		public List<C曲リストノード> list曲ルート;			// 起動時にフォルダ検索して構築されるlist
+		public List<C曲リストノード> list曲ルート_Dan = new List<C曲リストノード>();			// 起動時にフォルダ検索して構築されるlist
 		public bool bIsSuspending							// 外部スレッドから、内部スレッドのsuspendを指示する時にtrueにする
 		{													// 再開時は、これをfalseにしてから、次のautoReset.Set()を実行する
 			get;
@@ -297,6 +298,13 @@ namespace TJAPlayer3
 
                                 c曲リストノード.strタイトル = dtx.TITLE;
                                 c曲リストノード.strサブタイトル = dtx.SUBTITLE;
+
+								if (dtx.List_DanSongs != null)
+									c曲リストノード.DanSongs = dtx.List_DanSongs;
+
+								if (dtx.Dan_C != null)
+									c曲リストノード.Dan_C = dtx.Dan_C;
+
                                 if (!string.IsNullOrEmpty(dtx.GENRE))
                                 {
                                     c曲リストノード.strジャンル = dtx.GENRE;
@@ -1086,6 +1094,15 @@ namespace TJAPlayer3
 				//-----------------------------
 				if ( c曲リストノード.eノード種別 == C曲リストノード.Eノード種別.BOX )
 				{
+					if(c曲リストノード.strタイトル == "段位道場")
+					{
+						list曲ルート.Remove(c曲リストノード);
+						for (int i = 0; i < c曲リストノード.list子リスト.Count; i++)
+                        {
+							list曲ルート_Dan.Add(c曲リストノード.list子リスト[i]);
+						}
+					}
+
 					int 曲数 = c曲リストノード.list子リスト.Count;
 					for (int index = 0; index < (曲数 / 7) + 1; index++)
 					{

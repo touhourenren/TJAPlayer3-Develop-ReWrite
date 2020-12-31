@@ -14,6 +14,7 @@ namespace TJAPlayer3
         const string TITLE = @"1_Title\";
         const string CONFIG = @"2_Config\";
         const string SONGSELECT = @"3_SongSelect\";
+        const string DANISELECT = @"3_DaniSelect\";
         const string SONGLOADING = @"4_SongLoading\";
         const string GAME = @"5_Game\";
         const string RESULT = @"6_Result\";
@@ -225,12 +226,23 @@ namespace TJAPlayer3
 
             #endregion
 
+            #region 3_段位選択画面
+
+            Dani_Background = TxC(DANISELECT + "Background.png");
+            Dani_Difficulty_Cymbol = TxC(DANISELECT + "Difficulty_Cymbol.png");
+            Dani_Level_Number = TxC(DANISELECT + "Level_Number.png");
+            Dani_Soul_Number = TxC(DANISELECT + "SoulNumber.png");
+            Dani_Exam_Number = TxC(DANISELECT + "ExamNumber.png");
+
+            #endregion
+
             #region 4_読み込み画面
             SongLoading_Plate = TxC(SONGLOADING + @"Plate.png");
             SongLoading_Bg = TxC(SONGLOADING + @"Bg.png");
             SongLoading_BgWait = TxC(SONGLOADING + @"Bg_Wait.png");
             SongLoading_Chara = TxC(SONGLOADING + @"Chara.png");
             SongLoading_Fade = TxC(SONGLOADING + @"Fade.png");
+            SongLoading_Bg_Dan = TxC(SONGLOADING + @"Bg_Dan.png");
             #endregion
 
             #region 5_演奏画面
@@ -740,11 +752,22 @@ namespace TJAPlayer3
 
         #endregion
 
+        #region 3_段位選択画面
+
+        public CTexture Dani_Background;
+        public CTexture Dani_Difficulty_Cymbol;
+        public CTexture Dani_Level_Number;
+        public CTexture Dani_Soul_Number;
+        public CTexture Dani_Exam_Number;
+
+        #endregion
+
         #region 4_読み込み画面
         public CTexture SongLoading_Plate,
             SongLoading_Bg,
             SongLoading_BgWait,
             SongLoading_Chara,
+            SongLoading_Bg_Dan,
             SongLoading_Fade;
         #endregion
 

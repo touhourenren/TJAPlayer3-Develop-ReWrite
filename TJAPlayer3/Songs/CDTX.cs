@@ -756,6 +756,8 @@ namespace TJAPlayer3
             public string Genre;
             public int ScoreInit;
             public int ScoreDiff;
+            public int Level;
+            public int Difficulty;
             public static int Number;
             public CWAV Wave;
 
@@ -3930,7 +3932,7 @@ namespace TJAPlayer3
 
                 strArray = SplitComma(argument); // \,をエスケープ処理するメソッドだぞっ
                 
-                WarnSplitLength("#NEXTSONG", strArray, 6);
+                WarnSplitLength("#NEXTSONG", strArray, 8);
                 var dansongs = new DanSongs();
                 dansongs.Title = strArray[0];
                 dansongs.SubTitle = strArray[1];
@@ -3938,6 +3940,17 @@ namespace TJAPlayer3
                 dansongs.FileName = strArray[3];
                 dansongs.ScoreInit = int.Parse(strArray[4]);
                 dansongs.ScoreDiff = int.Parse(strArray[5]);
+
+                if (strArray.Length == 7 && strArray[6] != "" && strArray[6] != null)
+                    dansongs.Difficulty = strConvertCourse(strArray[7]);
+                else
+                    dansongs.Difficulty = 3;
+
+                if (strArray.Length == 8 && strArray[7] != "" && strArray[7] != null)
+                    dansongs.Level = int.Parse(strArray[6]);
+                else
+                    dansongs.Level = 10;
+
                 dansongs.Wave = new CWAV
                 {
                     n内部番号 = this.n内部番号WAV1to,

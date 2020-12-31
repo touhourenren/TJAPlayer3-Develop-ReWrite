@@ -205,12 +205,22 @@ namespace TJAPlayer3
 								ctバナパス読み込み待機 = new CCounter();
 							}
 						}
-                        if (bモード選択)
+						if (bモード選択)
 						{
-							TJAPlayer3.Skin.sound決定音.t再生する();
-							n現在の選択行モード選択 = (int)E戻り値.GAMESTART - 1;
-							this.actFO.tフェードアウト開始(0, 500);
-							base.eフェーズID = CStage.Eフェーズ.共通_フェードアウト;
+							if (TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDXKeys.Key.Return))
+							{
+								TJAPlayer3.Skin.sound決定音.t再生する();
+								n現在の選択行モード選択 = (int)E戻り値.DANGAMESTART - 1;
+								this.actFO.tフェードアウト開始(0, 500);
+								base.eフェーズID = CStage.Eフェーズ.共通_フェードアウト;
+							}
+							else
+							{
+								TJAPlayer3.Skin.sound決定音.t再生する();
+								n現在の選択行モード選択 = (int)E戻り値.GAMESTART - 1;
+								this.actFO.tフェードアウト開始(0, 500);
+								base.eフェーズID = CStage.Eフェーズ.共通_フェードアウト;
+							}
 						}
 					}
 
@@ -507,6 +517,9 @@ namespace TJAPlayer3
 							case (int)E戻り値.GAMESTART - 1:
 								return (int)E戻り値.GAMESTART;
 
+							case (int)E戻り値.DANGAMESTART - 1:
+								return (int)E戻り値.DANGAMESTART;
+
 							case (int) E戻り値.CONFIG - 1:
 								return (int) E戻り値.CONFIG;
 
@@ -529,6 +542,7 @@ namespace TJAPlayer3
 		{
 			継続 = 0,
 			GAMESTART,
+			DANGAMESTART,
 			CONFIG,
 			EXIT
 		}

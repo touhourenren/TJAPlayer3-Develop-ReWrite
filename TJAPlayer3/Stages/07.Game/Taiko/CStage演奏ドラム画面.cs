@@ -390,9 +390,10 @@ namespace TJAPlayer3
 					// 一発Start()を掛けてJITの結果を生成させておく。
 
 					base.eフェーズID = CStage.Eフェーズ.共通_フェードイン;
-					this.actFI.tフェードイン開始();
 
-					if ( TJAPlayer3.DTXVmode.Enabled )			// DTXVモードなら
+                    this.actFI.tフェードイン開始();
+
+                    if ( TJAPlayer3.DTXVmode.Enabled )			// DTXVモードなら
 					{
 						#region [ DTXV用の再生設定にする(全AUTOなど) ]
 						tDTXV用の設定();

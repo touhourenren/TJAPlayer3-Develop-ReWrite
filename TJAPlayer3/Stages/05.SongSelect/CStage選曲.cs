@@ -55,22 +55,22 @@ namespace TJAPlayer3
         public int n確定された曲の難易度
         {
             get;
-            private set;
+            set;
         }
         public string str確定された曲のジャンル
         {
             get;
-            private set;
+            set;
         }
         public Cスコア r確定されたスコア
         {
             get;
-            private set;
+            set;
         }
         public C曲リストノード r確定された曲
         {
             get;
-            private set;
+            set;
         }
         public int n現在選択中の曲の難易度
         {
@@ -855,7 +855,7 @@ namespace TJAPlayer3
         private CActFIFOBlack actFIFO;
         private CActFIFOBlack actFIfrom結果画面;
         //private CActFIFOBlack actFOtoNowLoading;
-        private CActFIFOStart actFOtoNowLoading;
+        public CActFIFOStart actFOtoNowLoading;
         private CActSelectInformation actInformation;
         private CActSelectPreimageパネル actPreimageパネル;
         public CActSelectPresound actPresound;
@@ -897,7 +897,7 @@ namespace TJAPlayer3
         private STNumber[] stSongNumber = new STNumber[10];
         private STNumber[] stBoardNumber = new STNumber[10];
 
-        private struct STNumber
+        public struct STNumber
         {
             public char ch;
             public Point pt;

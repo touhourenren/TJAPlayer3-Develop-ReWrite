@@ -14,12 +14,19 @@ namespace TJAPlayer3
 		{
 			this.mode = EFIFOモード.フェードアウト;
 
-			this.counter = new CCounter(0, 3580, 1, TJAPlayer3.Timer);
+			if (TJAPlayer3.stage選曲.n確定された曲の難易度 == (int)Difficulty.Dan)
+				this.counter = new CCounter(0, 1255, 1, TJAPlayer3.Timer);
+			else
+				this.counter = new CCounter(0, 3580, 1, TJAPlayer3.Timer);
 		}
 		public void tフェードイン開始()
 		{
 			this.mode = EFIFOモード.フェードイン;
-			this.counter = new CCounter(0, 3580, 1, TJAPlayer3.Timer);
+
+			if (TJAPlayer3.stage選曲.n確定された曲の難易度 == (int)Difficulty.Dan)
+				this.counter = new CCounter(0, 255, 1, TJAPlayer3.Timer);
+			else
+				this.counter = new CCounter(0, 3580, 1, TJAPlayer3.Timer);
 		}
 		public void tフェードイン完了()     // #25406 2011.6.9 yyagi
 		{
@@ -53,38 +60,54 @@ namespace TJAPlayer3
 			}
 			this.counter.t進行();
 
-
-			if (this.mode == EFIFOモード.フェードアウト)
-			{
-				if (TJAPlayer3.Tx.SongLoading_Fade != null)
+			if(TJAPlayer3.stage選曲.n確定された曲の難易度 == (int)Difficulty.Dan)
+            {
+				if (TJAPlayer3.Tx.Tile_Black != null)
 				{
-					// 曲開始幕アニメ。
-					// 地味に横の拡大率が変動しているのが一番厄介...
-					var time = this.counter.n現在の値 >= 2580 ? this.counter.n現在の値 - 2580 : 0;
-					var FadeValue = (time - 670f) / 330.0f;
-					if (FadeValue >= 1.0) FadeValue = 1.0f; else if (FadeValue <= 0.0) FadeValue = 0.0f;
-
-					DrawBack(time < 500.0 ? TJAPlayer3.Tx.SongLoading_Fade : TJAPlayer3.Tx.SongLoading_Bg, time, 0, 500.0, false);
-					DrawStar(FadeValue * 255f);
-					DrawPlate(FadeValue * 255f, FadeValue);
-					DrawChara(time, (time - 730f) * (255f / 270f));
+					TJAPlayer3.Tx.Tile_Black.Opacity = this.mode == EFIFOモード.フェードアウト ? -1000 + counter.n現在の値 : 255 - counter.n現在の値;
+					for (int i = 0; i <= (SampleFramework.GameWindowSize.Width / 64); i++)      // #23510 2010.10.31 yyagi: change "clientSize.Width" to "640" to fix FIFO drawing size
+					{
+						for (int j = 0; j <= (SampleFramework.GameWindowSize.Height / 64); j++) // #23510 2010.10.31 yyagi: change "clientSize.Height" to "480" to fix FIFO drawing size
+						{
+							TJAPlayer3.Tx.Tile_Black.t2D描画(TJAPlayer3.app.Device, i * 64, j * 64);
+						}
+					}
 				}
-
 			}
-			else
+            else
 			{
-				if (TJAPlayer3.Tx.SongLoading_Fade != null)
+				if (this.mode == EFIFOモード.フェードアウト)
 				{
-					// 曲開始幕アニメ。
-					// 地味に横の拡大率が変動しているのが一番厄介...
-					var time = this.counter.n現在の値;
-					var FadeValue = time / 140f;
-					if (FadeValue >= 1.0) FadeValue = 1.0f; else if (FadeValue <= 0.0) FadeValue = 0.0f;
+					if (TJAPlayer3.Tx.SongLoading_Fade != null)
+					{
+						// 曲開始幕アニメ。
+						// 地味に横の拡大率が変動しているのが一番厄介...
+						var time = this.counter.n現在の値 >= 2580 ? this.counter.n現在の値 - 2580 : 0;
+						var FadeValue = (time - 670f) / 330.0f;
+						if (FadeValue >= 1.0) FadeValue = 1.0f; else if (FadeValue <= 0.0) FadeValue = 0.0f;
 
-					DrawBack(time < 300.0 ? TJAPlayer3.Tx.SongLoading_Bg : TJAPlayer3.Tx.SongLoading_Fade, time, 300.0, 500.0, true);
-					DrawStar(255f - (FadeValue * 255f));
-					DrawPlate(255f - (FadeValue * 255f), 1f + (FadeValue * 0.5f), 1f - FadeValue);
-					DrawChara(time, (time <= 80.0 ? 255 : 255f - (float)((Math.Pow((time - 80f), 1.5f) / Math.Pow(220f, 1.5f)) * 255f)), 250f, (time <= 80.0 ? ((time / 80f) * 30f) : 30f - (float)((Math.Pow((time - 80f), 1.5f) / Math.Pow(220f, 1.5f)) * 320f)));
+						DrawBack(time < 500.0 ? TJAPlayer3.Tx.SongLoading_Fade : TJAPlayer3.Tx.SongLoading_Bg, time, 0, 500.0, false);
+						DrawStar(FadeValue * 255f);
+						DrawPlate(FadeValue * 255f, FadeValue);
+						DrawChara(time, (time - 730f) * (255f / 270f));
+					}
+
+				}
+				else
+				{
+					if (TJAPlayer3.Tx.SongLoading_Fade != null)
+					{
+						// 曲開始幕アニメ。
+						// 地味に横の拡大率が変動しているのが一番厄介...
+						var time = this.counter.n現在の値;
+						var FadeValue = time / 140f;
+						if (FadeValue >= 1.0) FadeValue = 1.0f; else if (FadeValue <= 0.0) FadeValue = 0.0f;
+
+						DrawBack(time < 300.0 ? TJAPlayer3.Tx.SongLoading_Bg : TJAPlayer3.Tx.SongLoading_Fade, time, 300.0, 500.0, true);
+						DrawStar(255f - (FadeValue * 255f));
+						DrawPlate(255f - (FadeValue * 255f), 1f + (FadeValue * 0.5f), 1f - FadeValue);
+						DrawChara(time, (time <= 80.0 ? 255 : 255f - (float)((Math.Pow((time - 80f), 1.5f) / Math.Pow(220f, 1.5f)) * 255f)), 250f, (time <= 80.0 ? ((time / 80f) * 30f) : 30f - (float)((Math.Pow((time - 80f), 1.5f) / Math.Pow(220f, 1.5f)) * 320f)));
+					}
 				}
 			}
 

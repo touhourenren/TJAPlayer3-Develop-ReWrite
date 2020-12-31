@@ -1169,7 +1169,7 @@ namespace TJAPlayer3
 
 				if (ctBoxOpen.n現在の値 > 1300 && ctBoxOpen.n現在の値 < 1940)
 				{
-					ctBoxOpen.t間隔値変更(0.6);
+					ctBoxOpen.t間隔値変更(0.65);
 					if (i == 1)
 						Box = 600.0f;
 					if (i == 2)
@@ -1518,11 +1518,20 @@ namespace TJAPlayer3
 												TJAPlayer3.Tx.SongSelect_Frame_Score.color4 = new Color4(0.5f, 0.5f, 0.5f);
 												if (i == 4 && TJAPlayer3.stage選曲.n現在選択中の曲の難易度 == 4)
 												{
+													if (!TJAPlayer3.stage選曲.act難易度選択画面.bIsDifficltSelect)
+														TJAPlayer3.Tx.SongSelect_Level_Number.Opacity = (int)(BarAnimeCount * 4.25f);
+													else if (ctDifficultyIn.n現在の値 >= 1000)
+														TJAPlayer3.Tx.SongSelect_Level_Number.Opacity = (int)255.0f - (ctDifficultyIn.n現在の値 - 1000);
 													// エディット
 													TJAPlayer3.Tx.SongSelect_Frame_Score.t2D下中央基準描画(TJAPlayer3.app.Device, 494 + (3 * 122) - 31, TJAPlayer3.Skin.SongSelect_Overall_Y + 465, new Rectangle(122 * i, 0, 122, 360));
 												}
 												else if (i != 4)
 												{
+													if (!TJAPlayer3.stage選曲.act難易度選択画面.bIsDifficltSelect)
+														TJAPlayer3.Tx.SongSelect_Level_Number.Opacity = (int)(BarAnimeCount * 4.25f);
+													else if (ctDifficultyIn.n現在の値 >= 1000)
+														TJAPlayer3.Tx.SongSelect_Level_Number.Opacity = (int)255.0f - (ctDifficultyIn.n現在の値 - 1000);
+
 													TJAPlayer3.Tx.SongSelect_Frame_Score.t2D下中央基準描画(TJAPlayer3.app.Device, 494 + (i * 122) - 31, TJAPlayer3.Skin.SongSelect_Overall_Y + 465, new Rectangle(122 * i, 0, 122, 360));
 												}
 											}
@@ -2156,7 +2165,7 @@ namespace TJAPlayer3
             return new TitleTextureKey(str文字, pfSubtitle, forecolor, backcolor, 510);
         }
 
-	    private CTexture ResolveTitleTexture(TitleTextureKey titleTextureKey)
+	    public CTexture ResolveTitleTexture(TitleTextureKey titleTextureKey)
 	    {
 	        if (!_titleTextures.TryGetValue(titleTextureKey, out var texture))
 	        {
@@ -2167,7 +2176,7 @@ namespace TJAPlayer3
 	        return texture;
 	    }
 
-	    private static CTexture GenerateTitleTexture(TitleTextureKey titleTextureKey)
+		private static CTexture GenerateTitleTexture(TitleTextureKey titleTextureKey)
 	    {
 			using (var bmp = new Bitmap(titleTextureKey.cPrivateFastFont.DrawPrivateFont(
 	            titleTextureKey.str文字, titleTextureKey.forecolor, titleTextureKey.backcolor)))
@@ -2205,7 +2214,7 @@ namespace TJAPlayer3
             _titleTextures.Clear();
 	    }
 
-	    private sealed class TitleTextureKey
+	    public sealed class TitleTextureKey
 	    {
 	        public readonly string str文字;
 	        public readonly CPrivateFastFont cPrivateFastFont;

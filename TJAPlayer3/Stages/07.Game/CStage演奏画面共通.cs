@@ -294,11 +294,10 @@ namespace TJAPlayer3
 
             this.bIsAutoPlay = TJAPlayer3.ConfigIni.bAutoPlay;									// #24239 2011.1.23 yyagi
 
-			
-			//this.bIsAutoPlay.Guitar = CDTXMania.ConfigIni.bギターが全部オートプレイである;
-			//this.bIsAutoPlay.Bass = CDTXMania.ConfigIni.bベースが全部オートプレイである;
-//			this.nRisky = CDTXMania.ConfigIni.nRisky;											// #23559 2011.7.28 yyagi
-			actGauge.Init( TJAPlayer3.ConfigIni.nRisky );									// #23559 2011.7.28 yyagi
+            //this.bIsAutoPlay.Guitar = CDTXMania.ConfigIni.bギターが全部オートプレイである;
+            //this.bIsAutoPlay.Bass = CDTXMania.ConfigIni.bベースが全部オートプレイである;
+            //			this.nRisky = CDTXMania.ConfigIni.nRisky;											// #23559 2011.7.28 yyagi
+            actGauge.Init( TJAPlayer3.ConfigIni.nRisky );									// #23559 2011.7.28 yyagi
 			this.nPolyphonicSounds = TJAPlayer3.ConfigIni.nPoliphonicSounds;
 			e判定表示優先度 = TJAPlayer3.ConfigIni.e判定表示優先度;
 
@@ -605,10 +604,10 @@ namespace TJAPlayer3
 		protected CAct演奏チップファイアGB actChipFireGB;
 		public CAct演奏Combo共通 actCombo;
 		protected CAct演奏Danger共通 actDANGER;
-		//protected CActFIFOBlack actFI;
-        protected CActFIFOStart actFI;
-		protected CActFIFOBlack actFO;
-		protected CActFIFOResult actFOClear;
+        //protected CActFIFOBlack actFI;
+        public CActFIFOStart actFI;
+        protected CActFIFOBlack actFO;
+        protected CActFIFOResult actFOClear;
 		public    CAct演奏ゲージ共通 actGauge;
 
         public CAct演奏DrumsDancer actDancer;
@@ -1622,7 +1621,7 @@ namespace TJAPlayer3
                                     this.actCombo.n現在のコンボ数[ nPlayer ]++;
                                     if (this.actCombo.ctコンボ加算[nPlayer].b終了値に達してない)
                                     {
-                                        this.actCombo.ctコンボ加算[nPlayer].n現在の値 = 1;
+                                        this.actCombo.ctコンボ加算[nPlayer].n現在の値 = 0;
                                     }
                                     else
                                     {
@@ -1640,7 +1639,7 @@ namespace TJAPlayer3
                                     //this.actCombo.ctコンボ加算.t進行();
                                     if (this.actCombo.ctコンボ加算[nPlayer].b終了値に達してない)
                                     {
-                                        this.actCombo.ctコンボ加算[nPlayer].n現在の値 = 1;
+                                        this.actCombo.ctコンボ加算[nPlayer].n現在の値 = 0;
                                     }
                                     else
                                     {
@@ -4643,7 +4642,7 @@ namespace TJAPlayer3
 			switch ( base.eフェーズID )
 			{
 				case CStage.Eフェーズ.共通_フェードイン:
-					if ( this.actFI.On進行描画() != 0 )
+					if ( this.actFI.On進行描画() != 0)
 					{
 						base.eフェーズID = CStage.Eフェーズ.共通_通常状態;
 					}

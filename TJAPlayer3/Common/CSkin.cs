@@ -2506,7 +2506,7 @@ namespace TJAPlayer3
         public int Difficulty_Title_X = 0;
         public int Difficulty_Title_Y = 0;
         public string[] SongSelect_GenreName = { "ポップス", "アニメ", "ゲームバラエティ", "ナムコオリジナル", "クラシック", "キッズ", "ボーカロイド", "最近遊んだ曲"};
-        public int[] SongSelect_NamePlate_X = new int[] { 30, 1020 };
+        public int[] SongSelect_NamePlate_X = new int[] { 36, 1020 };
         public int[] SongSelect_NamePlate_Y = new int[] { 615, 615 };
         public int[] SongSelect_Auto_X = new int[] { 60, 950 };
         public int[] SongSelect_Auto_Y = new int[] { 650, 650 };
