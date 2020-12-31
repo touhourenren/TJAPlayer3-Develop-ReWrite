@@ -4284,8 +4284,11 @@ namespace TJAPlayer3
             this.t数値の初期化( true, true );
             this.actAVI.tReset();
             this.actPanel.t歌詞テクスチャを削除する();
-            this.t演奏位置の変更( 0, 0 );
-            this.t演奏位置の変更( 0, 1 );
+            for (int i = 0; i < 2; i++)
+            {
+                this.t演奏位置の変更(0, i);
+                this.actPlayInfo.NowMeasure[i] = 0;
+            }
             TJAPlayer3.stage演奏ドラム画面.On活性化();
             for( int i = 0; i < TJAPlayer3.ConfigIni.nPlayerCount; i++ )
             {
