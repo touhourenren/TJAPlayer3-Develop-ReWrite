@@ -787,7 +787,7 @@ namespace TJAPlayer3
 			//-----------------
 			if (this.b初めての進行描画)
 			{
-				this.nスクロールタイマ = CSound管理.rc演奏用タイマ.n現在時刻;
+				this.nスクロールタイマ = (long)(CSound管理.rc演奏用タイマ.n現在時刻 * (((double)TJAPlayer3.ConfigIni.n演奏速度) / 20.0));
 				TJAPlayer3.stage選曲.t選択曲変更通知();
 
 				ctBarOpen.t開始(0, 260, 2, TJAPlayer3.Timer);
