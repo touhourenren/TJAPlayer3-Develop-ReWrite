@@ -38,6 +38,7 @@ namespace TJAPlayer3
         const string FAILED = @"15_Failed\";
         const string RUNNER = @"16_Runner\";
         const string PUCHICHARA = @"18_PuchiChara\";
+        const string TRAINING = @"19_Training\";
         const string DANC = @"17_DanC\";
 
         // InGame_Effects
@@ -617,6 +618,18 @@ namespace TJAPlayer3
             #region PuichiChara
             PuchiChara = TxC(GAME + PUCHICHARA + @"0.png");
             #endregion
+            #region Training
+            Tokkun_DownBG = TxC(GAME + TRAINING + @"Down.png");
+            Tokkun_BigTaiko = TxC(GAME + TRAINING + @"BigTaiko.png");
+            Tokkun_ProgressBar = TxC(GAME + TRAINING + @"ProgressBar_Red.png");
+            Tokkun_ProgressBarWhite = TxC(GAME + TRAINING + @"ProgressBar_White.png");
+            Tokkun_GoGoPoint = TxC(GAME + TRAINING + @"GoGoPoint.png");
+            Tokkun_JumpPoint = TxC(GAME + TRAINING + @"JumpPoint.png");
+            Tokkun_Background_Up = TxC(GAME + TRAINING + @"Background_Up.png");
+            Tokkun_BigNumber = TxC(GAME + TRAINING + @"BigNumber.png");
+            Tokkun_SmallNumber = TxC(GAME + TRAINING + @"SmallNumber.png");
+            Tokkun_Speed_Measure = TxC(GAME + TRAINING + @"Speed_Measure.png");
+            #endregion
             #endregion
 
             #region 6_結果発表
@@ -910,6 +923,18 @@ namespace TJAPlayer3
         #endregion
         #region PuchiChara
         public CTexture PuchiChara;
+        #endregion
+        #region Training
+        public CTexture Tokkun_DownBG,
+            Tokkun_BigTaiko,
+            Tokkun_ProgressBar,
+            Tokkun_ProgressBarWhite,
+            Tokkun_GoGoPoint,
+            Tokkun_JumpPoint,
+            Tokkun_Background_Up,
+            Tokkun_BigNumber,
+            Tokkun_SmallNumber,
+            Tokkun_Speed_Measure;
         #endregion
         #endregion
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Diagnostics;
 using FDK;
+using System.Windows.Forms.VisualStyles;
 
 namespace TJAPlayer3
 {

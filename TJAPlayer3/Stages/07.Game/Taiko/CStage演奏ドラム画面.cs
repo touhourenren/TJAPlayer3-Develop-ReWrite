@@ -68,7 +68,7 @@ namespace TJAPlayer3
             base.list子Activities.Add(this.ScoreRank = new CAct演奏Drumsスコアランク());
 
             base.list子Activities.Add(this.actDan = new Dan_Cert());
-            base.list子Activities.Add(this.actTokkun = new CAct特訓モード());
+            base.list子Activities.Add(this.actTokkun = new CAct演奏Drums特訓モード());
             #region[ 文字初期化 ]
             ST文字位置[] st文字位置Array = new ST文字位置[ 12 ];
 			ST文字位置 st文字位置 = new ST文字位置();
@@ -427,26 +427,27 @@ namespace TJAPlayer3
 				    this.t進行描画_背景();
                 }
 
-                if (TJAPlayer3.ConfigIni.bAVI有効 && TJAPlayer3.DTX.listAVI.Count > 0)
+                if (TJAPlayer3.ConfigIni.bAVI有効 && TJAPlayer3.DTX.listAVI.Count > 0 && !TJAPlayer3.ConfigIni.bTokkunMode)
                 {
                     this.t進行描画_AVI();
                 }
                 else if (TJAPlayer3.ConfigIni.bBGA有効)
                 {
-                    actBackground.On進行描画();
+                    if (TJAPlayer3.ConfigIni.bTokkunMode) actTokkun.On進行描画_背景();
+                    else actBackground.On進行描画();
                 }
 
-                if (!TJAPlayer3.ConfigIni.bAVI有効)
+                if (!TJAPlayer3.ConfigIni.bAVI有効 && !TJAPlayer3.ConfigIni.bTokkunMode)
                 {
                     actRollChara.On進行描画();
                 }
 
-                if (!TJAPlayer3.ConfigIni.bAVI有効 && !bDoublePlay && TJAPlayer3.ConfigIni.ShowDancer)
+                if (!TJAPlayer3.ConfigIni.bAVI有効 && !bDoublePlay && TJAPlayer3.ConfigIni.ShowDancer && !TJAPlayer3.ConfigIni.bTokkunMode)
                 {
                     actDancer.On進行描画();
                 }
 
-                if(!TJAPlayer3.ConfigIni.bAVI有効 && !bDoublePlay && TJAPlayer3.ConfigIni.ShowFooter)
+                if(!TJAPlayer3.ConfigIni.bAVI有効 && !bDoublePlay && TJAPlayer3.ConfigIni.ShowFooter && !TJAPlayer3.ConfigIni.bTokkunMode)
                     this.actFooter.On進行描画();
 
                 //this.t進行描画_グラフ();   // #24074 2011.01.23 add ikanick
@@ -459,7 +460,7 @@ namespace TJAPlayer3
                 if( TJAPlayer3.ConfigIni.ShowChara )
                     this.actChara.On進行描画();
 
-                if(!TJAPlayer3.ConfigIni.bAVI有効 && TJAPlayer3.ConfigIni.ShowMob)
+                if(!TJAPlayer3.ConfigIni.bAVI有効 && TJAPlayer3.ConfigIni.ShowMob && !TJAPlayer3.ConfigIni.bTokkunMode)
                     this.actMob.On進行描画();
 
                 if ( TJAPlayer3.ConfigIni.eGameMode != EGame.OFF )
@@ -475,7 +476,7 @@ namespace TJAPlayer3
                 if( ( TJAPlayer3.ConfigIni.eClipDispType == EClipDispType.ウィンドウのみ || TJAPlayer3.ConfigIni.eClipDispType == EClipDispType.両方 ) && TJAPlayer3.ConfigIni.nPlayerCount == 1 )
                     this.actAVI.t窓表示();
 
-				if( !TJAPlayer3.ConfigIni.bNoInfo )
+				if( !TJAPlayer3.ConfigIni.bNoInfo && !TJAPlayer3.ConfigIni.bTokkunMode)
                     this.t進行描画_ゲージ();
 
                 this.actLaneTaiko.ゴーゴー炎();
@@ -492,10 +493,12 @@ namespace TJAPlayer3
                 this.actMtaiko.On進行描画();
                 this.GoGoSplash.On進行描画();
                 this.t進行描画_リアルタイム判定数表示();
+                if (TJAPlayer3.ConfigIni.bTokkunMode)
+                    this.actTokkun.On進行描画_小節_速度();
 
                 if ( !TJAPlayer3.ConfigIni.bNoInfo )
 			        this.t進行描画_コンボ();
-                if( !TJAPlayer3.ConfigIni.bNoInfo )
+                if( !TJAPlayer3.ConfigIni.bNoInfo && !TJAPlayer3.ConfigIni.bTokkunMode)
 				    this.t進行描画_スコア();
 
 
@@ -555,7 +558,6 @@ namespace TJAPlayer3
                         TJAPlayer3.Skin.sound特訓停止音.t再生する();
                         actTokkun.t演奏を停止する();
 
-                        actTokkun.n現在の小節線 = TJAPlayer3.stage演奏ドラム画面.actPlayInfo.NowMeasure[0];
                         actTokkun.t譜面の表示位置を合わせる(true);
                     }
                     else
@@ -636,7 +638,7 @@ namespace TJAPlayer3
         public CAct演奏Drumsレーン太鼓 actLaneTaiko;
         public CAct演奏Drums演奏終了演出 actEnd;
         private CAct演奏Drumsゲームモード actGame;
-        public CAct特訓モード actTokkun;
+        public CAct演奏Drums特訓モード actTokkun;
         public CAct演奏Drums背景 actBackground;
         public GoGoSplash GoGoSplash;
         public FlyingNotes FlyingNotes;
@@ -1361,7 +1363,7 @@ namespace TJAPlayer3
                                 break;
                         }
 
-                        if (bAutoPlay)
+                        if (bAutoPlay && !this.bPAUSE)
                         {
                             pChip.bHit = true;
                             if (pChip.nチャンネル番号 != 0x1F)
@@ -2173,7 +2175,7 @@ namespace TJAPlayer3
             string strNull = "Found";
             if (TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDX.DirectInput.Key.F1))
             {
-                if (!this.actPauseMenu.bIsActivePopupMenu)
+                if (!this.actPauseMenu.bIsActivePopupMenu && this.bPAUSE == false)
                 {
                     TJAPlayer3.Skin.sound変更音.t再生する();
 
@@ -2183,7 +2185,7 @@ namespace TJAPlayer3
                     this.actAVI.tPauseControl();
 
                     this.bPAUSE = true;
-                    this.actPauseMenu.tActivatePopupMenu(E楽器パート.DRUMS);
+                    this.actPauseMenu.tActivatePopupMenu(0);
                 }
 
             }
@@ -2232,6 +2234,7 @@ namespace TJAPlayer3
                 this.t小文字表示( 102, 494, string.Format( "{0,4:###0}", this.nヒット数_Auto含まない.Drums.Perfect.ToString() ), false );
                 this.t小文字表示( 102, 532, string.Format( "{0,4:###0}", this.nヒット数_Auto含まない.Drums.Great.ToString() ), false );
                 this.t小文字表示( 102, 570, string.Format( "{0,4:###0}", this.nヒット数_Auto含まない.Drums.Miss.ToString() ), false );
+                this.t小文字表示(102, 634, string.Format("{0,4:###0}", GetRoll(0)), false);
 
                 int nNowTotal = this.nヒット数_Auto含まない.Drums.Perfect + this.nヒット数_Auto含まない.Drums.Great + this.nヒット数_Auto含まない.Drums.Miss;
                 double dbたたけた率 = Math.Round((100.0 * ( TJAPlayer3.stage演奏ドラム画面.nヒット数_Auto含まない.Drums.Perfect + TJAPlayer3.stage演奏ドラム画面.nヒット数_Auto含まない.Drums.Great)) / (double)nNowTotal);

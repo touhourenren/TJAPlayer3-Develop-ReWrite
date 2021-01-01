@@ -177,17 +177,20 @@ namespace TJAPlayer3
                 }
 
                 int n整数値管理 = 0;
-                foreach( CDTX.CChip chip in listChip[ i ] )
+                if (r指定時刻に一番近い未ヒットChipを過去方向優先で検索する(0, i) != null) //2020.07.08 Mr-Ojii 未ヒットチップがないときの例外の発生回避 <-(KabanFriends)コード借りましたごめんなさい(´・ω・`)
                 {
-                    chip.nList上の位置 = n整数値管理;
-                    if( ( chip.nチャンネル番号 == 0x15 || chip.nチャンネル番号 == 0x16 ) && ( n整数値管理 < this.listChip[ i ].Count - 1 ) )
+                    foreach (CDTX.CChip chip in listChip[i])
                     {
-                        if( chip.db発声時刻ms < r指定時刻に一番近い未ヒットChipを過去方向優先で検索する( 0, i ).db発声時刻ms)
+                        chip.nList上の位置 = n整数値管理;
+                        if ((chip.nチャンネル番号 == 0x15 || chip.nチャンネル番号 == 0x16) && (n整数値管理 < this.listChip[i].Count - 1))
                         {
-                            chip.n描画優先度 = 1;
+                            if (chip.db発声時刻ms < r指定時刻に一番近い未ヒットChipを過去方向優先で検索する(0, i).db発声時刻ms)
+                            {
+                                chip.n描画優先度 = 1;
+                            }
                         }
+                        n整数値管理++;
                     }
-                    n整数値管理++;
                 }
             }
 
@@ -205,6 +208,15 @@ namespace TJAPlayer3
             else
             {
                 nAddScoreNiji = (double)Math.Ceiling((decimal)(1000000 - (nBalloonCount * 100)) / nNoteCount / 10) * 10;
+            }
+
+            for (int index = TJAPlayer3.DTX.listChip.Count - 1; index >= 0; index--)
+            {
+                if (TJAPlayer3.DTX.listChip[index].nチャンネル番号 == 0x01)
+                {
+                    this.bgmlength = TJAPlayer3.DTX.listChip[index].GetDuration() + TJAPlayer3.DTX.listChip[index].n発声時刻ms;
+                    break;
+                }
             }
 
             this.ct制御タイマ = new CCounter();
@@ -372,7 +384,8 @@ namespace TJAPlayer3
 		}
 		public override void On非活性化()
 		{
-			this.L最後に再生したHHの実WAV番号.Clear();	// #23921 2011.1.4 yyagi
+            this.bgmlength = 1;
+            this.L最後に再生したHHの実WAV番号.Clear();	// #23921 2011.1.4 yyagi
 			this.L最後に再生したHHの実WAV番号 = null;	//
 			this.ctチップ模様アニメ.Drums = null;
 			this.ctチップ模様アニメ.Guitar = null;
@@ -658,7 +671,7 @@ namespace TJAPlayer3
         public CAct演奏DrumsFooter actFooter;
         public CAct演奏DrumsMob actMob;
         public Dan_Cert actDan;
-        public CAct特訓モード actTokkun;
+        public CAct演奏Drums特訓モード actTokkun;
         public bool bPAUSE;
         public bool[] bIsAlreadyCleared;
         public bool[] bIsAlreadyMaxed;
@@ -669,8 +682,9 @@ namespace TJAPlayer3
         protected STDGBVALUE<CCounter> ctチップ模様アニメ;
         public CCounter[] ctChipAnime;
         public CCounter[] ctChipAnimeLag;
+        private int bgmlength = 1;
 
-		protected E演奏画面の戻り値 eフェードアウト完了時の戻り値;
+        protected E演奏画面の戻り値 eフェードアウト完了時の戻り値;
         protected readonly int[] nチャンネル0Atoパッド08 = new int[] { 1, 2, 3, 4, 5, 7, 6, 1, 8, 0, 9, 9 };
         protected readonly int[] nチャンネル0Atoレーン07 = new int[] { 1, 2, 3, 4, 5, 7, 6, 1, 9, 0, 8, 8 };
                                                                     //                         RD LC  LP  RD
@@ -3878,16 +3892,8 @@ namespace TJAPlayer3
 						{
                             if (TJAPlayer3.ConfigIni.bTokkunMode)
                             {
-                                foreach (CDTX.CWAV cwav in TJAPlayer3.DTX.listWAV.Values)
-                                {
-                                    for (int i = 0; i < nPolyphonicSounds; i++)
-                                    {
-                                        if ((cwav.rSound[i] != null) && cwav.rSound[i].b再生中)
-                                        {
-                                            return false;
-                                        }
-                                    }
-                                }
+                                if (this.bgmlength > CSound管理.rc演奏用タイマ.n現在時刻ms)
+                                    break;
                             }
                             pChip.bHit = true;
                             return true;

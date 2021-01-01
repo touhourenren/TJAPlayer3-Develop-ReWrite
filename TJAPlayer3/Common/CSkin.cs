@@ -34,6 +34,9 @@ namespace TJAPlayer3
         SOUND風船,
         SOUND曲決定音,
         SOUND成績発表,
+        SOUND特訓再生,
+        SOUND特訓停止,
+        SOUND特訓スクロール,
         Count				// システムサウンド総数の計算用
     }
 
@@ -343,7 +346,6 @@ namespace TJAPlayer3
         public Cシステムサウンド sound特訓停止音 = null;
         public Cシステムサウンド sound特訓スクロール音 = null;
 
-
         //public Cシステムサウンド soundRed = null;
         //public Cシステムサウンド soundBlue = null;
         public Cシステムサウンド soundBalloon = null;
@@ -418,6 +420,16 @@ namespace TJAPlayer3
 
                     case Eシステムサウンド.SOUND成績発表:
                         return this.bgmリザルトイン音;
+
+                    case Eシステムサウンド.SOUND特訓再生:
+                        return this.sound特訓再生音;
+
+                    case Eシステムサウンド.SOUND特訓停止:
+                        return this.sound特訓停止音;
+
+                    case Eシステムサウンド.SOUND特訓スクロール:
+                        return this.sound特訓スクロール音;
+
                 }
                 throw new IndexOutOfRangeException();
             }
@@ -476,12 +488,6 @@ namespace TJAPlayer3
                     case 15:
                         return this.bgm選曲画面;
 
-                    //case 16:
-                    //    return this.soundRed;
-
-                    //case 17:
-                    //    return this.soundBlue;
-
                     case 16:
                         return this.soundBalloon;
 
@@ -490,6 +496,15 @@ namespace TJAPlayer3
 
                     case 18:
                         return this.bgmリザルトイン音;
+
+                    case 19:
+                        return this.sound特訓再生音;
+
+                    case 20:
+                        return this.sound特訓停止音;
+
+                    case 21:
+                        return this.sound特訓スクロール音;
                 }
                 throw new IndexOutOfRangeException();
             }
@@ -660,6 +675,7 @@ namespace TJAPlayer3
             this.sound特訓再生音 = new Cシステムサウンド(@"Sounds\Resume.ogg", false, false,false, ESoundGroup.SoundEffect);
             this.sound特訓停止音 = new Cシステムサウンド(@"Sounds\Pause.ogg", false, false, false, ESoundGroup.SoundEffect);
             this.sound特訓スクロール音 = new Cシステムサウンド(@"Sounds\Scroll.ogg", false, false, false, ESoundGroup.SoundEffect);
+
             ReloadSkin();
             tReadSkinConfig();
         }
@@ -2225,6 +2241,45 @@ namespace TJAPlayer3
                                 Game_PuchiChara_SineTimer = double.Parse(strParam);
                             }
                             #endregion
+                            #region Training
+                            else if (strCommand == nameof(Game_Training_ScrollTime))
+                            {
+                                Game_Training_ScrollTime = int.Parse(strParam);
+                            }
+                            else if (strCommand == nameof(Game_Training_ProgressBar_XY))
+                            {
+                                Game_Training_ProgressBar_XY = strParam.Split(',').Select(int.Parse).ToArray();
+                            }
+                            else if (strCommand == nameof(Game_Training_GoGoPoint_Y))
+                            {
+                                Game_Training_GoGoPoint_Y = int.Parse(strParam);
+                            }
+                            else if (strCommand == nameof(Game_Training_JumpPoint_Y))
+                            {
+                                Game_Training_JumpPoint_Y = int.Parse(strParam);
+                            }
+                            else if (strCommand == nameof(Game_Training_MaxMeasureCount_XY))
+                            {
+                                Game_Training_MaxMeasureCount_XY = strParam.Split(',').Select(int.Parse).ToArray();
+                            }
+                            else if (strCommand == nameof(Game_Training_CurrentMeasureCount_XY))
+                            {
+                                Game_Training_CurrentMeasureCount_XY = strParam.Split(',').Select(int.Parse).ToArray();
+                            }
+                            else if (strCommand == nameof(Game_Training_SpeedDisplay_XY))
+                            {
+                                Game_Training_CurrentMeasureCount_XY = strParam.Split(',').Select(int.Parse).ToArray();
+                            }
+                            else if (strCommand == nameof(Game_Training_SmallNumber_Width))
+                            {
+                                Game_Training_SmallNumber_Width = int.Parse(strParam);
+                            }
+                            else if (strCommand == nameof(Game_Training_BigNumber_Width))
+                            {
+                                Game_Training_BigNumber_Width = int.Parse(strParam);
+                            }
+                            #endregion
+
                             #endregion
                             #region Result
                             else if (strCommand == nameof(Result_MusicName_X))
@@ -2780,6 +2835,18 @@ namespace TJAPlayer3
         public int[] Game_DanC_Exam_Offset = new int[] { 222, 27 };
         public int[] Game_DanC_Dan_Plate = new int[] { 149, 416 };
         #endregion
+        #region Training
+        public int Game_Training_ScrollTime = 350;
+        public int[] Game_Training_ProgressBar_XY = { 333, 378 };
+        public int Game_Training_GoGoPoint_Y = 396;
+        public int Game_Training_JumpPoint_Y = 375;
+        public int[] Game_Training_MaxMeasureCount_XY = { 284, 377 };
+        public int[] Game_Training_CurrentMeasureCount_XY = { 254, 370 };
+        public int[] Game_Training_SpeedDisplay_XY = { 110, 370 };
+        public int Game_Training_SmallNumber_Width = 17;
+        public int Game_Training_BigNumber_Width = 20;
+        #endregion
+
         #endregion
         #region Result
         public int Result_MusicName_X = 640;
