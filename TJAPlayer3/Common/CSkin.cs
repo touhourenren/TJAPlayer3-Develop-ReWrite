@@ -339,6 +339,10 @@ namespace TJAPlayer3
 
         public Cシステムサウンド SoundBanapas = null;
 
+        public Cシステムサウンド sound特訓再生音 = null;
+        public Cシステムサウンド sound特訓停止音 = null;
+        public Cシステムサウンド sound特訓スクロール音 = null;
+
 
         //public Cシステムサウンド soundRed = null;
         //public Cシステムサウンド soundBlue = null;
@@ -653,7 +657,9 @@ namespace TJAPlayer3
             this.bgmリザルトイン音 = new Cシステムサウンド(@"Sounds\BGM\Result_In.ogg", false, false, true, ESoundGroup.SongPlayback);
             this.bgmリザルト音 = new Cシステムサウンド(@"Sounds\BGM\Result.ogg", true, false, true, ESoundGroup.SongPlayback);
 
-
+            this.sound特訓再生音 = new Cシステムサウンド(@"Sounds\Resume.ogg", false, false,false, ESoundGroup.SoundEffect);
+            this.sound特訓停止音 = new Cシステムサウンド(@"Sounds\Pause.ogg", false, false, false, ESoundGroup.SoundEffect);
+            this.sound特訓スクロール音 = new Cシステムサウンド(@"Sounds\Scroll.ogg", false, false, false, ESoundGroup.SoundEffect);
             ReloadSkin();
             tReadSkinConfig();
         }

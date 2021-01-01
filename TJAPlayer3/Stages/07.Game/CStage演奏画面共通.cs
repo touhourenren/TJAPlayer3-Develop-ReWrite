@@ -658,7 +658,8 @@ namespace TJAPlayer3
         public CAct演奏DrumsFooter actFooter;
         public CAct演奏DrumsMob actMob;
         public Dan_Cert actDan;
-		public bool bPAUSE;
+        public CAct特訓モード actTokkun;
+        public bool bPAUSE;
         public bool[] bIsAlreadyCleared;
         public bool[] bIsAlreadyMaxed;
         protected bool b演奏にMIDI入力を使った;
@@ -679,8 +680,8 @@ namespace TJAPlayer3
         protected readonly int[] nパッド0Atoレーン07 = new int[] { 1, 2, 3, 4, 5, 6, 7, 1, 9, 0, 8, 8 };
 		public STDGBVALUE<CHITCOUNTOFRANK> nヒット数_Auto含まない;
 		public STDGBVALUE<CHITCOUNTOFRANK> nヒット数_Auto含む;
-		protected int n現在のトップChip = -1;
-		protected int[] n最後に再生したBGMの実WAV番号 = new int[ 50 ];
+        public int n現在のトップChip = -1;
+        protected int[] n最後に再生したBGMの実WAV番号 = new int[ 50 ];
 		protected int n最後に再生したHHのチャンネル番号;
 		protected List<int> L最後に再生したHHの実WAV番号;		// #23921 2011.1.4 yyagi: change "int" to "List<int>", for recording multiple wav No.
 		protected STLANEVALUE<int> n最後に再生した実WAV番号;	// #26388 2011.11.8 yyagi: change "n最後に再生した実WAV番号.GUITAR" and "n最後に再生した実WAV番号.BASS"
@@ -739,9 +740,9 @@ namespace TJAPlayer3
         protected int n現在の音符の顔番号;
 
         protected int nWaitButton;
-        
 
-        protected CDTX.CChip[] chip現在処理中の連打チップ = new CDTX.CChip[ 4 ];
+
+        public CDTX.CChip[] chip現在処理中の連打チップ = new CDTX.CChip[ 4 ];
 
         protected const int NOTE_GAP = 25;        
         public int nLoopCount_Clear;
@@ -3416,7 +3417,10 @@ namespace TJAPlayer3
                                     //    this.actChara.ctChara_GoGo = new CCounter( 0, this.actChara.arゴーゴーモーション番号.Length - 1, dbPtn_GoGo, CSound管理.rc演奏用タイマ );
                                     //}
                                 }
-                                actPlayInfo.NowMeasure[nPlayer] = pChip.n整数値_内部番号;
+                                if (!bPAUSE)
+                                {
+                                    actPlayInfo.NowMeasure[nPlayer] = pChip.n整数値_内部番号;
+                                }
                                 pChip.bHit = true;
                             }
                             this.t進行描画_チップ_小節線( configIni, ref dTX, ref pChip, nPlayer );
@@ -4337,7 +4341,7 @@ namespace TJAPlayer3
 			TJAPlayer3.DTX.t全チップの再生停止();
 			this.actAVI.Stop();
             CDTX dTX = TJAPlayer3.DTX;
-            switch( nPlayer )
+            switch (nPlayer)
             {
                 case 1:
                     dTX = TJAPlayer3.DTX_2P;
@@ -4346,14 +4350,14 @@ namespace TJAPlayer3
                     break;
             }
 
-            if( dTX == null ) return; //CDTXがnullの場合はプレイヤーが居ないのでその場で処理終了
+            if (dTX == null) return; //CDTXがnullの場合はプレイヤーが居ないのでその場で処理終了
 
 
-#region [ 再生開始小節の変更 ]
-			//nStartBar++;									// +1が必要
+            #region [ 再生開始小節の変更 ]
+            //nStartBar++;									// +1が必要
 
-#region [ 演奏済みフラグのついたChipをリセットする ]
-			for ( int i = 0; i < dTX.listChip.Count; i++ )
+            #region [ 演奏済みフラグのついたChipをリセットする ]
+            for ( int i = 0; i < dTX.listChip.Count; i++ )
 			{
                 //if(dTX.listChip[i].bHit) フラグが付いてなくてもすべてのチップをリセットする。(必要がある).2020.04.23.akasoko26
 
@@ -4372,12 +4376,12 @@ namespace TJAPlayer3
 #region [ 処理を開始するチップの特定 ]
 			//for ( int i = this.n現在のトップChip; i < CDTXMania.DTX.listChip.Count; i++ )
 			bool bSuccessSeek = false;
-			for ( int i = 0; i < dTX.listChip.Count; i++ )
-			{
-				CDTX.CChip pChip = dTX.listChip[ i ];
-				if ( pChip.n発声位置 < 384 * nStartBar )
-				{
-					continue;
+            for (int i = 0; i < dTX.listChip.Count; i++)
+            {
+                CDTX.CChip pChip = dTX.listChip[i];
+                if (pChip.n発声位置 < 384 * nStartBar)
+                {
+                    continue;
 				}
 				else
 				{
@@ -4386,10 +4390,10 @@ namespace TJAPlayer3
 					break;
 				}
 			}
-			if ( !bSuccessSeek )
-			{
-				// this.n現在のトップChip = CDTXMania.DTX.listChip.Count - 1;
-				this.n現在のトップChip = 0;		// 対象小節が存在しないなら、最初から再生
+            if (!bSuccessSeek)
+            {
+                // this.n現在のトップChip = CDTXMania.DTX.listChip.Count - 1;
+                this.n現在のトップChip = 0;		// 対象小節が存在しないなら、最初から再生
 			}
 #endregion
 

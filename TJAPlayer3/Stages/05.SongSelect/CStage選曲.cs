@@ -408,7 +408,7 @@ namespace TJAPlayer3
                     }
                 }
                 if (TJAPlayer3.ConfigIni.bTokkunMode)
-                    TJAPlayer3.act文字コンソール.tPrint(0, 0, C文字コンソール.Eフォント種別.白, "GAME: TokkunMode");
+                    TJAPlayer3.act文字コンソール.tPrint(0, 0, C文字コンソール.Eフォント種別.白, "GAME: TRAINING MODE");
                 if (TJAPlayer3.ConfigIni.eGameMode == EGame.完走叩ききりまショー)
                     TJAPlayer3.act文字コンソール.tPrint(0, 16, C文字コンソール.Eフォント種別.白, "GAME: SURVIVAL");
                 if (TJAPlayer3.ConfigIni.eGameMode == EGame.完走叩ききりまショー激辛)
