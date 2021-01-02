@@ -42,6 +42,7 @@ namespace TJAPlayer3
                         Flying[i].Height = Math.Abs(TJAPlayer3.Skin.Game_Effect_FlyingNotes_EndPoint_Y[nPlayer] - TJAPlayer3.Skin.Game_Effect_FlyingNotes_StartPoint_Y[nPlayer]);
                         Flying[i].Width = (Math.Abs((TJAPlayer3.Skin.Game_Effect_FlyingNotes_EndPoint_X[nPlayer] - StartPointX[nPlayer])) / 2);
                         //Console.WriteLine("{0}, {1}", width2P, height2P);
+                        Flying[i].Theta = ((Math.Atan2(Flying[i].Height, Flying[i].Width) * 180.0) / Math.PI);
                         Flying[i].Counter = new CCounter(36, 140, TJAPlayer3.Skin.Game_Effect_FlyingNotes_Timer, TJAPlayer3.Timer);
                         //Flying[i].Counter = new CCounter(0, 200000, CDTXMania.Skin.Game_Effect_FlyingNotes_Timer, CDTXMania.Timer);
 
@@ -129,7 +130,7 @@ namespace TJAPlayer3
 
                             if (Flying[i].Player == 0)
                             {
-                                Flying[i].Y = (TJAPlayer3.Skin.Game_Effect_FlyingNotes_StartPoint_Y[Flying[i].Player]) - Math.Sin(Flying[i].Counter.n現在の値 * (Math.PI / 180)) * TJAPlayer3.Skin.Game_Effect_FlyingNotes_Sine;
+                                Flying[i].Y = (TJAPlayer3.Skin.Game_Effect_FlyingNotes_StartPoint_Y[Flying[i].Player]) + -Math.Sin(Flying[i].Counter.n現在の値 * (Math.PI / 180)) * TJAPlayer3.Skin.Game_Effect_FlyingNotes_Sine;
                                 Flying[i].Y -= Flying[i].IncreaseY * Flying[i].Counter.n現在の値;
                             }
                             else
@@ -139,8 +140,15 @@ namespace TJAPlayer3
                             }
 
                         }
-                        TJAPlayer3.Tx.Notes?.t2D中心基準描画(TJAPlayer3.app.Device, (int)Flying[i].X, (int)Flying[i].Y, new Rectangle(Flying[i].Lane * 130, 0, 130, 130));
-
+                        if (Flying[i].Player == 0)
+                        {
+                            TJAPlayer3.Tx.Notes?.t2D中心基準描画(TJAPlayer3.app.Device, (int)Flying[i].X, (int)Flying[i].Y, new Rectangle(Flying[i].Lane * 130, 0, 130, 130));
+                        }
+                        else if (Flying[i].Player == 1)
+                        {
+                            //
+                            TJAPlayer3.Tx.Notes?.t2D中心基準描画(TJAPlayer3.app.Device, (int)Flying[i].X, (int)Flying[i].Y, new Rectangle(Flying[i].Lane * 130, 0, 130, 130));
+                        }
                     }
                 }
             }
@@ -168,6 +176,7 @@ namespace TJAPlayer3
             public bool IsRoll;
             public int StartPointX;
             public int StartPointY;
+            public double Theta;
         }
 
         private Status[] Flying = new Status[32];
