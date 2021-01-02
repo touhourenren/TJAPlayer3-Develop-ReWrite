@@ -526,10 +526,15 @@ namespace FDK
 					}
 					else
 					{
-//						if ( b再生中 )	// #30838 2012.2.24 yyagi (delete b再生中)
-//						{
-							this.Buffer.Frequency = ( int ) ( _db周波数倍率 * _db再生速度 * nオリジナルの周波数 );
-//						}
+						try
+						{
+							this.Buffer.Frequency = (int)(_db周波数倍率 * _db再生速度 * nオリジナルの周波数);
+						}
+						catch
+						{
+							//例外処理は出さない
+							this.b速度上げすぎ問題 = true;
+						}
 					}
 				}
 			}
@@ -580,6 +585,7 @@ namespace FDK
 		}
 		#endregion
 
+		public bool b速度上げすぎ問題 = false;
 		public bool b演奏終了後も再生が続くチップである = false;	// これがtrueなら、本サウンドの再生終了のコールバック時に自動でミキサーから削除する
 
 		//private STREAMPROC _cbStreamXA;		// make it global, so that the GC can not remove it
@@ -1169,7 +1175,8 @@ namespace FDK
 		public void t再生を開始する()
 		{
 			t再生位置を先頭に戻す();
-			tサウンドを再生する();
+			if (!b速度上げすぎ問題)
+				tサウンドを再生する(false);
 		}
 		public void t再生を開始する( bool bループする )
 		{

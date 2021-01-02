@@ -422,18 +422,6 @@ namespace TJAPlayer3
                     }
                 }
             }
-            public bool bWAVを使うチャンネルである
-            {
-                get
-                {
-                    switch (this.nチャンネル番号)
-                    {
-                        case 0x01:
-                            return true;
-                    }
-                    return false;
-                }
-            }
             public bool b自動再生音チャンネルである
             {
                 get
@@ -585,7 +573,7 @@ namespace TJAPlayer3
             {
                 int nDuration = 0;
 
-                if (this.bWAVを使うチャンネルである)       // WAV
+                if (this.nチャンネル番号 == 0x01)       // WAV
                 {
                     CDTX.CWAV wc;
                     TJAPlayer3.DTX.listWAV.TryGetValue(this.n整数値_内部番号, out wc);
@@ -1819,17 +1807,13 @@ namespace TJAPlayer3
         }
 
         #region [ チップの再生と停止 ]
-        public void tチップの再生(CChip pChip, long n再生開始システム時刻ms, int nLane)
+        public void tチップの再生(CChip pChip, long n再生開始システム時刻ms)
         {
             if (TJAPlayer3.ConfigIni.b演奏速度が一倍速であるとき以外音声を再生しない && TJAPlayer3.ConfigIni.n演奏速度 != 20)
                 return;
 
             if (pChip.n整数値_内部番号 >= 0)
             {
-                if ((nLane < (int)Eレーン.LC) || ((int)Eレーン.BGM < nLane))
-                {
-                    throw new ArgumentOutOfRangeException();
-                }
                 if (this.listWAV.TryGetValue(pChip.n整数値_内部番号, out CWAV wc))
                 {
                     int index = wc.n現在再生中のサウンド番号 = (wc.n現在再生中のサウンド番号 + 1) % nPolyphonicSounds;
@@ -1841,7 +1825,6 @@ namespace TJAPlayer3
                     CSound sound = wc.rSound[index];
                     if (sound != null)
                     {
-                        sound.db周波数倍率 = 1.0;
                         sound.db再生速度 = ((double)TJAPlayer3.ConfigIni.n演奏速度) / 20.0;
                         // 再生速度によって、WASAPI/ASIOで使う使用mixerが決まるため、付随情報の設定(音量/PAN)は、再生速度の設定後に行う
 
@@ -2705,7 +2688,7 @@ namespace TJAPlayer3
                         #region [ チップの種類を分類し、対応するフラグを立てる ]
                         foreach (CChip chip in this.listChip)
                         {
-                            if ((chip.bWAVを使うチャンネルである && this.listWAV.TryGetValue(chip.n整数値_内部番号, out CWAV cwav)) && !cwav.listこのWAVを使用するチャンネル番号の集合.Contains(chip.nチャンネル番号))
+                            if ((chip.nチャンネル番号 == 0x01 && this.listWAV.TryGetValue(chip.n整数値_内部番号, out CWAV cwav)) && !cwav.listこのWAVを使用するチャンネル番号の集合.Contains(chip.nチャンネル番号))
                             {
                                 cwav.listこのWAVを使用するチャンネル番号の集合.Add(chip.nチャンネル番号);
 
@@ -8318,7 +8301,7 @@ namespace TJAPlayer3
 
                 #region [ 無限定義への対応 → 内部番号の取得。]
                 //-----------------
-                if (chip.bWAVを使うチャンネルである)
+                if (chip.nチャンネル番号 == 0x01)
                 {
                     chip.n整数値_内部番号 = this.n無限管理WAV[nオブジェクト数値];  // これが本当に一意なWAV番号となる。（無限定義の場合、chip.n整数値 は一意である保証がない。）
                 }
