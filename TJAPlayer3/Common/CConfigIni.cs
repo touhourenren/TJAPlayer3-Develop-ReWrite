@@ -851,6 +851,7 @@ namespace TJAPlayer3
 				}
 			}
 		}
+		public bool b2P演奏時のSEの左右;
 		public int nRisky;						// #23559 2011.6.20 yyagi Riskyでの残ミス数。0で閉店
 		public bool bIsAllowedDoubleClickFullscreen;	// #26752 2011.11.27 yyagi ダブルクリックしてもフルスクリーンに移行しない
 		public STAUTOPLAY bAutoPlay;
@@ -1419,11 +1420,11 @@ namespace TJAPlayer3
 
             this.eSTEALTH = Eステルスモード.OFF;
             this.bNoInfo = false;
-            
-            //this.bNoMP3Streaming = false;
-			this.nMasterVolume = 100;					// #33700 2014.4.26 yyagi マスターボリュームの設定(WASAPI/ASIO用)
 
-            this.bHispeedRandom = false;
+			//this.bNoMP3Streaming = false;
+			this.nMasterVolume = 100;                   // #33700 2014.4.26 yyagi マスターボリュームの設定(WASAPI/ASIO用)
+			this.b2P演奏時のSEの左右 = true;
+			this.bHispeedRandom = false;
             this.nDefaultSongSort = 2;
             this.eGameMode = EGame.OFF;
 			this.TokkunMashInterval = 750;
@@ -1715,7 +1716,11 @@ namespace TJAPlayer3
 		    sw.WriteLine( $"; Keyboard sound level increment ({MinimumKeyboardSoundLevelIncrement}-{MaximumKeyboardSoundLevelIncrement})" );
 		    sw.WriteLine( "{0}={1}", nameof(KeyboardSoundLevelIncrement), KeyboardSoundLevelIncrement );
 			sw.WriteLine();
-            sw.WriteLine($"; 音源再生前の空白時間 (ms)");
+			sw.WriteLine($"; 2P演奏時に叩いた音を左右別々にならすか (0:OFF, 1:ON)");
+			sw.WriteLine($"; Use panning for SE (0:OFF, 1:ON)");
+			sw.WriteLine("UsePanning={0}", b2P演奏時のSEの左右 ? 1 : 0);
+			sw.WriteLine();
+			sw.WriteLine($"; 音源再生前の空白時間 (ms)");
             sw.WriteLine($"; Blank time before music source to play. (ms)");
             sw.WriteLine("{0}={1}", nameof(MusicPreTimeMs), MusicPreTimeMs);
             sw.WriteLine();
@@ -2375,7 +2380,11 @@ namespace TJAPlayer3
 											{
 												this.KeyboardSoundLevelIncrement = C変換.n値を文字列から取得して範囲内に丸めて返す( str4, MinimumKeyboardSoundLevelIncrement, MaximumKeyboardSoundLevelIncrement, this.KeyboardSoundLevelIncrement );
 											}
-                                            else if( str3.Equals(nameof(MusicPreTimeMs)))
+											else if (str3.Equals("UsePanning"))
+											{
+												this.b2P演奏時のSEの左右 = C変換.bONorOFF(str4[0]);
+											}
+											else if( str3.Equals(nameof(MusicPreTimeMs)))
                                             {
                                                 MusicPreTimeMs = int.Parse(str4);
                                             }
@@ -2640,7 +2649,7 @@ namespace TJAPlayer3
 											}
 											else if( str3.Equals( "PlaySpeed" ) )
 											{
-												this.n演奏速度 = C変換.n値を文字列から取得して範囲内に丸めて返す( str4, 5, 40, this.n演奏速度 );
+												this.n演奏速度 = C変換.n値を文字列から取得して範囲内に丸めて返す( str4, 5, 400, this.n演奏速度 );
 											}
 											else if (str3.Equals("PlaySpeedNotEqualOneNoSound"))
 											{
