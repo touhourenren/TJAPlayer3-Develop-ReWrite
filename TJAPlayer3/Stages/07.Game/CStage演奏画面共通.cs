@@ -177,17 +177,20 @@ namespace TJAPlayer3
                 }
 
                 int n整数値管理 = 0;
-                foreach( CDTX.CChip chip in listChip[ i ] )
+                if (r指定時刻に一番近い未ヒットChipを過去方向優先で検索する(0, i) != null) //2020.07.08 Mr-Ojii 未ヒットチップがないときの例外の発生回避 <-(KabanFriends)コード借りましたごめんなさい(´・ω・`)
                 {
-                    chip.nList上の位置 = n整数値管理;
-                    if( ( chip.nチャンネル番号 == 0x15 || chip.nチャンネル番号 == 0x16 ) && ( n整数値管理 < this.listChip[ i ].Count - 1 ) )
+                    foreach (CDTX.CChip chip in listChip[i])
                     {
-                        if( chip.db発声時刻ms < r指定時刻に一番近い未ヒットChipを過去方向優先で検索する( 0, i ).db発声時刻ms)
+                        chip.nList上の位置 = n整数値管理;
+                        if ((chip.nチャンネル番号 == 0x15 || chip.nチャンネル番号 == 0x16) && (n整数値管理 < this.listChip[i].Count - 1))
                         {
-                            chip.n描画優先度 = 1;
+                            if (chip.db発声時刻ms < r指定時刻に一番近い未ヒットChipを過去方向優先で検索する(0, i).db発声時刻ms)
+                            {
+                                chip.n描画優先度 = 1;
+                            }
                         }
+                        n整数値管理++;
                     }
-                    n整数値管理++;
                 }
             }
 
@@ -205,6 +208,15 @@ namespace TJAPlayer3
             else
             {
                 nAddScoreNiji = (double)Math.Ceiling((decimal)(1000000 - (nBalloonCount * 100)) / nNoteCount / 10) * 10;
+            }
+
+            for (int index = TJAPlayer3.DTX.listChip.Count - 1; index >= 0; index--)
+            {
+                if (TJAPlayer3.DTX.listChip[index].nチャンネル番号 == 0x01)
+                {
+                    this.bgmlength = TJAPlayer3.DTX.listChip[index].GetDuration() + TJAPlayer3.DTX.listChip[index].n発声時刻ms;
+                    break;
+                }
             }
 
             this.ct制御タイマ = new CCounter();
@@ -372,7 +384,8 @@ namespace TJAPlayer3
 		}
 		public override void On非活性化()
 		{
-			this.L最後に再生したHHの実WAV番号.Clear();	// #23921 2011.1.4 yyagi
+            this.bgmlength = 1;
+            this.L最後に再生したHHの実WAV番号.Clear();	// #23921 2011.1.4 yyagi
 			this.L最後に再生したHHの実WAV番号 = null;	//
 			this.ctチップ模様アニメ.Drums = null;
 			this.ctチップ模様アニメ.Guitar = null;
@@ -658,7 +671,8 @@ namespace TJAPlayer3
         public CAct演奏DrumsFooter actFooter;
         public CAct演奏DrumsMob actMob;
         public Dan_Cert actDan;
-		public bool bPAUSE;
+        public CAct演奏Drums特訓モード actTokkun;
+        public bool bPAUSE;
         public bool[] bIsAlreadyCleared;
         public bool[] bIsAlreadyMaxed;
         protected bool b演奏にMIDI入力を使った;
@@ -668,8 +682,9 @@ namespace TJAPlayer3
         protected STDGBVALUE<CCounter> ctチップ模様アニメ;
         public CCounter[] ctChipAnime;
         public CCounter[] ctChipAnimeLag;
+        private int bgmlength = 1;
 
-		protected E演奏画面の戻り値 eフェードアウト完了時の戻り値;
+        protected E演奏画面の戻り値 eフェードアウト完了時の戻り値;
         protected readonly int[] nチャンネル0Atoパッド08 = new int[] { 1, 2, 3, 4, 5, 7, 6, 1, 8, 0, 9, 9 };
         protected readonly int[] nチャンネル0Atoレーン07 = new int[] { 1, 2, 3, 4, 5, 7, 6, 1, 9, 0, 8, 8 };
                                                                     //                         RD LC  LP  RD
@@ -679,8 +694,8 @@ namespace TJAPlayer3
         protected readonly int[] nパッド0Atoレーン07 = new int[] { 1, 2, 3, 4, 5, 6, 7, 1, 9, 0, 8, 8 };
 		public STDGBVALUE<CHITCOUNTOFRANK> nヒット数_Auto含まない;
 		public STDGBVALUE<CHITCOUNTOFRANK> nヒット数_Auto含む;
-		protected int n現在のトップChip = -1;
-		protected int[] n最後に再生したBGMの実WAV番号 = new int[ 50 ];
+        public int n現在のトップChip = -1;
+        protected int[] n最後に再生したBGMの実WAV番号 = new int[ 50 ];
 		protected int n最後に再生したHHのチャンネル番号;
 		protected List<int> L最後に再生したHHの実WAV番号;		// #23921 2011.1.4 yyagi: change "int" to "List<int>", for recording multiple wav No.
 		protected STLANEVALUE<int> n最後に再生した実WAV番号;	// #26388 2011.11.8 yyagi: change "n最後に再生した実WAV番号.GUITAR" and "n最後に再生した実WAV番号.BASS"
@@ -739,9 +754,9 @@ namespace TJAPlayer3
         protected int n現在の音符の顔番号;
 
         protected int nWaitButton;
-        
 
-        protected CDTX.CChip[] chip現在処理中の連打チップ = new CDTX.CChip[ 4 ];
+
+        public CDTX.CChip[] chip現在処理中の連打チップ = new CDTX.CChip[ 4 ];
 
         protected const int NOTE_GAP = 25;        
         public int nLoopCount_Clear;
@@ -2914,6 +2929,12 @@ namespace TJAPlayer3
 				{	// del (debug info)
 					TJAPlayer3.ConfigIni.b演奏情報を表示する = !TJAPlayer3.ConfigIni.b演奏情報を表示する;
 				}
+                else if ((keyboard.bキーが押された((int)SlimDXKeys.Key.Escape)))
+                {   // escape (exit)
+                    CSound管理.rc演奏用タイマ.t再開();
+                    TJAPlayer3.Timer.t再開();
+                    this.t演奏中止();
+                }
             }
 
 #region [ Minus & Equals Sound Group Level ]
@@ -3416,7 +3437,10 @@ namespace TJAPlayer3
                                     //    this.actChara.ctChara_GoGo = new CCounter( 0, this.actChara.arゴーゴーモーション番号.Length - 1, dbPtn_GoGo, CSound管理.rc演奏用タイマ );
                                     //}
                                 }
-                                actPlayInfo.NowMeasure[nPlayer] = pChip.n整数値_内部番号;
+                                if (!bPAUSE)
+                                {
+                                    actPlayInfo.NowMeasure[nPlayer] = pChip.n整数値_内部番号;
+                                }
                                 pChip.bHit = true;
                             }
                             this.t進行描画_チップ_小節線( configIni, ref dTX, ref pChip, nPlayer );
@@ -3874,16 +3898,8 @@ namespace TJAPlayer3
 						{
                             if (TJAPlayer3.ConfigIni.bTokkunMode)
                             {
-                                foreach (CDTX.CWAV cwav in TJAPlayer3.DTX.listWAV.Values)
-                                {
-                                    for (int i = 0; i < nPolyphonicSounds; i++)
-                                    {
-                                        if ((cwav.rSound[i] != null) && cwav.rSound[i].b再生中)
-                                        {
-                                            return false;
-                                        }
-                                    }
-                                }
+                                if (this.bgmlength > CSound管理.rc演奏用タイマ.n現在時刻ms)
+                                    break;
                             }
                             pChip.bHit = true;
                             return true;
@@ -4337,7 +4353,7 @@ namespace TJAPlayer3
 			TJAPlayer3.DTX.t全チップの再生停止();
 			this.actAVI.Stop();
             CDTX dTX = TJAPlayer3.DTX;
-            switch( nPlayer )
+            switch (nPlayer)
             {
                 case 1:
                     dTX = TJAPlayer3.DTX_2P;
@@ -4346,14 +4362,14 @@ namespace TJAPlayer3
                     break;
             }
 
-            if( dTX == null ) return; //CDTXがnullの場合はプレイヤーが居ないのでその場で処理終了
+            if (dTX == null) return; //CDTXがnullの場合はプレイヤーが居ないのでその場で処理終了
 
 
-#region [ 再生開始小節の変更 ]
-			//nStartBar++;									// +1が必要
+            #region [ 再生開始小節の変更 ]
+            //nStartBar++;									// +1が必要
 
-#region [ 演奏済みフラグのついたChipをリセットする ]
-			for ( int i = 0; i < dTX.listChip.Count; i++ )
+            #region [ 演奏済みフラグのついたChipをリセットする ]
+            for ( int i = 0; i < dTX.listChip.Count; i++ )
 			{
                 //if(dTX.listChip[i].bHit) フラグが付いてなくてもすべてのチップをリセットする。(必要がある).2020.04.23.akasoko26
 
@@ -4372,12 +4388,12 @@ namespace TJAPlayer3
 #region [ 処理を開始するチップの特定 ]
 			//for ( int i = this.n現在のトップChip; i < CDTXMania.DTX.listChip.Count; i++ )
 			bool bSuccessSeek = false;
-			for ( int i = 0; i < dTX.listChip.Count; i++ )
-			{
-				CDTX.CChip pChip = dTX.listChip[ i ];
-				if ( pChip.n発声位置 < 384 * nStartBar )
-				{
-					continue;
+            for (int i = 0; i < dTX.listChip.Count; i++)
+            {
+                CDTX.CChip pChip = dTX.listChip[i];
+                if (pChip.n発声位置 < 384 * nStartBar)
+                {
+                    continue;
 				}
 				else
 				{
@@ -4386,10 +4402,10 @@ namespace TJAPlayer3
 					break;
 				}
 			}
-			if ( !bSuccessSeek )
-			{
-				// this.n現在のトップChip = CDTXMania.DTX.listChip.Count - 1;
-				this.n現在のトップChip = 0;		// 対象小節が存在しないなら、最初から再生
+            if (!bSuccessSeek)
+            {
+                // this.n現在のトップChip = CDTXMania.DTX.listChip.Count - 1;
+                this.n現在のトップChip = 0;		// 対象小節が存在しないなら、最初から再生
 			}
 #endregion
 

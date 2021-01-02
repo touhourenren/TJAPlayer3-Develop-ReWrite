@@ -761,7 +761,9 @@ namespace TJAPlayer3
         public int nDefaultSongSort;
 
         public EGame eGameMode;
-        public bool bSuperHard = false;
+		public int TokkunSkipMeasures;
+		public int TokkunMashInterval;
+		public bool bSuperHard = false;
         public bool bTokkunMode = false;
         public bool bJust;
 
@@ -1424,7 +1426,8 @@ namespace TJAPlayer3
             this.bHispeedRandom = false;
             this.nDefaultSongSort = 2;
             this.eGameMode = EGame.OFF;
-            this.bEndingAnime = false;
+			this.TokkunMashInterval = 750;
+			this.bEndingAnime = false;
             this.nPlayerCount = 1; //2017.08.18 kairera0467 マルチプレイ対応
             ShinuchiMode = false;
             FastRender = true;
@@ -1918,7 +1921,15 @@ namespace TJAPlayer3
             sw.WriteLine( "; ゲーム(0:OFF, 1:完走!叩ききりまショー!, 2:完走!叩ききりまショー!(激辛) )" );
 			sw.WriteLine( "GameMode={0}", (int) this.eGameMode );
 			sw.WriteLine();
-            sw.WriteLine( "; JUST(0:OFF, 1:ON)" );
+			sw.WriteLine();
+			sw.WriteLine("; 特訓モード時にPgUp/PgDnで何小節飛ばすか");
+			sw.WriteLine("TokkunSkipMeasures={0}", this.TokkunSkipMeasures);
+			sw.WriteLine();
+			sw.WriteLine("; 特訓モード時にジャンプポイントに飛ばすための時間(ms)");
+			sw.WriteLine("; 指定ms以内に5回縁を叩きましょう");
+			sw.WriteLine("{1}={0}", this.TokkunMashInterval, nameof(this.TokkunMashInterval));
+			sw.WriteLine();
+			sw.WriteLine( "; JUST(0:OFF, 1:ON)" );
 			sw.WriteLine( "Just={0}", this.bJust ? 1 : 0 );
 			sw.WriteLine();
             sw.WriteLine( "; 判定数の表示(0:OFF, 1:ON)" );
@@ -2702,6 +2713,14 @@ namespace TJAPlayer3
 											else if( str3.Equals( "GameMode" ) )
 											{
 												this.eGameMode = (EGame) C変換.n値を文字列から取得して範囲内に丸めて返す( str4, 0, 2, (int) this.eGameMode );
+											}
+											else if (str3.Equals("TokkunSkipMeasures"))
+											{
+												this.TokkunSkipMeasures = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 9999, this.TokkunSkipMeasures);
+											}
+											else if (str3.Equals(nameof(TokkunMashInterval)))
+											{
+												this.TokkunMashInterval = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 9999, this.TokkunMashInterval);
 											}
 											else if( str3.Equals( "JudgeCountDisplay" ) )
 											{
