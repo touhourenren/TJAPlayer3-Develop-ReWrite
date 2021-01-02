@@ -26,7 +26,7 @@ namespace TJAPlayer3
                 var index = ListCombo[player][VoiceIndex[player]];
                 if (nCombo == index.nCombo)
                 {
-                    index.soundComboVoice?.tサウンドを先頭から再生する();
+                    index.soundComboVoice.t再生を開始する();
                     VoiceIndex[player]++;
                 }
                 
@@ -71,6 +71,13 @@ namespace TJAPlayer3
                             comboVoice.nPlayer = i;
                             comboVoice.strFilePath = item;
                             comboVoice.soundComboVoice = TJAPlayer3.Sound管理.tサウンドを生成する(item, ESoundGroup.Voice);
+                            if (TJAPlayer3.ConfigIni.nPlayerCount >= 2) //2020.05.06 Mr-Ojii 左右に出したかったから追加。
+                            {
+                                if (i == 0)
+                                    comboVoice.soundComboVoice.n位置 = -100;
+                                else
+                                    comboVoice.soundComboVoice.n位置 = 100;
+                            }
                             comboVoice.nCombo = int.Parse(Path.GetFileNameWithoutExtension(item));
                             ListCombo[i].Add(comboVoice);
                         }

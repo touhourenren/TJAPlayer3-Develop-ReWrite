@@ -754,6 +754,9 @@ namespace TJAPlayer3
         protected CSound soundRed;
         protected CSound soundBlue;
         protected CSound soundAdlib;
+        protected CSound soundRed2;
+        protected CSound soundBlue2;
+        protected CSound soundAdlib2;
         public bool bDoublePlay; // 2016.08.21 kairera0467 表示だけ。
 		protected Stopwatch sw;		// 2011.6.13 最適化検討用のストップウォッチ
         private int ListDan_Number;
@@ -1065,14 +1068,41 @@ namespace TJAPlayer3
 		protected void tサウンド再生( CDTX.CChip pChip, int nPlayer )
 		{
 			int index = pChip.nチャンネル番号;
-            if( index == 0x11 || index == 0x13 || index == 0x1A )
-                this.soundRed?.t再生を開始する();
-            else if( index == 0x12 || index == 0x14 || index == 0x1B )
-                this.soundBlue?.t再生を開始する();
-            else if( index == 0x1F )
-                this.soundAdlib?.t再生を開始する();
+            if (index == 0x11 || index == 0x13 || index == 0x1A)
+            {
+                if (pChip.nPlayerSide == 0)
+                {
+                    this.soundRed?.t再生を開始する();
+                }
+                else
+                {
+                    this.soundRed2?.t再生を開始する();
+                }
+            }
+            else if (index == 0x12 || index == 0x14 || index == 0x1B)
+            {
+                if (pChip.nPlayerSide == 0)
+                {
+                    this.soundBlue?.t再生を開始する();
+                }
+                else
+                {
+                    this.soundBlue2?.t再生を開始する();
+                }
+            }
+            else if (index == 0x1F)
+            {
+                if (pChip.nPlayerSide == 0)
+                {
+                    this.soundAdlib?.t再生を開始する();
+                }
+                else
+                {
+                    this.soundAdlib2?.t再生を開始する();
+                }
+            }
 
-            if( this.nHand[ nPlayer ] == 0 )
+            if (this.nHand[nPlayer] == 0)
                 this.nHand[ nPlayer ]++;
             else
                 this.nHand[ nPlayer ] = 0;
@@ -1184,8 +1214,11 @@ namespace TJAPlayer3
                 //赤か青かの分岐
                 if( sort == 0 )
                 {
-                    this.soundRed?.t再生を開始する();
-                    if( pChip.nチャンネル番号 == 0x15 )
+                    if (pChip.nPlayerSide == 0)
+                        this.soundRed?.t再生を開始する();
+                    else
+                        this.soundRed2?.t再生を開始する();
+                    if (pChip.nチャンネル番号 == 0x15)
                     {
                         //CDTXMania.Skin.soundRed.t再生する();
                         //CDTXMania.stage演奏ドラム画面.actChipFireTaiko.Start( 1, nPlayer );
@@ -1200,8 +1233,11 @@ namespace TJAPlayer3
                 }
                 else
                 {
-                    this.soundBlue?.t再生を開始する();
-                    if( pChip.nチャンネル番号 == 0x15 )
+                    if (pChip.nPlayerSide == 0)
+                        this.soundBlue?.t再生を開始する();
+                    else
+                        this.soundBlue2?.t再生を開始する();
+                    if (pChip.nチャンネル番号 == 0x15)
                     {
                         //CDTXMania.Skin.soundBlue.t再生する();
                         //CDTXMania.stage演奏ドラム画面.actChipFireTaiko.Start( 2, nPlayer );
@@ -1299,7 +1335,10 @@ namespace TJAPlayer3
                         this.actScore.Add(E楽器パート.TAIKO, this.bIsAutoPlay, 100L, player);
                     }
                     //CDTXMania.Skin.soundRed.t再生する();
-                    this.soundRed?.t再生を開始する();
+                    if (pChip.nPlayerSide == 0)
+                        this.soundRed?.t再生を開始する();
+                    else
+                        this.soundRed2?.t再生を開始する();
                 }
                 //TJAPlayer3.stage演奏ドラム画面.actTaikoLaneFlash.PlayerLane[player].Start(PlayerLane.FlashType.Hit);
             }
