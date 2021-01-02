@@ -74,7 +74,6 @@ namespace TJAPlayer3
         {
             #region 共通
             Tile_Black = TxC(@"Tile_Black.png");
-            Tile_White = TxC(@"Tile_White.png");
             Menu_Title = TxC(@"Menu_Title.png");
             Menu_Highlight = TxC(@"Menu_Highlight.png");
             Enum_Song = TxC(@"Enum_Song.png");
@@ -683,7 +682,6 @@ namespace TJAPlayer3
 
         #region 共通
         public CTexture Tile_Black,
-            Tile_White,
             Menu_Title,
             Menu_Highlight,
             Enum_Song,
