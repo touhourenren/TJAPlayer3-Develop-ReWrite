@@ -2929,6 +2929,12 @@ namespace TJAPlayer3
 				{	// del (debug info)
 					TJAPlayer3.ConfigIni.b演奏情報を表示する = !TJAPlayer3.ConfigIni.b演奏情報を表示する;
 				}
+                else if ((keyboard.bキーが押された((int)SlimDXKeys.Key.Escape)))
+                {   // escape (exit)
+                    CSound管理.rc演奏用タイマ.t再開();
+                    TJAPlayer3.Timer.t再開();
+                    this.t演奏中止();
+                }
             }
 
 #region [ Minus & Equals Sound Group Level ]
