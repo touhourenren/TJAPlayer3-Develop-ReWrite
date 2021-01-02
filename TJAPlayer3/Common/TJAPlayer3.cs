@@ -886,62 +886,6 @@ namespace TJAPlayer3
 						#endregion
 						break;
 
-//					case CStage.Eステージ.オプション:
-						#region [ *** ]
-//						//-----------------------------
-//						if( this.n進行描画の戻り値 != 0 )
-//						{
-//							switch( r直前のステージ.eステージID )
-//							{
-//								case CStage.Eステージ.タイトル:
-//									#region [ *** ]
-//									//-----------------------------
-//									r現在のステージ.On非活性化();
-//									Trace.TraceInformation( "----------------------" );
-//									Trace.TraceInformation( "■ タイトル" );
-//									stageタイトル.On活性化();
-//									r直前のステージ = r現在のステージ;
-//									r現在のステージ = stageタイトル;
-//						
-//									foreach( STPlugin pg in this.listプラグイン )
-//									{
-//										Directory.SetCurrentDirectory( pg.strプラグインフォルダ );
-//										pg.plugin.Onステージ変更();
-//										Directory.SetCurrentDirectory( CDTXMania.strEXEのあるフォルダ );
-//									}
-//						
-//									this.tガベージコレクションを実行する();
-//									break;
-//								//-----------------------------
-//									#endregion
-//
-//								case CStage.Eステージ.選曲:
-//									#region [ *** ]
-//									//-----------------------------
-//									r現在のステージ.On非活性化();
-//									Trace.TraceInformation( "----------------------" );
-//									Trace.TraceInformation( "■ 選曲" );
-//									stage選曲.On活性化();
-//									r直前のステージ = r現在のステージ;
-//									r現在のステージ = stage選曲;
-//
-//									foreach( STPlugin pg in this.listプラグイン )
-//									{
-//										Directory.SetCurrentDirectory( pg.strプラグインフォルダ );
-//										pg.plugin.Onステージ変更();
-//										Directory.SetCurrentDirectory( CDTXMania.strEXEのあるフォルダ );
-//									}
-//
-//									this.tガベージコレクションを実行する();
-//									break;
-//								//-----------------------------
-//									#endregion
-//							}
-//						}
-//						//-----------------------------
-						#endregion
-//						break;
-
 					case CStage.Eステージ.コンフィグ:
 						#region [ *** ]
 						//-----------------------------
