@@ -80,8 +80,7 @@ namespace TJAPlayer3
             Enum_Song = TxC(@"Enum_Song.png");
             Scanning_Loudness = TxC(@"Scanning_Loudness.png");
             Overlay = TxC(@"Overlay.png");
-            Overlay_Offline = TxC(@"Overlay_Offline.png");
-            Overlay_Online = TxC(@"Overlay_Online.png");
+            Network_Connection = TxC(@"Network_Connection.png");
             NamePlate = new CTexture[2];
             NamePlateBase = TxC(@"NamePlate.png");
             NamePlate[0] = TxC(@"1P_NamePlate.png");
@@ -691,8 +690,7 @@ namespace TJAPlayer3
             Scanning_Loudness,
             NamePlateBase,
             Overlay,
-            Overlay_Offline,
-            Overlay_Online;
+            Network_Connection;
         public CTexture[] NamePlate;
         #endregion
         #region 1_タイトル画面
