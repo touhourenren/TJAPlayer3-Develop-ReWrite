@@ -452,7 +452,9 @@ namespace TJAPlayer3
 
                 //this.t進行描画_DANGER();
                 //this.t進行描画_判定ライン();
-                if( TJAPlayer3.ConfigIni.ShowChara )
+                if (!TJAPlayer3.ConfigIni.bNoInfo)
+                    this.t進行描画_ネームプレート();
+                if ( TJAPlayer3.ConfigIni.ShowChara )
                     this.actChara.On進行描画();
 
                 if(!TJAPlayer3.ConfigIni.bAVI有効 && TJAPlayer3.ConfigIni.ShowMob)
@@ -2029,6 +2031,8 @@ namespace TJAPlayer3
             if( pChip.nコース != this.n現在のコース[ nPlayer ] )
                 return;
 
+            //int n小節番号plus1 = pChip.n発声位置 / 384;
+            int n小節番号plus1 = this.actPlayInfo.NowMeasure[nPlayer];
             int x = TJAPlayer3.Skin.nScrollFieldX[ nPlayer ] + pChip.nバーからの距離dot.Taiko;
             int y = TJAPlayer3.Skin.nScrollFieldY[ nPlayer ];
 
@@ -2175,6 +2179,21 @@ namespace TJAPlayer3
             this.bStartFlag = true;
         }
         private bool bStartFlag;
+
+        private void t進行描画_ネームプレート()
+        {
+            //if( this.txNamePlate != null )
+            //this.txNamePlate.t2D描画( CDTXMania.app.Device, 0, 100 );
+
+            //if(CDTXMania.Tx.Taiko_NamePlate[0] != null) CDTXMania.Tx.Taiko_NamePlate[0].t2D描画(CDTXMania.app.Device, 0, 100);
+            //if(CDTXMania.stage演奏ドラム画面.bDoublePlay && CDTXMania.Tx.Taiko_NamePlate[1] != null) CDTXMania.Tx.Taiko_NamePlate[0].t2D描画(CDTXMania.app.Device, 0, 600);
+
+            //if ( CDTXMania.stage演奏ドラム画面.bDoublePlay )
+            //{
+            //    if( this.txNamePlate2P != null )
+            //        this.txNamePlate2P.t2D描画( CDTXMania.app.Device, 314, 636 );
+            //}
+        }
 
         private void t進行描画_リアルタイム判定数表示()
         {
