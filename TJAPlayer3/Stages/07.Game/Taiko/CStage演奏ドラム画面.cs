@@ -422,7 +422,7 @@ namespace TJAPlayer3
 					TJAPlayer3.DTX.t全チップの再生停止();
 					base.eフェーズID = CStage.Eフェーズ.演奏_STAGE_FAILED;
 				}
-                if( !String.IsNullOrEmpty( TJAPlayer3.DTX.strBGIMAGE_PATH ) || ( TJAPlayer3.DTX.listAVI.Count == 0 ) ) //背景動画があったら背景画像を描画しない。
+                if( !String.IsNullOrEmpty( TJAPlayer3.DTX.strBGIMAGE_PATH ) || ( TJAPlayer3.DTX.listAVI.Count == 0 )|| !TJAPlayer3.ConfigIni.bAVI有効 ) //背景動画があったら背景画像を描画しない。
                 {
 				    this.t進行描画_背景();
                 }
