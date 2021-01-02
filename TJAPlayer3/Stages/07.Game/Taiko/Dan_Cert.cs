@@ -38,8 +38,8 @@ namespace TJAPlayer3
             TJAPlayer3.stage演奏ドラム画面.ReSetScore(TJAPlayer3.DTX.List_DanSongs[NowShowingNumber].ScoreInit, TJAPlayer3.DTX.List_DanSongs[NowShowingNumber].ScoreDiff);
             IsAnimating = true;
             TJAPlayer3.stage演奏ドラム画面.actPanel.SetPanelString(TJAPlayer3.DTX.List_DanSongs[NowShowingNumber].Title, TJAPlayer3.DTX.List_DanSongs[NowShowingNumber].Genre, 1 + NowShowingNumber + "曲目");
-            if(number == 0) Sound_Section_First?.tサウンドを先頭から再生する();
-            else Sound_Section?.tサウンドを先頭から再生する();
+            if(number == 0) Sound_Section_First?.t再生を開始する();
+            else Sound_Section?.t再生を開始する();
         }
 
         public override void On活性化()
@@ -185,7 +185,7 @@ namespace TJAPlayer3
                 }
                 if(oldReached == false && Challenge[i].GetReached() == true)
                 {
-                    Sound_Failed?.tサウンドを先頭から再生する();
+                    Sound_Failed?.t再生を開始する();
                 }
             }
         }

@@ -1321,11 +1321,6 @@ Debug.WriteLine("更に再生に失敗: " + Path.GetFileName(this.strファイ�
 				this.Buffer.Play( 0, pf );
 			}
 		}
-		public void tサウンドを先頭から再生する()
-		{
-			this.t再生位置を先頭に戻す();
-			this.tサウンドを再生する();
-		}
 		public void tサウンドを停止してMixerからも削除する()
 		{
 			tサウンドを停止する( false );

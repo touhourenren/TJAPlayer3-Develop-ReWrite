@@ -340,7 +340,20 @@ namespace TJAPlayer3
 			        this.soundRed = TJAPlayer3.Sound管理.tサウンドを生成する( CSkin.Path( @"Sounds\Taiko\dong.ogg" ), ESoundGroup.SoundEffect );
 			        this.soundBlue = TJAPlayer3.Sound管理.tサウンドを生成する( CSkin.Path( @"Sounds\Taiko\ka.ogg" ), ESoundGroup.SoundEffect );
 			        this.soundAdlib = TJAPlayer3.Sound管理.tサウンドを生成する( CSkin.Path(@"Sounds\Taiko\Adlib.ogg"), ESoundGroup.SoundEffect );
-			    }
+                    this.soundRed2 = TJAPlayer3.Sound管理.tサウンドを生成する(CSkin.Path(@"Sounds\Taiko\dong.ogg"), ESoundGroup.SoundEffect);
+                    this.soundBlue2 = TJAPlayer3.Sound管理.tサウンドを生成する(CSkin.Path(@"Sounds\Taiko\ka.ogg"), ESoundGroup.SoundEffect);
+                    this.soundAdlib2 = TJAPlayer3.Sound管理.tサウンドを生成する(CSkin.Path(@"Sounds\Taiko\Adlib.ogg"), ESoundGroup.SoundEffect);
+
+                    if (TJAPlayer3.ConfigIni.nPlayerCount >= 2)//2020.05.06 Mr-Ojii左右に出したかったから、追加。
+                    {
+                        this.soundRed.n位置 = -100;
+                        this.soundBlue.n位置 = -100;
+                        this.soundAdlib.n位置 = -100;
+                        this.soundRed2.n位置 = 100;
+                        this.soundBlue2.n位置 = 100;
+                        this.soundAdlib2.n位置 = 100;
+                    }
+                }
 
 			    base.OnManagedリソースの作成();
 			}
@@ -374,7 +387,13 @@ namespace TJAPlayer3
                     this.soundBlue.t解放する();
                 if( this.soundAdlib != null )
                     this.soundAdlib.t解放する();
-				base.OnManagedリソースの解放();
+                if (this.soundRed2 != null)
+                    this.soundRed2.t解放する();
+                if (this.soundBlue2 != null)
+                    this.soundBlue2.t解放する();
+                if (this.soundAdlib2 != null)
+                    this.soundAdlib2.t解放する();
+                base.OnManagedリソースの解放();
 			}
 		}
 		public override int On進行描画()
@@ -944,7 +963,14 @@ namespace TJAPlayer3
                         if (chipNoHit.nチャンネル番号 == 0x1F && (e判定 == E判定.Perfect || e判定 == E判定.Good))
                             b太鼓音再生フラグ = false;
                         if (chipNoHit.nチャンネル番号 == 0x1F && (e判定 != E判定.Miss && e判定 != E判定.Poor))
-                            this.soundAdlib?.t再生を開始する();
+                            if (chipNoHit.nPlayerSide == 0)
+                            {
+                                this.soundAdlib?.t再生を開始する();
+                            }
+                            else
+                            {
+                                this.soundAdlib2?.t再生を開始する();
+                            }
                     }
 
                     switch (nPad)
@@ -988,7 +1014,7 @@ namespace TJAPlayer3
                             nChannel = 0x11;
                             if (b太鼓音再生フラグ)
                             {
-                                this.soundRed?.t再生を開始する();
+                                this.soundRed2?.t再生を開始する();
                             }
                             break;
                         case 17:
@@ -997,7 +1023,7 @@ namespace TJAPlayer3
                             nChannel = 0x11;
                             if (b太鼓音再生フラグ)
                             {
-                                this.soundRed?.t再生を開始する();
+                                this.soundRed2?.t再生を開始する();
                             }
                             break;
                         case 18:
@@ -1005,14 +1031,14 @@ namespace TJAPlayer3
                             nHand = 0;
                             nChannel = 0x12;
                             if (b太鼓音再生フラグ)
-                                this.soundBlue?.t再生を開始する();
+                                this.soundBlue2?.t再生を開始する();
                             break;
                         case 19:
                             nLane = 1;
                             nHand = 1;
                             nChannel = 0x12;
                             if (b太鼓音再生フラグ)
-                                this.soundBlue?.t再生を開始する();
+                                this.soundBlue2?.t再生を開始する();
                             break;
                     }
 
