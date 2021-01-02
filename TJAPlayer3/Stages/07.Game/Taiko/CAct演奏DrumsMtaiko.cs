@@ -15,14 +15,6 @@ namespace TJAPlayer3
         /// </summary>
         public CAct演奏DrumsMtaiko()
         {
-            //this.strCourseSymbolFileName = new string[]{
-            //    @"Graphics\CourseSymbol\easy.png",
-            //    @"Graphics\CourseSymbol\normal.png",
-            //    @"Graphics\CourseSymbol\hard.png",
-            //    @"Graphics\CourseSymbol\oni.png",
-            //    @"Graphics\CourseSymbol\edit.png",
-            //    @"Graphics\CourseSymbol\sinuchi.png",
-            //};
             base.b活性化してない = true;
         }
 
@@ -44,38 +36,11 @@ namespace TJAPlayer3
 
         public override void OnManagedリソースの作成()
         {
-            //this.txMtaiko枠 = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\7_mtaiko_A.png" ) );
-            //this.txMtaiko下敷き[ 0 ] = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\7_mtaiko_C.png" ) );
-            //if (CDTXMania.stage演奏ドラム画面.bDoublePlay)
-            //    this.txMtaiko下敷き[ 1 ] = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\7_mtaiko_C_2P.png" ) );
-
-            //this.txオプションパネル_HS = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\7_HiSpeed.png" ) );
-            //this.txオプションパネル_RANMIR = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\7_RANMIR.png" ) );
-            //this.txオプションパネル_特殊 = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\7_SpecialOption.png" ) );
-            
-            //this.tx太鼓_土台 = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\7_mtaiko_main.png" ) );
-            //this.tx太鼓_面L = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\7_mtaiko_red.png" ) );
-            //this.tx太鼓_ふちL = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\7_mtaiko_blue.png" ) );
-            //this.tx太鼓_面R = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\7_mtaiko_red.png" ) );
-            //this.tx太鼓_ふちR = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\7_mtaiko_blue.png" ) );
-
-            //this.txレベルアップ = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\7_LevelUp.png" ) );
-            //this.txレベルダウン = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\7_LevelDown.png" ) );
-
-            //this.txネームプレート = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\7_NamePlate.png" ) );
-            //if (CDTXMania.stage演奏ドラム画面.bDoublePlay)
-            //    this.txネームプレート = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\7_NamePlate2P.png" ) );
-            
-            //for( int i = 0; i < 6; i++ )
-            //{
-            //    this.txコースシンボル[ i ] = CDTXMania.tテクスチャの生成( CSkin.Path( this.strCourseSymbolFileName[ i ] ) );
-            //}
-            this.ctレベルアップダウン = new CCounter[ 4 ];
+             this.ctレベルアップダウン = new CCounter[ 4 ];
             this.After = new CDTX.ECourse[ 4 ];
             this.Before = new CDTX.ECourse[ 4 ];
             for ( int i = 0; i < 4; i++ )
             {
-                //this.ctレベルアップダウン = new CCounter( 0, 1000, 1, CDTXMania.Timer );
                 this.ctレベルアップダウン[ i ] = new CCounter();
             }
 
@@ -85,33 +50,6 @@ namespace TJAPlayer3
 
         public override void OnManagedリソースの解放()
         {
-      //      CDTXMania.tテクスチャの解放( ref this.txMtaiko枠 );
-      //      CDTXMania.tテクスチャの解放( ref this.txMtaiko下敷き[ 0 ] );
-      //      if (CDTXMania.stage演奏ドラム画面.bDoublePlay)
-      //          CDTXMania.tテクスチャの解放( ref this.txMtaiko下敷き[ 1 ] );
-            
-		    //CDTXMania.tテクスチャの解放( ref this.tx太鼓_土台 );
-      //      CDTXMania.tテクスチャの解放( ref this.txオプションパネル_HS );
-      //      CDTXMania.tテクスチャの解放( ref this.txオプションパネル_RANMIR );
-      //      CDTXMania.tテクスチャの解放( ref this.txオプションパネル_特殊 );
-
-      //      CDTXMania.tテクスチャの解放( ref this.tx太鼓_面L );
-      //      CDTXMania.tテクスチャの解放( ref this.tx太鼓_面R );
-		    //CDTXMania.tテクスチャの解放( ref this.tx太鼓_ふちL );
-      //      CDTXMania.tテクスチャの解放( ref this.tx太鼓_ふちR );
-
-		    //CDTXMania.tテクスチャの解放( ref this.txレベルアップ );
-      //      CDTXMania.tテクスチャの解放( ref this.txレベルダウン );
-
-      //      CDTXMania.tテクスチャの解放( ref this.txネームプレート );
-      //      if (CDTXMania.stage演奏ドラム画面.bDoublePlay)
-      //          CDTXMania.tテクスチャの解放( ref this.txネームプレート2P );
-
-      //      for( int i = 0; i < 6; i++ )
-      //      {
-      //          CDTXMania.tテクスチャの解放( ref this.txコースシンボル[ i ] );
-      //      }
-
             this.ctレベルアップダウン = null;
 
             base.OnManagedリソースの解放();
@@ -417,15 +355,6 @@ namespace TJAPlayer3
         }
 
         //太鼓
-        //private CTexture txMtaiko枠;
-        //private CTexture[] txMtaiko下敷き = new CTexture[ 4 ];
-
-        //private CTexture tx太鼓_土台;
-        //private CTexture tx太鼓_面L;
-        //private CTexture tx太鼓_ふちL;
-        //private CTexture tx太鼓_面R;
-        //private CTexture tx太鼓_ふちR;
-
         private STパッド状態[] stパッド状態 = new STパッド状態[ 4 * 4 ];
         private long nフラッシュ制御タイマ;
 
@@ -438,16 +367,10 @@ namespace TJAPlayer3
         private CTexture txオプションパネル_特殊;
         private int nHS;
 
-        //ネームプレート
-        //private CTexture txネームプレート;
-        //private CTexture txネームプレート2P;
-
         //譜面分岐
         private CCounter[] ctレベルアップダウン;
         public CDTX.ECourse[] After;
         public CDTX.ECourse[] Before;
-        //private CTexture txレベルアップ;
-        //private CTexture txレベルダウン;
         //-----------------
         #endregion
 
