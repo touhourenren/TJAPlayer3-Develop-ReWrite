@@ -20,8 +20,9 @@ namespace FDK
 			{
 				this.devJoystick = new Joystick( directInput, di.InstanceGuid );
 				this.devJoystick.SetCooperativeLevel( hWnd, CooperativeLevel.Foreground | CooperativeLevel.Exclusive );
-				//this.devJoystick.Properties.BufferSize = _rawBufferedDataArray.Length;
+				this.devJoystick.Properties.BufferSize = 32;
 				Trace.TraceInformation( this.devJoystick.Information.InstanceName + "を生成しました。" );
+				this.strDeviceName = this.devJoystick.Information.InstanceName;
 			}
 			catch
 			{
@@ -537,7 +538,7 @@ namespace FDK
 						}
 						else
 						{
-							if (this.bButtonState[4] == true)
+							if (this.bButtonState[6] == true)
 							{
 								STInputEvent ev = new STInputEvent()
 								{
