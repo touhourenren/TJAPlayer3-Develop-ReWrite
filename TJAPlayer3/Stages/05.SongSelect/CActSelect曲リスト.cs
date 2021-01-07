@@ -593,23 +593,19 @@ namespace TJAPlayer3
                 this.pfBoxName = new CPrivateFastFont(new FontFamily(TJAPlayer3.ConfigIni.FontName), 28);
                 this.pfMusicName = new CPrivateFastFont(new FontFamily(TJAPlayer3.ConfigIni.FontName), 22);
                 this.pfSubtitle = new CPrivateFastFont(new FontFamily(TJAPlayer3.ConfigIni.FontName), 13);
-
-                try
-				{
-					this.pfBoxText = new CPrivateFastFont(new FontFamily("ＤＦＰ太丸ゴシック体"), 14);
-				}
-                catch
-				{
-					this.pfBoxText = new CPrivateFastFont(new FontFamily(TJAPlayer3.ConfigIni.FontName), 14);
-				}
 			}
             else
             {
                 this.pfBoxName = new CPrivateFastFont(new FontFamily("MS UI Gothic"), 28);
                 this.pfMusicName = new CPrivateFastFont(new FontFamily("MS UI Gothic"), 22);
                 this.pfSubtitle = new CPrivateFastFont(new FontFamily("MS UI Gothic"), 13);
-                this.pfBoxText = new CPrivateFastFont(new FontFamily("MS UI Gothic"), 14);
-            }
+			}
+
+			if(!string.IsNullOrEmpty(TJAPlayer3.ConfigIni.BoxFontName))
+				this.pfBoxText = new CPrivateFastFont(new FontFamily(TJAPlayer3.ConfigIni.BoxFontName), 14);
+			else
+				this.pfBoxText = new CPrivateFastFont(new FontFamily("MS UI Gothic"), 14);
+
 
 			this.b登場アニメ全部完了 = false;
 			this.n目標のスクロールカウンタ = 0;
