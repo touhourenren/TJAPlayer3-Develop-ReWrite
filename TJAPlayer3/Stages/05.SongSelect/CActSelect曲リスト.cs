@@ -797,10 +797,32 @@ namespace TJAPlayer3
 			if ((this.r現在選択中の曲 == null) && (TJAPlayer3.Songs管理.list曲ルート.Count > 0))
 				this.r現在選択中の曲 = TJAPlayer3.Songs管理.list曲ルート[0];
 
+			// 描画。
+			if (this.r現在選択中の曲 == null)
+			{
+				#region [ 曲が１つもないなら「Songs not found.」を表示してここで帰れ。]
+				//-----------------
+				if (bIsEnumeratingSongs)
+				{
+					if (this.txEnumeratingSongs != null)
+					{
+						this.txEnumeratingSongs.t2D描画(TJAPlayer3.app.Device, 320, 160);
+					}
+				}
+				else
+				{
+					if (this.txSongNotFound != null)
+						this.txSongNotFound.t2D描画(TJAPlayer3.app.Device, 320, 160);
+				}
+				//-----------------
+				#endregion
+
+				return 0;
+			}
 
 			// 本ステージは、(1)登場アニメフェーズ → (2)通常フェーズ　と二段階にわけて進む。
 
-			if(strBoxText != r現在選択中の曲.strBoxText[0] + r現在選択中の曲.strBoxText[1] + r現在選択中の曲.strBoxText[2])
+			if (strBoxText != r現在選択中の曲.strBoxText[0] + r現在選択中の曲.strBoxText[1] + r現在選択中の曲.strBoxText[2])
 			{
 				for (int i = 0; i < 3; i++)
 				{
@@ -1057,29 +1079,6 @@ namespace TJAPlayer3
 				}
 				//-----------------
 				#endregion
-			}
-
-			// 描画。
-			if (this.r現在選択中の曲 == null)
-			{
-				#region [ 曲が１つもないなら「Songs not found.」を表示してここで帰れ。]
-				//-----------------
-				if (bIsEnumeratingSongs)
-				{
-					if (this.txEnumeratingSongs != null)
-					{
-						this.txEnumeratingSongs.t2D描画(TJAPlayer3.app.Device, 320, 160);
-					}
-				}
-				else
-				{
-					if (this.txSongNotFound != null)
-						this.txSongNotFound.t2D描画(TJAPlayer3.app.Device, 320, 160);
-				}
-				//-----------------
-				#endregion
-
-				return 0;
 			}
 
 			int i選曲バーX座標 = 673; //選曲バーの座標用

@@ -1040,26 +1040,29 @@ namespace TJAPlayer3
 
 			#region [ "最近遊んだ曲"BOXを生成する ]
 
-			C曲リストノード crecentryplaysong = new C曲リストノード();
-			crecentryplaysong.eノード種別 = C曲リストノード.Eノード種別.BOX;
-			crecentryplaysong.strタイトル = "最近あそんだ曲";
-			crecentryplaysong.strBoxText[0] = "";
-			crecentryplaysong.strBoxText[1] = "最近あそんだ曲を集めたよ！";
-			crecentryplaysong.strBoxText[2] = "";
-			crecentryplaysong.strジャンル = "最近遊んだ曲";
-			crecentryplaysong.nスコア数 = 1;
-			crecentryplaysong.list子リスト = new List<C曲リストノード>();
-			crecentryplaysong.BackColor = ColorTranslator.FromHtml("#164748");
+			if(list曲ルート.Count > 0)
+			{
+				C曲リストノード crecentryplaysong = new C曲リストノード();
+				crecentryplaysong.eノード種別 = C曲リストノード.Eノード種別.BOX;
+				crecentryplaysong.strタイトル = "最近あそんだ曲";
+				crecentryplaysong.strBoxText[0] = "";
+				crecentryplaysong.strBoxText[1] = "最近あそんだ曲を集めたよ！";
+				crecentryplaysong.strBoxText[2] = "";
+				crecentryplaysong.strジャンル = "最近遊んだ曲";
+				crecentryplaysong.nスコア数 = 1;
+				crecentryplaysong.list子リスト = new List<C曲リストノード>();
+				crecentryplaysong.BackColor = ColorTranslator.FromHtml("#164748");
 
-			crecentryplaysong.arスコア[0] = new Cスコア();
-			crecentryplaysong.arスコア[0].ファイル情報.フォルダの絶対パス = "";
-			crecentryplaysong.arスコア[0].譜面情報.タイトル = crecentryplaysong.strタイトル;
-			crecentryplaysong.arスコア[0].譜面情報.コメント =
-				(CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ja") ?
-				"最近遊んだ曲" :
-				"Recentry play songs";
+				crecentryplaysong.arスコア[0] = new Cスコア();
+				crecentryplaysong.arスコア[0].ファイル情報.フォルダの絶対パス = "";
+				crecentryplaysong.arスコア[0].譜面情報.タイトル = crecentryplaysong.strタイトル;
+				crecentryplaysong.arスコア[0].譜面情報.コメント =
+					(CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ja") ?
+					"最近遊んだ曲" :
+					"Recentry play songs";
 
-			list曲ルート.Add(crecentryplaysong);
+				list曲ルート.Add(crecentryplaysong);
+			}
 
 			#endregion
 
@@ -1230,6 +1233,7 @@ namespace TJAPlayer3
 		}
 		//-----------------
 		#endregion
+
 		#region [ スコアキャッシュをSongsDBに出力する ]
 		//-----------------
 		public void tスコアキャッシュをSongsDBに出力する( string SongsDBファイル名 )

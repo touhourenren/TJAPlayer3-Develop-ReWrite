@@ -775,6 +775,7 @@ namespace TJAPlayer3
             public int Level;
             public int Difficulty;
             public static int Number;
+            public bool bTitleShow;
             public CWAV Wave;
 
             public DanSongs()
@@ -3994,14 +3995,19 @@ namespace TJAPlayer3
                 dansongs.ScoreDiff = int.Parse(strArray[5]);
 
                 if (strArray.Length == 7 && strArray[6] != "" && strArray[6] != null)
-                    dansongs.Difficulty = strConvertCourse(strArray[7]);
+                    dansongs.Difficulty = strConvertCourse(strArray[6]);
                 else
                     dansongs.Difficulty = 3;
 
                 if (strArray.Length == 8 && strArray[7] != "" && strArray[7] != null)
-                    dansongs.Level = int.Parse(strArray[6]);
+                    dansongs.Level = int.Parse(strArray[7]);
                 else
                     dansongs.Level = 10;
+
+                if (strArray.Length == 9 && strArray[8] != "" && strArray[8] != null)
+                    dansongs.bTitleShow = bool.Parse(strArray[8]);
+                else
+                    dansongs.bTitleShow = false;
 
                 dansongs.Wave = new CWAV
                 {

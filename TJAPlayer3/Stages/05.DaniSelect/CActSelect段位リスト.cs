@@ -52,8 +52,10 @@ namespace TJAPlayer3
                 pfDanSong = new CPrivateFastFont(new FontFamily(TJAPlayer3.ConfigIni.FontName), 24);
             else
                 pfDanSong = new CPrivateFastFont(new FontFamily("MS UI Gothic"), 16);
-
-            this.tバーの初期化();
+            
+            //一応チェックしておく。
+            if(TJAPlayer3.Songs管理.list曲ルート_Dan.Count > 0)
+                this.tバーの初期化();
 
             base.On活性化();
         }
@@ -218,7 +220,7 @@ namespace TJAPlayer3
                 {
                     var song = TJAPlayer3.Songs管理.list曲ルート_Dan[i];
 
-                    stバー情報[i].ttkタイトル[j] = new TitleTextureKey(song.DanSongs[j].Title, pfDanSong, Color.White, Color.Black, 700);
+                    stバー情報[i].ttkタイトル[j] = new TitleTextureKey(song.DanSongs[j].bTitleShow ? "???" : song.DanSongs[j].Title, pfDanSong, Color.White, Color.Black, 700);
                     stバー情報[i].n曲難易度[j] = song.DanSongs[j].Difficulty;
                     stバー情報[i].n曲レベル[j] = song.DanSongs[j].Level;
                     stバー情報[i].dan_c = song.Dan_C;
