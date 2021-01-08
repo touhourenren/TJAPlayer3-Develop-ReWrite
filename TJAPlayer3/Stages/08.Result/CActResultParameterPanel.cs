@@ -523,7 +523,7 @@ namespace TJAPlayer3
 			#region 段位認定モード用
             if (TJAPlayer3.stage選曲.n確定された曲の難易度 == (int)Difficulty.Dan)
 			{
-				TJAPlayer3.stage演奏ドラム画面.actDan.DrawExam(TJAPlayer3.stage結果.st演奏記録.Drums.Dan_C);
+				//TJAPlayer3.stage演奏ドラム画面.actDan.DrawExam(TJAPlayer3.stage結果.st演奏記録.Drums.Dan_C);
 				switch (TJAPlayer3.stage演奏ドラム画面.actDan.GetExamStatus(TJAPlayer3.stage結果.st演奏記録.Drums.Dan_C))
 				{
 					case Exam.Status.Failure:
