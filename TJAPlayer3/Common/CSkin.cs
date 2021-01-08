@@ -2720,6 +2720,7 @@ namespace TJAPlayer3
         #endregion
         #region Gauge
         public int Game_Gauge_Rainbow_Ptn;
+        public int Game_Gauge_Dan_Rainbow_Ptn;
         public int Game_Gauge_Rainbow_Timer = 50;
         #endregion
         #region Balloon

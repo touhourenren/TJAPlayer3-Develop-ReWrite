@@ -498,6 +498,16 @@ namespace TJAPlayer3
                     Gauge_Rainbow[i] = TxC(GAME + GAUGE + @"Rainbow\" + i.ToString() + ".png");
                 }
             }
+
+            TJAPlayer3.Skin.Game_Gauge_Dan_Rainbow_Ptn = TJAPlayer3.t連番画像の枚数を数える(CSkin.Path(BASE + GAME + DANC + @"Rainbow\"));
+            if (TJAPlayer3.Skin.Game_Gauge_Dan_Rainbow_Ptn != 0)
+            {
+                Gauge_Dan_Rainbow = new CTexture[TJAPlayer3.Skin.Game_Gauge_Dan_Rainbow_Ptn];
+                for (int i = 0; i < TJAPlayer3.Skin.Game_Gauge_Dan_Rainbow_Ptn; i++)
+                {
+                    Gauge_Dan_Rainbow[i] = TxC(GAME + DANC + @"Rainbow\" + i.ToString() + ".png");
+                }
+            }
             Gauge_Dan = new CTexture[4];
             Gauge_Dan[0] = TxC(GAME + GAUGE + @"1P_Dan_Base.png");
             Gauge_Dan[1] = TxC(GAME + GAUGE + @"1P_Dan.png");
@@ -858,6 +868,7 @@ namespace TJAPlayer3
         public CTexture Gauge_Soul,
             Gauge_Soul_Fire;
         public CTexture[] Gauge_Dan;
+        public CTexture[] Gauge_Dan_Rainbow;
         #endregion
         #region 吹き出し
         public CTexture[] Balloon_Combo;

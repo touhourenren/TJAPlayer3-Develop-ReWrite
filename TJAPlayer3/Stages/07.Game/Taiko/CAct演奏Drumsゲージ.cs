@@ -200,8 +200,8 @@ namespace TJAPlayer3
                 #endregion
 
 
+                int nRectX2P = (int)(this.db現在のゲージ値[1] / 2) * 14;
                 int nRectX = (int)( this.db現在のゲージ値[ 0 ] / 2 ) * 14;
-                int nRectX2P = (int)( this.db現在のゲージ値[ 1 ] / 2 ) * 14;
                 int 虹ベース = ct虹アニメ.n現在の値 + 1;
                 if (虹ベース == ct虹アニメ.n終了値+1) 虹ベース = 0;
                 /*
