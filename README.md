@@ -1,5 +1,5 @@
 # TJAPlayer3-Develop-ReWrite
-DTXManiaをいじってtja再生プログラムにしちゃった[TJAPlayer3fPC](https://github.com/AioiLight/TJAPlayer3)をForkして本家風に改造したアレを趙本家風に改造したアレを書き直したアレ(語彙力)
+DTXManiaをいじってtja再生プログラムにしちゃった[TJAPlayer2fPC](https://github.com/kairera0467/TJAP2fPC)をForkして本家風に改造した[TJAPlayer3]((https://github.com/AioiLight/TJAPlayer3)を趙本家風に改造したアレを書き直したアレ(語彙力)
 
 このプログラムを使用した不具合・問題については責任を負いかねます。
 
