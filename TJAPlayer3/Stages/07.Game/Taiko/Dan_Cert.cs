@@ -144,9 +144,9 @@ namespace TJAPlayer3
                 }
                 else
                 {
-                    var notesRemain = TJAPlayer3.DTX.nノーツ数[3] - (TJAPlayer3.stage演奏ドラム画面.nヒット数_Auto含む.Drums.Perfect + TJAPlayer3.stage演奏ドラム画面.nヒット数_Auto含まない.Drums.Perfect) - (TJAPlayer3.stage演奏ドラム画面.nヒット数_Auto含む.Drums.Great + TJAPlayer3.stage演奏ドラム画面.nヒット数_Auto含まない.Drums.Great) - (TJAPlayer3.stage演奏ドラム画面.nヒット数_Auto含む.Drums.Miss + TJAPlayer3.stage演奏ドラム画面.nヒット数_Auto含まない.Drums.Miss);
+                    notesremain = TJAPlayer3.DTX.nノーツ数[3] - (TJAPlayer3.stage演奏ドラム画面.nヒット数_Auto含む.Drums.Perfect + TJAPlayer3.stage演奏ドラム画面.nヒット数_Auto含まない.Drums.Perfect) - (TJAPlayer3.stage演奏ドラム画面.nヒット数_Auto含む.Drums.Great + TJAPlayer3.stage演奏ドラム画面.nヒット数_Auto含まない.Drums.Great) - (TJAPlayer3.stage演奏ドラム画面.nヒット数_Auto含む.Drums.Miss + TJAPlayer3.stage演奏ドラム画面.nヒット数_Auto含まない.Drums.Miss);
                     // 残り音符数が0になったときに判断されるやつ
-                    if (notesRemain <= 0)
+                    if (notesremain <= 0)
                     {
                         // 残り音符数ゼロ
                         switch (Challenge[i].GetExamType())
@@ -169,10 +169,10 @@ namespace TJAPlayer3
                         case Exam.Type.JudgePerfect:
                         case Exam.Type.JudgeGood:
                         case Exam.Type.JudgeBad:
-                            if (notesRemain < (Challenge[i].Value[0] - Challenge[i].Amount)) Challenge[i].SetReached(true);
+                            if (notesremain < (Challenge[i].Value[0] - Challenge[i].Amount)) Challenge[i].SetReached(true);
                             break;
                         case Exam.Type.Combo:
-                            if (notesRemain + TJAPlayer3.stage演奏ドラム画面.actCombo.n現在のコンボ数.P1 < ((Challenge[i].Value[0])) && TJAPlayer3.stage演奏ドラム画面.actCombo.n現在のコンボ数.最高値[0] < (Challenge[i].Value[0])) Challenge[i].SetReached(true);
+                            if (notesremain + TJAPlayer3.stage演奏ドラム画面.actCombo.n現在のコンボ数.P1 < ((Challenge[i].Value[0])) && TJAPlayer3.stage演奏ドラム画面.actCombo.n現在のコンボ数.最高値[0] < (Challenge[i].Value[0])) Challenge[i].SetReached(true);
                             break;
                         default:
                             break;
@@ -302,11 +302,6 @@ namespace TJAPlayer3
 
             DrawExam(Challenge);
 
-            if (!FirstSectionAnime)
-            {
-                TJAPlayer3.Tx.DanC_Screen?.t2D描画(TJAPlayer3.app.Device, TJAPlayer3.Skin.nScrollFieldBGX[0], TJAPlayer3.Skin.nScrollFieldY[0]);
-            }
-
             // 幕のアニメーション
             if (Counter_In != null)
             {
@@ -331,7 +326,6 @@ namespace TJAPlayer3
 
             if (Counter_Wait != null)
             {
-                FirstSectionAnime = true;
                 if (Counter_Wait.b終了値に達してない)
                 {
                     TJAPlayer3.Tx.DanC_Screen?.t2D描画(TJAPlayer3.app.Device, TJAPlayer3.Skin.nScrollFieldBGX[0], TJAPlayer3.Skin.nScrollFieldY[0]);
@@ -453,7 +447,7 @@ namespace TJAPlayer3
                                         }
                                         if (nowAmount < 0) nowAmount = 0;
 
-                                        DrawNumber(nowAmount, TJAPlayer3.Skin.Game_DanC_X[count - 1] + TJAPlayer3.Skin.Game_DanC_Number_Small_Number_Offset[0] + nowAmount.ToString().Length * TJAPlayer3.Skin.Game_DanC_Number_Size[0], TJAPlayer3.Skin.Game_DanC_Y[count - 1] + TJAPlayer3.Skin.Game_DanC_Size[1] * (i + 1) + ((i + 1) * TJAPlayer3.Skin.Game_DanC_Padding) - TJAPlayer3.Skin.Game_DanC_Number_Small_Number_Offset[1], TJAPlayer3.Skin.Game_DanC_Number_Small_Padding, true, TJAPlayer3.Skin.Game_DanC_Number_Small_Scale, TJAPlayer3.Skin.Game_DanC_Number_Small_Scale, (Status[i].Timer_Amount != null ? ScoreScale[Status[i].Timer_Amount.n現在の値] : 0f));
+                                        DrawNumber(nowAmount, TJAPlayer3.Skin.Game_DanC_X[count - 1] + TJAPlayer3.Skin.Game_DanC_Number_Small_Number_Offset[0] + nowAmount.ToString().Length * TJAPlayer3.Skin.Game_DanC_Number_Size[0], TJAPlayer3.Skin.Game_DanC_Y[count - 1] + TJAPlayer3.Skin.Game_DanC_Size[1] * (i + 1) + ((i + 1) * TJAPlayer3.Skin.Game_DanC_Padding) - TJAPlayer3.Skin.Game_DanC_Number_Small_Number_Offset[1], TJAPlayer3.Skin.Game_DanC_Number_Small_Padding, true, Challenge[i], TJAPlayer3.Skin.Game_DanC_Number_Small_Scale, TJAPlayer3.Skin.Game_DanC_Number_Small_Scale, (Status[i].Timer_Amount != null ? ScoreScale[Status[i].Timer_Amount.n現在の値] : 0f));
                     
                     #endregion
 
@@ -469,7 +463,7 @@ namespace TJAPlayer3
                                         offset -= TJAPlayer3.Skin.Game_DanC_ExamRange_Padding;
 
                                         // 条件の数字
-                                        DrawNumber(dan_C[i].Value[0], TJAPlayer3.Skin.Game_DanC_X[count - 1] + offset - 13, TJAPlayer3.Skin.Game_DanC_Y[count - 1] + TJAPlayer3.Skin.Game_DanC_Size[1] * (i + 1) + ((i + 1) * TJAPlayer3.Skin.Game_DanC_Padding) - TJAPlayer3.Skin.Game_DanC_Exam_Offset[1] - 1, (int)(TJAPlayer3.Skin.Game_DanC_Number_Small_Padding * TJAPlayer3.Skin.Game_DanC_Exam_Number_Scale), false);
+                                        DrawNumber(dan_C[i].Value[0], TJAPlayer3.Skin.Game_DanC_X[count - 1] + offset - 13, TJAPlayer3.Skin.Game_DanC_Y[count - 1] + TJAPlayer3.Skin.Game_DanC_Size[1] * (i + 1) + ((i + 1) * TJAPlayer3.Skin.Game_DanC_Padding) - TJAPlayer3.Skin.Game_DanC_Exam_Offset[1] - 1, (int)(TJAPlayer3.Skin.Game_DanC_Number_Small_Padding * TJAPlayer3.Skin.Game_DanC_Exam_Number_Scale), false, Challenge[i]);
                                         //offset -= CDTXMania.Skin.Game_DanC_Number_Small_Padding * (dan_C[i].Value[0].ToString().Length + 1);
                                         offset -= TJAPlayer3.Skin.Game_DanC_Number_Small_Padding * (dan_C[i].Value[0].ToString().Length);
 
@@ -503,7 +497,7 @@ namespace TJAPlayer3
         /// <param name="scaleX">拡大率X</param>
         /// <param name="scaleY">拡大率Y</param>
         /// <param name="scaleJump">アニメーション用拡大率(Yに加算される)。</param>
-        private void DrawNumber(int value, int x, int y, int padding,　bool bBig, float scaleX = 1.0f, float scaleY = 1.0f, float scaleJump = 0.0f)
+        private void DrawNumber(int value, int x, int y, int padding,　bool bBig, Dan_C dan_c, float scaleX = 1.0f, float scaleY = 1.0f, float scaleJump = 0.0f)
         {
             if (bBig)
             {
@@ -511,7 +505,7 @@ namespace TJAPlayer3
                 for (int i = value.ToString().Length; i > 0; i--)
                 {
                     var number = Convert.ToInt32(value.ToString()[i - 1].ToString());
-                    Rectangle rectangle = new Rectangle(TJAPlayer3.Skin.Game_DanC_Number_Size[0] * number - 1, 0, TJAPlayer3.Skin.Game_DanC_Number_Size[0], TJAPlayer3.Skin.Game_DanC_Number_Size[1]);
+                    Rectangle rectangle = new Rectangle(TJAPlayer3.Skin.Game_DanC_Number_Size[0] * number - 1, GetExamStatus(dan_c) == Exam.Status.Better_Success ? GetExamConfirmStatus(dan_c) ? 53 : notesremain == 0 ? 53 : 0 : 0, TJAPlayer3.Skin.Game_DanC_Number_Size[0], TJAPlayer3.Skin.Game_DanC_Number_Size[1]);
                     if (TJAPlayer3.Tx.DanC_Number != null)
                     {
                         TJAPlayer3.Tx.DanC_Number.vc拡大縮小倍率.X = scaleX;
@@ -578,6 +572,41 @@ namespace TJAPlayer3
             return status;
         }
 
+        public Exam.Status GetExamStatus(Dan_C dan_C)
+        {
+            var status = Exam.Status.Better_Success;
+            if (!dan_C.GetCleared()[1]) status = Exam.Status.Success;
+            if (!dan_C.GetCleared()[0]) status = Exam.Status.Failure;
+            return status;
+        }
+
+        public bool GetExamConfirmStatus(Dan_C dan_C)
+        {
+            switch (dan_C.GetExamRange())
+            {
+                case Exam.Range.Less:
+                    {
+                        return false;
+                    }
+
+                case Exam.Range.More:
+                    {
+                        switch (dan_C.GetExamType())
+                        {
+                            case Exam.Type.Gauge:
+                            case Exam.Type.Score:
+                            case Exam.Type.Roll:
+                            case Exam.Type.Hit:
+                                return true;
+
+                            default:
+                                return false;
+                        }
+                    }
+            }
+            return false;
+        }
+
         public Dan_C[] GetExam()
         {
             return Challenge;
@@ -609,8 +638,9 @@ namespace TJAPlayer3
             public CCounter Timer_Failed;
         }
 
-#region[ private ]
+        #region[ private ]
         //-----------------
+        private int notesremain;
         private bool[] ExamChange = new bool[4];
         private int ExamCount;
         private ChallengeStatus[] Status = new ChallengeStatus[4];

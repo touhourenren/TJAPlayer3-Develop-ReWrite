@@ -772,7 +772,7 @@ namespace TJAPlayer3
         protected CSound soundAdlib2;
         public bool bDoublePlay; // 2016.08.21 kairera0467 表示だけ。
 		protected Stopwatch sw;		// 2011.6.13 最適化検討用のストップウォッチ
-        private int ListDan_Number;
+        public int ListDan_Number;
         private bool IsDanFailed;
         private bool[] b強制分岐譜面 = new bool[4];
         private CDTX.E分岐種類 eBranch種類;
@@ -3590,8 +3590,15 @@ namespace TJAPlayer3
                                     IsDanFailed = true;
                                     return true;
                                 }
-                                this.actDan.Start(this.ListDan_Number);
-                                ListDan_Number++;
+                                if(ListDan_Number != 0 && actDan.FirstSectionAnime)
+                                {
+                                    this.actDan.Start(this.ListDan_Number);
+                                    ListDan_Number++;
+                                }
+                                else
+                                {
+                                    actDan.FirstSectionAnime = true;
+                                }
                             }
                         }
                         break;

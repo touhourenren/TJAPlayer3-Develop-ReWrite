@@ -24,7 +24,12 @@ namespace TJAPlayer3
 			this.mode = EFIFOモード.フェードイン;
 
 			if (TJAPlayer3.stage選曲.n確定された曲の難易度 == (int)Difficulty.Dan)
+			{
 				this.counter = new CCounter(0, 255, 1, TJAPlayer3.Timer);
+
+				TJAPlayer3.stage演奏ドラム画面.actDan.Start(TJAPlayer3.stage演奏ドラム画面.ListDan_Number);
+				TJAPlayer3.stage演奏ドラム画面.ListDan_Number++;
+			}
 			else
 				this.counter = new CCounter(0, 3580, 1, TJAPlayer3.Timer);
 		}

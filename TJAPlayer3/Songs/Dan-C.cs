@@ -287,7 +287,6 @@ namespace TJAPlayer3
             return NotReached;
         }
 
-
         // オーバーライドメソッド
         /// <summary>
         /// ToString()のオーバーライドメソッド。段位認定モードの各条件の現在状況をString型で返します。
