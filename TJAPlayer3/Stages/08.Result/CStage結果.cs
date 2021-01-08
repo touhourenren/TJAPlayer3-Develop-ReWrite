@@ -46,9 +46,7 @@ namespace TJAPlayer3
 			base.eステージID = CStage.Eステージ.結果;
 			base.eフェーズID = CStage.Eフェーズ.共通_通常状態;
 			base.b活性化してない = true;
-			base.list子Activities.Add(this.actResultImage = new CActResultImage());
 			base.list子Activities.Add(this.actParameterPanel = new CActResultParameterPanel());
-			base.list子Activities.Add(this.actRank = new CActResultRank());
 			base.list子Activities.Add(this.actSongBar = new CActResultSongBar());
 			base.list子Activities.Add(this.actOption = new CActオプションパネル());
 			base.list子Activities.Add(this.actFI = new CActFIFOResult());
@@ -341,17 +339,6 @@ namespace TJAPlayer3
 					TJAPlayer3.Tx.Result_Mountain[1].t2D拡大率考慮下基準描画(TJAPlayer3.app.Device, 0, 720);
 				}
 
-
-				if (this.ct登場用.b進行中 && (TJAPlayer3.Tx.Result_Header != null))
-				{
-					double num2 = ((double)this.ct登場用.n現在の値) / 100.0;
-					double num3 = Math.Sin(Math.PI / 2 * num2);
-					num = ((int)(TJAPlayer3.Tx.Result_Header.sz画像サイズ.Height * num3)) - TJAPlayer3.Tx.Result_Header.sz画像サイズ.Height;
-				}
-				else
-				{
-					num = 0;
-				}
                 if (!b音声再生 && !TJAPlayer3.Skin.bgmリザルトイン音.b再生中)
                 {
                     TJAPlayer3.Skin.bgmリザルト音.t再生する();
@@ -361,10 +348,6 @@ namespace TJAPlayer3
                 if (TJAPlayer3.Tx.Result_Header != null)
 				{
 					TJAPlayer3.Tx.Result_Header.t2D描画(TJAPlayer3.app.Device, 0, 0);
-				}
-				if (this.actResultImage.On進行描画() == 0)
-				{
-					this.bアニメが完了 = false;
 				}
 				if (this.actParameterPanel.On進行描画() == 0)
 				{
@@ -394,6 +377,7 @@ namespace TJAPlayer3
 				{
 					return (int)this.eフェードアウト完了時の戻り値;
 				}
+
 				#region [ #24609 2011.3.14 yyagi ランク更新or演奏型スキル更新時、リザルト画像をpngで保存する ]
 				if (this.bアニメが完了 == true && this.bIsCheckedWhetherResultScreenShouldSaveOrNot == false  // #24609 2011.3.14 yyagi; to save result screen in case BestRank or HiSkill.
 					&& TJAPlayer3.ConfigIni.bScoreIniを出力する
@@ -408,14 +392,6 @@ namespace TJAPlayer3
 
 				if (TJAPlayer3.act現在入力を占有中のプラグイン == null)
 				{
-					#region [ #24609 2011.4.7 yyagi リザルト画面で[F12]を押下すると、リザルト画像をpngで保存する機能は、CDTXManiaに移管。 ]
-					//					if ( CDTXMania.Input管理.Keyboard.bキーが押された( (int) SlimDXKeys.Key.F12 ) &&
-					//						CDTXMania.ConfigIni.bScoreIniを出力する )
-					//					{
-					//						CheckAndSaveResultScreen(false);
-					//						this.bIsCheckedWhetherResultScreenShouldSaveOrNot = true;
-					//					}
-					#endregion
 					if (base.eフェーズID == CStage.Eフェーズ.共通_通常状態)
 					{
 						if (TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDXKeys.Key.Escape))
@@ -546,8 +522,6 @@ namespace TJAPlayer3
 		private CActFIFOBlack actFO;
 		private CActオプションパネル actOption;
 		private CActResultParameterPanel actParameterPanel;
-		private CActResultRank actRank;
-		private CActResultImage actResultImage;
 		private CActResultSongBar actSongBar;
 		private bool bアニメが完了;
 		private bool bIsCheckedWhetherResultScreenShouldSaveOrNot;              // #24509 2011.3.14 yyagi

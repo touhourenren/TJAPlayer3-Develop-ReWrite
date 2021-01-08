@@ -433,6 +433,9 @@ namespace TJAPlayer3
             Background_Up_3rd[1] = TxC(GAME + BACKGROUND + @"0\" + @"2P_Up_3rd.png");
             Background_Up_3rd[2] = TxC(GAME + BACKGROUND + @"0\" + @"Clear_Up_3rd.png");
 
+            for(int i = 0; i < Background_Up_Dan.Length; i++)
+                Background_Up_Dan[i] = TxC(GAME + BACKGROUND + @"1\" + i.ToString() + @".png");
+
             Background_Down = TxC(GAME + BACKGROUND + @"0\" + @"Down.png");
             Background_Down_Clear = TxC(GAME + BACKGROUND + @"0\" + @"Down_Clear.png");
             Background_Down_Scroll = TxC(GAME + BACKGROUND + @"0\" + @"Down_Scroll.png");
@@ -825,7 +828,8 @@ namespace TJAPlayer3
             Background_Down_Scroll;
         public CTexture[] Background_Up_1st,
                           Background_Up_2nd,
-                          Background_Up_3rd;
+                          Background_Up_3rd,
+                          Background_Up_Dan = new CTexture[6];
         #endregion
         #region 太鼓
         public CTexture[] Taiko_Frame, // MTaiko下敷き

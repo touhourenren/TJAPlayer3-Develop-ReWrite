@@ -13,6 +13,7 @@ EXAM3:jb,40,2,l
 
 #START
 #NEXTSONG プチポチ,,クラシック,プチポチ.ogg,420,103
+EXAM4:r,10,20,m
 #BPMCHANGE 149
 #MEASURE 4/4
 #SCROLL 1.0
@@ -104,6 +105,7 @@ EXAM3:jb,40,2,l
 #GOGOEND
 ,
 #NEXTSONG 青天の黎明,steμ feat.siroa,ナムコオリジナル,青天の黎明.ogg,350,75,10,3
+EXAM4:r,25,40,m
 #BPMCHANGE 222
 #MEASURE 4/4
 #SCROLL 1.0
@@ -335,6 +337,7 @@ EXAM3:jb,40,2,l
 0000000000008022,
 2,
 #NEXTSONG 星屑ストラック,t+pazolite,ナムコオリジナル,星屑ストラック.ogg,350,80,10,4
+EXAM4:r,30,42,m
 #BPMCHANGE 220
 #MEASURE 4/4
 #SCROLL 1.0

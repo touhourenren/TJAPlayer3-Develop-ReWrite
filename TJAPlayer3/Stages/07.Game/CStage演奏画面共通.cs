@@ -362,9 +362,18 @@ namespace TJAPlayer3
 					break;
 				}
 			}
-			#endregion
+            #endregion
 
-			this.sw = new Stopwatch();
+            if(TJAPlayer3.stage選曲.n確定された曲の難易度 == (int)Difficulty.Dan)
+            {
+                n良 = new int[TJAPlayer3.stage選曲.r確定された曲.DanSongs.Count];
+                n可 = new int[TJAPlayer3.stage選曲.r確定された曲.DanSongs.Count];
+                n不可 = new int[TJAPlayer3.stage選曲.r確定された曲.DanSongs.Count];
+                n連打 = new int[TJAPlayer3.stage選曲.r確定された曲.DanSongs.Count];
+            }
+
+
+            this.sw = new Stopwatch();
 			//          this.sw2 = new Stopwatch();
             //			this.gclatencymode = GCSettings.LatencyMode;
             //			GCSettings.LatencyMode = GCLatencyMode.Batch;	// 演奏画面中はGCを抑止する
@@ -685,6 +694,10 @@ namespace TJAPlayer3
         protected readonly int[] nパッド0Atoレーン07 = new int[] { 1, 2, 3, 4, 5, 6, 7, 1, 9, 0, 8, 8 };
 		public STDGBVALUE<CHITCOUNTOFRANK> nヒット数_Auto含まない;
 		public STDGBVALUE<CHITCOUNTOFRANK> nヒット数_Auto含む;
+        public int[] n良;
+        public int[] n可;
+        public int[] n不可;
+        public int[] n連打;
         public int n現在のトップChip = -1;
         protected int[] n最後に再生したBGMの実WAV番号 = new int[ 50 ];
 		protected int n最後に再生したHHのチャンネル番号;
@@ -1164,7 +1177,9 @@ namespace TJAPlayer3
                     this.eRollState = E連打State.rollB;
 
                 pChip.nRollCount++;
-                
+
+                this.n連打[actDan.NowShowingNumber]++;
+
                 this.n現在の連打数[ nPlayer ]++;
                 this.CBranchScore[ nPlayer ].nRoll++;
                 this.n合計連打数[ nPlayer ]++;
@@ -1623,7 +1638,8 @@ namespace TJAPlayer3
                                 {
                                     this.CBranchScore[nPlayer].nGreat++;
                                     if ( nPlayer == 0 ) this.nヒット数_Auto含まない.Drums.Perfect++;
-                                    this.actCombo.n現在のコンボ数[ nPlayer ]++;
+                                    this.actCombo.n現在のコンボ数[nPlayer]++;
+                                    this.n良[actDan.NowShowingNumber]++;
                                     if (this.actCombo.ctコンボ加算[nPlayer].b終了値に達してない)
                                     {
                                         this.actCombo.ctコンボ加算[nPlayer].n現在の値 = 1;
@@ -1640,6 +1656,7 @@ namespace TJAPlayer3
                                     this.CBranchScore[nPlayer].nGood++;
                                     if ( nPlayer == 0 ) this.nヒット数_Auto含まない.Drums.Great++;
                                     this.actCombo.n現在のコンボ数[ nPlayer ]++;
+                                    this.n可[actDan.NowShowingNumber]++;
                                     //this.actCombo.ctコンボ加算 = new CCounter( 0, 8, 10, CDTXMania.Timer );
                                     //this.actCombo.ctコンボ加算.t進行();
                                     if (this.actCombo.ctコンボ加算[nPlayer].b終了値に達してない)
@@ -1659,6 +1676,7 @@ namespace TJAPlayer3
                                 {
                                     if( pChip.nチャンネル番号 == 0x1F )
                                         break;
+                                    this.n不可[actDan.NowShowingNumber]++;
                                     this.CBranchScore[nPlayer].nMiss++;
                                     if ( nPlayer == 0 ) this.nヒット数_Auto含まない.Drums.Miss++;
                                     this.actCombo.n現在のコンボ数[ nPlayer ] = 0;

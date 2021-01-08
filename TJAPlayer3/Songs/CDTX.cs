@@ -774,8 +774,9 @@ namespace TJAPlayer3
             public int ScoreDiff;
             public int Level;
             public int Difficulty;
-            public static int Number;
+            public static int Number = 0;
             public bool bTitleShow;
+            public Dan_C[] Dan_C = new Dan_C[4];
             public CWAV Wave;
 
             public DanSongs()
@@ -1435,6 +1436,7 @@ namespace TJAPlayer3
 
             Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture; // Change default culture to invariant, fixes (Purota)
             Dan_C = new Dan_C[4];
+            DanSongs.Number = 0;
         }
         public CDTX(string str全入力文字列)
             : this()
@@ -3251,6 +3253,9 @@ namespace TJAPlayer3
                         //}
 
                         this.t入力_行解析譜面_V4(str);
+
+                        if (!String.IsNullOrEmpty(strSplit読み込むコース[i]))
+                            this.tDanExamLoad(strSplit読み込むコース[i]);
                     }
                 }
                 catch (Exception ex)
@@ -3995,14 +4000,14 @@ namespace TJAPlayer3
                 dansongs.ScoreDiff = int.Parse(strArray[5]);
 
                 if (strArray.Length == 7 && strArray[6] != "" && strArray[6] != null)
-                    dansongs.Difficulty = strConvertCourse(strArray[6]);
-                else
-                    dansongs.Difficulty = 3;
-
-                if (strArray.Length == 8 && strArray[7] != "" && strArray[7] != null)
-                    dansongs.Level = int.Parse(strArray[7]);
+                    dansongs.Level = int.Parse(strArray[6]);
                 else
                     dansongs.Level = 10;
+
+                if (strArray.Length == 8 && strArray[7] != "" && strArray[7] != null)
+                    dansongs.Difficulty = strConvertCourse(strArray[7]);
+                else
+                    dansongs.Difficulty = 3;
 
                 if (strArray.Length == 9 && strArray[8] != "" && strArray[8] != null)
                     dansongs.bTitleShow = bool.Parse(strArray[8]);
@@ -4608,7 +4613,29 @@ namespace TJAPlayer3
                     this.b配点が指定されている[1, this.n参照中の難易度] = true;
                 }
             }
-            else if (strCommandName.Equals("EXAM1") || strCommandName.Equals("EXAM2") || strCommandName.Equals("EXAM3") || strCommandName.Equals("EXAM4"))
+            if (this.nScoreModeTmp == 99) //2017.01.28 DD SCOREMODEを入力していない場合のみConfigで設定したモードにする
+            {
+                this.nScoreModeTmp = TJAPlayer3.ConfigIni.nScoreMode;
+            }
+            if (TJAPlayer3.ConfigIni.nScoreMode == 3 && !this.b配点が指定されている[2, this.n参照中の難易度])
+            { //2017.06.04 kairera0467
+                this.nScoreModeTmp = 3;
+            }
+        }
+
+        private void tDanExamLoad(string input)
+        {
+            string[] strArray = input.Split(new char[] { ':' });
+            string strCommandName = "";
+            string strCommandParam = "";
+
+            if (strArray.Length == 2)
+            {
+                strCommandName = strArray[0].Trim();
+                strCommandParam = strArray[1].Trim();
+            }
+
+            if (strCommandName.Equals("EXAM1") || strCommandName.Equals("EXAM2") || strCommandName.Equals("EXAM3") || strCommandName.Equals("EXAM4"))
             {
                 if (!string.IsNullOrEmpty(strCommandParam))
                 {
@@ -4666,16 +4693,12 @@ namespace TJAPlayer3
                             examRange = Exam.Range.More;
                             break;
                     }
-                    Dan_C[int.Parse(strCommandName.Substring(4)) - 1] = new Dan_C(examType, examValue, examRange);
+
+                    if(Dan_C[int.Parse(strCommandName.Substring(4)) - 1] == null)
+                        Dan_C[int.Parse(strCommandName.Substring(4)) - 1] = new Dan_C(examType, examValue, examRange);
+
+                    List_DanSongs[DanSongs.Number - 1].Dan_C[int.Parse(strCommandName.Substring(4)) - 1] = new Dan_C(examType, examValue, examRange);
                 }
-            }
-            if (this.nScoreModeTmp == 99) //2017.01.28 DD SCOREMODEを入力していない場合のみConfigで設定したモードにする
-            {
-                this.nScoreModeTmp = TJAPlayer3.ConfigIni.nScoreMode;
-            }
-            if (TJAPlayer3.ConfigIni.nScoreMode == 3 && !this.b配点が指定されている[2, this.n参照中の難易度])
-            { //2017.06.04 kairera0467
-                this.nScoreModeTmp = 3;
             }
         }
 

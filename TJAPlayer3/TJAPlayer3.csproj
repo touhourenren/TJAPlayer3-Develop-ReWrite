@@ -242,9 +242,7 @@
     <Compile Include="Stages\07.Game\Taiko\CAct演奏Drumsレーン太鼓.cs" />
     <Compile Include="Stages\07.Game\Taiko\CAct演奏DrumsMtaiko.cs" />
     <Compile Include="Stages\07.Game\Taiko\GoGoSplash.cs" />
-    <Compile Include="Stages\08.Result\CActResultImage.cs" />
     <Compile Include="Stages\08.Result\CActResultParameterPanel.cs" />
-    <Compile Include="Stages\08.Result\CActResultRank.cs" />
     <Compile Include="Stages\08.Result\CActResultSongBar.cs" />
     <Compile Include="Stages\08.Result\CStage結果.cs" />
     <Compile Include="Stages\09.Ending\CStage終了.cs" />

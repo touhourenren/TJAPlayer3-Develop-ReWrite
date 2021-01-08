@@ -97,11 +97,13 @@ namespace TJAPlayer3
 
                 float Anime = ctDanAnimeIn.n現在の値 == 90 ? bLeftMove ? (float)Math.Sin(ctDaniMoveAnime.n現在の値 * (Math.PI / 180)) * 1280 : -((float)Math.Sin(ctDaniMoveAnime.n現在の値 * (Math.PI / 180)) * 1280) : 1280 - (float)Math.Sin(ctDanAnimeIn.n現在の値 * (Math.PI / 180)) * 1280;
 
+                #region [ 中央バーの表示 ]
+
                 if (stバー情報[n現在の選択行].txBarCenter != null) stバー情報[n現在の選択行].txBarCenter?.t2D描画(TJAPlayer3.app.Device, Anime, 0);
                 else TJAPlayer3.Tx.Dani_Bar_Center.t2D描画(TJAPlayer3.app.Device, Anime, 0);
                 if (stバー情報[n現在の選択行].txDanPlate != null) stバー情報[n現在の選択行].txDanPlate.Opacity = 255;
                 stバー情報[n現在の選択行].txDanPlate?.t2D中心基準描画(TJAPlayer3.app.Device, 173 + Anime, 301);
-                tSoulDraw(370 + Anime, 462, stバー情報[n現在の選択行].dan_c[0].Value[0].ToString());
+                tSoulDraw(370 + Anime, 462, stバー情報[n現在の選択行].List_DanSongs[0].Dan_C[0].Value[0].ToString());
 
                 for (int i = 0; i < stバー情報[n現在の選択行].ttkタイトル.Length; i++)
                     TJAPlayer3.stage選曲.act曲リスト.ResolveTitleTexture(stバー情報[n現在の選択行].ttkタイトル[i]).t2D描画(TJAPlayer3.app.Device, 401 + Anime, 173 + i * 73);
@@ -109,20 +111,39 @@ namespace TJAPlayer3
                     TJAPlayer3.Tx.Dani_Difficulty_Cymbol.t2D中心基準描画(TJAPlayer3.app.Device, 377 + Anime, 180 + i * 73, new Rectangle(stバー情報[n現在の選択行].n曲難易度[i] * 53, 0, 53, 53));
                 for (int i = 0; i < stバー情報[n現在の選択行].n曲レベル.Length; i++)
                     this.tLevelNumberDraw(383 + Anime, 207 + i * 73, stバー情報[n現在の選択行].n曲レベル[i].ToString());
-                for (int i = 0; i < stバー情報[n現在の選択行].dan_c.Length - 1; i++)
-                    if (stバー情報[n現在の選択行].dan_c[i + 1] != null)
+
+                for (int j = 1; j < 4; j++)  //段位条件のループ(魂ゲージを除く) 縦(y)
+                {
+                    if (stバー情報[n現在の選択行].List_DanSongs[0].Dan_C[j] != null)
                     {
-                        tExamDraw(590 + Anime, 455 + i * 88, stバー情報[n現在の選択行].dan_c[i + 1].Value[0].ToString(), stバー情報[n現在の選択行].dan_c[i + 1].GetExamRange());
-                        TJAPlayer3.Tx.DanC_ExamType?.t2D描画(TJAPlayer3.app.Device, 515 + Anime, 412 + i * 88, new Rectangle(0, TJAPlayer3.Skin.Game_DanC_ExamType_Size[1] * (int)stバー情報[n現在の選択行].dan_c[i + 1].GetExamType(), TJAPlayer3.Skin.Game_DanC_ExamType_Size[0], TJAPlayer3.Skin.Game_DanC_ExamType_Size[1]));
+                        TJAPlayer3.Tx.DanC_ExamType?.t2D描画(TJAPlayer3.app.Device, 515 + Anime, 412 + (j - 1) * 88, new Rectangle(0, TJAPlayer3.Skin.Game_DanC_ExamType_Size[1] * (int)stバー情報[n現在の選択行].List_DanSongs[0].Dan_C[j].GetExamType(), TJAPlayer3.Skin.Game_DanC_ExamType_Size[0], TJAPlayer3.Skin.Game_DanC_ExamType_Size[1]));
+                        
+                        for (int i = 0; i < stバー情報[n現在の選択行].List_DanSongs.Count; i++)  //曲ごとのループ(魂ゲージを除く) 横(x)
+                        {
+                            if (stバー情報[n現在の選択行].List_DanSongs[stバー情報[n現在の選択行].List_DanSongs.Count - 1].Dan_C[j] != null) //個別の条件がありますよー
+                            {
+                                tExamDraw(590 + Anime + i * 220, 455 + (j - 1) * 88, stバー情報[n現在の選択行].List_DanSongs[i].Dan_C[j].Value[0].ToString(), stバー情報[n現在の選択行].List_DanSongs[i].Dan_C[j].GetExamRange());
+                            }
+                            else    //全体の条件ですよー
+                            {
+                                tExamDraw(590 + Anime, 455 + (j - 1) * 88, stバー情報[n現在の選択行].List_DanSongs[0].Dan_C[j].Value[0].ToString(), stバー情報[n現在の選択行].List_DanSongs[0].Dan_C[j].GetExamRange());
+                            }
+                        }
                     }
+                }
+
+                #endregion
+
                 if (bLeftMove && n現在の選択行 - 1 >= 0)
                 {
+                    #region [ 左バーの表示 ]
+
                     if (stバー情報[n現在の選択行 - 1].txBarCenter != null) stバー情報[n現在の選択行 - 1].txBarCenter?.t2D描画(TJAPlayer3.app.Device, -1280 + Anime, 0);
                     else TJAPlayer3.Tx.Dani_Bar_Center.t2D描画(TJAPlayer3.app.Device, -1280 + Anime, 0);
                     
                     if (stバー情報[n現在の選択行 - 1].txDanPlate != null) stバー情報[n現在の選択行 - 1].txDanPlate.Opacity = 255;
                     stバー情報[n現在の選択行 - 1].txDanPlate?.t2D中心基準描画(TJAPlayer3.app.Device, -1280 + 173 + Anime, 301);
-                    tSoulDraw(-1280 + 370 + Anime, 462, stバー情報[n現在の選択行 - 1].dan_c[0].Value[0].ToString());
+                    tSoulDraw(-1280 + 370 + Anime, 462, stバー情報[n現在の選択行 - 1].List_DanSongs[0].Dan_C[0].Value[0].ToString());
 
                     for (int i = 0; i < stバー情報[n現在の選択行 - 1].ttkタイトル.Length; i++)
                         TJAPlayer3.stage選曲.act曲リスト.ResolveTitleTexture(stバー情報[n現在の選択行 - 1].ttkタイトル[i]).t2D描画(TJAPlayer3.app.Device, -879 + Anime, 173 + i * 73);
@@ -130,21 +151,39 @@ namespace TJAPlayer3
                         TJAPlayer3.Tx.Dani_Difficulty_Cymbol.t2D中心基準描画(TJAPlayer3.app.Device, -1280 + 377 + +Anime, 180 + i * 73, new Rectangle(stバー情報[n現在の選択行 - 1].n曲難易度[i] * 53, 0, 53, 53));
                     for (int i = 0; i < stバー情報[n現在の選択行 - 1].n曲レベル.Length; i++)
                         this.tLevelNumberDraw(-1280 + 383 + Anime, 207 + i * 73, stバー情報[n現在の選択行 - 1].n曲レベル[i].ToString());
-                    for (int i = 0; i < stバー情報[n現在の選択行 - 1].dan_c.Length - 1; i++)
-                        if (stバー情報[n現在の選択行 - 1].dan_c[i + 1] != null)
+
+                    for (int j = 1; j < 4; j++)  //段位条件のループ(魂ゲージを除く) 縦(y)
+                    {
+                        if (stバー情報[n現在の選択行 - 1].List_DanSongs[0].Dan_C[j] != null)
                         {
-                            tExamDraw(-1280 + 590 + Anime, 455 + i * 88, stバー情報[n現在の選択行 - 1].dan_c[i + 1].Value[0].ToString(), stバー情報[n現在の選択行 - 1].dan_c[i + 1].GetExamRange());
-                            TJAPlayer3.Tx.DanC_ExamType?.t2D描画(TJAPlayer3.app.Device, -1280 + 515 + Anime, 412 + i * 88, new Rectangle(0, TJAPlayer3.Skin.Game_DanC_ExamType_Size[1] * (int)stバー情報[n現在の選択行 - 1].dan_c[i + 1].GetExamType(), TJAPlayer3.Skin.Game_DanC_ExamType_Size[0], TJAPlayer3.Skin.Game_DanC_ExamType_Size[1]));
+                            TJAPlayer3.Tx.DanC_ExamType?.t2D描画(TJAPlayer3.app.Device, -1280 + 515 + Anime, 412 + (j - 1) * 88, new Rectangle(0, TJAPlayer3.Skin.Game_DanC_ExamType_Size[1] * (int)stバー情報[n現在の選択行 - 1].List_DanSongs[0].Dan_C[j].GetExamType(), TJAPlayer3.Skin.Game_DanC_ExamType_Size[0], TJAPlayer3.Skin.Game_DanC_ExamType_Size[1]));
+
+                            for (int i = 0; i < stバー情報[n現在の選択行 - 1].List_DanSongs.Count; i++)  //曲ごとのループ(魂ゲージを除く) 横(x)
+                            {
+                                if (stバー情報[n現在の選択行 - 1].List_DanSongs[stバー情報[n現在の選択行 - 1].List_DanSongs.Count - 1].Dan_C[j] != null) //個別の条件がありますよー
+                                {
+                                    tExamDraw(-1280 + 590 + Anime + i * 220, 455 + (j - 1) * 88, stバー情報[n現在の選択行 - 1].List_DanSongs[i].Dan_C[j].Value[0].ToString(), stバー情報[n現在の選択行 - 1].List_DanSongs[i].Dan_C[j].GetExamRange());
+                                }
+                                else    //全体の条件ですよー
+                                {
+                                    tExamDraw(-1280 + 590 + Anime, 455 + (j - 1) * 88, stバー情報[n現在の選択行 - 1].List_DanSongs[0].Dan_C[j].Value[0].ToString(), stバー情報[n現在の選択行 - 1].List_DanSongs[0].Dan_C[j].GetExamRange());
+                                }
+                            }
                         }
+                    }
+
+                    #endregion
                 }
                 if (!bLeftMove && n現在の選択行 + 1 <= stバー情報.Length - 1)
                 {
+                    #region [ 右バーの表示 ]
+
                     if (stバー情報[n現在の選択行 + 1].txBarCenter != null) stバー情報[n現在の選択行 + 1].txBarCenter?.t2D描画(TJAPlayer3.app.Device, 1280 + Anime, 0);
                     else TJAPlayer3.Tx.Dani_Bar_Center.t2D描画(TJAPlayer3.app.Device, 1280 + Anime, 0);
 
                     if(stバー情報[n現在の選択行 + 1].txDanPlate != null) stバー情報[n現在の選択行 + 1].txDanPlate.Opacity = 255;
                     stバー情報[n現在の選択行 + 1].txDanPlate?.t2D中心基準描画(TJAPlayer3.app.Device, 1280 + 173 + Anime, 301);
-                    tSoulDraw(1280 + 370 + Anime, 462, stバー情報[n現在の選択行 + 1].dan_c[0].Value[0].ToString());
+                    tSoulDraw(1280 + 370 + Anime, 462, stバー情報[n現在の選択行 + 1].List_DanSongs[0].Dan_C[0].Value[0].ToString());
 
                     for (int i = 0; i < stバー情報[n現在の選択行 + 1].ttkタイトル.Length; i++)
                         TJAPlayer3.stage選曲.act曲リスト.ResolveTitleTexture(stバー情報[n現在の選択行 + 1].ttkタイトル[i]).t2D描画(TJAPlayer3.app.Device, 1280 + 401 + Anime, 173 + i * 73);
@@ -152,12 +191,27 @@ namespace TJAPlayer3
                         TJAPlayer3.Tx.Dani_Difficulty_Cymbol.t2D中心基準描画(TJAPlayer3.app.Device, 1280 + 377 + Anime, 180 + i * 73, new Rectangle(stバー情報[n現在の選択行 + 1].n曲難易度[i] * 53, 0, 53, 53));
                     for (int i = 0; i < stバー情報[n現在の選択行 + 1].n曲レベル.Length; i++)
                         this.tLevelNumberDraw(1280 + 383 + Anime, 207 + i * 73, stバー情報[n現在の選択行 + 1].n曲レベル[i].ToString());
-                    for (int i = 0; i < stバー情報[n現在の選択行 + 1].dan_c.Length - 1; i++)
-                        if (stバー情報[n現在の選択行 + 1].dan_c[i + 1] != null)
+
+                    for (int j = 1; j < 4; j++)  //段位条件のループ(魂ゲージを除く) 縦(y)
+                    {
+                        if (stバー情報[n現在の選択行 + 1].List_DanSongs[0].Dan_C[j] != null)
                         {
-                            tExamDraw(1280 + 590 + Anime, 455 + i * 88, stバー情報[n現在の選択行 + 1].dan_c[i + 1].Value[0].ToString(), stバー情報[n現在の選択行 + 1].dan_c[i + 1].GetExamRange());
-                            TJAPlayer3.Tx.DanC_ExamType?.t2D描画(TJAPlayer3.app.Device, 1280 + 515 + Anime, 412 + i * 88, new Rectangle(0, TJAPlayer3.Skin.Game_DanC_ExamType_Size[1] * (int)stバー情報[n現在の選択行 + 1].dan_c[i + 1].GetExamType(), TJAPlayer3.Skin.Game_DanC_ExamType_Size[0], TJAPlayer3.Skin.Game_DanC_ExamType_Size[1]));
+                            TJAPlayer3.Tx.DanC_ExamType?.t2D描画(TJAPlayer3.app.Device, 1280 + 515 + Anime, 412 + (j - 1) * 88, new Rectangle(0, TJAPlayer3.Skin.Game_DanC_ExamType_Size[1] * (int)stバー情報[n現在の選択行 + 1].List_DanSongs[0].Dan_C[j].GetExamType(), TJAPlayer3.Skin.Game_DanC_ExamType_Size[0], TJAPlayer3.Skin.Game_DanC_ExamType_Size[1]));
+
+                            for (int i = 0; i < stバー情報[n現在の選択行 + 1].List_DanSongs.Count; i++)  //曲ごとのループ(魂ゲージを除く) 横(x)
+                            {
+                                if (stバー情報[n現在の選択行 + 1].List_DanSongs[stバー情報[n現在の選択行 + 1].List_DanSongs.Count - 1].Dan_C[j] != null) //個別の条件がありますよー
+                                {
+                                    tExamDraw(1280 + 590 + Anime + i * 220, 455 + (j - 1) * 88, stバー情報[n現在の選択行 + 1].List_DanSongs[i].Dan_C[j].Value[0].ToString(), stバー情報[n現在の選択行 + 1].List_DanSongs[i].Dan_C[j].GetExamRange());
+                                }
+                                else    //全体の条件ですよー
+                                {
+                                    tExamDraw(1280 + 590 + Anime, 455 + (j - 1) * 88, stバー情報[n現在の選択行 + 1].List_DanSongs[0].Dan_C[j].Value[0].ToString(), stバー情報[n現在の選択行 + 1].List_DanSongs[0].Dan_C[j].GetExamRange());
+                                }
+                            }
                         }
+                    }
+                    #endregion
                 }
             }
 
@@ -203,7 +257,7 @@ namespace TJAPlayer3
             public TitleTextureKey[] ttkタイトル;
             public int[] n曲難易度;
             public int[] n曲レベル;
-            public Dan_C[] dan_c;
+            public List<CDTX.DanSongs> List_DanSongs;
             public CTexture txBarCenter;
             public CTexture txDanPlate;
         }
@@ -215,7 +269,6 @@ namespace TJAPlayer3
                 stバー情報[i].ttkタイトル = new TitleTextureKey[TJAPlayer3.Songs管理.list曲ルート_Dan[i].DanSongs.Count];
                 stバー情報[i].n曲難易度 = new int[TJAPlayer3.Songs管理.list曲ルート_Dan[i].DanSongs.Count];
                 stバー情報[i].n曲レベル = new int[TJAPlayer3.Songs管理.list曲ルート_Dan[i].DanSongs.Count];
-                stバー情報[i].dan_c = new Dan_C[TJAPlayer3.Songs管理.list曲ルート_Dan[i].DanSongs.Count];
                 for (int j = 0; j < TJAPlayer3.Songs管理.list曲ルート_Dan[i].DanSongs.Count; j++)
                 {
                     var song = TJAPlayer3.Songs管理.list曲ルート_Dan[i];
@@ -223,7 +276,7 @@ namespace TJAPlayer3
                     stバー情報[i].ttkタイトル[j] = new TitleTextureKey(song.DanSongs[j].bTitleShow ? "???" : song.DanSongs[j].Title, pfDanSong, Color.White, Color.Black, 700);
                     stバー情報[i].n曲難易度[j] = song.DanSongs[j].Difficulty;
                     stバー情報[i].n曲レベル[j] = song.DanSongs[j].Level;
-                    stバー情報[i].dan_c = song.Dan_C;
+                    stバー情報[i].List_DanSongs = song.DanSongs;
                     stバー情報[i].txBarCenter = TJAPlayer3.tテクスチャの生成(Path.GetDirectoryName(song.arスコア[6].ファイル情報.ファイルの絶対パス) + @"\Bar_Center.png");
                     stバー情報[i].txDanPlate = TJAPlayer3.tテクスチャの生成(Path.GetDirectoryName(song.arスコア[6].ファイル情報.ファイルの絶対パス) + @"\Dan_Plate.png");
                 }
