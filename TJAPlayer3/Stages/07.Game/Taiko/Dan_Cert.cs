@@ -533,7 +533,7 @@ namespace TJAPlayer3
                 for (int i = value.ToString().Length; i > 0; i--)
                 {
                     var number = Convert.ToInt32(value.ToString()[i - 1].ToString());
-                    Rectangle rectangle = new Rectangle(TJAPlayer3.Skin.Game_DanC_Number_Size[0] * number - 1, GetExamStatus(dan_c) == Exam.Status.Better_Success ? GetExamConfirmStatus(dan_c) ? 53 : notesremain == 0 ? 53 : 0 : 0, TJAPlayer3.Skin.Game_DanC_Number_Size[0], TJAPlayer3.Skin.Game_DanC_Number_Size[1]);
+                    Rectangle rectangle = new Rectangle(TJAPlayer3.Skin.Game_DanC_Number_Size[0] * number - 1, GetExamConfirmStatus(dan_c) ? 53 : 0, TJAPlayer3.Skin.Game_DanC_Number_Size[0], TJAPlayer3.Skin.Game_DanC_Number_Size[1]);
                     if (TJAPlayer3.Tx.DanC_Number != null)
                     {
                         TJAPlayer3.Tx.DanC_Number.vc拡大縮小倍率.X = scaleX;
@@ -614,22 +614,18 @@ namespace TJAPlayer3
             {
                 case Exam.Range.Less:
                     {
-                        return false;
+                        if (GetExamStatus(dan_C) == Exam.Status.Better_Success && notesremain == 0)
+                            return true;
+                        else
+                            return false;
                     }
 
                 case Exam.Range.More:
                     {
-                        switch (dan_C.GetExamType())
-                        {
-                            case Exam.Type.Gauge:
-                            case Exam.Type.Score:
-                            case Exam.Type.Roll:
-                            case Exam.Type.Hit:
-                                return true;
-
-                            default:
-                                return false;
-                        }
+                        if (GetExamStatus(dan_C) == Exam.Status.Better_Success)
+                            return true;
+                        else
+                            return false;
                     }
             }
             return false;
