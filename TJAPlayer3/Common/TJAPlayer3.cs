@@ -1769,10 +1769,24 @@ for (int i = 0; i < 3; i++) {
             obj = default(T);
         }
 
-        /// <summary>
-        /// そのフォルダの連番画像の最大値を返す。
-        /// </summary>
-        public static int t連番画像の枚数を数える(string ディレクトリ名, string プレフィックス = "", string 拡張子 = ".png")
+		public static void t安全にDisposeする<T>(ref T[] array) where T : class, IDisposable //2020.08.01 Mr-Ojii twopointzero氏のソースコードをもとに追加
+		{
+			if (array == null)
+			{
+				return;
+			}
+
+			for (var i = 0; i < array.Length; i++)
+			{
+				array[i]?.Dispose();
+				array[i] = null;
+			}
+		}
+
+		/// <summary>
+		/// そのフォルダの連番画像の最大値を返す。
+		/// </summary>
+		public static int t連番画像の枚数を数える(string ディレクトリ名, string プレフィックス = "", string 拡張子 = ".png")
         {
             int num = 0;
             while(File.Exists(ディレクトリ名 + プレフィックス + num + 拡張子))
@@ -1782,13 +1796,26 @@ for (int i = 0; i < 3; i++) {
             return num;
         }
 
-        /// <summary>
-        /// 曲名テクスチャの縮小倍率を返す。
-        /// </summary>
-        /// <param name="cTexture">曲名テクスチャ。</param>
-        /// <param name="samePixel">等倍で表示するピクセル数の最大値(デフォルト値:645)</param>
-        /// <returns>曲名テクスチャの縮小倍率。そのテクスチャがnullならば一倍(1f)を返す。</returns>
-        public static float GetSongNameXScaling(ref CTexture cTexture, int samePixel = 660)
+		/// <summary>
+		/// そのフォルダの連番フォルダの最大値を返す。
+		/// </summary>
+		public static int t連番フォルダの個数を数える(string ディレクトリ名, string プレフィックス = "")
+		{
+			int num = 0;
+			while (Directory.Exists(ディレクトリ名 + プレフィックス + num))
+			{
+				num++;
+			}
+			return num;
+		}
+
+		/// <summary>
+		/// 曲名テクスチャの縮小倍率を返す。
+		/// </summary>
+		/// <param name="cTexture">曲名テクスチャ。</param>
+		/// <param name="samePixel">等倍で表示するピクセル数の最大値(デフォルト値:645)</param>
+		/// <returns>曲名テクスチャの縮小倍率。そのテクスチャがnullならば一倍(1f)を返す。</returns>
+		public static float GetSongNameXScaling(ref CTexture cTexture, int samePixel = 660)
         {
             if (cTexture == null) return 1f;
             float scalingRate = (float)samePixel / (float)cTexture.szテクスチャサイズ.Width;
