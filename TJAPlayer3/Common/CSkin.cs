@@ -675,7 +675,6 @@ namespace TJAPlayer3
             this.sound特訓再生音 = new Cシステムサウンド(@"Sounds\Resume.ogg", false, false,false, ESoundGroup.SoundEffect);
             this.sound特訓停止音 = new Cシステムサウンド(@"Sounds\Pause.ogg", false, false, false, ESoundGroup.SoundEffect);
             this.sound特訓スクロール音 = new Cシステムサウンド(@"Sounds\Scroll.ogg", false, false, false, ESoundGroup.SoundEffect);
-
             ReloadSkin();
             tReadSkinConfig();
         }
@@ -2596,6 +2595,14 @@ namespace TJAPlayer3
         public int SongSelect_CorrectionX_Chara_Value = 0;
         public int SongSelect_CorrectionY_Chara_Value = 0;
         public string[] SongSelect_Rotate_Chara = { "ここに90℃回転させたい文字をカンマで区切って記入" };
+
+        #endregion Difficulty_Select
+        #region Difficulty_Select
+        public int[] ChangeSE_Box_X = { 220, 1050 };
+        public int[] ChangeSE_Box_Y = { 740, 740 };
+        public int SECount = 0;
+        public int[] NowSENum = { 0, 0 };
+        public string[] SENames;
         #endregion
         #region SongLoading
         public int SongLoading_Plate_X = 640;

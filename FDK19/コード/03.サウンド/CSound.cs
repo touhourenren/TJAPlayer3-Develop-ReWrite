@@ -575,10 +575,15 @@ namespace FDK
 					}
 					else
 					{
-//						if ( b再生中 )	// #30838 2012.2.24 yyagi (delete b再生中)
-//						{
-							this.Buffer.Frequency = ( int ) ( _db周波数倍率 * _db再生速度 * nオリジナルの周波数 );
-//						}
+						try
+						{
+							this.Buffer.Frequency = (int)(_db周波数倍率 * _db再生速度 * nオリジナルの周波数);
+						}
+						catch
+						{
+							//例外処理は出さない
+							this.b速度上げすぎ問題 = true;
+						}
 					}
 				}
 			}
