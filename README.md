@@ -1,5 +1,6 @@
 # TJAPlayer3-Develop-ReWrite
-DTXManiaをいじってtja再生プログラムにしちゃった[TJAPlayer2fPC](https://github.com/kairera0467/TJAP2fPC)をForkして本家風に改造した[TJAPlayer3]((https://github.com/AioiLight/TJAPlayer3)を趙本家風に改造したアレを書き直したアレ(語彙力)
+DTXManiaをいじってtja再生プログラムにしちゃった[TJAPlayer2fPC](https://github.com/kairera0467/TJAP2fPC)をForkして本家風に改造した
+[TJAPlayer3](https://github.com/AioiLight/TJAPlayer3)(を趙本家風に改造したアレを書き直したアレ(語彙力)
 
 このプログラムを使用した不具合・問題については責任を負いかねます。
 
@@ -22,13 +23,13 @@ Fork元より引用。
 > * xadec
 > * IPAフォント
 > * libogg
-> *libvorbis
+> * libvorbis
 > 「実行時フォルダ/Licenses」に収録しています。
 > 
 > また、このプログラムはFROM氏の「DTXMania」を元に製作しています。
 
 ## クレジット
->[TwoPointZero/TJAPlayer3](https://github.com/twopointzero/TJAPlayer3)(@twopointzero)
->[KabanFriends/TJAPlayer3](https://github.com/KabanFriends/TJAPlayer3)(@KabanFriends)
->[Mr-Ojii/TJAPlayer3-f](https://github.com/Mr-Ojii/TJAPlayer3-f)(@Mr-Ojii)
->[Akasoko/TJAPlayer3](https://github.com/Akasoko-Master/TJAPlayer3)(@AkasokoR)
+> * [TwoPointZero/TJAPlayer3](https://github.com/twopointzero/TJAPlayer3)(@twopointzero)
+> * [KabanFriends/TJAPlayer3](https://github.com/KabanFriends/TJAPlayer3)(@KabanFriends)
+> * [Mr-Ojii/TJAPlayer3-f](https://github.com/Mr-Ojii/TJAPlayer3-f)(@Mr-Ojii)
+> * [Akasoko/TJAPlayer3](https://github.com/Akasoko-Master/TJAPlayer3)(@AkasokoR)
