@@ -1924,7 +1924,7 @@ namespace TJAPlayer3
                         var normalColor = new Color4(1.0f, 1.0f, 1.0f);
                         float f末端ノーツのテクスチャ位置調整 = 65f;
 
-                        if (pChip.nチャンネル番号 == 0x15) //連打(小)
+                        if (pChip.nチャンネル番号 == 0x15 && pChip.bShow) //連打(小)
                         {
                             int index = x末端 - x; //連打の距離
                             if (TJAPlayer3.ConfigIni.eSTEALTH != Eステルスモード.DORON)
@@ -1965,7 +1965,7 @@ namespace TJAPlayer3
                             TJAPlayer3.Tx.SENotes.t2D描画(TJAPlayer3.app.Device, x + 30, y + nSenotesY, new Rectangle(0, 240, 60, 30));
                             TJAPlayer3.Tx.SENotes.t2D描画(TJAPlayer3.app.Device, x, y + nSenotesY, new Rectangle(0, 30 * pChip.nSenote, 136, 30));
                         }
-                        if (pChip.nチャンネル番号 == 0x16)
+                        if (pChip.nチャンネル番号 == 0x16 && pChip.bShow)
                         {
                             int index = x末端 - x; //連打の距離
 

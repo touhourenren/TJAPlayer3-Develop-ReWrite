@@ -1797,26 +1797,13 @@ for (int i = 0; i < 3; i++) {
         }
 
 		/// <summary>
-		/// そのフォルダの連番フォルダの最大値を返す。
-		/// </summary>
-		public static int t連番フォルダの個数を数える(string ディレクトリ名, string プレフィックス = "")
-		{
-			int num = 0;
-			while (Directory.Exists(ディレクトリ名 + プレフィックス + num))
-			{
-				num++;
-			}
-			return num;
-		}
-
-		/// <summary>
 		/// 曲名テクスチャの縮小倍率を返す。
 		/// </summary>
 		/// <param name="cTexture">曲名テクスチャ。</param>
 		/// <param name="samePixel">等倍で表示するピクセル数の最大値(デフォルト値:645)</param>
 		/// <returns>曲名テクスチャの縮小倍率。そのテクスチャがnullならば一倍(1f)を返す。</returns>
 		public static float GetSongNameXScaling(ref CTexture cTexture, int samePixel = 660)
-        {
+		{
             if (cTexture == null) return 1f;
             float scalingRate = (float)samePixel / (float)cTexture.szテクスチャサイズ.Width;
             if (cTexture.szテクスチャサイズ.Width <= samePixel)
