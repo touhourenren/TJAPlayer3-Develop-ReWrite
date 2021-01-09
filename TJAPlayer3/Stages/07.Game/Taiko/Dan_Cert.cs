@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using FDK;
 using System.IO;
 using TJAPlayer3;
+using System.Linq;
 
 namespace TJAPlayer3
 {
@@ -34,6 +35,7 @@ namespace TJAPlayer3
             {
                 Counter_In = new CCounter(0, 999, 1, TJAPlayer3.Timer);
             }
+            bExamChangeCheck = false;
 
             for (int i = 1; i < 4; i++)
                 ExamChange[i] = false;
@@ -67,6 +69,7 @@ namespace TJAPlayer3
             FirstSectionAnime = false;
             // 始点を決定する。
             ExamCount = 0;
+            songsnotesremain = new int[TJAPlayer3.stage選曲.r確定された曲.DanSongs.Count];
             this.ct虹アニメ = new CCounter(0, TJAPlayer3.Skin.Game_Gauge_Dan_Rainbow_Ptn - 1, 30, TJAPlayer3.Timer);
             this.ct虹透明度 = new CCounter(0, TJAPlayer3.Skin.Game_Gauge_Rainbow_Timer - 1, 1, TJAPlayer3.Timer);
             for (int i = 0; i < 4; i++)
@@ -74,6 +77,8 @@ namespace TJAPlayer3
                 if (Challenge[i] != null && Challenge[i].GetEnable() == true)
                     this.ExamCount++;
             }
+
+            bExamChangeCheck = false;
 
             for (int i = 0; i < 4; i++)
             {
@@ -146,6 +151,7 @@ namespace TJAPlayer3
                 }
                 else
                 {
+                    songsnotesremain[NowShowingNumber] = TJAPlayer3.DTX.nDan_NotesCount[NowShowingNumber] - (TJAPlayer3.stage演奏ドラム画面.n良[NowShowingNumber] + TJAPlayer3.stage演奏ドラム画面.n可[NowShowingNumber] + TJAPlayer3.stage演奏ドラム画面.n不可[NowShowingNumber]);
                     notesremain = TJAPlayer3.DTX.nノーツ数[3] - (TJAPlayer3.stage演奏ドラム画面.nヒット数_Auto含む.Drums.Perfect + TJAPlayer3.stage演奏ドラム画面.nヒット数_Auto含まない.Drums.Perfect) - (TJAPlayer3.stage演奏ドラム画面.nヒット数_Auto含む.Drums.Great + TJAPlayer3.stage演奏ドラム画面.nヒット数_Auto含まない.Drums.Great) - (TJAPlayer3.stage演奏ドラム画面.nヒット数_Auto含む.Drums.Miss + TJAPlayer3.stage演奏ドラム画面.nヒット数_Auto含まない.Drums.Miss);
                     // 残り音符数が0になったときに判断されるやつ
                     if (notesremain <= 0)
@@ -171,7 +177,7 @@ namespace TJAPlayer3
                         case Exam.Type.JudgePerfect:
                         case Exam.Type.JudgeGood:
                         case Exam.Type.JudgeBad:
-                            if (notesremain < (Challenge[i].Value[0] - Challenge[i].Amount)) Challenge[i].SetReached(true);
+                            if (ExamChange[i] ? songsnotesremain[NowShowingNumber] < (Challenge[i].Value[0] - Challenge[i].Amount) : notesremain < (Challenge[i].Value[0] - Challenge[i].Amount)) Challenge[i].SetReached(true);
                             break;
                         case Exam.Type.Combo:
                             if (notesremain + TJAPlayer3.stage演奏ドラム画面.actCombo.n現在のコンボ数.P1 < ((Challenge[i].Value[0])) && TJAPlayer3.stage演奏ドラム画面.actCombo.n現在のコンボ数.最高値[0] < (Challenge[i].Value[0])) Challenge[i].SetReached(true);
@@ -190,8 +196,10 @@ namespace TJAPlayer3
                             switch (Challenge[i].GetExamType())
                             {
                                 case Exam.Type.Score:
-                                case Exam.Type.Roll:
                                 case Exam.Type.Hit:
+                                    if (Challenge[i].Amount < Challenge[i].Value[0]) Challenge[i].SetReached(true);
+                                    break;
+                                case Exam.Type.Roll:
                                     if (Challenge[i].Amount < Challenge[i].Value[0]) Challenge[i].SetReached(true);
                                     break;
                                 default:
@@ -331,6 +339,31 @@ namespace TJAPlayer3
                 if (Counter_Wait.b終了値に達してない)
                 {
                     TJAPlayer3.Tx.DanC_Screen?.t2D描画(TJAPlayer3.app.Device, TJAPlayer3.Skin.nScrollFieldBGX[0], TJAPlayer3.Skin.nScrollFieldY[0]);
+
+                    if (NowShowingNumber != 0)
+                    {
+                        if (Counter_Wait.n現在の値 >= 800)
+                        {
+                            if (!bExamChangeCheck)
+                            {
+                                for (int i = 1; i < 4; i++)
+                                    ExamChange[i] = false;
+
+                                for (int j = 1; j < 4; j++)  //段位条件のループ(魂ゲージを除く) 縦(y)
+                                {
+                                    if (TJAPlayer3.stage選曲.r確定された曲.DanSongs[0].Dan_C[j] != null)
+                                    {
+                                        if (TJAPlayer3.stage選曲.r確定された曲.DanSongs[TJAPlayer3.stage選曲.r確定された曲.DanSongs.Count - 1].Dan_C[j] != null) //個別の条件がありますよー
+                                        {
+                                            Challenge[j] = TJAPlayer3.stage選曲.r確定された曲.DanSongs[NowShowingNumber].Dan_C[j];
+                                            ExamChange[j] = true;
+                                        }
+                                    }
+                                }
+                                bExamChangeCheck = true;
+                            }
+                        }
+                    }
                 }
                 if (Counter_Wait.b終了値に達した)
                 {
@@ -377,8 +410,6 @@ namespace TJAPlayer3
             // 段プレートを描画する。
             Dan_Plate?.t2D中心基準描画(TJAPlayer3.app.Device, TJAPlayer3.Skin.Game_DanC_Dan_Plate[0], TJAPlayer3.Skin.Game_DanC_Dan_Plate[1]);
 
-#if DEBUG
-
             for(int i = 0; i < 4; i++)
             {
                 for(int j = 0; j < 3; j++)
@@ -387,10 +418,10 @@ namespace TJAPlayer3
                     TJAPlayer3.act文字コンソール.tPrint(50, j * 25, C文字コンソール.Eフォント種別.灰, TJAPlayer3.stage演奏ドラム画面.n可[j].ToString());
                     TJAPlayer3.act文字コンソール.tPrint(100, j * 25, C文字コンソール.Eフォント種別.灰, TJAPlayer3.stage演奏ドラム画面.n不可[j].ToString());
                     TJAPlayer3.act文字コンソール.tPrint(150, j * 25, C文字コンソール.Eフォント種別.灰, TJAPlayer3.stage演奏ドラム画面.n連打[j].ToString());
+                    TJAPlayer3.act文字コンソール.tPrint(200, j * 25, C文字コンソール.Eフォント種別.灰, TJAPlayer3.DTX.nDan_NotesCount[j].ToString());
+                    TJAPlayer3.act文字コンソール.tPrint(250, j * 25, C文字コンソール.Eフォント種別.灰, TJAPlayer3.DTX.nDan_ChipCount[j].ToString());
                 }
             }
-
-#endif
 
             return base.On進行描画();
         }
@@ -415,6 +446,34 @@ namespace TJAPlayer3
                     
                     if(GetExamStatus(dan_C[i]) == Exam.Status.Better_Success && GetExamConfirmStatus(dan_C[i]))
                     {
+                        if (Counter_Wait != null)
+                        {
+                            if (Counter_Wait.n現在の値 >= 800)
+                            {
+                                for (int j = 0; j < TJAPlayer3.Tx.DanC_Gauge.Length; j++)
+                                    TJAPlayer3.Tx.DanC_Gauge[j].Opacity = (Counter_Wait.n現在の値 - 800);
+
+                                for (int j = 0; j < TJAPlayer3.Tx.Gauge_Dan_Rainbow.Length; j++)
+                                    TJAPlayer3.Tx.Gauge_Dan_Rainbow[j].Opacity = (Counter_Wait.n現在の値 - 800);
+
+                                TJAPlayer3.Tx.DanC_Number.Opacity = (Counter_Wait.n現在の値 - 800);
+                                TJAPlayer3.Tx.DanC_ExamRange.Opacity = (Counter_Wait.n現在の値 - 800);
+                                TJAPlayer3.Tx.DanC_Small_Number.Opacity = (Counter_Wait.n現在の値 - 800);
+                            }
+                            else if (Counter_Wait.n現在の値 >= 800 - 255)
+                            {
+                                for (int j = 0; j < TJAPlayer3.Tx.DanC_Gauge.Length; j++)
+                                    TJAPlayer3.Tx.DanC_Gauge[j].Opacity = 255 - (Counter_Wait.n現在の値 - (800 - 255));
+
+                                for (int j = 0; j < TJAPlayer3.Tx.Gauge_Dan_Rainbow.Length; j++)
+                                    TJAPlayer3.Tx.Gauge_Dan_Rainbow[j].Opacity = 255 - (Counter_Wait.n現在の値 - (800 - 255));
+
+                                TJAPlayer3.Tx.DanC_Number.Opacity = 255 - (Counter_Wait.n現在の値 - (800 - 255));
+                                TJAPlayer3.Tx.DanC_ExamRange.Opacity = 255 - (Counter_Wait.n現在の値 - (800 - 255));
+                                TJAPlayer3.Tx.DanC_Small_Number.Opacity = 255 - (Counter_Wait.n現在の値 - (800 - 255));
+                            }
+                        }
+
                         this.ct虹アニメ.t進行Loop();
                         this.ct虹透明度.t進行Loop();
 
@@ -435,6 +494,37 @@ namespace TJAPlayer3
                     }
                     else
                     {
+                        if(ExamChange[i])
+                        {
+                            if (Counter_Wait != null)
+                            {
+                                if (Counter_Wait.n現在の値 >= 800)
+                                {
+                                    for (int j = 0; j < TJAPlayer3.Tx.DanC_Gauge.Length; j++)
+                                        TJAPlayer3.Tx.DanC_Gauge[j].Opacity = (Counter_Wait.n現在の値 - 800);
+
+                                    for (int j = 0; j < TJAPlayer3.Tx.Gauge_Dan_Rainbow.Length; j++)
+                                        TJAPlayer3.Tx.Gauge_Dan_Rainbow[j].Opacity = (Counter_Wait.n現在の値 - 800);
+
+                                    TJAPlayer3.Tx.DanC_Number.Opacity = (Counter_Wait.n現在の値 - 800);
+                                    TJAPlayer3.Tx.DanC_ExamRange.Opacity = (Counter_Wait.n現在の値 - 800);
+                                    TJAPlayer3.Tx.DanC_Small_Number.Opacity = (Counter_Wait.n現在の値 - 800);
+                                }
+                                else if (Counter_Wait.n現在の値 >= 800 - 255)
+                                {
+                                    for (int j = 0; j < TJAPlayer3.Tx.DanC_Gauge.Length; j++)
+                                        TJAPlayer3.Tx.DanC_Gauge[j].Opacity = 255 - (Counter_Wait.n現在の値 - (800 - 255));
+
+                                    for (int j = 0; j < TJAPlayer3.Tx.Gauge_Dan_Rainbow.Length; j++)
+                                        TJAPlayer3.Tx.Gauge_Dan_Rainbow[j].Opacity = 255 - (Counter_Wait.n現在の値 - (800 - 255));
+
+                                    TJAPlayer3.Tx.DanC_Number.Opacity = 255 - (Counter_Wait.n現在の値 - (800 - 255));
+                                    TJAPlayer3.Tx.DanC_ExamRange.Opacity = 255 - (Counter_Wait.n現在の値 - (800 - 255));
+                                    TJAPlayer3.Tx.DanC_Small_Number.Opacity = 255 - (Counter_Wait.n現在の値 - (800 - 255));
+                                }
+                            }
+                        }
+
                         var drawGaugeType = 0;
                         if (dan_C[i].GetExamRange() == Exam.Range.More)
                         {
@@ -664,7 +754,10 @@ namespace TJAPlayer3
 
         #region[ private ]
         //-----------------
+
+        private bool bExamChangeCheck;
         private int notesremain;
+        private int[] songsnotesremain;
         private bool[] ExamChange = new bool[4];
         private int ExamCount;
         private ChallengeStatus[] Status = new ChallengeStatus[4];

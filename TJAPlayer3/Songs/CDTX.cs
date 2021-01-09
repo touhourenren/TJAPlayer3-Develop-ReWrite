@@ -1242,6 +1242,8 @@ namespace TJAPlayer3
 
         private bool b最初の分岐である;
         public int[] nノーツ数 = new int[4]; //3:共通
+        public int[] nDan_NotesCount = new int[1];
+        public int[] nDan_ChipCount = new int[1];
         public int[] nノーツ数_Branch = new int[4]; //
         public int[] n風船数 = new int[4]; //0～2:各コース 3:共通
 
@@ -3422,6 +3424,7 @@ namespace TJAPlayer3
 
                 // チップを配置。
                 this.listChip.Add(chip);
+                this.nDan_ChipCount[0]++;
 
                 var chip1 = new CChip();
                 chip1.nチャンネル番号 = 0x54;
@@ -3459,7 +3462,7 @@ namespace TJAPlayer3
                 // チップを配置。
 
                 this.listChip.Add(chip);
-
+                this.nDan_ChipCount[DanSongs.Number - 1]++;
             }
 
             else if (command == "#BPMCHANGE")
@@ -3485,6 +3488,7 @@ namespace TJAPlayer3
                 // チップを配置。
 
                 this.listChip.Add(chip);
+                this.nDan_ChipCount[DanSongs.Number - 1]++;
 
                 var chip1 = new CChip();
                 chip1.nチャンネル番号 = 0x9C;
@@ -3554,6 +3558,7 @@ namespace TJAPlayer3
                     // チップを配置。
 
                     this.listChip.Add(chip);
+                    this.nDan_ChipCount[DanSongs.Number - 1]++;
                 }
                 else
                 {
@@ -3592,6 +3597,7 @@ namespace TJAPlayer3
                     // チップを配置。
 
                     this.listChip.Add(chip);
+                    this.nDan_ChipCount[DanSongs.Number - 1]++;
                 }
 
 
@@ -3626,6 +3632,7 @@ namespace TJAPlayer3
                 // チップを配置。
 
                 this.listChip.Add(chip);
+                this.nDan_ChipCount[DanSongs.Number - 1]++;
 
                 //lbMaster.Items.Add( ";拍子変更 " + strArray[0] + "/" + strArray[1] );
             }
@@ -3654,6 +3661,7 @@ namespace TJAPlayer3
                 this.dbNowBMScollTime += nDELAY * this.dbNowBPM / 15000;
 
                 this.listChip.Add(chip);
+                this.nDan_ChipCount[DanSongs.Number - 1]++;
                 this.n内部番号DELAY1to++;
             }
 
@@ -3672,6 +3680,7 @@ namespace TJAPlayer3
 
                 // チップを配置。
                 this.listChip.Add(chip);
+                this.nDan_ChipCount[DanSongs.Number - 1]++;
             }
             else if (command == "#GOGOEND")
             {
@@ -3688,6 +3697,7 @@ namespace TJAPlayer3
 
                 // チップを配置。
                 this.listChip.Add(chip);
+                this.nDan_ChipCount[DanSongs.Number - 1]++;
             }
             else if (command == "#SECTION")
             {
@@ -3703,6 +3713,7 @@ namespace TJAPlayer3
                 chip.db発声時刻ms = this.dbNowTime;
                 // チップを配置。
                 this.listChip.Add(chip);
+                this.nDan_ChipCount[DanSongs.Number - 1]++;
             }
             else if (command == "#BRANCHSTART")
             {
@@ -3789,6 +3800,7 @@ namespace TJAPlayer3
                 chip.dbSCROLL = c小節前の小節線情報.dbSCROLL;
                 chip.dbBPM = c小節前の小節線情報.dbBPM;
                 this.listChip.Add(chip);
+                this.nDan_ChipCount[DanSongs.Number - 1]++;
                 #endregion
 
                 for (int i = 0; i < 3; i++)
@@ -3820,6 +3832,7 @@ namespace TJAPlayer3
                 chip.n整数値_内部番号 = 1;
 
                 this.listChip.Add(chip);
+                this.nDan_ChipCount[DanSongs.Number - 1]++;
             }
             else if (command == "#BRANCHEND")
             {
@@ -3836,6 +3849,7 @@ namespace TJAPlayer3
                 GoBranch.n整数値_内部番号 = 1;
 
                 this.listChip.Add(GoBranch);
+                this.nDan_ChipCount[DanSongs.Number - 1]++;
 
                 //End時にも黄色い小節線あったべ？
                 for (int i = 0; i < 3; i++)
@@ -3855,6 +3869,7 @@ namespace TJAPlayer3
                 this.bBARLINECUE[0] = 1;
 
                 this.listChip.Add(chip);
+                this.nDan_ChipCount[DanSongs.Number - 1]++;
             }
             else if (command == "#BARLINEON")
             {
@@ -3870,6 +3885,7 @@ namespace TJAPlayer3
                 this.bBARLINECUE[0] = 0;
 
                 this.listChip.Add(chip);
+                this.nDan_ChipCount[DanSongs.Number - 1]++;
             }
             else if (command == "#LYRIC")
             {
@@ -3887,7 +3903,8 @@ namespace TJAPlayer3
 
                 // チップを配置。
 
-                this.listChip.Add(chip); 
+                this.listChip.Add(chip);
+                this.nDan_ChipCount[DanSongs.Number - 1]++;
                 this.bLyrics = true;
             }
             else if (command == "#DIRECTION")
@@ -3910,6 +3927,7 @@ namespace TJAPlayer3
                 // チップを配置。
 
                 this.listChip.Add(chip);
+                this.nDan_ChipCount[DanSongs.Number - 1]++;
             }
             else if (command == "#SUDDEN")
             {
@@ -3936,6 +3954,7 @@ namespace TJAPlayer3
                 // チップを配置。
 
                 this.listChip.Add(chip);
+                this.nDan_ChipCount[DanSongs.Number - 1]++;
             }
             else if (command == "#JPOSSCROLL")
             {
@@ -3960,6 +3979,7 @@ namespace TJAPlayer3
 
                 this.listJPOSSCROLL.Add(this.n内部番号JSCROLL1to, new CJPOSSCROLL() { n内部番号 = this.n内部番号JSCROLL1to, n表記上の番号 = 0, db移動時間 = db移動時刻, n移動距離px = n移動px, n移動方向 = n移動方向 });
                 this.listChip.Add(chip);
+                this.nDan_ChipCount[DanSongs.Number - 1]++;
                 this.n内部番号JSCROLL1to++;
             }
             else if (command == "#SENOTECHANGE")
@@ -3985,6 +4005,7 @@ namespace TJAPlayer3
 
                 // チップを配置。
                 this.listChip.Add(chip);
+                this.nDan_ChipCount[DanSongs.Number == 0 ? 0 : DanSongs.Number - 1]++;
 
                 AddMusicPreTimeMs(); // 段位の幕が開いてからの遅延。
 
@@ -4044,6 +4065,7 @@ namespace TJAPlayer3
 
                 // チップを配置。
                 this.listChip.Add(nextSongnextSongChip);
+                this.nDan_ChipCount[DanSongs.Number - 1]++;
 
             }
         }
@@ -4203,6 +4225,8 @@ namespace TJAPlayer3
                             #endregion
 
                             this.listChip.Add(chip);
+
+                            this.nDan_ChipCount[DanSongs.Number - 1]++;
 
                             #region [ 作り直し ]  
                             if (IsEndedBranching)
@@ -4461,6 +4485,7 @@ namespace TJAPlayer3
                                             this.nノーツ数_Branch[l]++;
                                     }
 
+                                    this.nDan_NotesCount[DanSongs.Number - 1]++;
                                     this.nノーツ数[3]++;
                                     #endregion
                                 }
@@ -4473,9 +4498,12 @@ namespace TJAPlayer3
                                     else
                                         this.n風船数[3]++;
                                 }
-
-
+                                
+                                Array.Resize(ref nDan_NotesCount, nDan_NotesCount.Length + 1);
+                                Array.Resize(ref nDan_ChipCount, nDan_ChipCount.Length + 1);
+                                this.nDan_ChipCount[DanSongs.Number - 1]++;
                                 this.listChip.Add(chip);
+                                this.nDan_ChipCount[DanSongs.Number - 1]++;
                             }
                         }
 
