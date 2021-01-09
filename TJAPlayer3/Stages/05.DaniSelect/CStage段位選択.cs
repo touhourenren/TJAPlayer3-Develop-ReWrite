@@ -70,12 +70,14 @@ namespace TJAPlayer3
 
                 if (!this.段位リスト.bスクロール中 && !b選択した)
                 {
-                    if (TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.RBlue))
+                    if (TJAPlayer3.Input管理.Keyboard.bキーが押された((int)Key.RightArrow) ||
+                        TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.RBlue))
                     {
                         this.段位リスト.t右に移動();
                     }
 
-                    if (TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.LBlue))
+                    if (TJAPlayer3.Input管理.Keyboard.bキーが押された((int)Key.LeftArrow) ||
+                    TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.LBlue))
                     {
                         this.段位リスト.t左に移動();
                     }
