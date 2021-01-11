@@ -1244,6 +1244,7 @@ namespace TJAPlayer3
         public int[] nノーツ数 = new int[4]; //3:共通
         public int[] nDan_NotesCount = new int[1];
         public int[] nノーツ数_Branch = new int[4]; //
+        public CChip[] pDan_LastChip;
         public int[] n風船数 = new int[4]; //0～2:各コース 3:共通
 
         private List<CLine> listLine;
@@ -1437,6 +1438,7 @@ namespace TJAPlayer3
 
             Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture; // Change default culture to invariant, fixes (Purota)
             Dan_C = new Dan_C[4];
+            pDan_LastChip = new CChip[1];
             DanSongs.Number = 0;
         }
         public CDTX(string str全入力文字列)
@@ -3459,6 +3461,22 @@ namespace TJAPlayer3
                 chip.n整数値_内部番号 = 1;
                 // チップを配置。
 
+                if(n参照中の難易度 == (int)Difficulty.Dan)
+                {
+                    for (int i = listChip.Count - 1; i >= 0; i--)
+                    {
+                        if (listChip[i].nチャンネル番号 >= 0x11 && listChip[i].nチャンネル番号 <= 0x18)
+                        {
+                            if (DanSongs.Number != 0)
+                            {
+                                Array.Resize(ref this.pDan_LastChip, this.pDan_LastChip.Length + 1);
+                                this.pDan_LastChip[DanSongs.Number - 1] = listChip[i];
+                                break;
+                            }
+                        }
+                    }
+                }
+
                 this.listChip.Add(chip);
             }
 
@@ -3989,7 +4007,20 @@ namespace TJAPlayer3
                 AddMusicPreTimeMs(); // 段位の幕が開いてからの遅延。
 
                 strArray = SplitComma(argument); // \,をエスケープ処理するメソッドだぞっ
-                
+
+                for (int i = listChip.Count - 1; i >= 0; i--)
+                {
+                    if (listChip[i].nチャンネル番号 >= 0x11 && listChip[i].nチャンネル番号 <= 0x18)
+                    {
+                        if(DanSongs.Number != 0)
+                        {
+                            Array.Resize(ref this.pDan_LastChip, this.pDan_LastChip.Length + 1);
+                            this.pDan_LastChip[DanSongs.Number - 1] = listChip[i];
+                            break;
+                        }
+                    }
+                }
+
                 WarnSplitLength("#NEXTSONG", strArray, 8);
                 var dansongs = new DanSongs();
                 dansongs.Title = strArray[0];

@@ -194,7 +194,7 @@ namespace TJAPlayer3
                     if(!IsEnded)
                     {
                         if (TJAPlayer3.DTX.listChip.Count <= 0) continue;
-                        if (TJAPlayer3.DTX.listChip[TJAPlayer3.DTX.listChip.Count - 1].n発声時刻ms < TJAPlayer3.Timer.n現在時刻)
+                        if (ExamChange[i] ? TJAPlayer3.DTX.pDan_LastChip[NowShowingNumber].n発声時刻ms < TJAPlayer3.Timer.n現在時刻 : TJAPlayer3.DTX.listChip[TJAPlayer3.DTX.listChip.Count - 1].n発声時刻ms < TJAPlayer3.Timer.n現在時刻)
                         {
                             switch (Challenge[i].GetExamType())
                             {

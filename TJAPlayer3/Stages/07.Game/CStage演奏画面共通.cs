@@ -1296,6 +1296,10 @@ namespace TJAPlayer3
                     actChara.CharaAction_Balloon_Breaking[player] = new CCounter(0, TJAPlayer3.Skin.Game_Chara_Ptn_Balloon_Breaking - 1, TJAPlayer3.Skin.Game_Chara_Balloon_Timer, TJAPlayer3.Timer);
                    
                 }
+
+                if (TJAPlayer3.stage選曲.n確定された曲の難易度 == (int)Difficulty.Dan)
+                    this.n連打[actDan.NowShowingNumber]++;
+
                 if (this.actBalloon.ct風船アニメ[player].b終了値に達してない)
                 {
                     this.actBalloon.ct風船アニメ[player] = new CCounter(0, 9, 14, TJAPlayer3.Timer);
@@ -1710,6 +1714,8 @@ namespace TJAPlayer3
                                 {
                                     if( pChip.nチャンネル番号 != 0x15 && pChip.nチャンネル番号 != 0x16 && pChip.nチャンネル番号 != 0x17 && pChip.nチャンネル番号 != 0x18 )
                                     {
+                                        if (TJAPlayer3.stage選曲.n確定された曲の難易度 == (int)Difficulty.Dan)
+                                            this.n良[actDan.NowShowingNumber]++;
                                         this.CBranchScore[nPlayer].nGreat++;
                                         if ( nPlayer == 0 ) this.nヒット数_Auto含む.Drums.Perfect++;
                                         this.actCombo.n現在のコンボ数[ nPlayer ]++;
@@ -1730,6 +1736,8 @@ namespace TJAPlayer3
                                 {
                                     if( pChip.nチャンネル番号 != 0x15 && pChip.nチャンネル番号 != 0x16 && pChip.nチャンネル番号 != 0x17 && pChip.nチャンネル番号 != 0x18 && pChip.nチャンネル番号 != 0x1F )
                                     {
+                                        if (TJAPlayer3.stage選曲.n確定された曲の難易度 == (int)Difficulty.Dan)
+                                            this.n不可[actDan.NowShowingNumber]++;
                                         this.CBranchScore[nPlayer].nMiss++;
                                         this.actCombo.n現在のコンボ数[ nPlayer ] = 0;
                                         this.actComboVoice.tReset(nPlayer);
