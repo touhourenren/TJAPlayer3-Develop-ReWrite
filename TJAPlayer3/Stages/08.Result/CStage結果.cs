@@ -61,6 +61,7 @@ namespace TJAPlayer3
 			TJAPlayer3.Skin.bgmリザルトイン音.t再生する();
 			Trace.TraceInformation("結果ステージを活性化します。");
 			Trace.Indent();
+			b最近遊んだ曲追加済み = false;
 			try
 			{
 				{
@@ -417,28 +418,6 @@ namespace TJAPlayer3
 								TJAPlayer3.Skin.sound決定音.t再生する();
 								actFI.tフェードアウト開始();
 
-								foreach (var song in TJAPlayer3.Songs管理.list曲ルート)
-								{
-									if (song.strジャンル == "最近遊んだ曲" && song.eノード種別 == C曲リストノード.Eノード種別.BOX)
-									{
-										song.list子リスト.Add(TJAPlayer3.stage選曲.r確定された曲.Clone());
-
-										foreach (var song2 in song.list子リスト)
-										{
-											song2.r親ノード = song;
-											song2.strジャンル = "最近遊んだ曲";
-
-											if (song2.eノード種別 != C曲リストノード.Eノード種別.BACKBOX)
-												song2.BackColor = ColorTranslator.FromHtml("#164748");
-										}
-
-										if (song.list子リスト.Count >= 6)
-										{
-											song.list子リスト.RemoveAt(1);
-										}
-									}
-								}
-
 								if (TJAPlayer3.stage選曲.n確定された曲の難易度 != (int)Difficulty.Dan && TJAPlayer3.stage選曲.n確定された曲の難易度 != (int)Difficulty.Tower)
 								{
 									if (nスコアランク != 0)
@@ -469,9 +448,11 @@ namespace TJAPlayer3
 									}
 								}
 
-								#region [ 選曲画面の譜面情報の更新 ]
-								//---------------------
-								if (!TJAPlayer3.bコンパクトモード)
+								if (!b最近遊んだ曲追加済み)
+								{
+									#region [ 選曲画面の譜面情報の更新 ]
+									//---------------------
+									if (!TJAPlayer3.bコンパクトモード)
 								{
 									if (TJAPlayer3.stage選曲.n確定された曲の難易度 != (int)Difficulty.Dan && TJAPlayer3.stage選曲.n確定された曲の難易度 != (int)Difficulty.Tower)
 									{
@@ -484,8 +465,33 @@ namespace TJAPlayer3
 											cスコア.譜面情報.nスコアランク[TJAPlayer3.stage選曲.n確定された曲の難易度] = this.nスコアランク;
 									}
 								}
-								//---------------------
-								#endregion
+                                //---------------------
+                                #endregion
+
+									foreach (var song in TJAPlayer3.Songs管理.list曲ルート)
+									{
+										if (song.strジャンル == "最近遊んだ曲" && song.eノード種別 == C曲リストノード.Eノード種別.BOX)
+										{
+											song.list子リスト.Add(TJAPlayer3.stage選曲.r確定された曲.Clone());
+
+											foreach (var song2 in song.list子リスト)
+											{
+												song2.r親ノード = song;
+												song2.strジャンル = "最近遊んだ曲";
+
+												if (song2.eノード種別 != C曲リストノード.Eノード種別.BACKBOX)
+													song2.BackColor = ColorTranslator.FromHtml("#164748");
+											}
+
+											if (song.list子リスト.Count >= 6)
+											{
+												song.list子リスト.RemoveAt(1);
+											}
+										}
+									}
+
+									b最近遊んだ曲追加済み = true;
+								}
 
 								if (TJAPlayer3.stage選曲.r現在選択中の曲.r親ノード != null)
 									TJAPlayer3.stage選曲.act曲リスト.tBOXを出る();
@@ -514,6 +520,8 @@ namespace TJAPlayer3
 
 		#region [ private ]
 		//-----------------
+
+		public bool b最近遊んだ曲追加済み;
 		public bool b音声再生;
 		public bool EndAnime;
 		private CCounter ct登場用;

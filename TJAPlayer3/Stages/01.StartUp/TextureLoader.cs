@@ -509,10 +509,12 @@ namespace TJAPlayer3
                 }
             }
             Gauge_Dan = new CTexture[4];
+
             Gauge_Dan[0] = TxC(GAME + GAUGE + @"1P_Dan_Base.png");
             Gauge_Dan[1] = TxC(GAME + GAUGE + @"1P_Dan.png");
             Gauge_Dan[2] = TxC(GAME + GAUGE + @"1P_Dan_Clear_Base.png");
             Gauge_Dan[3] = TxC(GAME + GAUGE + @"1P_Dan_Clear.png");
+
             Gauge_Soul = TxC(GAME + GAUGE + @"Soul.png");
             Gauge_Soul_Fire = TxC(GAME + GAUGE + @"Fire.png");
             Gauge_Soul_Explosion = new CTexture[2];
@@ -625,6 +627,10 @@ namespace TJAPlayer3
             DanC_ExamRange = TxC(GAME + DANC + @"ExamRange.png");
             DanC_ExamUnit = TxC(GAME + DANC + @"ExamUnit.png");
             DanC_Screen = TxC(GAME + DANC + @"Screen.png");
+            DanC_SmallBase = TxC(GAME + DANC + @"SmallBase.png");
+            DanC_Small_ExamCymbol = TxC(GAME + DANC + @"Small_ExamCymbol.png");
+            DanC_ExamCymbol = TxC(GAME + DANC + @"ExamCymbol.png");
+            DanC_MiniNumber = TxC(GAME + DANC + @"MiniNumber.png");
             #endregion
             #region PuichiChara
             PuchiChara = TxC(GAME + PUCHICHARA + @"0.png");
@@ -714,7 +720,7 @@ namespace TJAPlayer3
         public CTexture[] Banapas_Load_Clear = new CTexture[2];
         public CTexture[] Banapas_Load_Failure = new CTexture[2];
         public CTexture[] Entry_Player = new CTexture[3];
-        public CTexture[] Donchan_Entry = new CTexture[22];
+        public CTexture[] Donchan_Entry = new CTexture[44];
         public CTexture[] Entry_Donchan_Normal = new CTexture[13];
         #endregion
 
@@ -927,8 +933,12 @@ namespace TJAPlayer3
         public CTexture DanC_Failed;
         public CTexture DanC_Number,
             DanC_Small_Number,
+            DanC_SmallBase,
             DanC_ExamType,
             DanC_ExamRange,
+            DanC_Small_ExamCymbol,
+            DanC_ExamCymbol,
+            DanC_MiniNumber,
             DanC_ExamUnit;
         public CTexture DanC_Screen;
         #endregion
