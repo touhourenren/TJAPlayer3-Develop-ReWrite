@@ -231,11 +231,11 @@ namespace TJAPlayer3
 				this.ct表示用 = new CCounter(0, 0x3e7, 2, TJAPlayer3.Timer);
 				base.b初めての進行描画 = false;
 			}
-			if(TJAPlayer3.stage選曲.n確定された曲の難易度 != (int)Difficulty.Dan && TJAPlayer3.stage選曲.n確定された曲の難易度 != (int)Difficulty.Tower)
-            {
-                #region [ 通常時リザルト ]
+			if (TJAPlayer3.stage選曲.n確定された曲の難易度 != (int)Difficulty.Dan)
+			{
+				#region [ 通常時リザルト ]
 
-                this.ct表示用.t進行();
+				this.ct表示用.t進行();
 				ct全体アニメ.t進行();
 				ctゲージアニメーション.t進行();
 				ctEndAnime.t進行();
@@ -517,13 +517,12 @@ namespace TJAPlayer3
 
 					}
 				}
-                #endregion
+				#endregion
 			}
-
-			#region 段位認定モード用
-            if (TJAPlayer3.stage選曲.n確定された曲の難易度 == (int)Difficulty.Dan)
+            else
 			{
-				//TJAPlayer3.stage演奏ドラム画面.actDan.DrawExam(TJAPlayer3.stage結果.st演奏記録.Drums.Dan_C);
+				#region 段位時リザルト
+
 				switch (TJAPlayer3.stage演奏ドラム画面.actDan.GetExamStatus(TJAPlayer3.stage結果.st演奏記録.Drums.Dan_C))
 				{
 					case Exam.Status.Failure:
@@ -538,10 +537,11 @@ namespace TJAPlayer3
 					default:
 						break;
 				}
-				// Dan_Plate
+
 				Dan_Plate?.t2D中心基準描画(TJAPlayer3.app.Device, TJAPlayer3.Skin.Result_Dan_Plate_XY[0], TJAPlayer3.Skin.Result_Dan_Plate_XY[1]);
+
+				#endregion
 			}
-			#endregion
 
 			if (!this.ct表示用.b終了値に達した)
 			{

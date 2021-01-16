@@ -416,7 +416,7 @@ namespace TJAPlayer3
                 {
                     if (!this.bどんちゃんカウンター初期化)
 					{
-						this.ctどんちゃんエントリーループ = new CCounter(0, 21, 1000 / 30, TJAPlayer3.Timer);
+						this.ctどんちゃんエントリーループ = new CCounter(0, TJAPlayer3.Tx.Donchan_Entry.Length - 1, 1000 / 60, TJAPlayer3.Timer);
 						this.bどんちゃんカウンター初期化 = true;
 					}
 

@@ -3600,14 +3600,14 @@ namespace TJAPlayer3
                             this.actPanel.t歌詞テクスチャを削除する();
                             if (pChip.nコース == this.n現在のコース[nPlayer])
                             {
-                                if (this.actDan.GetFailedAllChallenges())
-                                {
-                                    this.n現在のトップChip = TJAPlayer3.DTX.listChip.Count - 1;	// 終端にシーク
-                                    IsDanFailed = true;
-                                    return true;
-                                }
                                 if(ListDan_Number != 0 && actDan.FirstSectionAnime)
                                 {
+                                    if (this.actDan.GetFailedAllChallenges())
+                                    {
+                                        this.n現在のトップChip = TJAPlayer3.DTX.listChip.Count - 1;   // 終端にシーク
+                                        IsDanFailed = true;
+                                        return true;
+                                    }
                                     this.actDan.Start(this.ListDan_Number);
                                     ListDan_Number++;
                                 }
