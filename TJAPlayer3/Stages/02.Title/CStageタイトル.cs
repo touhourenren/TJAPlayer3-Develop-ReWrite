@@ -209,17 +209,17 @@ namespace TJAPlayer3
 						{
 							if (TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDXKeys.Key.Return))
 							{
-								if(TJAPlayer3.Songs管理.list曲ルート_Dan.Count > 0)
-								{
-									TJAPlayer3.Skin.sound決定音.t再生する();
-									n現在の選択行モード選択 = (int)E戻り値.DANGAMESTART - 1;
-									this.actFO.tフェードアウト開始(0, 500);
-									base.eフェーズID = CStage.Eフェーズ.共通_フェードアウト;
-								}
-                                else
-                                {
-									TJAPlayer3.Skin.soundError.t再生する();
-                                }
+									if (TJAPlayer3.Songs管理.list曲ルート_Dan.Count > 0 && TJAPlayer3.ConfigIni.nPlayerCount !=2)
+									{
+										TJAPlayer3.Skin.sound決定音.t再生する();
+										n現在の選択行モード選択 = (int)E戻り値.DANGAMESTART - 1;
+										this.actFO.tフェードアウト開始(0, 500);
+										base.eフェーズID = CStage.Eフェーズ.共通_フェードアウト;
+									}
+									else
+									{
+										TJAPlayer3.Skin.soundError.t再生する();
+									}
 							}
 							else
 							{

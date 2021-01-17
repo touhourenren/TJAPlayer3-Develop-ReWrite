@@ -1281,9 +1281,9 @@ namespace TJAPlayer3
         protected bool tBalloonProcess( CDTX.CChip pChip, double dbProcess_time, int player )
         {
             //if( dbProcess_time >= pChip.n発声時刻ms && dbProcess_time < pChip.nノーツ終了時刻ms )
-            if ((int)CSound管理.rc演奏用タイマ.n現在時刻ms >= pChip.n発声時刻ms && (int)CSound管理.rc演奏用タイマ.n現在時刻ms <= pChip.nノーツ終了時刻ms)
+            if ((int)(long)(CSound管理.rc演奏用タイマ.n現在時刻ms * (((double)TJAPlayer3.ConfigIni.n演奏速度) / 20.0)) >= pChip.n発声時刻ms && (int)(long)(CSound管理.rc演奏用タイマ.n現在時刻ms * (((double)TJAPlayer3.ConfigIni.n演奏速度) / 20.0)) <= pChip.nノーツ終了時刻ms)
             {
-                if( pChip.nRollCount == 0 )
+                if ( pChip.nRollCount == 0 && this.bPAUSE == false)
                 {
                     this.n風船残り[ player ] = pChip.nBalloon;
                 }
@@ -1440,9 +1440,9 @@ namespace TJAPlayer3
                             this.b連打中[nPlayer] = true;
                             if (bAutoPlay)
                             {
-                                if (TJAPlayer3.ConfigIni.bAuto先生の連打)
+                                if (TJAPlayer3.ConfigIni.bAuto先生の連打 && this.bPAUSE == false)
                                 {
-                                    if (CSound管理.rc演奏用タイマ.n現在時刻ms > (pChip.n発声時刻ms + (1000.0 / 15.0) * pChip.nRollCount))
+                                    if (((CSound管理.rc演奏用タイマ.n現在時刻 * (((double)TJAPlayer3.ConfigIni.n演奏速度) / 20.0)) * (((double)TJAPlayer3.ConfigIni.n演奏速度) / 20.0)) > (pChip.n発声時刻ms + (1000.0 / 15.0) * pChip.nRollCount))
                                     {
                                         if (this.nHand[nPlayer] == 0)
                                             this.nHand[nPlayer]++;
@@ -1496,9 +1496,9 @@ namespace TJAPlayer3
 
                             if (bAutoPlay)
                             {
-                                if (pChip.nBalloon != 0)
+                                if (pChip.nBalloon != 0 && this.bPAUSE == false)
                                 {
-                                    if (CSound管理.rc演奏用タイマ.n現在時刻ms > (pChip.n発声時刻ms + ((pChip.nノーツ終了時刻ms - pChip.n発声時刻ms) / pChip.nBalloon) * pChip.nRollCount))
+                                    if ((CSound管理.rc演奏用タイマ.n現在時刻 * (((double)TJAPlayer3.ConfigIni.n演奏速度) / 20.0)) > (pChip.n発声時刻ms + ((pChip.nノーツ終了時刻ms - pChip.n発声時刻ms) / pChip.nBalloon) * pChip.nRollCount))
                                     {
                                         if (this.nHand[nPlayer] == 0)
                                             this.nHand[nPlayer]++;
@@ -1521,7 +1521,7 @@ namespace TJAPlayer3
                         }
                         else if (pChip.nチャンネル番号 == 0x18)
                         {
-                            if (pChip.nノーツ終了時刻ms <= CSound管理.rc演奏用タイマ.n現在時刻ms)
+                            if (pChip.nノーツ終了時刻ms <= (CSound管理.rc演奏用タイマ.n現在時刻 * (((double)TJAPlayer3.ConfigIni.n演奏速度) / 20.0)))
                             {
                                 this.b連打中[nPlayer] = false;
                                 //this.actChara.b風船連打中 = false;
@@ -3953,8 +3953,16 @@ namespace TJAPlayer3
 						{
                             if (TJAPlayer3.ConfigIni.bTokkunMode)
                             {
-                                if (this.bgmlength > CSound管理.rc演奏用タイマ.n現在時刻ms)
-                                    break;
+                                foreach (CDTX.CWAV cwav in TJAPlayer3.DTX.listWAV.Values)
+                                {
+                                    for (int i = 0; i < nPolyphonicSounds; i++)
+                                    {
+                                        if ((cwav.rSound[i] != null) && cwav.rSound[i].b再生中)
+                                        {
+                                            return false;
+                                        }
+                                    }
+                                }
                             }
                             pChip.bHit = true;
                             return true;
