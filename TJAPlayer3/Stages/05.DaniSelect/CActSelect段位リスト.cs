@@ -103,7 +103,9 @@ namespace TJAPlayer3
                 else TJAPlayer3.Tx.Dani_Bar_Center.t2D描画(TJAPlayer3.app.Device, Anime, 0);
                 if (stバー情報[n現在の選択行].txDanPlate != null) stバー情報[n現在の選択行].txDanPlate.Opacity = 255;
                 stバー情報[n現在の選択行].txDanPlate?.t2D中心基準描画(TJAPlayer3.app.Device, 173 + Anime, 301);
-                tSoulDraw(370 + Anime, 462, stバー情報[n現在の選択行].List_DanSongs[0].Dan_C[0].Value[0].ToString());
+
+                if (stバー情報[n現在の選択行].List_DanSongs[0].Dan_C[0] != null)
+                    tSoulDraw(370 + Anime, 462, stバー情報[n現在の選択行].List_DanSongs[0].Dan_C[0].Value[0].ToString());
 
                 for (int i = 0; i < stバー情報[n現在の選択行].ttkタイトル.Length; i++)
                     TJAPlayer3.stage選曲.act曲リスト.ResolveTitleTexture(stバー情報[n現在の選択行].ttkタイトル[i]).t2D描画(TJAPlayer3.app.Device, 401 + Anime, 173 + i * 73);
@@ -143,7 +145,9 @@ namespace TJAPlayer3
                     
                     if (stバー情報[n現在の選択行 - 1].txDanPlate != null) stバー情報[n現在の選択行 - 1].txDanPlate.Opacity = 255;
                     stバー情報[n現在の選択行 - 1].txDanPlate?.t2D中心基準描画(TJAPlayer3.app.Device, -1280 + 173 + Anime, 301);
-                    tSoulDraw(-1280 + 370 + Anime, 462, stバー情報[n現在の選択行 - 1].List_DanSongs[0].Dan_C[0].Value[0].ToString());
+
+                    if (stバー情報[n現在の選択行 - 1].List_DanSongs[0].Dan_C[0] != null)
+                        tSoulDraw(-1280 + 370 + Anime, 462, stバー情報[n現在の選択行 - 1].List_DanSongs[0].Dan_C[0].Value[0].ToString());
 
                     for (int i = 0; i < stバー情報[n現在の選択行 - 1].ttkタイトル.Length; i++)
                         TJAPlayer3.stage選曲.act曲リスト.ResolveTitleTexture(stバー情報[n現在の選択行 - 1].ttkタイトル[i]).t2D描画(TJAPlayer3.app.Device, -879 + Anime, 173 + i * 73);
@@ -183,7 +187,9 @@ namespace TJAPlayer3
 
                     if(stバー情報[n現在の選択行 + 1].txDanPlate != null) stバー情報[n現在の選択行 + 1].txDanPlate.Opacity = 255;
                     stバー情報[n現在の選択行 + 1].txDanPlate?.t2D中心基準描画(TJAPlayer3.app.Device, 1280 + 173 + Anime, 301);
-                    tSoulDraw(1280 + 370 + Anime, 462, stバー情報[n現在の選択行 + 1].List_DanSongs[0].Dan_C[0].Value[0].ToString());
+
+                    if (stバー情報[n現在の選択行 + 1].List_DanSongs[0].Dan_C[0] != null)
+                        tSoulDraw(1280 + 370 + Anime, 462, stバー情報[n現在の選択行 + 1].List_DanSongs[0].Dan_C[0].Value[0].ToString());
 
                     for (int i = 0; i < stバー情報[n現在の選択行 + 1].ttkタイトル.Length; i++)
                         TJAPlayer3.stage選曲.act曲リスト.ResolveTitleTexture(stバー情報[n現在の選択行 + 1].ttkタイトル[i]).t2D描画(TJAPlayer3.app.Device, 1280 + 401 + Anime, 173 + i * 73);
