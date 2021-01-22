@@ -482,7 +482,7 @@ namespace TJAPlayer3
                         if ((TJAPlayer3.Input管理.Keyboard.bキーが押されている((int)SlimDXKeys.Key.RightShift) || TJAPlayer3.Input管理.Keyboard.bキーが押されている((int)SlimDXKeys.Key.LeftShift)) &&
                             TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDXKeys.Key.F1))
                         {   // [SHIFT] + [F1] CONFIG
-                            this.actPresound.tサウンド停止();
+                            TJAPlayer3.Skin.bgm選曲画面.t停止する();
                             this.eフェードアウト完了時の戻り値 = E戻り値.コンフィグ呼び出し;  // #24525 2011.3.16 yyagi: [SHIFT]-[F1]でCONFIG呼び出し
                             this.actFIFO.tフェードアウト開始();
                             base.eフェーズID = CStage.Eフェーズ.共通_フェードアウト;
