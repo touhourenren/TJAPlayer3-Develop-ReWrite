@@ -446,7 +446,7 @@ namespace TJAPlayer3
                     if (actQuickConfig.bGotoDetailConfig)
                     {   // 詳細CONFIG呼び出し
                         actQuickConfig.tDeativatePopupMenu();
-                        this.actPresound.tサウンド停止();
+                        TJAPlayer3.Skin.bgm選曲画面.t停止する();
                         this.eフェードアウト完了時の戻り値 = E戻り値.コンフィグ呼び出し;  // #24525 2011.3.16 yyagi: [SHIFT]-[F1]でCONFIG呼び出し
                         this.actFIFO.tフェードアウト開始();
                         base.eフェーズID = CStage.Eフェーズ.共通_フェードアウト;
