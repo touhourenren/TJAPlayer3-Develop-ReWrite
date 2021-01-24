@@ -106,35 +106,71 @@ namespace TJAPlayer3
         // メソッド
 
         private float[,] n点数アニメ拡大率_座標 = new float[,]
-{
-                        {1.05f,-5},
-                        {1.10f,-6},
-                        {1.15f,-8},
-                        {1.20f,-9},
-                        {1.25f,-8},
-                        {1.20f,-6},
-                        {1.15f,-5},
-                        {1.05f,-4},
-                        {1.02f,-2},
-                        {1.01f,-1},
-                        {1f,-1},
-                        {1f, 0}
+    {
+            {
+                1.14f,
+                -5f
+            },
+            {
+                1.2f,
+                -6f
+            },
+            {
+                1.23f,
+                -8f
+            },
+            {
+                1.25f,
+                -9f
+            },
+            {
+                1.23f,
+                -8f
+            },
+            {
+                1.2f,
+                -6f
+            },
+            {
+                1.14f,
+                -5f
+            },
+            {
+                1.08f,
+                -4f
+            },
+            {
+                1.04f,
+                -2f
+            },
+            {
+                1.02f,
+                -1f
+            },
+            {
+                1.01f,
+                -1f
+            },
+            {
+                1f,
+                0f
+            }
         };
 
         private float[] ScoreScale = new float[]
         {
-            1.000f,
-            1.100f, // リピート
-            1.110f,
-            1.120f,
-            1.130f,
-            1.120f,
-            1.110f,
-            1.100f,
-            1.050f,
-            1.030f,
+           1f,
+            1.111f,
+            1.222f,
+            1.185f,
+            1.148f,
+            1.129f,
+            1.111f,
+            1.074f,
+            1.065f,
+            1.033f,
             1.015f,
-            1.000f
+            1f
         };
 
         public double Get( E楽器パート part, int player )
@@ -202,7 +238,7 @@ namespace TJAPlayer3
                         this.stScore[ i ].b使用中 = true;
                         this.stScore[ i ].b表示中 = true;
                         this.stScore[ i ].nAddScore = (int)delta;
-                        this.stScore[ i ].ctTimer = new CCounter( 0, 500, 1, TJAPlayer3.Timer );
+                        this.stScore[ i ].ctTimer = new CCounter( 0, 465, 2, TJAPlayer3.Timer );
                         this.stScore[ i ].bBonusScore = false;
                         this.stScore[ i ].bAddEnd = false;
                         this.stScore[ i ].nPlayer = player;
@@ -226,7 +262,7 @@ namespace TJAPlayer3
                         this.stScore[ i ].b使用中 = true;
                         this.stScore[ i ].b表示中 = true;
                         this.stScore[ i ].nAddScore = 10000;
-                        this.stScore[ i ].ctTimer = new CCounter( 0, 400, 1, TJAPlayer3.Timer );
+                        this.stScore[ i ].ctTimer = new CCounter( 0, 100, 4, TJAPlayer3.Timer );
                         this.stScore[ i ].bBonusScore = true;
                         this.stScore[ i ].bAddEnd = true;
                         this.stScore[ i ].nPlayer = player;
