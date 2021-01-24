@@ -443,7 +443,7 @@ namespace TJAPlayer3
 
                     for (int j = 1; j < 3; j++)
                     {
-                        if (TJAPlayer3.stage選曲.r確定された曲.DanSongs[j - 1].Dan_C[i] != null)
+                        if (TJAPlayer3.stage選曲.r確定された曲.DanSongs[j - 1].Dan_C[i] != null && TJAPlayer3.stage選曲.r確定された曲.DanSongs[NowShowingNumber].Dan_C[i] != null)
                         {
                             if (NowShowingNumber > j)
                             {
@@ -520,7 +520,7 @@ namespace TJAPlayer3
 
                     for (int j = 1; j < 3; j++)
                     {
-                        if(TJAPlayer3.stage選曲.r確定された曲.DanSongs[j - 1].Dan_C[i] != null)
+                        if(TJAPlayer3.stage選曲.r確定された曲.DanSongs[j - 1].Dan_C[i] != null && TJAPlayer3.stage選曲.r確定された曲.DanSongs[NowShowingNumber].Dan_C[i] != null)
                         {
                             if (GetExamStatus(TJAPlayer3.stage選曲.r確定された曲.DanSongs[j - 1].Dan_C[i]) == Exam.Status.Better_Success && GetExamConfirmStatus(TJAPlayer3.stage選曲.r確定された曲.DanSongs[j - 1].Dan_C[i]))
                             {

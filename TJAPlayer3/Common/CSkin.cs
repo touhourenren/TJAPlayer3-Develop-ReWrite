@@ -345,6 +345,9 @@ namespace TJAPlayer3
         public Cシステムサウンド sound特訓再生音 = null;
         public Cシステムサウンド sound特訓停止音 = null;
         public Cシステムサウンド sound特訓スクロール音 = null;
+        public Cシステムサウンド soundPon = null;
+        public Cシステムサウンド soundGauge = null;
+        public Cシステムサウンド soundScoreDon = null;
 
         //public Cシステムサウンド soundRed = null;
         //public Cシステムサウンド soundBlue = null;
@@ -675,6 +678,9 @@ namespace TJAPlayer3
             this.sound特訓再生音 = new Cシステムサウンド(@"Sounds\Resume.ogg", false, false,false, ESoundGroup.SoundEffect);
             this.sound特訓停止音 = new Cシステムサウンド(@"Sounds\Pause.ogg", false, false, false, ESoundGroup.SoundEffect);
             this.sound特訓スクロール音 = new Cシステムサウンド(@"Sounds\Scroll.ogg", false, false, false, ESoundGroup.SoundEffect);
+            this.soundPon = new Cシステムサウンド(@"Sounds\Pon.ogg", false, false, false, ESoundGroup.SoundEffect);
+            this.soundGauge = new Cシステムサウンド(@"Sounds\Gauge.ogg", false, false, false, ESoundGroup.SoundEffect);
+            this.soundScoreDon = new Cシステムサウンド(@"Sounds\ScoreDon.ogg", false, false, false, ESoundGroup.SoundEffect);
             ReloadSkin();
             tReadSkinConfig();
         }
@@ -2500,26 +2506,13 @@ namespace TJAPlayer3
         public int nResultJudge1_P1Y = 182;
         public int nResultJudge2_P1X = 968;
         public int nResultJudge2_P1Y = 174;
-        public int nResultGreatP1X = 490;
-        public int nResultGreatP1Y = 188;
-        public int nResultGreatP2X = 875;
-        public int nResultGreatP2Y = 188;
-        public int nResultGoodP1X = 490;
-        public int nResultGoodP1Y = 230;
-        public int nResultGoodP2X = 875;
-        public int nResultGoodP2Y = 226;
-        public int nResultBadP1X = 490;
-        public int nResultBadP1Y = 272;
-        public int nResultBadP2X = 875;
-        public int nResultBadP2Y = 266;
-        public int nResultRollP1X = 490;
-        public int nResultRollP1Y = 314;
-        public int nResultRollP2X = 1144;
-        public int nResultRollP2Y = 226;
-        public int nResultComboP1X = 490;
-        public int nResultComboP1Y = 356;
-        public int nResultComboP2X = 1144;
-        public int nResultComboP2Y = 188;
+
+        public int nResultNumberP1X = 490;
+        public int nResultNumberP2X = 875;
+
+        public int nResultNumberY = 188;
+        public int nResultNumberYPadding = 42;
+
         public int nResultGaugeBaseP1X = 56;
         public int nResultGaugeBaseP1Y = 141;
         public int nResultGaugeBaseP2X = 555;

@@ -4032,17 +4032,17 @@ namespace TJAPlayer3
 
                 if (strArray.Length == 7 && strArray[6] != "" && strArray[6] != null)
                     dansongs.Level = int.Parse(strArray[6]);
-                else
+                else if (strArray.Length < 7)
                     dansongs.Level = 10;
 
                 if (strArray.Length == 8 && strArray[7] != "" && strArray[7] != null)
                     dansongs.Difficulty = strConvertCourse(strArray[7]);
-                else
+                else if (strArray.Length < 8)
                     dansongs.Difficulty = 3;
 
                 if (strArray.Length == 9 && strArray[8] != "" && strArray[8] != null)
                     dansongs.bTitleShow = bool.Parse(strArray[8]);
-                else
+                else if (strArray.Length < 9)
                     dansongs.bTitleShow = false;
 
                 dansongs.Wave = new CWAV
