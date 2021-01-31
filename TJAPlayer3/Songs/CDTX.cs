@@ -4030,12 +4030,12 @@ namespace TJAPlayer3
                 dansongs.ScoreInit = int.Parse(strArray[4]);
                 dansongs.ScoreDiff = int.Parse(strArray[5]);
 
-                if (strArray.Length == 7 && strArray[6] != "" && strArray[6] != null)
+                if (strArray.Length >= 7 && strArray[6] != "" && strArray[6] != null)
                     dansongs.Level = int.Parse(strArray[6]);
                 else if (strArray.Length < 7)
                     dansongs.Level = 10;
 
-                if (strArray.Length == 8 && strArray[7] != "" && strArray[7] != null)
+                if (strArray.Length >= 8 && strArray[7] != "" && strArray[7] != null)
                     dansongs.Difficulty = strConvertCourse(strArray[7]);
                 else if (strArray.Length < 8)
                     dansongs.Difficulty = 3;

@@ -588,16 +588,12 @@ namespace TJAPlayer3
 
             #endregion
             #region 終了演出
-            End_Clear_L = new CTexture[5];
-            End_Clear_R = new CTexture[5];
-            for (int i = 0; i < 5; i++)
-            {
-                End_Clear_L[i] = TxC(GAME + END + @"Clear_L_" + i.ToString() + ".png");
-                End_Clear_R[i] = TxC(GAME + END + @"Clear_R_" + i.ToString() + ".png");
-            }
-            End_Clear_Text = TxC(GAME + END + @"Clear_Text.png");
-            End_Clear_Text_Effect = TxC(GAME + END + @"Clear_Text_Effect.png");
-            if (End_Clear_Text_Effect != null) End_Clear_Text_Effect.b加算合成 = true;
+            End_Clear_Chara = TxC(GAME + END + @"Clear_Chara.png");
+            End_Star = TxC(GAME + END + @"Star.png");
+
+            End_Clear_Text = new CTexture[2];
+            End_Clear_Text[0] = TxC(GAME + END + @"Clear_Text.png");
+            End_Clear_Text[1] = TxC(GAME + END + @"Clear_Text_End.png");
             #endregion
             #region ゲームモード
             GameMode_Timer_Tick = TxC(GAME + GAMEMODE + @"Timer_Tick.png");
@@ -909,10 +905,9 @@ namespace TJAPlayer3
             Lane_Background_GoGo;
         #endregion
         #region 終了演出
-        public CTexture[] End_Clear_L,
-            End_Clear_R;
-        public CTexture End_Clear_Text,
-            End_Clear_Text_Effect;
+        public CTexture End_Clear_Chara;
+        public CTexture[] End_Clear_Text;
+        public CTexture End_Star;
         #endregion
         #region ゲームモード
         public CTexture GameMode_Timer_Frame,
