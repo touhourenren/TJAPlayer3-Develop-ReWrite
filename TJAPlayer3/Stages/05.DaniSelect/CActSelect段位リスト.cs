@@ -119,8 +119,11 @@ namespace TJAPlayer3
                     if (stバー情報[n現在の選択行].List_DanSongs[0].Dan_C[j] != null)
                     {
                         TJAPlayer3.Tx.DanC_ExamType?.t2D描画(TJAPlayer3.app.Device, 515 + Anime, 412 + (j - 1) * 88, new Rectangle(0, TJAPlayer3.Skin.Game_DanC_ExamType_Size[1] * (int)stバー情報[n現在の選択行].List_DanSongs[0].Dan_C[j].GetExamType(), TJAPlayer3.Skin.Game_DanC_ExamType_Size[0], TJAPlayer3.Skin.Game_DanC_ExamType_Size[1]));
-                        
-                        for (int i = 0; i < stバー情報[n現在の選択行].List_DanSongs.Count; i++)  //曲ごとのループ(魂ゲージを除く) 横(x)
+                    }
+
+                    for (int i = 0; i < stバー情報[n現在の選択行].List_DanSongs.Count; i++)  //曲ごとのループ(魂ゲージを除く) 横(x)
+                    {
+                        if (stバー情報[n現在の選択行].List_DanSongs[i].Dan_C[j] != null)
                         {
                             if (stバー情報[n現在の選択行].List_DanSongs[stバー情報[n現在の選択行].List_DanSongs.Count - 1].Dan_C[j] != null) //個別の条件がありますよー
                             {
@@ -161,8 +164,11 @@ namespace TJAPlayer3
                         if (stバー情報[n現在の選択行 - 1].List_DanSongs[0].Dan_C[j] != null)
                         {
                             TJAPlayer3.Tx.DanC_ExamType?.t2D描画(TJAPlayer3.app.Device, -1280 + 515 + Anime, 412 + (j - 1) * 88, new Rectangle(0, TJAPlayer3.Skin.Game_DanC_ExamType_Size[1] * (int)stバー情報[n現在の選択行 - 1].List_DanSongs[0].Dan_C[j].GetExamType(), TJAPlayer3.Skin.Game_DanC_ExamType_Size[0], TJAPlayer3.Skin.Game_DanC_ExamType_Size[1]));
+                        }
 
-                            for (int i = 0; i < stバー情報[n現在の選択行 - 1].List_DanSongs.Count; i++)  //曲ごとのループ(魂ゲージを除く) 横(x)
+                        for (int i = 0; i < stバー情報[n現在の選択行 - 1].List_DanSongs.Count; i++)  //曲ごとのループ(魂ゲージを除く) 横(x)
+                        {
+                            if (stバー情報[n現在の選択行 - 1].List_DanSongs[i].Dan_C[j] != null)
                             {
                                 if (stバー情報[n現在の選択行 - 1].List_DanSongs[stバー情報[n現在の選択行 - 1].List_DanSongs.Count - 1].Dan_C[j] != null) //個別の条件がありますよー
                                 {
@@ -203,8 +209,11 @@ namespace TJAPlayer3
                         if (stバー情報[n現在の選択行 + 1].List_DanSongs[0].Dan_C[j] != null)
                         {
                             TJAPlayer3.Tx.DanC_ExamType?.t2D描画(TJAPlayer3.app.Device, 1280 + 515 + Anime, 412 + (j - 1) * 88, new Rectangle(0, TJAPlayer3.Skin.Game_DanC_ExamType_Size[1] * (int)stバー情報[n現在の選択行 + 1].List_DanSongs[0].Dan_C[j].GetExamType(), TJAPlayer3.Skin.Game_DanC_ExamType_Size[0], TJAPlayer3.Skin.Game_DanC_ExamType_Size[1]));
+                        }
 
-                            for (int i = 0; i < stバー情報[n現在の選択行 + 1].List_DanSongs.Count; i++)  //曲ごとのループ(魂ゲージを除く) 横(x)
+                        for (int i = 0; i < stバー情報[n現在の選択行 + 1].List_DanSongs.Count; i++)  //曲ごとのループ(魂ゲージを除く) 横(x)
+                        {
+                            if (stバー情報[n現在の選択行 + 1].List_DanSongs[i].Dan_C[j] != null)
                             {
                                 if (stバー情報[n現在の選択行 + 1].List_DanSongs[stバー情報[n現在の選択行 + 1].List_DanSongs.Count - 1].Dan_C[j] != null) //個別の条件がありますよー
                                 {
