@@ -21,6 +21,7 @@ namespace TJAPlayer3
 
         public void Start()
         {
+            this.ct進行メイン = new CCounter(0, 500, 1000 / 60, TJAPlayer3.Timer);
             // モードの決定。クリア失敗・フルコンボも事前に作っとく。
             if (TJAPlayer3.stage選曲.n確定された曲の難易度 == (int)Difficulty.Dan)
             {
@@ -38,7 +39,6 @@ namespace TJAPlayer3
             }
             else
             {
-                this.ct進行メイン = new CCounter(0, 500, 1000 / 60, TJAPlayer3.Timer);
                 // 通常のモード。
                 // ここでフルコンボフラグをチェックするが現時点ではない。
                 // 今の段階では魂ゲージ80%以上でチェック。
