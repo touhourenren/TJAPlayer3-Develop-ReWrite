@@ -116,6 +116,7 @@ namespace TJAPlayer3
             base.list子Activities.Add(this.actShowCurrentPosition = new CActSelectShowCurrentPosition());
             base.list子Activities.Add(this.actQuickConfig = new CActSelectQuickConfig());
             base.list子Activities.Add(this.act難易度選択画面 = new CActSelect難易度選択画面());
+            base.list子Activities.Add(this.actPlayOption = new CActPlayOption());
 
             for(int i = 0; i < 10; i++)
             {
@@ -438,6 +439,8 @@ namespace TJAPlayer3
                 if (this.ctDiffSelect移動待ち != null)
                     this.ctDiffSelect移動待ち.t進行();
 
+              
+
                 // キー入力
                 if (base.eフェーズID == CStage.Eフェーズ.共通_通常状態
                     && TJAPlayer3.act現在入力を占有中のプラグイン == null)
@@ -707,6 +710,8 @@ namespace TJAPlayer3
                 }
                 //------------------------------
 
+                
+
 
                 if (TJAPlayer3.ConfigIni.nPlayerCount == 1)
                 {
@@ -759,7 +764,9 @@ namespace TJAPlayer3
                     }
                 }
 
-                for(int i = 0; i < 10; i++)
+                if (act難易度選択画面.bOption) actPlayOption.On進行描画();
+
+                for (int i = 0; i < 10; i++)
                 {
                     tBoardNumberDraw(this.ptBoardNumber[i].X - 10, this.ptBoardNumber[i].Y, i < 7 ? this.act曲リスト.ScoreRankCount[i].ToString() : this.act曲リスト.CrownCount[i - 7].ToString());
                 }
@@ -868,6 +875,7 @@ namespace TJAPlayer3
         public CActSelect曲リスト act曲リスト;
         private CActSelectShowCurrentPosition actShowCurrentPosition;
         public CActSelect難易度選択画面 act難易度選択画面;
+        public CActPlayOption actPlayOption;
 
         public CActSortSongs actSortSongs;
         private CActSelectQuickConfig actQuickConfig;

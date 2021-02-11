@@ -450,7 +450,63 @@ namespace FDK
         {
             this.t2D描画(device, x - (rc.Width / 2 * this.vc拡大縮小倍率.X), y - (rc.Height / 2 * this.vc拡大縮小倍率.Y), 1f, rc);
         }
+        public void t2D拡大率考慮描画(Device device, RefPnt refpnt, float x, float y)
+        {
+            this.t2D拡大率考慮描画(device, refpnt, x, y, rc全画像);
+        }
+        public void t2D拡大率考慮描画(Device device, RefPnt refpnt, float x, float y, Rectangle rect)
+        {
+            this.t2D拡大率考慮描画(device, refpnt, x, y, 1f, rect);
+        }
+        public void t2D拡大率考慮描画(Device device, RefPnt refpnt, float x, float y, float depth, Rectangle rect)
+        {
+            switch (refpnt)
+            {
+                case RefPnt.UpLeft:
+                    this.t2D描画(device, x, y, depth, rect);
+                    break;
+                case RefPnt.Up:
+                    this.t2D描画(device, x - (rect.Width / 2 * this.vc拡大縮小倍率.X), y, depth, rect);
+                    break;
+                case RefPnt.UpRight:
+                    this.t2D描画(device, x - rect.Width * this.vc拡大縮小倍率.X, y, depth, rect);
+                    break;
+                case RefPnt.Left:
+                    this.t2D描画(device, x, y - (rect.Height / 2 * this.vc拡大縮小倍率.Y), depth, rect);
+                    break;
+                case RefPnt.Center:
+                    this.t2D描画(device, x - (rect.Width / 2 * this.vc拡大縮小倍率.X), y - (rect.Height / 2 * this.vc拡大縮小倍率.Y), depth, rect);
+                    break;
+                case RefPnt.Right:
+                    this.t2D描画(device, x - rect.Width * this.vc拡大縮小倍率.X, y - (rect.Height / 2 * this.vc拡大縮小倍率.Y), depth, rect);
+                    break;
+                case RefPnt.DownLeft:
+                    this.t2D描画(device, x, y - rect.Height * this.vc拡大縮小倍率.Y, depth, rect);
+                    break;
+                case RefPnt.Down:
+                    this.t2D描画(device, x - (rect.Width / 2 * this.vc拡大縮小倍率.X), y - rect.Height * this.vc拡大縮小倍率.Y, depth, rect);
+                    break;
+                case RefPnt.DownRight:
+                    this.t2D描画(device, x - rect.Width * this.vc拡大縮小倍率.X, y - rect.Height * this.vc拡大縮小倍率.Y, depth, rect);
+                    break;
+                default:
+                    break;
+            }
 
+        }
+
+        public enum RefPnt
+        {
+            UpLeft,
+            Up,
+            UpRight,
+            Left,
+            Center,
+            Right,
+            DownLeft,
+            Down,
+            DownRight,
+        }
 
         /// <summary>
         /// テクスチャを 2D 画像と見なして描画する。

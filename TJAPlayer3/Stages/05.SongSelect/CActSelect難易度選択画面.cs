@@ -161,7 +161,7 @@ namespace TJAPlayer3
 
             #region [ キー入力 ]
 
-            if (this.ctBarAnimeIn.b終了値に達した && !bSelect)
+            if (this.ctBarAnimeIn.b終了値に達した && !bSelect && !bOption)
             {
                 if (TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.RBlue) || TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDXKeys.Key.RightArrow))
                 {
@@ -185,10 +185,11 @@ namespace TJAPlayer3
                     else if (n現在の選択行 == 1)
                     {
                         TJAPlayer3.Skin.sound決定音.t再生する();
+                        bOption = true;
                     }
                     else
                     {
-                        if(TJAPlayer3.stage選曲.r現在選択中のスコア.譜面情報.nレベル[n現在の選択行 - 2] > 0)
+                        if (TJAPlayer3.stage選曲.r現在選択中のスコア.譜面情報.nレベル[n現在の選択行 - 2] > 0)
                         {
                             TJAPlayer3.stage選曲.ctDonchan_Jump.t開始(0, TJAPlayer3.Tx.SongSelect_Donchan_Jump.Length - 1, 1000 / 45, TJAPlayer3.Timer);
                             this.bSelect = true;
@@ -310,6 +311,7 @@ namespace TJAPlayer3
         //-----------------
 
         public bool bSelect;
+        public bool bOption = false;
 
         private CPrivateFastFont pfTitle;
         private CPrivateFastFont pfSubTitle;
