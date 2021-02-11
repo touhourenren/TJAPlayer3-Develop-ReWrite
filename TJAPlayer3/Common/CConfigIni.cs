@@ -1333,7 +1333,7 @@ namespace TJAPlayer3
 				this.bLight[ i ] = false;
 				this.bLeft[ i ] = false;
 				this.判定文字表示位置[ i ] = E判定文字表示位置.レーン上;
-				this.n譜面スクロール速度[ i ] = 1;
+				this.n譜面スクロール速度[ i ] = 9;
 				this.nJudgeLinePosOffset[ i ] = 0;
 				this.eInvisible[ i ] = EInvisible.OFF;
 				this.nViewerScrollSpeed[ i ] = 1;
@@ -1875,7 +1875,7 @@ namespace TJAPlayer3
 			sw.WriteLine( "; TIGHT mode. 0=OFF, 1=ON " );
 			sw.WriteLine( "DrumsTight={0}", this.bTight ? 1 : 0 );
 			sw.WriteLine();
-			sw.WriteLine( "; ドラム譜面スクロール速度(0:x0.5, 1:x1.0, 2:x1.5,…,1999:x1000.0)" );
+			sw.WriteLine("; ドラム譜面スクロール速度(0:x0.1, 9:x1.0, 14:x1.5,…,1999:x200.0)");
 			sw.WriteLine( "DrumsScrollSpeed={0}", this.n譜面スクロール速度.Drums );
 			sw.WriteLine();
 			sw.WriteLine( "; 演奏速度(5～40)(→x5/20～x40/20)" );

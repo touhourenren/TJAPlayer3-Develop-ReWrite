@@ -371,8 +371,8 @@ namespace TJAPlayer3
                                 break;
                             case "ばいそく":
                                 {
-                                    double d = (double)((((int)lciMenuItems[i].cItem.obj現在値()) + 1) / 2.0);
-                                    s = "x" + d.ToString("0.0");
+									double d = (double)((((int)lciMenuItems[i].cItem.obj現在値()) + 1) / 10.0);
+									s = "x" + d.ToString("0.0");
                                 }
                                 break;
 
