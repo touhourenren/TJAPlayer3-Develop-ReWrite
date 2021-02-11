@@ -764,12 +764,13 @@ namespace TJAPlayer3
                     }
                 }
 
-                if (act難易度選択画面.bOption) actPlayOption.On進行描画();
-
+            
                 for (int i = 0; i < 10; i++)
                 {
                     tBoardNumberDraw(this.ptBoardNumber[i].X - 10, this.ptBoardNumber[i].Y, i < 7 ? this.act曲リスト.ScoreRankCount[i].ToString() : this.act曲リスト.CrownCount[i - 7].ToString());
                 }
+
+                if (act難易度選択画面.bOption) actPlayOption.On進行描画();
 
                 switch (base.eフェーズID)
                 {
