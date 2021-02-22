@@ -788,11 +788,11 @@ namespace FDK
                 #endregion
             }
         }
-        public void t2D上下反転描画(Device device, float x, float y)
+        public void t2D上下反転描画(Device device, int x, int y)
         {
             this.t2D上下反転描画(device, x, y, 1f, this.rc全画像);
         }
-        public void t2D上下反転描画(Device device, float x, float y, Rectangle rc画像内の描画領域)
+        public void t2D上下反転描画(Device device, int x, int y, Rectangle rc画像内の描画領域)
         {
             this.t2D上下反転描画(device, x, y, 1f, rc画像内の描画領域);
         }
@@ -868,7 +868,7 @@ namespace FDK
             device.VertexFormat = TransformedColoredTexturedVertex.Format;
             device.DrawUserPrimitives(PrimitiveType.TriangleStrip, 2, this.cvTransformedColoredVertexies);
         }
-        public void t2D上下反転描画(Device device, float x, float y, float depth, Rectangle rc画像内の描画領域)
+        public void t2D上下反転描画(Device device, int x, int y, float depth, Rectangle rc画像内の描画領域)
         {
             if (this.texture == null)
                 throw new InvalidOperationException("テクスチャは生成されていません。");
