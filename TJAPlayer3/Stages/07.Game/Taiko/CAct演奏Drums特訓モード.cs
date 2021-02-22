@@ -526,12 +526,11 @@ namespace TJAPlayer3
 
 		public void t現在の位置にジャンプポイントを設定する()
 		{
-			TJAPlayer3.Skin.sound特訓ジャンプポイント.t再生する();
-
 			if (!this.bスクロール中 && this.b特訓PAUSE)
 			{
 				if (!JumpPointList.Contains(new STJUMPP() { Time = (long)(CSound管理.rc演奏用タイマ.n現在時刻ms * (((double)TJAPlayer3.ConfigIni.n演奏速度) / 20.0)), Measure = this.n現在の小節線 }))
 					JumpPointList.Add(new STJUMPP() { Time = (long)(CSound管理.rc演奏用タイマ.n現在時刻ms * (((double)TJAPlayer3.ConfigIni.n演奏速度) / 20.0)), Measure = this.n現在の小節線 });
+				TJAPlayer3.Skin.sound特訓ジャンプポイント.t再生する();
 				JumpPointList.Sort((a, b) => a.Time.CompareTo(b.Time));
 			}
 		}
