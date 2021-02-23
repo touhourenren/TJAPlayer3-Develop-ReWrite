@@ -698,7 +698,7 @@ namespace TJAPlayer3
 	    public int SongPreviewLevel
 	    {
 	        get => _songPreviewLevel;
-	        set => SetProperty(ref _songPreviewLevel, value, nameof(SongPreviewLevel));
+	        set => SetProperty(ref _songPreviewLevel, value, nameof(SongPlaybackLevel));
 	    }
 
 	    private int _songPlaybackLevel;
@@ -1308,7 +1308,7 @@ namespace TJAPlayer3
 		    this.ApplySongVol = false;
 		    this.SoundEffectLevel = CSound.DefaultSoundEffectLevel;
 		    this.VoiceLevel = CSound.DefaultVoiceLevel;
-		    this.SongPreviewLevel = CSound.DefaultSongPreviewLevel;
+		    this.SongPreviewLevel = CSound.DefaultSongPlaybackLevel;
 		    this.SongPlaybackLevel = CSound.DefaultSongPlaybackLevel;
 		    this.KeyboardSoundLevelIncrement = DefaultKeyboardSoundLevelIncrement;
 			this.bログ出力 = true;
@@ -1708,10 +1708,6 @@ namespace TJAPlayer3
 		    sw.WriteLine( $"; Voice level ({CSound.MinimumGroupLevel}-{CSound.MaximumGroupLevel}%)" );
 		    sw.WriteLine( "{0}={1}", nameof(VoiceLevel), VoiceLevel );
 		    sw.WriteLine();
-		    sw.WriteLine( $"; 選曲画面のプレビュー時の音量 ({CSound.MinimumGroupLevel}-{CSound.MaximumGroupLevel}%)" );
-		    sw.WriteLine( $"; Song preview level ({CSound.MinimumGroupLevel}-{CSound.MaximumGroupLevel}%)" );
-		    sw.WriteLine( "{0}={1}", nameof(SongPreviewLevel), SongPreviewLevel );
-			sw.WriteLine();
 		    sw.WriteLine( $"; ゲーム中の音源の音量 ({CSound.MinimumGroupLevel}-{CSound.MaximumGroupLevel}%)" );
 		    sw.WriteLine( $"; Song playback level ({CSound.MinimumGroupLevel}-{CSound.MaximumGroupLevel}%)" );
 		    sw.WriteLine( "{0}={1}", nameof(SongPlaybackLevel), SongPlaybackLevel );
@@ -2374,10 +2370,6 @@ namespace TJAPlayer3
 											else if( str3.Equals( nameof(SongPreviewLevel) ) )
 											{
 												this.SongPreviewLevel = C変換.n値を文字列から取得して範囲内に丸めて返す( str4, CSound.MinimumGroupLevel, CSound.MaximumGroupLevel, this.SongPreviewLevel );
-											}
-											else if( str3.Equals( nameof(SongPlaybackLevel) ) )
-											{
-												this.SongPlaybackLevel = C変換.n値を文字列から取得して範囲内に丸めて返す( str4, CSound.MinimumGroupLevel, CSound.MaximumGroupLevel, this.SongPlaybackLevel );
 											}
 											else if( str3.Equals( nameof(KeyboardSoundLevelIncrement) ) )
 											{
