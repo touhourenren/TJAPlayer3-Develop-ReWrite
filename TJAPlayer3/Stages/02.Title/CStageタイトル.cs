@@ -57,7 +57,8 @@ namespace TJAPlayer3
 
 				TJAPlayer3.Skin.soundEntry.t再生する();
 				TJAPlayer3.Skin.SoundBanapas.bPlayed = false;
-				TJAPlayer3.Skin.bgmタイトルイン.t再生する();
+				if (TJAPlayer3.ConfigIni.bBGM音を発声する)
+					TJAPlayer3.Skin.bgmタイトルイン.t再生する();
 				b音声再生 = false;
 				base.On活性化();
 			}
@@ -124,7 +125,7 @@ namespace TJAPlayer3
 
 				if (!TJAPlayer3.Skin.bgmタイトルイン.b再生中)
                 {
-                    if (!b音声再生)
+                    if (TJAPlayer3.ConfigIni.bBGM音を発声する && !b音声再生)
 					{
 						TJAPlayer3.Skin.bgmタイトル.t再生する();
 						b音声再生 = true;

@@ -2594,16 +2594,7 @@ namespace TJAPlayer3
                 nearestChip = pastChip;
             }
             #endregion
-#if DEBUG
-            if(player == 0)
-            {
-                TJAPlayer3.act文字コンソール.tPrint(0, 0, C文字コンソール.Eフォント種別.白, pastChip != null ? pastChip.ToString() : "null");
-                TJAPlayer3.act文字コンソール.tPrint(0, 20, C文字コンソール.Eフォント種別.白, futureChip != null ? futureChip.ToString() : "null");
-                TJAPlayer3.act文字コンソール.tPrint(0, 40, C文字コンソール.Eフォント種別.白, nearestChip != null ? nearestChip.ToString() : "null");
-                TJAPlayer3.act文字コンソール.tPrint(0, 60, C文字コンソール.Eフォント種別.白, startPosision.ToString());
 
-            }
-#endif
             return nearestChip;
         }
 
@@ -2948,23 +2939,28 @@ namespace TJAPlayer3
                             break;
                     }
 				}
-#if DEBUG
-                if ( keyboard.bキーが押された( (int) SlimDXKeys.Key.F6 ) )
+                if (TJAPlayer3.ConfigIni.bTokkunMode) 
                 {
-                    if( TJAPlayer3.ConfigIni.b太鼓パートAutoPlay == false )
-                        TJAPlayer3.ConfigIni.b太鼓パートAutoPlay = true;
-                    else
-                        TJAPlayer3.ConfigIni.b太鼓パートAutoPlay = false;
+                    if (keyboard.bキーが押された((int)SlimDXKeys.Key.F6))
+                    {
+                        if (TJAPlayer3.ConfigIni.b太鼓パートAutoPlay == false)
+                            TJAPlayer3.ConfigIni.b太鼓パートAutoPlay = true;
+                        else
+                            TJAPlayer3.ConfigIni.b太鼓パートAutoPlay = false;
+                    }
                 }
-                if ( keyboard.bキーが押された( (int) SlimDXKeys.Key.F7 ) )
-                {
-                    if(TJAPlayer3.ConfigIni.b太鼓パートAutoPlay2P == false )
-                        TJAPlayer3.ConfigIni.b太鼓パートAutoPlay2P = true;
-                    else
-                        TJAPlayer3.ConfigIni.b太鼓パートAutoPlay2P = false;
-                }
-#endif
             }
+
+#if DEBUG
+
+            if (keyboard.bキーが押された((int)SlimDXKeys.Key.F7))
+            {
+                if (TJAPlayer3.ConfigIni.b太鼓パートAutoPlay2P == false)
+                    TJAPlayer3.ConfigIni.b太鼓パートAutoPlay2P = true;
+                else
+                    TJAPlayer3.ConfigIni.b太鼓パートAutoPlay2P = false;
+            }
+#endif
             if ( !this.actPauseMenu.bIsActivePopupMenu && this.bPAUSE && ( ( base.eフェーズID != CStage.Eフェーズ.演奏_STAGE_FAILED ) ) && ( base.eフェーズID != CStage.Eフェーズ.演奏_STAGE_FAILED_フェードアウト ) )
 			{
 				if ( keyboard.bキーが押された( (int)SlimDXKeys.Key.UpArrow ) )
@@ -4428,10 +4424,10 @@ namespace TJAPlayer3
             if (dTX == null) return; //CDTXがnullの場合はプレイヤーが居ないのでその場で処理終了
 
 
-            #region [ 再生開始小節の変更 ]
+#region [ 再生開始小節の変更 ]
             //nStartBar++;									// +1が必要
 
-            #region [ 演奏済みフラグのついたChipをリセットする ]
+#region [ 演奏済みフラグのついたChipをリセットする ]
             for ( int i = 0; i < dTX.listChip.Count; i++ )
 			{
                 //if(dTX.listChip[i].bHit) フラグが付いてなくてもすべてのチップをリセットする。(必要がある).2020.04.23.akasoko26
@@ -4487,7 +4483,7 @@ namespace TJAPlayer3
                 while (this.n現在のトップChip != 0 && dTX.listChip[this.n現在のトップChip].n発声時刻ms == dTX.listChip[TJAPlayer3.stage演奏ドラム画面.n現在のトップChip - 1].n発声時刻ms)
                     TJAPlayer3.stage演奏ドラム画面.n現在のトップChip--;
             }
-            #endregion
+#endregion
 #region [ 演奏開始の発声時刻msを取得し、タイマに設定 ]
             int nStartTime = (int)(dTX.listChip[this.n現在のトップChip].n発声時刻ms / (((double)TJAPlayer3.ConfigIni.n演奏速度) / 20.0));
 
@@ -4535,17 +4531,17 @@ namespace TJAPlayer3
 #endregion
 #region [ 演奏開始時点で既に表示されているBGAとAVIの、シークと再生 ]
 			this.actAVI.SkipStart( nStartTime );
-            #endregion
-            #region [ PAUSEしていたサウンドを一斉に再生再開する(ただしタイマを止めているので、ここではまだ再生開始しない) ]
+#endregion
+#region [ PAUSEしていたサウンドを一斉に再生再開する(ただしタイマを止めているので、ここではまだ再生開始しない) ]
 
             if (!(TJAPlayer3.ConfigIni.b演奏速度が一倍速であるとき以外音声を再生しない && TJAPlayer3.ConfigIni.n演奏速度 != 20))
                 foreach (CSound cs in pausedCSound)
                 {
                     cs.tサウンドを再生する();
                 }
-            #endregion
+#endregion
             pausedCSound.Clear();
-            #region [ タイマを再開して、PAUSEから復帰する ]
+#region [ タイマを再開して、PAUSEから復帰する ]
             CSound管理.rc演奏用タイマ.n現在時刻 = nStartTime;
 			TJAPlayer3.Timer.tリセット();						// これでPAUSE解除されるので、3行先の再開()は不要
 			TJAPlayer3.Timer.n現在時刻 = nStartTime;				// Debug表示のTime: 表記を正しくするために必要

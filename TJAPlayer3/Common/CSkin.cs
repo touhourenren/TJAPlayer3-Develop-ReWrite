@@ -36,6 +36,8 @@ namespace TJAPlayer3
         SOUND成績発表,
         SOUND特訓再生,
         SOUND特訓停止,
+        sound特訓ジャンプポイント,
+        sound特訓スキップ音,
         SOUND特訓スクロール,
         Count				// システムサウンド総数の計算用
     }
@@ -344,6 +346,8 @@ namespace TJAPlayer3
 
         public Cシステムサウンド sound特訓再生音 = null;
         public Cシステムサウンド sound特訓停止音 = null;
+        public Cシステムサウンド sound特訓ジャンプポイント = null;
+        public Cシステムサウンド sound特訓スキップ音 = null;
         public Cシステムサウンド sound特訓スクロール音 = null;
         public Cシステムサウンド soundPon = null;
         public Cシステムサウンド soundGauge = null;
@@ -430,6 +434,12 @@ namespace TJAPlayer3
                     case Eシステムサウンド.SOUND特訓停止:
                         return this.sound特訓停止音;
 
+                    case Eシステムサウンド.sound特訓ジャンプポイント:
+                        return this.sound特訓ジャンプポイント;
+
+                    case Eシステムサウンド.sound特訓スキップ音:
+                        return this.sound特訓スキップ音;
+
                     case Eシステムサウンド.SOUND特訓スクロール:
                         return this.sound特訓スクロール音;
 
@@ -508,6 +518,12 @@ namespace TJAPlayer3
 
                     case 21:
                         return this.sound特訓スクロール音;
+
+                    case 22:
+                        return this.sound特訓ジャンプポイント;
+
+                    case 23:
+                        return this.sound特訓スキップ音;
                 }
                 throw new IndexOutOfRangeException();
             }
@@ -655,8 +671,8 @@ namespace TJAPlayer3
             this.bgm起動画面 = new Cシステムサウンド(@"Sounds\Setup BGM.ogg", true, true, false, ESoundGroup.SongPlayback);
             this.bgmオプション画面 = new Cシステムサウンド(@"Sounds\Option BGM.ogg", true, true, false, ESoundGroup.SongPlayback);
             this.bgmコンフィグ画面 = new Cシステムサウンド(@"Sounds\Config BGM.ogg", true, true, false, ESoundGroup.SongPlayback);
-            this.bgm選曲画面 = new Cシステムサウンド(@"Sounds\Select BGM.ogg", true, true, false, ESoundGroup.SongPreview);
-            this.soundSongSelectChara = new Cシステムサウンド(@"Sounds\SongSelect Chara.ogg", false, false, false, ESoundGroup.SongPreview);
+            this.bgm選曲画面 = new Cシステムサウンド(@"Sounds\Select BGM.ogg", true, true, false, ESoundGroup.SongPlayback);
+            this.soundSongSelectChara = new Cシステムサウンド(@"Sounds\SongSelect Chara.ogg", false, false, false, ESoundGroup.SongPlayback);
             this.soundSkip = new Cシステムサウンド(@"Sounds\Skip.ogg", false, false, false, ESoundGroup.SoundEffect);
             this.SoundBanapas = new Cシステムサウンド(@"Sounds\Banapas.ogg", false, false, false, ESoundGroup.SoundEffect);
             this.soundEntry = new Cシステムサウンド(@"Sounds\Entry.ogg", true, false, false, ESoundGroup.Voice);
@@ -678,6 +694,8 @@ namespace TJAPlayer3
             this.sound特訓再生音 = new Cシステムサウンド(@"Sounds\Resume.ogg", false, false,false, ESoundGroup.SoundEffect);
             this.sound特訓停止音 = new Cシステムサウンド(@"Sounds\Pause.ogg", false, false, false, ESoundGroup.SoundEffect);
             this.sound特訓スクロール音 = new Cシステムサウンド(@"Sounds\Scroll.ogg", false, false, false, ESoundGroup.SoundEffect);
+            this.sound特訓ジャンプポイント = new Cシステムサウンド(@"Sounds\Jump Point.ogg", false, false, false, ESoundGroup.SoundEffect);
+            this.sound特訓スキップ音 = new Cシステムサウンド(@"Sounds\Traning Skip.ogg", false, false, false, ESoundGroup.SoundEffect);
             this.soundPon = new Cシステムサウンド(@"Sounds\Pon.ogg", false, false, false, ESoundGroup.SoundEffect);
             this.soundGauge = new Cシステムサウンド(@"Sounds\Gauge.ogg", false, false, false, ESoundGroup.SoundEffect);
             this.soundScoreDon = new Cシステムサウンド(@"Sounds\ScoreDon.ogg", false, false, false, ESoundGroup.SoundEffect);
