@@ -1225,6 +1225,19 @@ namespace TJAPlayer3
                             {
                                 SongSelect_Rotate_Chara = strParam.Split(',').ToArray();
                             }
+
+                            else if (strCommand == nameof(SongSelect_Rating_Selected_Song_X))
+                            {
+                                SongSelect_Rating_Selected_Song_X = int.Parse(strParam);
+                            }
+                            else if (strCommand == nameof(SongSelect_Rating_Selected_Song_Offset_Y))
+                            {
+                                SongSelect_Rating_Selected_Song_Offset_Y = int.Parse(strParam);
+                            }
+                            else if (strCommand == nameof(SongSelect_Rating_Increment_Y))
+                            {
+                                SongSelect_Rating_Increment_Y = int.Parse(strParam);
+                            }
                             #endregion
                             #region SongLoading
                             else if (strCommand == nameof(SongLoading_Plate_X))
@@ -2576,7 +2589,7 @@ namespace TJAPlayer3
         public int SongSelect_Title_Y = 0;
         public int Difficulty_Title_X = 0;
         public int Difficulty_Title_Y = 0;
-        public string[] SongSelect_GenreName = { "ポップス", "アニメ", "ゲームバラエティ", "ナムコオリジナル", "クラシック", "キッズ", "ボーカロイド", "最近遊んだ曲"};
+        public string[] SongSelect_GenreName = { "ポップス", "アニメ", "ゲームバラエティ", "ナムコオリジナル", "クラシック", "キッズ", "ボーカロイド", "最近遊んだ曲" };
         public int[] SongSelect_NamePlate_X = new int[] { 36, 1020 };
         public int[] SongSelect_NamePlate_Y = new int[] { 615, 615 };
         public int[] SongSelect_Auto_X = new int[] { 60, 950 };
@@ -2607,6 +2620,9 @@ namespace TJAPlayer3
         public int SongSelect_CorrectionY_Chara_Value = 0;
         public string[] SongSelect_Rotate_Chara = { "ここに90℃回転させたい文字をカンマで区切って記入" };
 
+        public int SongSelect_Rating_Selected_Song_X = 390;
+        public int SongSelect_Rating_Selected_Song_Offset_Y = 180;
+        public int SongSelect_Rating_Increment_Y = 14;
         #endregion
         #region SongLoading
         public int SongLoading_Plate_X = 640;

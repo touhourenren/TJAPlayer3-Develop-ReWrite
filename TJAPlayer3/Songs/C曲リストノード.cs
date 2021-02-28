@@ -9,6 +9,7 @@ namespace TJAPlayer3
 	{
 		// プロパティ
 
+		public int? nIndex;
 		public Eノード種別 eノード種別 = Eノード種別.UNKNOWN;
 		public enum Eノード種別
 		{

@@ -7,9 +7,9 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Diagnostics;
 using System.Drawing.Text;
+using System.Linq;
 using SlimDX;
 using FDK;
-using System.Linq;
 
 namespace TJAPlayer3
 {
@@ -917,6 +917,9 @@ namespace TJAPlayer3
 						this.stバー情報[index].strジャンル = song.strジャンル;
 						this.stバー情報[index].strサブタイトル = song.strサブタイトル;
 						this.stバー情報[index].ar難易度 = song.nLevel;
+
+						CopyRating(song, ref this.stバー情報[index]);
+
 						for (int f = 0; f < (int)Difficulty.Total; f++)
 						{
 							if (song.arスコア[f] != null)
@@ -999,6 +1002,9 @@ namespace TJAPlayer3
 						this.stバー情報[index].strサブタイトル = song.strサブタイトル;
 						this.stバー情報[index].strジャンル = song.strジャンル;
 						this.stバー情報[index].ar難易度 = song.nLevel;
+
+						CopyRating(song, ref this.stバー情報[index]);
+
 						for (int f = 0; f < (int)Difficulty.Total; f++)
 						{
 							if (song.arスコア[f] != null)
@@ -1094,6 +1100,11 @@ namespace TJAPlayer3
 				int x = i選曲バーX座標;
 				int xAnime = this.ptバーの座標[n見た目の行番号].X + ((int)((this.ptバーの座標[n次のパネル番号].X - this.ptバーの座標[n見た目の行番号].X) * (((double)Math.Abs(this.n現在のスクロールカウンタ)) / 100.0)));
 				int y = this.ptバーの座標[n見た目の行番号].Y + ((int)((this.ptバーの座標[n次のパネル番号].Y - this.ptバーの座標[n見た目の行番号].Y) * (((double)Math.Abs(this.n現在のスクロールカウンタ)) / 100.0)));
+
+				if (i != 5)
+				{
+					DrawRatingForUnselectedSong(nパネル番号, this.ptバーの座標[nパネル番号].X);
+				}
 
 				// (B) スクロール中の選択曲バー、またはその他のバーの描画。
 
@@ -1534,6 +1545,7 @@ namespace TJAPlayer3
 									}
 								}
 							}
+							DrawRatingForSelectedSong();
 						}
 						break;
 
@@ -1707,7 +1719,72 @@ namespace TJAPlayer3
 
 			return 0;
 		}
-		
+
+
+		private static void CopyRating(C曲リストノード song, ref STバー情報 stバー情報)
+		{
+			if (song.eノード種別 == C曲リストノード.Eノード種別.SCORE)
+			{
+				stバー情報.Rating = song.arスコア.FirstOrDefault(o => o != null)?.譜面情報.Rating;
+			}
+			else
+			{
+				stバー情報.Rating = null;
+			}
+		}
+
+		// 26x24 alt
+		private int _ratingSelectedSongX = 390;
+		private int _ratingSelectedSongOffsetY = 180;
+		private int _ratingIncrementY = 14;
+
+		private void DrawRatingForUnselectedSong(int nパネル番号, int baseX)
+		{
+			var rating = this.stバー情報[nパネル番号].Rating;
+			//var x = baseX + _ratingUnselectedSongOffsetX;
+			//var offsetY = _ratingUnselectedSongOffsetY;
+
+			//DrawRatingForSong(rating, x, offsetY);
+		}
+
+		private void DrawRatingForSelectedSong()
+		{
+			var rating = TJAPlayer3.stage選曲.r現在選択中のスコア.譜面情報.Rating;
+			var x = _ratingSelectedSongX;
+			var offsetY = _ratingSelectedSongOffsetY;
+
+			DrawRatingForSong(rating, x, offsetY);
+		}
+
+		private void DrawRatingForSong(SongRating? rating, int x, int offsetY)
+		{
+			if (rating == null || rating == SongRating.Unset)
+			{
+				return;
+			}
+
+			var txRating = TJAPlayer3.Tx.SongSelect_Rating;
+
+			if (txRating == null)
+			{
+				return;
+			}
+
+			for (int i = -((int)rating - 1); i <= 0; i++)
+			{
+				txRating.t2D下中央基準描画(
+					TJAPlayer3.app.Device,
+					x,
+					TJAPlayer3.Skin.SongSelect_Overall_Y + offsetY - (i * _ratingIncrementY));
+			}
+		}
+
+		public void OnSelectedSongRatingChanged(SongRating newRating)
+		{
+			int nパネル番号 = (this.n現在の選択行 + 13) % 13;
+
+			this.stバー情報[nパネル番号].Rating = newRating;
+		}
 
 		// その他
 
@@ -1775,6 +1852,7 @@ namespace TJAPlayer3
             public string strジャンル;
             public string strサブタイトル;
             public TitleTextureKey ttkタイトル;
+			public SongRating? Rating;
 			public int[] nクリア;
 			public int[] nスコアランク;
 		}
@@ -1948,19 +2026,21 @@ namespace TJAPlayer3
 
 			for( int i = 0; i < 9; i++ )
 			{
-				this.stバー情報[ i ].strタイトル文字列 = song.strタイトル;
-                this.stバー情報[ i ].strジャンル = song.strジャンル;
-				this.stバー情報[ i ].col文字色 = song.col文字色;
+				this.stバー情報[i].strタイトル文字列 = song.strタイトル;
+                this.stバー情報[i].strジャンル = song.strジャンル;
+				this.stバー情報[i].col文字色 = song.col文字色;
                 this.stバー情報[i].ForeColor = song.ForeColor;
                 this.stバー情報[i].BackColor = song.BackColor;
-				this.stバー情報[ i ].eバー種別 = this.e曲のバー種別を返す( song );
-                this.stバー情報[ i ].strサブタイトル = song.strサブタイトル;
-                this.stバー情報[ i ].ar難易度 = song.nLevel;
+				this.stバー情報[i].eバー種別 = this.e曲のバー種別を返す( song );
+                this.stバー情報[i].strサブタイトル = song.strサブタイトル;
+                this.stバー情報[i].ar難易度 = song.nLevel;
 
-			    for( int f = 0; f < (int)Difficulty.Total; f++ )
+				CopyRating(song, ref this.stバー情報[i]);
+
+				for ( int f = 0; f < (int)Difficulty.Total; f++ )
                 {
-                    if( song.arスコア[ f ] != null )
-                        this.stバー情報[ i ].b分岐 = song.arスコア[ f ].譜面情報.b譜面分岐;
+                    if( song.arスコア[f] != null )
+                        this.stバー情報[i].b分岐 = song.arスコア[f].譜面情報.b譜面分岐;
                 }
 
 
@@ -1979,9 +2059,9 @@ namespace TJAPlayer3
 				}
 
 				for ( int j = 0; j < 3; j++ )
-					this.stバー情報[ i ].nスキル値[ j ] = (int) song.arスコア[ this.n現在のアンカ難易度レベルに最も近い難易度レベルを返す( song ) ].譜面情報.最大スキル[ j ];
+					this.stバー情報[i].nスキル値[j] = (int) song.arスコア[this.n現在のアンカ難易度レベルに最も近い難易度レベルを返す( song )].譜面情報.最大スキル[ j ];
 
-                this.stバー情報[ i ].ttkタイトル = this.ttk曲名テクスチャを生成する( this.stバー情報[ i ].strタイトル文字列, this.stバー情報[i].ForeColor, this.stバー情報[i].BackColor, stバー情報[i].eバー種別 == Eバー種別.Box ? this.pfBoxName : this.pfMusicName);
+                this.stバー情報[i].ttkタイトル = this.ttk曲名テクスチャを生成する( this.stバー情報[i].strタイトル文字列, this.stバー情報[i].ForeColor, this.stバー情報[i].BackColor, stバー情報[i].eバー種別 == Eバー種別.Box ? this.pfBoxName : this.pfMusicName);
 
 				song = this.r次の曲( song );
 			}

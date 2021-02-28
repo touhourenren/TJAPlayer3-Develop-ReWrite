@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Text;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using TJAPlayer3.C曲リストノードComparers;
 using FDK;
@@ -150,6 +151,15 @@ namespace TJAPlayer3
 			if( TJAPlayer3.ConfigIni.bLog曲検索ログ出力 )
 				Trace.TraceInformation( "基点フォルダ: " + str基点フォルダ );
 
+			var rawFileInfos = info.GetFiles();
+			var playlistFileInfos = GetPlaylistFileInfos(rawFileInfos);
+			var fileInfoIndexPairs = playlistFileInfos
+				.Select((o, i) => new KeyValuePair<FileInfo, int?>(o, i))
+				.Concat(rawFileInfos
+					.Select(o => new KeyValuePair<FileInfo, int?>(o, null))
+				)
+				.ToList();
+
 			#region [ a.フォルダ内に set.def が存在する場合 → 1フォルダ内のtjaファイル無制限]
 			//-----------------------------
 			string path = str基点フォルダ + "set.def";
@@ -163,9 +173,12 @@ namespace TJAPlayer3
 				}
 				try
 				{
-                    foreach( FileInfo fileinfo in info.GetFiles() )
-                    {
-					    SlowOrSuspendSearchTask();
+					foreach (var kvp in fileInfoIndexPairs)
+					{
+						var fileinfo = kvp.Key;
+                        var index = kvp.Value;
+
+						SlowOrSuspendSearchTask();
                         #region[ 拡張子を取得 ]
 					    string strExt = fileinfo.Extension.ToLower();
                         #endregion
@@ -173,9 +186,9 @@ namespace TJAPlayer3
                         {
                             if( strExt.Equals( ".tja" ) )
                             {
-                                //tja、dtxが両方存在していた場合、tjaを読み込まずにtjaと同名のdtxだけを使う。
-                                string dtxscoreini = str基点フォルダ + ( fileinfo.Name.Replace( strExt, ".dtx" ) );
-                                if( File.Exists( dtxscoreini ) )
+								//tja、dtxが両方存在していた場合、tjaを読み込まずにtjaと同名のdtxだけを使う。
+								string dtxscoreini = Path.ChangeExtension(fileinfo.FullName, ".dtx");
+								if ( File.Exists( dtxscoreini ) )
                                 {
                                     continue;
                                 }
@@ -184,7 +197,8 @@ namespace TJAPlayer3
                             #region[ 新処理 ]
                             CDTX dtx = new CDTX( fileinfo.FullName, false, 1.0, 0, 1 );
                             C曲リストノード c曲リストノード = new C曲リストノード();
-                            c曲リストノード.eノード種別 = C曲リストノード.Eノード種別.SCORE;
+							c曲リストノード.nIndex = index;
+							c曲リストノード.eノード種別 = C曲リストノード.Eノード種別.SCORE;
 
                             bool b = false;
                             for( int n = 0; n < (int)Difficulty.Total; n++ )
@@ -194,9 +208,9 @@ namespace TJAPlayer3
                                     c曲リストノード.nスコア数++;
                                     c曲リストノード.r親ノード = node親;
                                     c曲リストノード.strBreadcrumbs = ( c曲リストノード.r親ノード == null ) ?
-                                    str基点フォルダ + fileinfo.Name : c曲リストノード.r親ノード.strBreadcrumbs + " > " + str基点フォルダ + fileinfo.Name;
+									fileinfo.FullName : c曲リストノード.r親ノード.strBreadcrumbs + " > " + fileinfo.FullName;
 
-                                    c曲リストノード.strタイトル = dtx.TITLE;
+									c曲リストノード.strタイトル = dtx.TITLE;
                                     c曲リストノード.strサブタイトル = dtx.SUBTITLE;
                                     c曲リストノード.strジャンル = dtx.GENRE;
                                     if (c曲リストノード.r親ノード != null && c曲リストノード.r親ノード.strジャンル != "")
@@ -222,17 +236,17 @@ namespace TJAPlayer3
 									c曲リストノード.str本当のジャンル = c曲リストノード.strジャンル;
 
 
-									c曲リストノード.arスコア[ n ] = new Cスコア();
-                                    c曲リストノード.arスコア[ n ].ファイル情報.ファイルの絶対パス = str基点フォルダ + fileinfo.Name;
-                                    c曲リストノード.arスコア[ n ].ファイル情報.フォルダの絶対パス = str基点フォルダ;
-                                    c曲リストノード.arスコア[ n ].ファイル情報.ファイルサイズ = fileinfo.Length;
-                                    c曲リストノード.arスコア[ n ].ファイル情報.最終更新日時 = fileinfo.LastWriteTime;
+									c曲リストノード.arスコア[n] = new Cスコア();
+									c曲リストノード.arスコア[n].ファイル情報.ファイルの絶対パス = fileinfo.FullName;
+									c曲リストノード.arスコア[n].ファイル情報.フォルダの絶対パス = fileinfo.DirectoryName + Path.DirectorySeparatorChar;
+									c曲リストノード.arスコア[n].ファイル情報.ファイルサイズ = fileinfo.Length;
+                                    c曲リストノード.arスコア[n].ファイル情報.最終更新日時 = fileinfo.LastWriteTime;
                                     string strFileNameScoreIni = c曲リストノード.arスコア[ n ].ファイル情報.ファイルの絶対パス + ".score.ini";
                                     if( File.Exists( strFileNameScoreIni ) )
                                     {
                                         FileInfo infoScoreIni = new FileInfo( strFileNameScoreIni );
-                                        c曲リストノード.arスコア[ n ].ScoreIni情報.ファイルサイズ = infoScoreIni.Length;
-                                        c曲リストノード.arスコア[ n ].ScoreIni情報.最終更新日時 = infoScoreIni.LastWriteTime;
+                                        c曲リストノード.arスコア[n].ScoreIni情報.ファイルサイズ = infoScoreIni.Length;
+                                        c曲リストノード.arスコア[n].ScoreIni情報.最終更新日時 = infoScoreIni.LastWriteTime;
                                     }
                                     if( b == false )
                                     {
@@ -263,28 +277,32 @@ namespace TJAPlayer3
 			//-----------------------------
             else
 			{
-				foreach( FileInfo fileinfo in info.GetFiles() )
+				foreach (var kvp in fileInfoIndexPairs)
 				{
+					var fileinfo = kvp.Key;
+					var index = kvp.Value;
+
 					SlowOrSuspendSearchTask();		// #27060 中断要求があったら、解除要求が来るまで待機, #PREMOVIE再生中は検索負荷を落とす
 					string strExt = fileinfo.Extension.ToLower();
 
                     if( ( strExt.Equals( ".tja" ) || strExt.Equals( ".dtx" ) ) )
                     {
-                        // 2017.06.02 kairera0467 廃止。
-                        //if( strExt.Equals( ".tja" ) )
-                        //{
-                        //    //tja、dtxが両方存在していた場合、tjaを読み込まずにdtxだけ使う。
-                        //    string[] dtxscoreini = Directory.GetFiles( str基点フォルダ, "*.dtx");
-                        //    if(dtxscoreini.Length != 0 )
-                        //    {
-                        //        continue;
-                        //    }
-                        //}
+						// 2017.06.02 kairera0467 廃止。
+						//if( strExt.Equals( ".tja" ) )
+						//{
+						//    //tja、dtxが両方存在していた場合、tjaを読み込まずにdtxだけ使う。
+						//    string[] dtxscoreini = Directory.GetFiles( str基点フォルダ, "*.dtx");
+						//    if(dtxscoreini.Length != 0 )
+						//    {
+						//        continue;
+						//    }
+						//}
 
-                        #region[ 新処理 ]
-                        CDTX dtx = new CDTX( str基点フォルダ + fileinfo.Name, false, 1.0, 0, 0 );
-                        C曲リストノード c曲リストノード = new C曲リストノード();
-                        c曲リストノード.eノード種別 = C曲リストノード.Eノード種別.SCORE;
+						#region[ 新処理 ]
+						CDTX dtx = new CDTX(fileinfo.FullName, false, 1.0, 0, 0);
+						C曲リストノード c曲リストノード = new C曲リストノード();
+						c曲リストノード.nIndex = index;
+						c曲リストノード.eノード種別 = C曲リストノード.Eノード種別.SCORE;
 
                         bool b = false;
                         for( int n = 0; n < (int)Difficulty.Total; n++ )
@@ -294,9 +312,9 @@ namespace TJAPlayer3
                                 c曲リストノード.nスコア数++;
                                 c曲リストノード.r親ノード = node親;
                                 c曲リストノード.strBreadcrumbs = ( c曲リストノード.r親ノード == null ) ?
-                                    str基点フォルダ + fileinfo.Name : c曲リストノード.r親ノード.strBreadcrumbs + " > " + str基点フォルダ + fileinfo.Name;
+									fileinfo.FullName : c曲リストノード.r親ノード.strBreadcrumbs + " > " + fileinfo.FullName;
 
-                                c曲リストノード.strタイトル = dtx.TITLE;
+								c曲リストノード.strタイトル = dtx.TITLE;
                                 c曲リストノード.strサブタイトル = dtx.SUBTITLE;
 
 								if (dtx.List_DanSongs != null)
@@ -407,9 +425,9 @@ namespace TJAPlayer3
                                 c曲リストノード.nLevel = dtx.LEVELtaiko;
 
                                 c曲リストノード.arスコア[ n ] = new Cスコア();
-                                c曲リストノード.arスコア[ n ].ファイル情報.ファイルの絶対パス = str基点フォルダ + fileinfo.Name;
-                                c曲リストノード.arスコア[ n ].ファイル情報.フォルダの絶対パス = str基点フォルダ;
-                                c曲リストノード.arスコア[ n ].ファイル情報.ファイルサイズ = fileinfo.Length;
+								c曲リストノード.arスコア[n].ファイル情報.ファイルの絶対パス = fileinfo.FullName;
+								c曲リストノード.arスコア[n].ファイル情報.フォルダの絶対パス = fileinfo.DirectoryName + Path.DirectorySeparatorChar;
+								c曲リストノード.arスコア[ n ].ファイル情報.ファイルサイズ = fileinfo.Length;
                                 c曲リストノード.arスコア[ n ].ファイル情報.最終更新日時 = fileinfo.LastWriteTime;
                                 string strFileNameScoreIni = c曲リストノード.arスコア[ n ].ファイル情報.ファイルの絶対パス + ".score.ini";
                                 if( File.Exists( strFileNameScoreIni ) )
@@ -721,6 +739,19 @@ namespace TJAPlayer3
 				#endregion
 			}
 		}
+		private static IEnumerable<FileInfo> GetPlaylistFileInfos(IEnumerable<FileInfo> fileInfos)
+		{
+			return fileInfos
+				.Where(o => o.Extension.ToUpperInvariant() == ".T3U8")
+				.SelectMany(GetPlaylistFileInfos);
+		}
+
+		private static IEnumerable<FileInfo> GetPlaylistFileInfos(FileInfo playlistFileInfo)
+		{
+			return File.ReadAllLines(playlistFileInfo.FullName, Encoding.UTF8)
+				.Select(o => new FileInfo(o)); // TODO Add support for various (relative) locations
+		}
+
 		//-----------------
 		#endregion
 		#region [ スコアキャッシュを曲リストに反映する ]
@@ -877,10 +908,14 @@ namespace TJAPlayer3
 			cスコア.譜面情報.nスコアランク[2] = br.ReadInt32();
 			cスコア.譜面情報.nスコアランク[3] = br.ReadInt32();
 			cスコア.譜面情報.nスコアランク[4] = br.ReadInt32();
+			var hasSongRating = br.ReadBoolean();
+			var songRating = br.ReadInt32();
+			cスコア.譜面情報.Rating = hasSongRating
+				? (SongRating)songRating
+				: SongRating.Unset;
 
-
-            //Debug.WriteLine( "songs.db: " + cスコア.ファイル情報.ファイルの絶対パス );
-            return cスコア;
+			//Debug.WriteLine( "songs.db: " + cスコア.ファイル情報.ファイルの絶対パス );
+			return cスコア;
 		}
 		//-----------------
 		#endregion
@@ -953,7 +988,8 @@ namespace TJAPlayer3
                                     c曲リストノード.arスコア[ i ].譜面情報.nレベル[4] = cdtx.LEVELtaiko[4];
                                     c曲リストノード.arスコア[i].譜面情報.nレベル[5] = cdtx.LEVELtaiko[5];
                                     c曲リストノード.arスコア[i].譜面情報.nレベル[6] = cdtx.LEVELtaiko[6];
-                                    this.nファイルから反映できたスコア数++;
+									c曲リストノード.arスコア[i].譜面情報.Rating = SongRatingController.GetRating(path);
+									this.nファイルから反映できたスコア数++;
 									cdtx.On非活性化();
 //Debug.WriteLine( "★" + this.nファイルから反映できたスコア数 + " " + c曲リストノード.arスコア[ i ].譜面情報.タイトル );
 									#region [ 曲検索ログ出力 ]
@@ -1346,7 +1382,10 @@ namespace TJAPlayer3
 					bw.Write(node.arスコア[i].譜面情報.nスコアランク[2]);
 					bw.Write(node.arスコア[i].譜面情報.nスコアランク[3]);
 					bw.Write(node.arスコア[i].譜面情報.nスコアランク[4]);
-                    this.nSongsDBへ出力できたスコア数++;
+					var songRating = node.arスコア[i].譜面情報.Rating;
+					bw.Write(songRating.HasValue);
+					bw.Write(songRating.HasValue ? (int)songRating : 0);
+					this.nSongsDBへ出力できたスコア数++;
 				}
 			}
 		}
@@ -1666,7 +1705,8 @@ Debug.WriteLine( s + ":" + c曲リストノード.strタイトル );
 
 	            var comparer = new ComparerChain<C曲リストノード>(
 	                new C曲リストノードComparerノード種別(),
-	                acGenreComparer,
+					new C曲リストノードComparerPlaylistIndex(),
+					acGenreComparer,
 	                new C曲リストノードComparer絶対パス(1),
 	                new C曲リストノードComparerタイトル(1));
 
@@ -1688,7 +1728,7 @@ Debug.WriteLine( s + ":" + c曲リストノード.strタイトル );
 			{
 				ノードリスト.Sort( delegate( C曲リストノード n1, C曲リストノード n2 )
 				{
-        #region [ 共通処理 ]
+		#region [ 共通処理 ]
 					if ( n1 == n2 )
 					{
 						return 0;
@@ -1702,7 +1742,7 @@ Debug.WriteLine( s + ":" + c曲リストノード.strタイトル );
 					{
 						return order * n1.arスコア[ 0 ].ファイル情報.フォルダの絶対パス.CompareTo( n2.arスコア[ 0 ].ファイル情報.フォルダの絶対パス );
 					}
-        #endregion
+		#endregion
 					double dBPMn1 = 0.0, dBPMn2 = 0.0;
 					if ( n1.arスコア[ nL12345 ] != null )
 					{
@@ -1731,11 +1771,34 @@ Debug.WriteLine( dBPM + ":" + c曲リストノード.strタイトル );
 			}
 		}
 #endif
-        //-----------------
-        #endregion
-        #region [ .score.ini を読み込んで Cスコア.譜面情報に設定する ]
-        //-----------------
-        public void tScoreIniを読み込んで譜面情報を設定する( string strScoreIniファイルパス, Cスコア score )
+
+		public static void t曲リストのソート10_Rating順(List<C曲リストノード> ノードリスト, E楽器パート part, int itemIndex, params object[] p)
+		{
+			try
+			{
+				var comparer = new ComparerChain<C曲リストノード>(
+					new C曲リストノードComparerノード種別(),
+					new C曲リストノードComparerRating(itemIndex),
+					new C曲リストノードComparerPlaylistIndex(),
+					new C曲リストノードComparerAC15(),
+					new C曲リストノードComparer絶対パス(1),
+					new C曲リストノードComparerタイトル(1));
+
+				ノードリスト.Sort(comparer);
+			}
+			catch (Exception ex)
+			{
+				Trace.TraceError(ex.ToString());
+				Trace.TraceError("例外が発生しましたが処理を継続します。 (bca6dda7-76ad-42fc-a415-250f52c0b17e)");
+			}
+		}
+
+
+		//-----------------
+		#endregion
+		#region [ .score.ini を読み込んで Cスコア.譜面情報に設定する ]
+		//-----------------
+		public void tScoreIniを読み込んで譜面情報を設定する( string strScoreIniファイルパス, Cスコア score )
 		{
 			if( !File.Exists( strScoreIniファイルパス ) )
 				return;
@@ -1805,7 +1868,7 @@ Debug.WriteLine( dBPM + ":" + c曲リストノード.strタイトル );
 
 		#region [ private ]
 		//-----------------
-		private const string SONGSDB_VERSION = "SongsDB5";
+		private const string SONGSDB_VERSION = "SongsDB6";
 		private List<string> listStrBoxDefSkinSubfolderFullName;
 
 		/// <summary>

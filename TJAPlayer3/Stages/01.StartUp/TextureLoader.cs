@@ -170,6 +170,7 @@ namespace TJAPlayer3
             }
 
             SongSelect_ScoreWindow_Text = TxC(SONGSELECT + @"ScoreWindow_Text.png");
+            SongSelect_Rating = TxC(SONGSELECT + @"Rating.png");
 
             TJAPlayer3.Skin.SongSelect_Bar_Genre_Count = TJAPlayer3.t連番画像の枚数を数える(CSkin.Path(BASE + SONGSELECT + @"Bar_Genre\"), "Bar_Genre_");
 
@@ -757,6 +758,7 @@ namespace TJAPlayer3
             SongSelect_ScoreRank,
             SongSelect_Song_Number,
             SongSelect_BoardNumber,
+            SongSelect_Rating,
             SongSelect_ScoreWindow_Text;
         public CTexture[] SongSelect_GenreBack,
             SongSelect_Bar_Genre,

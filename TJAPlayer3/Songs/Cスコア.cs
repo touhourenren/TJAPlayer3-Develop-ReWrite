@@ -78,6 +78,7 @@ namespace TJAPlayer3
             public int[] nハイスコア;
             public string strサブタイトル;
             public int[] nレベル;
+			public SongRating? Rating;
 			public int[] nクリア;		//0:未クリア 1:クリア 2:フルコンボ 3:ドンダフルコンボ
 			public int[] nスコアランク;  //0:未取得 1:白粋 2:銅粋 3:銀粋 4:金雅 5:桃雅 6:紫雅 7:虹極
 
@@ -308,6 +309,7 @@ namespace TJAPlayer3
             this.譜面情報.nハイスコア = new int[(int)Difficulty.Total];
             this.譜面情報.strサブタイトル = "";
             this.譜面情報.nレベル = new int[(int)Difficulty.Total] { -1, -1, -1, -1, -1, -1, -1};
+			this.譜面情報.Rating = null;
 			this.譜面情報.nクリア = new int[5];
 			this.譜面情報.nスコアランク = new int[5];
 		}
