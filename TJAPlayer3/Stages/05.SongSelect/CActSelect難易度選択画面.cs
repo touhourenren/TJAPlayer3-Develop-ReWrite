@@ -163,18 +163,18 @@ namespace TJAPlayer3
 
             if (this.ctBarAnimeIn.b終了値に達した && !bSelect && !bOption)
             {
-                if (TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.RBlue) || TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDXKeys.Key.RightArrow))
+                if (TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.RBlue) || TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDX.DirectInput.Key.RightArrow))
                 {
                     TJAPlayer3.Skin.sound変更音.t再生する();
                     this.t次に移動();
                 }
-                else if (TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.LBlue) || TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDXKeys.Key.LeftArrow))
+                else if (TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.LBlue) || TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDX.DirectInput.Key.LeftArrow))
                 {
                     TJAPlayer3.Skin.sound変更音.t再生する();
                     this.t前に移動();
                 }
                 else if (TJAPlayer3.Pad.b押されたDGB(Eパッド.Decide) || TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.LRed) || TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.RRed) ||
-                     (TJAPlayer3.ConfigIni.bEnterがキー割り当てのどこにも使用されていない && TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDXKeys.Key.Return)))
+                     (TJAPlayer3.ConfigIni.bEnterがキー割り当てのどこにも使用されていない && TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDX.DirectInput.Key.Return)))
                 {
                     if (n現在の選択行 == 0)
                     {

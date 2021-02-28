@@ -6,8 +6,8 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using FDK.ExtensionMethods;
-using SharpDX.DirectSound;
-using SharpDX.Multimedia;
+using SlimDX.DirectSound;
+using SlimDX.Multimedia;
 using Un4seen.Bass;
 using Un4seen.BassAsio;
 using Un4seen.BassWasapi;
@@ -846,7 +846,8 @@ namespace FDK
 			this.n位置 = 0;
 			this._db周波数倍率 = 1.0;
 			this._db再生速度 = 1.0;
-//			this._cbRemoveMixerChannel = new WaitCallback( RemoveMixerChannelLater );
+			this.DirectSoundBufferFlags = CSoundDeviceDirectSound.DefaultFlags;
+			//this._cbRemoveMixerChannel = new WaitCallback( RemoveMixerChannelLater );
 			this._hBassStream = -1;
 			this._hTempoStream = 0;
 		}
@@ -893,10 +894,9 @@ namespace FDK
 				//-----------------
 				try
 				{
-					Stream str = File.Open(strファイル名, FileMode.Open, FileAccess.Read);
-					using (var ws = new SoundStream(str))
+					using (var ws = new WaveStream(strファイル名))
 					{
-						if (ws.Format.Encoding != WaveFormatEncoding.Pcm)
+						if (ws.Format.FormatTag != WaveFormatTag.Pcm)
 							bファイルがWAVかつPCMフォーマットである = false;
 					}
 				}
@@ -938,95 +938,28 @@ namespace FDK
 		}
 		public void tDirectSoundサウンドを作成するXaOggMp3( string strファイル名, DirectSound DirectSound )
 		{
-			try
-			{
-				this.e作成方法 = E作成方法.ファイルから;
-				this.strファイル名 = strファイル名;
-				WaveFormat wfx = new WaveFormat();
-				int nPCMデータの先頭インデックス = 0;
-				//			int nPCMサイズbyte = (int) ( xa.xaheader.nSamples * xa.xaheader.nChannels * 2 );	// nBytes = Bass.BASS_ChannelGetLength( this.hBassStream );
+			this.e作成方法 = E作成方法.ファイルから;
+			this.strファイル名 = strファイル名;
+			WaveFormat wfx = new WaveFormat();
+			int nPCMデータの先頭インデックス = 0;
+			//			int nPCMサイズbyte = (int) ( xa.xaheader.nSamples * xa.xaheader.nChannels * 2 );	// nBytes = Bass.BASS_ChannelGetLength( this.hBassStream );
 
+			int nPCMサイズbyte;
+			CWin32.WAVEFORMATEX cw32wfx;
+			tオンメモリ方式でデコードする(strファイル名, out this.byArrWAVファイルイメージ,
+			out nPCMデータの先頭インデックス, out nPCMサイズbyte, out cw32wfx, false);
 
+			wfx.AverageBytesPerSecond = (int)cw32wfx.nAvgBytesPerSec;
+			wfx.BitsPerSample = (short)cw32wfx.wBitsPerSample;
+			wfx.BlockAlignment = (short)cw32wfx.nBlockAlign;
+			wfx.Channels = (short)cw32wfx.nChannels;
+			wfx.FormatTag = WaveFormatTag.Pcm;  // xa.waveformatex.wFormatTag;
+			wfx.SamplesPerSecond = (int)cw32wfx.nSamplesPerSec;
 
-				int nPCMサイズbyte;
-				CWin32.WAVEFORMATEX cw32wfx;
-				tオンメモリ方式でデコードする(strファイル名, out this.byArrWAVファイルイメージ,
-				out nPCMデータの先頭インデックス, out nPCMサイズbyte, out cw32wfx, false);
-
-				wfx = WaveFormat.CreateCustomFormat((WaveFormatEncoding)cw32wfx.wFormatTag, (int)cw32wfx.nSamplesPerSec, cw32wfx.nChannels, (int)cw32wfx.nAvgBytesPerSec, cw32wfx.nBlockAlign, cw32wfx.wBitsPerSample);
-
-				// セカンダリバッファを作成し、PCMデータを書き込む。
-				tDirectSoundサウンドを作成する_セカンダリバッファの作成とWAVデータ書き込み
-					(ref this.byArrWAVファイルイメージ, DirectSound, CSoundDeviceDirectSound.DefaultFlags, wfx,
-					  nPCMサイズbyte, nPCMデータの先頭インデックス);
-				return;
-			}
-			catch (Exception e)
-			{
-				string s = Path.GetFileName(strファイル名);
-				Trace.TraceWarning($"Failed to create DirectSound buffer by using BASS.DLL.({s}: {e.Message})");
-				Trace.TraceWarning("Retrying by using DirectShow decoder.");
-			}
-			// すべてのファイルを DirectShow でデコードすると時間がかかるので、ファイルが WAV かつ PCM フォーマットでない場合のみ DirectShow でデコードする。
-
-			byte[] byArrWAVファイルイメージ = null;
-			bool bファイルがWAVかつPCMフォーマットである = true;
-
-			{
-				#region [ ファイルがWAVかつPCMフォーマットか否か調べる。]
-				//-----------------
-				SoundStream ws = null;
-				try
-				{
-					using (ws = new SoundStream(new FileStream(strファイル名, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)))
-					{
-						if (ws.Format.Encoding != WaveFormatEncoding.Pcm)
-							bファイルがWAVかつPCMフォーマットである = false;
-					}
-				}
-				catch
-				{
-					bファイルがWAVかつPCMフォーマットである = false;
-				}
-				finally
-				{
-					if (ws != null)
-					{
-						ws.Close();
-						ws.Dispose();
-					}
-				}
-				//-----------------
-				#endregion
-
-				if (bファイルがWAVかつPCMフォーマットである)
-				{
-					#region [ ファイルを読み込んで byArrWAVファイルイメージへ格納。]
-					//-----------------
-					var fs = File.Open(strファイル名, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-					var br = new BinaryReader(fs);
-
-					byArrWAVファイルイメージ = new byte[fs.Length];
-					br.Read(byArrWAVファイルイメージ, 0, (int)fs.Length);
-
-					br.Close();
-					fs.Close();
-					//-----------------
-					#endregion
-				}
-				else
-				{
-					#region [ DirectShow でデコード変換し、 byArrWAVファイルイメージへ格納。]
-					//-----------------
-					CDStoWAVFileImage.t変換(strファイル名, out byArrWAVファイルイメージ);
-					//-----------------
-					#endregion
-				}
-			}
-
-			// あとはあちらで。
-
-			this.tDirectSoundサウンドを作成する(byArrWAVファイルイメージ, DirectSound);
+			// セカンダリバッファを作成し、PCMデータを書き込む。
+			tDirectSoundサウンドを作成する_セカンダリバッファの作成とWAVデータ書き込み
+				(ref this.byArrWAVファイルイメージ, DirectSound, CSoundDeviceDirectSound.DefaultFlags, wfx,
+				  nPCMサイズbyte, nPCMデータの先頭インデックス);
 		}
 
 		public void tDirectSoundサウンドを作成する( byte[] byArrWAVファイルイメージ, DirectSound DirectSound )
@@ -1069,29 +1002,28 @@ namespace FDK
 					{
 						long chunkSize = (long) br.ReadUInt32();
 
-						var tag = (WaveFormatEncoding)br.ReadUInt16();
-						int Channels = br.ReadInt16();
-						int SamplesPerSecond = br.ReadInt32();
-						int AverageBytesPerSecond = br.ReadInt32();
-						int BlockAlignment = br.ReadInt16();
-						int BitsPerSample = br.ReadInt16();
+						var tag = (WaveFormatTag)br.ReadUInt16();
 
-						if (tag == WaveFormatEncoding.Pcm) wfx = new WaveFormat();
-						else if (tag == WaveFormatEncoding.Extensible) wfx = new WaveFormatExtensible(SamplesPerSecond, BitsPerSample, Channels);   // このクラスは WaveFormat を継承している。
+						if (tag == WaveFormatTag.Pcm) wfx = new WaveFormat();
+						else if (tag == WaveFormatTag.Extensible) wfx = new SlimDX.Multimedia.WaveFormatExtensible();   // このクラスは WaveFormat を継承している。
 						else
 							throw new InvalidDataException( string.Format( "未対応のWAVEフォーマットタグです。(Tag:{0})", tag.ToString() ) );
 
-						wfx = WaveFormat.CreateCustomFormat((WaveFormatEncoding)tag, SamplesPerSecond, Channels, AverageBytesPerSecond, BlockAlignment, BitsPerSample);
+						wfx.FormatTag = tag;
+						wfx.Channels = br.ReadInt16();
+						wfx.SamplesPerSecond = br.ReadInt32();
+						wfx.AverageBytesPerSecond = br.ReadInt32();
+						wfx.BlockAlignment = br.ReadInt16();
+						wfx.BitsPerSample = br.ReadInt16();
 
 						long nフォーマットサイズbyte = 16;
 
-						if (wfx.Encoding == WaveFormatEncoding.Extensible)
+						if (wfx.FormatTag == WaveFormatTag.Extensible)
 						{
 							br.ReadUInt16();    // 拡張領域サイズbyte
-							var wfxEx = (SharpDX.Multimedia.WaveFormatExtensible)wfx;
-							int ValidBitsPerSample = br.ReadInt16();
-							wfxEx.ChannelMask = (Speakers) br.ReadInt32();
-							wfxEx.GuidSubFormat = new Guid(br.ReadBytes(16)); // GUID は 16byte (128bit)
+							var wfxEx = (SlimDX.Multimedia.WaveFormatExtensible)wfx;
+							wfxEx.ValidBitsPerSample = br.ReadInt16();
+							wfxEx.SubFormat = new Guid(br.ReadBytes(16));   // GUID は 16byte (128bit)
 
 							nフォーマットサイズbyte += 24;
 						}
@@ -1142,14 +1074,13 @@ namespace FDK
 			( ref byte[] byArrWAVファイルイメージ, DirectSound DirectSound, BufferFlags flags, WaveFormat wfx,
 			int nPCMサイズbyte, int nPCMデータの先頭インデックス )
 		{
-			this._Format = wfx;
 			// セカンダリバッファを作成し、PCMデータを書き込む。
 
 			this.Buffer = new SecondarySoundBuffer( DirectSound, new SoundBufferDescription()
 			{
-				Format = (wfx.Encoding == WaveFormatEncoding.Pcm) ? wfx : (SharpDX.Multimedia.WaveFormatExtensible)wfx,
+				Format = (wfx.FormatTag == WaveFormatTag.Pcm) ? wfx : (SlimDX.Multimedia.WaveFormatExtensible)wfx,
 				Flags = flags,
-				BufferBytes = nPCMサイズbyte,
+				SizeInBytes = nPCMサイズbyte,
 			});
 			this.Buffer.Write( byArrWAVファイルイメージ, nPCMデータの先頭インデックス, nPCMサイズbyte, 0, LockFlags.None );
 
@@ -1161,8 +1092,8 @@ namespace FDK
 			this.DirectSound = DirectSound;
 
 			// DTXMania用に追加
-			this.nオリジナルの周波数 = wfx.SampleRate;
-			n総演奏時間ms = (int)(((double)nPCMサイズbyte) / (this._Format.AverageBytesPerSecond * 0.001));
+			this.nオリジナルの周波数 = wfx.SamplesPerSecond;
+			n総演奏時間ms = (int)(((double)nPCMサイズbyte) / (this.Buffer.Format.AverageBytesPerSecond * 0.001));
 
 
 			// インスタンスリストに登録。
@@ -1237,7 +1168,7 @@ namespace FDK
 			{
 				if ( this.eデバイス種別 == ESoundDeviceType.DirectSound )
 				{
-					return ((this.Buffer.Status & (int)BufferStatus.Playing) != (int)BufferStatus.None);
+					return ((this.Buffer.Status & BufferStatus.Playing) != BufferStatus.None);
 				}
 				else
 				{
@@ -1372,7 +1303,7 @@ Debug.WriteLine("更に再生に失敗: " + Path.GetFileName(this.strファイ�
 			}
 			else if( this.bDirectSoundである )
 			{
-				this.Buffer.CurrentPosition = 0;
+				this.Buffer.CurrentPlayPosition = 0;
 			}
 		}
 		public void t再生位置を変更する( long n位置ms )
@@ -1404,14 +1335,15 @@ Debug.WriteLine("更に再生に失敗: " + Path.GetFileName(this.strファイ�
 			}
 			else if( this.bDirectSoundである )
 			{
-				int n位置sample = (int)(this._Format.SampleRate * n位置ms * 0.001 * _db周波数倍率 * _db再生速度);    // #30839 2013.2.24 yyagi; add _db周波数倍率 and _db再生速度
+				int n位置sample = (int)(this.Buffer.Format.SamplesPerSecond * n位置ms * 0.001 * _db周波数倍率 * _db再生速度);    // #30839 2013.2.24 yyagi; add _db周波数倍率 and _db再生速度
 				try
 				{
-					this.Buffer.CurrentPosition = n位置sample * this._Format.BlockAlign;
+					this.Buffer.CurrentPlayPosition = n位置sample * this.Buffer.Format.BlockAlignment;
 				}
-				catch
+				catch (DirectSoundException e)
 				{
 					Trace.TraceError( "{0}: Seek error: {1}", Path.GetFileName( this.strファイル名 ), n位置ms);
+					Trace.TraceError(e.ToString());
 					Trace.TraceError( "例外が発生しましたが処理を継続します。 (95dee242-1f92-4fcf-aaf6-b162ad2bfc03)" );
 				}
 				//if ( this.n総演奏時間ms > 5000 )
@@ -1434,9 +1366,8 @@ Debug.WriteLine("更に再生に失敗: " + Path.GetFileName(this.strファイ�
 			}
 			else if ( this.bDirectSoundである )
 			{
-				this.Buffer.GetCurrentPosition(out int n位置tmp, out int _);
-				n位置byte = (long)n位置tmp;
-				db位置ms = n位置byte / this._Format.SampleRate / 0.001 / _db周波数倍率 / _db再生速度;
+				n位置byte = this.Buffer.CurrentPlayPosition;
+				db位置ms = n位置byte / this.Buffer.Format.SamplesPerSecond / 0.001 / _db周波数倍率 / _db再生速度;
 			}
 			else
 			{
@@ -1668,7 +1599,6 @@ Debug.WriteLine("更に再生に失敗: " + Path.GetFileName(this.strファイ�
 		private double _db周波数倍率 = 1.0;
 		private double _db再生速度 = 1.0;
 		private bool bIs1倍速再生 = true;
-		private WaveFormat _Format;
 
 		private void tBASSサウンドを作成する( string strファイル名, int hMixer, BASSFlag flags )
 		{
@@ -1740,11 +1670,10 @@ Debug.WriteLine("更に再生に失敗: " + Path.GetFileName(this.strファイ�
 			//-----------------
 			try
 			{
-				Stream str = File.Open(strファイル名, FileMode.Open, FileAccess.Read);
-				using (var ws = new SoundStream(str))
+				using (var ws = new WaveStream(strファイル名))
 				{
-					if (ws.Format.Encoding == (WaveFormatEncoding)0x6770 || // Ogg Vorbis Mode 2+
-						 ws.Format.Encoding == (WaveFormatEncoding)0x6771)  // Ogg Vorbis Mode 3+
+					if (ws.Format.FormatTag == (WaveFormatTag)0x6770 || // Ogg Vorbis Mode 2+
+						 ws.Format.FormatTag == (WaveFormatTag)0x6771)  // Ogg Vorbis Mode 3+
 					{
 						Trace.TraceInformation( Path.GetFileName( strファイル名 ) + ": RIFF chunked Vorbis. Decode to raw Wave first, to avoid BASS.DLL troubles" );
 						try

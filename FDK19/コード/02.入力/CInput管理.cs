@@ -3,17 +3,13 @@ using System.Collections.Generic;
 using System.Text;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using SharpDX.DirectInput;
+using SlimDX;
+using SlimDX.DirectInput;
 
 namespace FDK
 {
 	public class CInput管理 : IDisposable
 	{
-		// 定数
-
-		public static int n通常音量 = 110;
-
-
 		// プロパティ
 
 		public List<IInputDevice> list入力デバイス
@@ -62,7 +58,11 @@ namespace FDK
 
 
 		// コンストラクタ
-		public CInput管理(IntPtr hWnd, bool bUseMidiIn = true)
+		public CInput管理(IntPtr hWnd)
+		{
+			CInput管理初期化(hWnd, true);
+		}
+		public CInput管理(IntPtr hWnd, bool bUseMidiIn)
 		{
 			CInput管理初期化(hWnd, bUseMidiIn);
 		}
@@ -73,33 +73,13 @@ namespace FDK
 			// this.timer = new CTimer( CTimer.E種別.MultiMedia );
 
 			this.list入力デバイス = new List<IInputDevice>(10);
-			#region [ Enumerate keyboard/mouse: exception is masked if keyboard/mouse is not connected ]
-			CInputKeyboard cinputkeyboard = null;
-			CInputMouse cinputmouse = null;
-			try
-			{
-				cinputkeyboard = new CInputKeyboard(hWnd, directInput);
-				cinputmouse = new CInputMouse(hWnd, directInput);
-			}
-
-			catch
-			{
-			}
-			if (cinputkeyboard != null)
-			{
-				this.list入力デバイス.Add(cinputkeyboard);
-			}
-			if (cinputmouse != null)
-			{
-				this.list入力デバイス.Add(cinputmouse);
-			}
-			#endregion
-			#region [ Enumerate joypad ]
-			foreach (DeviceInstance instance in this.directInput.GetDevices(DeviceClass.GameControl, DeviceEnumerationFlags.AttachedOnly))
+			this.list入力デバイス.Add(new CInputKeyboard(hWnd, directInput));
+			this.list入力デバイス.Add(new CInputMouse(hWnd, directInput));
+			foreach (DeviceInstance instance in this.directInput.GetDevices(DeviceClass.GameController, DeviceEnumerationFlags.AttachedOnly))
 			{
 				this.list入力デバイス.Add(new CInputJoystick(hWnd, instance, directInput));
 			}
-			#endregion
+
 			if (bUseMidiIn)
 			{
 				this.proc = new CWin32.MidiInProc(this.MidiInCallback);
@@ -108,27 +88,22 @@ namespace FDK
 				for (uint i = 0; i < nMidiDevices; i++)
 				{
 					CInputMIDI item = new CInputMIDI(i);
+					this.list入力デバイス.Add(item);
 					CWin32.MIDIINCAPS lpMidiInCaps = new CWin32.MIDIINCAPS();
 					uint num3 = CWin32.midiInGetDevCaps(i, ref lpMidiInCaps, (uint)Marshal.SizeOf(lpMidiInCaps));
 					if (num3 != 0)
 					{
 						Trace.TraceError("MIDI In: Device{0}: midiInDevCaps(): {1:X2}: ", i, num3);
 					}
+					else if ((CWin32.midiInOpen(ref item.hMidiIn, i, this.proc, 0, 0x30000) == 0) && (item.hMidiIn != 0))
+					{
+						CWin32.midiInStart(item.hMidiIn);
+						Trace.TraceInformation("MIDI In: [{0}] \"{1}\" の入力受付を開始しました。", i, lpMidiInCaps.szPname);
+					}
 					else
 					{
-						uint ret = CWin32.midiInOpen(ref item.hMidiIn, i, this.proc, IntPtr.Zero, 0x30000);
-						Trace.TraceInformation("midiInOpen()==" + ret);
-						Trace.TraceInformation("item.hMidiIn==" + item.hMidiIn.ToString());
-						if ((ret == 0) && (item.hMidiIn != IntPtr.Zero))
-						{
-							CWin32.midiInStart(item.hMidiIn);
-							Trace.TraceInformation("MIDI In: [{0}] \"{1}\" の入力受付を開始しました。", i, lpMidiInCaps.szPname);
-							item.strDeviceName = lpMidiInCaps.szPname;
-							this.list入力デバイス.Add(item);
-							continue;
-						}
+						Trace.TraceError("MIDI In: [{0}] \"{1}\" の入力受付の開始に失敗しました。", i, lpMidiInCaps.szPname);
 					}
-					Trace.TraceError("MIDI In: [{0}] \"{1}\" の入力受付の開始に失敗しました。", i, lpMidiInCaps.szPname);
 				}
 			}
 			else
@@ -185,19 +160,12 @@ namespace FDK
 					{
 						device.tポーリング(bWindowがアクティブ中, bバッファ入力を使用する);
 					}
-					catch (SharpDX.SharpDXException e)                                      // #24016 2011.1.6 yyagi: catch exception for unplugging USB joystick, and remove the device object from the polling items.
+					catch (DirectInputException e)                          // #24016 2011.1.6 yyagi: catch exception for unplugging USB joystick, and remove the device object from the polling items.
 					{
-						if (e.ResultCode == ResultCode.OtherApplicationHasPriority)
-						{
-							// #xxxxx: 2017.5.9: from: このエラーの時は、何もしない。
-						}
-						else
-						{
-							// #xxxxx: 2017.5.9: from: その他のエラーの場合は、デバイスが外されたと想定してRemoveする。
-							this.list入力デバイス.Remove(device);
-							device.Dispose();
-							Trace.TraceError("tポーリング時に対象deviceが抜かれており例外発生。同deviceをポーリング対象からRemoveしました。");
-						}
+						Trace.TraceError(e.ToString());
+						this.list入力デバイス.Remove(device);
+						device.Dispose();
+						Trace.TraceError("tポーリング時に対象deviceが抜かれており例外発生。同deviceをポーリング対象からRemoveしました。");
 					}
 				}
 			}
@@ -266,15 +234,16 @@ namespace FDK
 		private List<uint> listHMIDIIN = new List<uint>(8);
 		private object objMidiIn排他用 = new object();
 		private CWin32.MidiInProc proc;
-		//private CTimer timer;
+		//		private CTimer timer;
 
-		private void MidiInCallback(IntPtr hMidiIn, uint wMsg, IntPtr dwInstance, IntPtr dwParam1, IntPtr dwParam2)
+		private void MidiInCallback(uint hMidiIn, uint wMsg, int dwInstance, int dwParam1, int dwParam2)
 		{
-			int p = (int)dwParam1 & 0xF0;
-			if (wMsg != CWin32.MIM_DATA || (p != 0x80 && p != 0x90 && p != 0xB0))
+			int p = dwParam1 & 0xF0;
+			if (wMsg != CWin32.MIM_DATA || (p != 0x80 && p != 0x90))
 				return;
 
 			long time = CSound管理.rc演奏用タイマ.nシステム時刻;  // lock前に取得。演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
+
 			lock (this.objMidiIn排他用)
 			{
 				if ((this.list入力デバイス != null) && (this.list入力デバイス.Count != 0))

@@ -23,7 +23,7 @@ namespace TJAPlayer3
 			{
 				try			// #xxxxx 2012.12.31 yyagi: to prepare flush, first of all, I create q queue to the GPU.
 				{
-					IDirect3DQuery9 = new Query(TJAPlayer3.app.Device.UnderlyingDevice, QueryType.Occlusion);
+					IDirect3DQuery9 = new SlimDX.Direct3D9.Query(TJAPlayer3.app.Device.UnderlyingDevice, QueryType.Occlusion);
 				}
 				catch ( Exception e )
 				{
@@ -54,7 +54,7 @@ namespace TJAPlayer3
 
 		#region [ private ]
 		//-----------------
-		private Query IDirect3DQuery9;
+		private SlimDX.Direct3D9.Query IDirect3DQuery9;
 		//-----------------
 		#endregion
 	}

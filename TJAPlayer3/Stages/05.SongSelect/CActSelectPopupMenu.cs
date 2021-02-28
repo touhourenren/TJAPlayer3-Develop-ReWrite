@@ -253,16 +253,16 @@ namespace TJAPlayer3
 				if ( this.bキー入力待ち )
 				{
 					#region [ Shift-F1: CONFIG画面 ]
-					if ( ( TJAPlayer3.Input管理.Keyboard.bキーが押されている( (int)SlimDXKeys.Key.RightShift ) || TJAPlayer3.Input管理.Keyboard.bキーが押されている( (int)SlimDXKeys.Key.LeftShift ) ) &&
-						TJAPlayer3.Input管理.Keyboard.bキーが押された( (int)SlimDXKeys.Key.F1 ) )
-					{	// [SHIFT] + [F1] CONFIG
+					if ((TJAPlayer3.Input管理.Keyboard.bキーが押されている((int)SlimDX.DirectInput.Key.RightShift) || TJAPlayer3.Input管理.Keyboard.bキーが押されている((int)SlimDX.DirectInput.Key.LeftShift)) &&
+						TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDX.DirectInput.Key.F1))
+					{   // [SHIFT] + [F1] CONFIG
 						TJAPlayer3.Skin.sound取消音.t再生する();
 						tCancel();
 						this.bGotoDetailConfig = true;
 					}
 					#endregion
 					#region [ キー入力: キャンセル ]
-					else if ( ( TJAPlayer3.Input管理.Keyboard.bキーが押された( (int)SlimDXKeys.Key.Escape )
+					else if ((TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDX.DirectInput.Key.Escape)
 						|| TJAPlayer3.Pad.b押された( E楽器パート.DRUMS, Eパッド.FT )
 						|| TJAPlayer3.Pad.b押されたGB( Eパッド.Cancel ) )
                         && this.bEsc有効 )
@@ -292,7 +292,7 @@ namespace TJAPlayer3
 						|| TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.LC)
 						|| TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.LRed)
 						|| TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.RRed)
-						|| ( TJAPlayer3.ConfigIni.bEnterがキー割り当てのどこにも使用されていない && TJAPlayer3.Input管理.Keyboard.bキーが押された( (int)SlimDXKeys.Key.Return ) ) )
+						|| (TJAPlayer3.ConfigIni.bEnterがキー割り当てのどこにも使用されていない && TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDX.DirectInput.Key.Return)))
 					{
 						eInst = E楽器パート.DRUMS;
 						eAction = ESortAction.Decide;
@@ -303,7 +303,7 @@ namespace TJAPlayer3
 					}
 					#endregion
 					#region [ キー入力: 前に移動 ]
-					this.ctキー反復用.Up.tキー反復( TJAPlayer3.Input管理.Keyboard.bキーが押されている( (int)SlimDXKeys.Key.UpArrow ), new CCounter.DGキー処理( this.t前に移動 ) );
+					this.ctキー反復用.Up.tキー反復(TJAPlayer3.Input管理.Keyboard.bキーが押されている((int)SlimDX.DirectInput.Key.UpArrow), new CCounter.DGキー処理(this.t前に移動));
 					this.ctキー反復用.R.tキー反復( TJAPlayer3.Pad.b押されているGB( Eパッド.R ), new CCounter.DGキー処理( this.t前に移動 ) );
 					if ( TJAPlayer3.Pad.b押された( E楽器パート.DRUMS, Eパッド.SD ) || TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.LBlue))
 					{
@@ -311,7 +311,7 @@ namespace TJAPlayer3
 					}
 					#endregion
 					#region [ キー入力: 次に移動 ]
-					this.ctキー反復用.Down.tキー反復( TJAPlayer3.Input管理.Keyboard.bキーが押されている( (int)SlimDXKeys.Key.DownArrow ), new CCounter.DGキー処理( this.t次に移動 ) );
+					this.ctキー反復用.Down.tキー反復(TJAPlayer3.Input管理.Keyboard.bキーが押されている((int)SlimDX.DirectInput.Key.DownArrow), new CCounter.DGキー処理(this.t次に移動));
 					this.ctキー反復用.B.tキー反復( TJAPlayer3.Pad.b押されているGB( Eパッド.B ), new CCounter.DGキー処理( this.t次に移動 ) );
 					if ( TJAPlayer3.Pad.b押された( E楽器パート.DRUMS, Eパッド.LT ) || TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.RBlue))
 					{

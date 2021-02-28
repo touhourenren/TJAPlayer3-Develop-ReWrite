@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Diagnostics;
-using SharpDX;
-using SharpDX.DirectInput;
+using SlimDX;
+using SlimDX.DirectInput;
 
 namespace FDK
 {
@@ -24,12 +24,11 @@ namespace FDK
 			try
 			{
 				this.devMouse = new Mouse(directInput);
-				this.devMouse.SetCooperativeLevel(hWnd, CooperativeLevel.Foreground | CooperativeLevel.NonExclusive);
-				this.devMouse.Properties.BufferSize = 0x20;
-				Trace.TraceInformation(this.devMouse.Information.ProductName.Trim(new char[] { '\0' }) + " を生成しました。");  // なぜか0x00のゴミが出るので削除
-				this.strDeviceName = this.devMouse.Information.ProductName.Trim(new char[] { '\0' });
+				this.devMouse.SetCooperativeLevel(hWnd, CooperativeLevel.Foreground | CooperativeLevel.Nonexclusive);
+				this.devMouse.Properties.BufferSize = _rawBufferedDataArray.Length;
+				Trace.TraceInformation(this.devMouse.Information.ProductName + " を生成しました。");
 			}
-			catch
+			catch (DirectInputException)
 			{
 				if (this.devMouse != null)
 				{
@@ -43,8 +42,10 @@ namespace FDK
 			{
 				this.devMouse.Acquire();
 			}
-			catch
+			catch (DirectInputException e)
 			{
+				Trace.TraceError(e.ToString());
+				Trace.TraceError("例外が発生しましたが処理を継続します。 (803ffb80-d2ca-425f-8f95-05d7c7cc8d90)");
 			}
 
 			for (int i = 0; i < this.bMouseState.Length; i++)
@@ -63,7 +64,6 @@ namespace FDK
 		public string GUID { get; private set; }
 		public int ID { get; private set; }
 		public List<STInputEvent> list入力イベント { get; private set; }
-		public string strDeviceName { get; set; }
 
 		public void tポーリング(bool bWindowがアクティブ中, bool bバッファ入力を使用する)
 		{
@@ -73,11 +73,8 @@ namespace FDK
 				this.bMousePullUp[i] = false;
 			}
 
-			if (bWindowがアクティブ中 && (this.devMouse != null))
+			if (((bWindowがアクティブ中 && (this.devMouse != null)) && !this.devMouse.Acquire().IsFailure) && !this.devMouse.Poll().IsFailure)
 			{
-				this.devMouse.Acquire();
-				this.devMouse.Poll();
-
 				// this.list入力イベント = new List<STInputEvent>( 32 );
 				this.list入力イベント.Clear();            // #xxxxx 2012.6.11 yyagi; To optimize, I removed new();
 
@@ -85,71 +82,45 @@ namespace FDK
 				{
 					#region [ a.バッファ入力 ]
 					//-----------------------------
-					var bufferedData = this.devMouse.GetBufferedData();
-					//if( Result.Last.IsSuccess && bufferedData != null )
+					var length = this.devMouse.GetDeviceData(_rawBufferedDataArray, false);
+					if (!Result.Last.IsSuccess)
 					{
-						foreach (MouseUpdate data in bufferedData)
+						return;
+					}
+					for (int i = 0; i < length; i++)
+					{
+						var rawBufferedData = _rawBufferedDataArray[i];
+						var key = rawBufferedData.Offset - 12;
+						var wasPressed = (rawBufferedData.Data & 128) == 128;
+
+						if (!(-1 < key && key < 8))
 						{
-							var mouseButton = new[] {
-								 MouseOffset.Buttons0,
-								 MouseOffset.Buttons1,
-								 MouseOffset.Buttons2,
-								 MouseOffset.Buttons3,
-								 MouseOffset.Buttons4,
-								 MouseOffset.Buttons5,
-								 MouseOffset.Buttons6,
-								 MouseOffset.Buttons7,
-							};
-
-							for (int k = 0; k < 8; k++)
-							{
-								//if( data.IsPressed( k ) )
-								if (data.Offset == mouseButton[k] && ((data.Value & 0x80) != 0))
-								{
-									STInputEvent item = new STInputEvent()
-									{
-										nKey = k,
-										b押された = true,
-										b離された = false,
-										nTimeStamp = CSound管理.rc演奏用タイマ.nサウンドタイマーのシステム時刻msへの変換(data.Timestamp),
-										nVelocity = CInput管理.n通常音量
-									};
-									this.list入力イベント.Add(item);
-
-									this.bMouseState[k] = true;
-									this.bMousePushDown[k] = true;
-								}
-								else if (data.Offset == mouseButton[k] && this.bMouseState[k] == true && ((data.Value & 0x80) == 0))
-								//else if( data.IsReleased( k ) )
-								{
-									STInputEvent item = new STInputEvent()
-									{
-										nKey = k,
-										b押された = false,
-										b離された = true,
-										nTimeStamp = CSound管理.rc演奏用タイマ.nサウンドタイマーのシステム時刻msへの変換(data.Timestamp),
-										nVelocity = CInput管理.n通常音量
-									};
-									this.list入力イベント.Add(item);
-
-									this.bMouseState[k] = false;
-									this.bMousePullUp[k] = true;
-								}
-							}
+							continue;
 						}
-                    }
-					//-----------------------------
-					#endregion
-				}
+
+						STInputEvent item = new STInputEvent()
+						{
+							nKey = key,
+							b押された = wasPressed,
+							nTimeStamp = CSound管理.rc演奏用タイマ.nサウンドタイマーのシステム時刻msへの変換(rawBufferedData.Timestamp),
+						};
+						this.list入力イベント.Add(item);
+
+						this.bMouseState[item.nKey] = wasPressed;
+						this.bMousePushDown[item.nKey] = wasPressed;
+						this.bMousePullUp[item.nKey] = !wasPressed;
+					}
+						//-----------------------------
+						#endregion
+					}
 				else
 				{
 					#region [ b.状態入力 ]
 					//-----------------------------
 					MouseState currentState = this.devMouse.GetCurrentState();
-					//if( Result.Last.IsSuccess && currentState != null )
+					if (Result.Last.IsSuccess && currentState != null)
 					{
-						bool[] buttons = currentState.Buttons;
-
+						bool[] buttons = currentState.GetButtons();
 						for (int j = 0; (j < buttons.Length) && (j < 8); j++)
 						{
 							if (this.bMouseState[j] == false && buttons[j] == true)
@@ -158,9 +129,7 @@ namespace FDK
 								{
 									nKey = j,
 									b押された = true,
-									b離された = false,
 									nTimeStamp = CSound管理.rc演奏用タイマ.nシステム時刻, // 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
-									nVelocity = CInput管理.n通常音量,
 								};
 								this.list入力イベント.Add(ev);
 
@@ -173,9 +142,7 @@ namespace FDK
 								{
 									nKey = j,
 									b押された = false,
-									b離された = true,
 									nTimeStamp = CSound管理.rc演奏用タイマ.nシステム時刻, // 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
-									nVelocity = CInput管理.n通常音量,
 								};
 								this.list入力イベント.Add(ev);
 
@@ -240,9 +207,10 @@ namespace FDK
 		#region [ private ]
 		//-----------------
 	    private bool bDispose完了済み;
-		private bool[] bMousePullUp = new bool[8];
-		private bool[] bMousePushDown = new bool[8];
-		private bool[] bMouseState = new bool[8];
+		private readonly RawBufferedData[] _rawBufferedDataArray = new RawBufferedData[256];
+		private readonly bool[] bMousePullUp = new bool[8];
+		private readonly bool[] bMousePushDown = new bool[8];
+		private readonly bool[] bMouseState = new bool[8];
 		private Mouse devMouse;
 		//private CTimer timer;
 		//-----------------
