@@ -18,7 +18,6 @@ Fork元より引用。
 > * DirectShowLib
 > * FDK21
 > * SlimDX
-> * SharpDX
 > * ReadJEnc
 > * xadec
 > * IPAフォント
