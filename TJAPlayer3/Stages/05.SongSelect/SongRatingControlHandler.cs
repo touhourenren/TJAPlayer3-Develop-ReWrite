@@ -52,32 +52,32 @@ namespace TJAPlayer3
 
         private static SongRating? GetSongRatingKeyPressed(IInputDevice keyboard)
         {
-            if (TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDX.DirectInput.Key.D0))
+            if (TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDXKeys.Key.D0))
             {
                 return SongRating.Unset;
             }
 
-            if (TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDX.DirectInput.Key.D1))
+            if (TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDXKeys.Key.D1))
             {
                 return SongRating.One;
             }
 
-            if (TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDX.DirectInput.Key.D2))
+            if (TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDXKeys.Key.D2))
             {
                 return SongRating.Two;
             }
 
-            if (TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDX.DirectInput.Key.D3))
+            if (TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDXKeys.Key.D3))
             {
                 return SongRating.Three;
             }
 
-            if (TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDX.DirectInput.Key.D4))
+            if (TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDXKeys.Key.D4))
             {
                 return SongRating.Four;
             }
 
-            if (TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDX.DirectInput.Key.D5))
+            if (TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDXKeys.Key.D5))
             {
                 return SongRating.Five;
             }

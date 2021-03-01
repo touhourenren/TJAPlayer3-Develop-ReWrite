@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using SlimDX;
-using SlimDX.DirectSound;
+using SharpDX.DirectSound;
 
 namespace FDK
 {
@@ -39,7 +39,7 @@ namespace FDK
 			{
 				if ( ctimer != null )
 				{
-					int n現在位置 = this.sd経過時間計測用サウンドバッファ.DirectSoundBuffer.CurrentPlayPosition;
+					this.sd経過時間計測用サウンドバッファ.DirectSoundBuffer.GetCurrentPosition(out int n現在位置, out int _);
 					long n現在のシステム時刻ms = this.tmシステムタイマ.nシステム時刻ms;
 
 
@@ -126,7 +126,7 @@ namespace FDK
 			{
 				this.DirectSound.SetCooperativeLevel( hWnd, CooperativeLevel.Priority );
 			}
-			catch (DirectSoundException)
+			catch
 			{
 				this.DirectSound.SetCooperativeLevel( hWnd, CooperativeLevel.Normal );	// これでも失敗したら例外をそのまま発出。
 				priority = false;

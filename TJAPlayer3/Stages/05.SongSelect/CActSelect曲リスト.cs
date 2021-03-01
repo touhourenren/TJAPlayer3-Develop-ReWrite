@@ -8,7 +8,6 @@ using System.Drawing.Imaging;
 using System.Diagnostics;
 using System.Drawing.Text;
 using System.Linq;
-using CSharpTest.Net.Collections;
 using SlimDX;
 using FDK;
 
@@ -470,23 +469,15 @@ namespace TJAPlayer3
 					{
 						this.t現在選択中の曲を元に曲バーを再構成する();
 					}
-#if false          // list子リストの中まではmatchしてくれないので、検索ロジックは手書きで実装 (searchCurrentBreadcrumbs())
-					string bc = this.r現在選択中の曲.strBreadcrumbs;
-					Predicate<C曲リストノード> match = delegate( C曲リストノード c )
-					{
-						return ( c.strBreadcrumbs.Equals( bc ) );
-					};
-					int nMatched = CDTXMania.Songs管理.list曲ルート.FindIndex( match );
-
-					this.r現在選択中の曲 = ( nMatched == -1 ) ? null : CDTXMania.Songs管理.list曲ルート[ nMatched ];
-					this.t現在選択中の曲を元に曲バーを再構成する();
-#endif
 					return;
 				}
 			}
-			this.On非活性化();
-			this.r現在選択中の曲 = null;
-			this.On活性化();
+			if (this.b活性化してる)
+			{
+				this.On非活性化();
+				this.r現在選択中の曲 = null;
+				this.On活性化();
+			}
 		}
 
 
@@ -615,8 +606,6 @@ namespace TJAPlayer3
 			else
 				this.pfBoxText = new CPrivateFastFont(new FontFamily("MS UI Gothic"), 14);
 
-			_titleTextures.ItemRemoved += OnTitleTexturesOnItemRemoved;
-			_titleTextures.ItemUpdated += OnTitleTexturesOnItemUpdated;
 
 			this.b登場アニメ全部完了 = false;
 			this.n目標のスクロールカウンタ = 0;
@@ -671,10 +660,7 @@ namespace TJAPlayer3
 			if( this.b活性化してない )
 				return;
 
-			_titleTextures.ItemRemoved -= OnTitleTexturesOnItemRemoved;
-			_titleTextures.ItemUpdated -= OnTitleTexturesOnItemUpdated;
-
-			TJAPlayer3.t安全にDisposeする(ref pfBoxName);
+		    TJAPlayer3.t安全にDisposeする(ref pfBoxName);
 		    TJAPlayer3.t安全にDisposeする(ref pfMusicName);
 		    TJAPlayer3.t安全にDisposeする(ref pfSubtitle);
 
@@ -1895,12 +1881,8 @@ namespace TJAPlayer3
 		private CPrivateFastFont pfBoxText;
 		private CTexture[] txBoxText = new CTexture[3];
 
-		// 2018-09-17 twopointzero: I can scroll through 2300 songs consuming approx. 200MB of memory.
-		//                          I have set the title texture cache size to a nearby round number (2500.)
-		//                          If we'd like title textures to take up no more than 100MB, for example,
-		//                          then a cache size of 1000 would be roughly correct.
-		private readonly LurchTable<TitleTextureKey, CTexture> _titleTextures =
-			new LurchTable<TitleTextureKey, CTexture>(LurchTableOrder.Access, 2500);
+		private readonly Dictionary<TitleTextureKey, CTexture> _titledictionary
+			= new Dictionary<TitleTextureKey, CTexture>();
 
 		private Font ft曲リスト用フォント;
 		private long nスクロールタイマ;
@@ -2242,10 +2224,10 @@ namespace TJAPlayer3
 
 	    public CTexture ResolveTitleTexture(TitleTextureKey titleTextureKey)
 	    {
-			if (!_titleTextures.TryGetValue(titleTextureKey, out var texture))
+			if (!_titledictionary.TryGetValue(titleTextureKey, out var texture))
 			{
 				texture = GenerateTitleTexture(titleTextureKey);
-				_titleTextures.Add(titleTextureKey, texture);
+				_titledictionary.Add(titleTextureKey, texture);
 			}
 
 			return texture;
@@ -2267,26 +2249,14 @@ namespace TJAPlayer3
 	        }
 	    }
 
-		private static void OnTitleTexturesOnItemUpdated(
-		   KeyValuePair<TitleTextureKey, CTexture> previous, KeyValuePair<TitleTextureKey, CTexture> next)
-		{
-			previous.Value.Dispose();
-		}
-
-		private static void OnTitleTexturesOnItemRemoved(
-			KeyValuePair<TitleTextureKey, CTexture> kvp)
-		{
-			kvp.Value.Dispose();
-		}
-
-		private void ClearTitleTextureCache()
+	    private void ClearTitleTextureCache()
 	    {
-			foreach (var titleTexture in _titleTextures.Values)
+			foreach (var titleTexture in _titledictionary.Values)
 			{
 				titleTexture.Dispose();
-			}
+	        }
 
-			_titleTextures.Clear();
+			_titledictionary.Clear();
 		}
 
 		public sealed class TitleTextureKey

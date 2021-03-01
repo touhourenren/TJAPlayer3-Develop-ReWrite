@@ -308,7 +308,7 @@ namespace TJAPlayer3
 			// 曲データの一覧取得中は、キー入力を無効化する
 			if ( !TJAPlayer3.EnumSongs.IsEnumerating || TJAPlayer3.actEnumSongs.bコマンドでの曲データ取得 != true )
 			{
-				if ((TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDX.DirectInput.Key.Escape) || TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.FT)) || TJAPlayer3.Pad.b押されたGB(Eパッド.FT))
+				if ( ( TJAPlayer3.Input管理.Keyboard.bキーが押された( (int)SlimDXKeys.Key.Escape ) || TJAPlayer3.Pad.b押された( E楽器パート.DRUMS, Eパッド.FT ) ) || TJAPlayer3.Pad.b押されたGB( Eパッド.FT ) )
 				{
 					TJAPlayer3.Skin.sound取消音.t再生する();
 					if ( !this.bメニューにフォーカス中 )
@@ -331,7 +331,7 @@ namespace TJAPlayer3
 						base.eフェーズID = CStage.Eフェーズ.共通_フェードアウト;
 					}
 				}
-				else if ((TJAPlayer3.Pad.b押されたDGB(Eパッド.CY) || TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.RD)) || (TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.LC) || (TJAPlayer3.ConfigIni.bEnterがキー割り当てのどこにも使用されていない && TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDX.DirectInput.Key.Return))))
+				else if ( ( TJAPlayer3.Pad.b押されたDGB( Eパッド.CY ) || TJAPlayer3.Pad.b押された( E楽器パート.DRUMS, Eパッド.RD ) ) || ( TJAPlayer3.Pad.b押された( E楽器パート.DRUMS, Eパッド.LC ) || ( TJAPlayer3.ConfigIni.bEnterがキー割り当てのどこにも使用されていない && TJAPlayer3.Input管理.Keyboard.bキーが押された( (int)SlimDXKeys.Key.Return ) ) ) )
 				{
 					if ( this.n現在のメニュー番号 == 2 )
 					{
@@ -368,13 +368,13 @@ namespace TJAPlayer3
 						}
 					}
 				}
-				this.ctキー反復用.Up.tキー反復(TJAPlayer3.Input管理.Keyboard.bキーが押されている((int)SlimDX.DirectInput.Key.UpArrow), new CCounter.DGキー処理(this.tカーソルを上へ移動する));
+				this.ctキー反復用.Up.tキー反復( TJAPlayer3.Input管理.Keyboard.bキーが押されている( (int)SlimDXKeys.Key.UpArrow ), new CCounter.DGキー処理( this.tカーソルを上へ移動する ) );
 				this.ctキー反復用.R.tキー反復( TJAPlayer3.Pad.b押されているGB( Eパッド.HH ), new CCounter.DGキー処理( this.tカーソルを上へ移動する ) );
 				if ( TJAPlayer3.Pad.b押された( E楽器パート.DRUMS, Eパッド.SD ) )
 				{
 					this.tカーソルを上へ移動する();
 				}
-				this.ctキー反復用.Down.tキー反復(TJAPlayer3.Input管理.Keyboard.bキーが押されている((int)SlimDX.DirectInput.Key.DownArrow), new CCounter.DGキー処理(this.tカーソルを下へ移動する));
+				this.ctキー反復用.Down.tキー反復( TJAPlayer3.Input管理.Keyboard.bキーが押されている( (int)SlimDXKeys.Key.DownArrow ), new CCounter.DGキー処理( this.tカーソルを下へ移動する ) );
 				this.ctキー反復用.B.tキー反復( TJAPlayer3.Pad.b押されているGB( Eパッド.BD ), new CCounter.DGキー処理( this.tカーソルを下へ移動する ) );
 				if ( TJAPlayer3.Pad.b押された( E楽器パート.DRUMS, Eパッド.LT ) )
 				{

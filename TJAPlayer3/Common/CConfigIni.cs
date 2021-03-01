@@ -798,7 +798,7 @@ namespace TJAPlayer3
 					{
 						for( int k = 0; k < 0x10; k++ )
 						{
-							if ((this.KeyAssign[i][j][k].入力デバイス == E入力デバイス.キーボード) && (this.KeyAssign[i][j][k].コード == (int)SlimDX.DirectInput.Key.Return))
+							if( ( this.KeyAssign[ i ][ j ][ k ].入力デバイス == E入力デバイス.キーボード ) && ( this.KeyAssign[ i ][ j ][ k ].コード == (int)SlimDXKeys.Key.Return ) )
 							{
 								return false;
 							}
