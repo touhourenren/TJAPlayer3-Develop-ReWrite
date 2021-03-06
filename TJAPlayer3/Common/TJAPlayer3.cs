@@ -1278,6 +1278,7 @@ for (int i = 0; i < 3; i++) {
 							case (int) E演奏画面の戻り値.演奏中断:
 								#region [ 演奏キャンセル ]
 								//-----------------------------
+								if(!TJAPlayer3.ConfigIni.bTokkunMode)
 								scoreIni = this.tScoreIniへBGMAdjustとHistoryとPlayCountを更新( "Play canceled" );
 
 								//int lastd = 0;

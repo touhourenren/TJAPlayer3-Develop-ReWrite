@@ -4339,11 +4339,14 @@ namespace TJAPlayer3
             {
                 this.t演奏位置の変更(0, i);
                 this.actPlayInfo.NowMeasure[i] = 0;
+                actChara.bマイどんアクション中[i] = false;
+                this.actChara.b風船連打中[i] = false;
+                this.chip現在処理中の連打チップ[i] = null;
             }
             TJAPlayer3.stage演奏ドラム画面.On活性化();
-            for( int i = 0; i < TJAPlayer3.ConfigIni.nPlayerCount; i++ )
+            for (int nPlayer = 0; nPlayer < TJAPlayer3.ConfigIni.nPlayerCount; nPlayer++)
             {
-                this.chip現在処理中の連打チップ[ i ] = null;
+                this.actChara.アクションタイマーリセット(nPlayer);
             }
             this.bPAUSE = false;
         }
