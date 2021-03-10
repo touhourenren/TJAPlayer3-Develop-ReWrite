@@ -37,30 +37,43 @@ namespace TJAPlayer3
 
         public void t次に移動()
         {
-            if (n現在の選択行 + 1 <= 5)
+            if (n現在の選択行 < 5)
             {
                 ctBarAnime.t開始(0, 180, 1, TJAPlayer3.Timer);
-                n現在の選択行++;
+                if (!b裏譜面)
+                {
+                    n現在の選択行++;
+                }
+                else
+                {
+                    if (n現在の選択行 == 4)
+                    {
+                        n現在の選択行 += 2;
+                    }
+                    else
+                    {
+                        n現在の選択行++;
+                    }
+                }
             }
-            else
+            else if (n現在の選択行 >= 5)
             {
-                nスイッチカウント++;
-                if(nスイッチカウント >= 10)
+                if (nスイッチカウント < 9 && TJAPlayer3.stage選曲.r現在選択中のスコア.譜面情報.nレベル[4] >= 0)
+                {
+                    nスイッチカウント++;
+                }
+                else if (nスイッチカウント == 9)
                 {
                     if (n現在の選択行 == 5)
                     {
-                        if(TJAPlayer3.stage選曲.r現在選択中のスコア.譜面情報.nレベル[4] >= 0)
-                        {
-                            n現在の選択行 = 6;
-                            b裏譜面 = true;
-                        }
+                        n現在の選択行 = 6;
                     }
                     else if (n現在の選択行 == 6)
                     {
-                        b裏譜面 = false;
                         n現在の選択行 = 5;
                     }
 
+                    b裏譜面 = !b裏譜面;
                     nスイッチカウント = 0;
                 }
             }
@@ -291,8 +304,8 @@ namespace TJAPlayer3
                         TJAPlayer3.Tx.Difficulty_Star.t2D描画(TJAPlayer3.app.Device, 444 + 3 * 143 + g * 10, 459);
             }
 
-            this.txTitle.t2D中心基準描画(TJAPlayer3.app.Device, 640, 140);
-            this.txSubTitle.t2D中心基準描画(TJAPlayer3.app.Device, 640, 180);
+            this.txTitle.t2D中心基準描画(TJAPlayer3.app.Device, 640 + TJAPlayer3.Skin.SongSelect_Title_X, 140 + TJAPlayer3.Skin.SongSelect_Title_Y);
+            this.txSubTitle.t2D中心基準描画(TJAPlayer3.app.Device, 640 + TJAPlayer3.Skin.SongSelect_Title_X, 180 + TJAPlayer3.Skin.SongSelect_Title_Y);
 
             #region [ バーの描画 ]
 

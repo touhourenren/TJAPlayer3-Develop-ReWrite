@@ -1219,6 +1219,7 @@ namespace TJAPlayer3
 				TJAPlayer3.Tx.SongSelect_Bar_Genre[nStrジャンルtoNum(stバー情報[nパネル番号].strジャンル)].vc拡大縮小倍率.X = 1.0f;
 				TJAPlayer3.Tx.SongSelect_Bar_Genre_Overlay.vc拡大縮小倍率.X = 1.0f;
 				TJAPlayer3.Tx.SongSelect_Bar_Genre_Back.vc拡大縮小倍率.X = 1.0f;
+
 				if (n現在のスクロールカウンタ != 0)
 					this.tジャンル別選択されていない曲バーの描画(xAnime - (int)Box, y - ((int)Box * 3), this.stバー情報[nパネル番号].strジャンル, stバー情報[nパネル番号].eバー種別, stバー情報[nパネル番号].nクリア, stバー情報[nパネル番号].nスコアランク);
 				else if (n見た目の行番号 != 4)
@@ -1233,9 +1234,9 @@ namespace TJAPlayer3
 					ResolveTitleTexture(this.stバー情報[nパネル番号].ttkタイトル).Opacity = 255;
 
 				if (n現在のスクロールカウンタ != 0)
-					ResolveTitleTexture(this.stバー情報[nパネル番号].ttkタイトル).t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, xAnime + 316 - Box, y + 59 - (Box * 3));
+					ResolveTitleTexture(this.stバー情報[nパネル番号].ttkタイトル).t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, xAnime + 316 - Box + TJAPlayer3.Skin.SongSelect_Title_X, y + 59 - (Box * 3) + TJAPlayer3.Skin.SongSelect_Title_Y);
 				else if (n見た目の行番号 != 4)
-					ResolveTitleTexture(this.stバー情報[nパネル番号].ttkタイトル).t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, xAnime + 316 - Box, y + 62 - (Box * 3));
+					ResolveTitleTexture(this.stバー情報[nパネル番号].ttkタイトル).t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, xAnime + 316 - Box + TJAPlayer3.Skin.SongSelect_Title_X, y + 62 - (Box * 3) + TJAPlayer3.Skin.SongSelect_Title_Y);
 				#endregion
 
 				//-----------------					
@@ -1554,7 +1555,7 @@ namespace TJAPlayer3
 								if (this.txBoxText[j].szテクスチャサイズ.Width >= 510)
 									this.txBoxText[j].vc拡大縮小倍率.X = 510f / this.txBoxText[j].szテクスチャサイズ.Width;
 
-								this.txBoxText[j].t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, 640 + TJAPlayer3.Skin.SongSelect_BoxExplanation_X, 360 + j * 30 + TJAPlayer3.Skin.SongSelect_BoxExplanation_Y);
+								this.txBoxText[j].t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, 640 + TJAPlayer3.Skin.SongSelect_BoxExplanation_X, 360 + j * TJAPlayer3.Skin.SongSelect_BoxExplanation_Interval + TJAPlayer3.Skin.SongSelect_BoxExplanation_Y);
 							}
 
 							if (!ctBoxOpen.b終了値に達した)
@@ -1679,17 +1680,17 @@ namespace TJAPlayer3
 									tx選択している曲のサブタイトル.Opacity = (int)255.0f - (ctDifficultyIn.n現在の値 - 1000);
 						} 
 
-						tx選択している曲のサブタイトル.t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, 640, y + 90 - (this.stバー情報[nパネル番号].eバー種別 == Eバー種別.Box ? BarAnimeCount : BarAnimeCount / 1.1f));
+						tx選択している曲のサブタイトル.t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, 640 + TJAPlayer3.Skin.SongSelect_Title_X, y + 90 - (this.stバー情報[nパネル番号].eバー種別 == Eバー種別.Box ? BarAnimeCount : BarAnimeCount / 1.1f) + TJAPlayer3.Skin.SongSelect_Title_Y);
 						if (this.ttk選択している曲の曲名 != null)
 						{
-							ResolveTitleTexture(this.ttk選択している曲の曲名).t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, 640, y + 61 - (r現在選択中の曲.eノード種別 != C曲リストノード.Eノード種別.BACKBOX ? (this.stバー情報[nパネル番号].eバー種別 == Eバー種別.Box ? BarAnimeCount : BarAnimeCount / 1.1f) : 0));
+							ResolveTitleTexture(this.ttk選択している曲の曲名).t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, 640 + TJAPlayer3.Skin.SongSelect_Title_X, y + 61 - (r現在選択中の曲.eノード種別 != C曲リストノード.Eノード種別.BACKBOX ? (this.stバー情報[nパネル番号].eバー種別 == Eバー種別.Box ? BarAnimeCount : BarAnimeCount / 1.1f) : 0) + TJAPlayer3.Skin.SongSelect_Title_Y);
 						}
 					}
 					else
 					{
 						if (this.ttk選択している曲の曲名 != null)
 						{
-							ResolveTitleTexture(this.ttk選択している曲の曲名).t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, 640, y + 61 - (r現在選択中の曲.eノード種別 != C曲リストノード.Eノード種別.BACKBOX ? (this.stバー情報[nパネル番号].eバー種別 == Eバー種別.Box ? BarAnimeCount : BarAnimeCount / 1.1f) : 0));
+							ResolveTitleTexture(this.ttk選択している曲の曲名).t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, 640 + TJAPlayer3.Skin.SongSelect_Title_X, y + 61 - (r現在選択中の曲.eノード種別 != C曲リストノード.Eノード種別.BACKBOX ? (this.stバー情報[nパネル番号].eバー種別 == Eバー種別.Box ? BarAnimeCount : BarAnimeCount / 1.1f) : 0) + TJAPlayer3.Skin.SongSelect_Title_Y);
 						}
 					}
 					//-----------------
@@ -1697,12 +1698,6 @@ namespace TJAPlayer3
 				}
 			}
 			//-----------------
-
-			for(int i = 0; i < 7; i++)
-				TJAPlayer3.act文字コンソール.tPrint(50 * i, 0, C文字コンソール.Eフォント種別.白, ScoreRankCount[i].ToString());
-
-			for(int i = 0; i < 3; i++)
-				TJAPlayer3.act文字コンソール.tPrint(50 * i, 13, C文字コンソール.Eフォント種別.白, CrownCount[i].ToString());
 
 			return 0;
 		}

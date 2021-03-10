@@ -1073,23 +1073,19 @@ namespace TJAPlayer3
                             }
                             else if (strCommand == "SongSelect_Title_X")
                             {
-                                SongSelect_Title_Y = int.Parse(strParam);
-                            }
-                            else if (strCommand == "SongSelect_GenreName")
-                            {
-                                SongSelect_GenreName = this.strStringを配列に直す(strParam);
+                                SongSelect_Title_X = int.Parse(strParam);
                             }
                             else if (strCommand == "SongSelect_Title_Y")
                             {
                                 SongSelect_Title_Y = int.Parse(strParam);
                             }
-                            else if (strCommand == "Difficulty_Title_X")
+                            else if (strCommand == "SongSelect_BoxExplanation_Interval")
                             {
-                                Difficulty_Title_X = int.Parse(strParam);
+                                SongSelect_BoxExplanation_Interval = int.Parse(strParam);
                             }
-                            else if (strCommand == "Difficulty_Title_Y")
+                            else if (strCommand == "SongSelect_GenreName")
                             {
-                                Difficulty_Title_Y = int.Parse(strParam);
+                                SongSelect_GenreName = this.strStringを配列に直す(strParam);
                             }
                             else if (strCommand == "SongSelect_NamePlate_X")
                             {
@@ -2554,10 +2550,9 @@ namespace TJAPlayer3
         public int SongSelect_Overall_Y = 123;
         public int SongSelect_BoxExplanation_X = 0;
         public int SongSelect_BoxExplanation_Y = 0;
+        public int SongSelect_BoxExplanation_Interval = 30;
         public int SongSelect_Title_X = 0;
         public int SongSelect_Title_Y = 0;
-        public int Difficulty_Title_X = 0;
-        public int Difficulty_Title_Y = 0;
         public string[] SongSelect_GenreName = { "ポップス", "アニメ", "ゲームバラエティ", "ナムコオリジナル", "クラシック", "キッズ", "ボーカロイド", "最近遊んだ曲"};
         public int[] SongSelect_NamePlate_X = new int[] { 36, 1020 };
         public int[] SongSelect_NamePlate_Y = new int[] { 615, 615 };
@@ -2572,9 +2567,9 @@ namespace TJAPlayer3
         public Color SongSelect_ForeColor_GameMusic = ColorTranslator.FromHtml("#FFFFFF");
         public Color SongSelect_ForeColor_Namco = ColorTranslator.FromHtml("#FFFFFF");
         public Color SongSelect_BackColor_JPOP = ColorTranslator.FromHtml("#01455B");
-        public Color SongSelect_BackColor_Anime = ColorTranslator.FromHtml("#9D3800");
+        public Color SongSelect_BackColor_Anime = ColorTranslator.FromHtml("#99001F");
         public Color SongSelect_BackColor_VOCALOID = ColorTranslator.FromHtml("#5B6278");
-        public Color SongSelect_BackColor_Children = ColorTranslator.FromHtml("#99001F");
+        public Color SongSelect_BackColor_Children = ColorTranslator.FromHtml("#9D3800");
         public Color SongSelect_BackColor_Variety = ColorTranslator.FromHtml("#366600");
         public Color SongSelect_BackColor_Classic = ColorTranslator.FromHtml("#875600");
         public Color SongSelect_BackColor_GameMusic = ColorTranslator.FromHtml("#412080");
