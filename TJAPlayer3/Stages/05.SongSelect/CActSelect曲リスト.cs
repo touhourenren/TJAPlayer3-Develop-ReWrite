@@ -1611,7 +1611,8 @@ namespace TJAPlayer3
 				{
 					this.tBOXを出る();
 					TJAPlayer3.stage選曲.bBGM再生済み = false;
-					TJAPlayer3.Skin.bgm選曲画面イン.t再生する();
+					if (TJAPlayer3.ConfigIni.bBGM音を発声する)
+						TJAPlayer3.Skin.bgm選曲画面イン.t再生する();
 					TJAPlayer3.stage選曲.bBGMIn再生した = true;
 					 bBoxClose = false;
 				}

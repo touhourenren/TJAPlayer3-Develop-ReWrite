@@ -150,7 +150,7 @@ namespace TJAPlayer3
 								{
 									this.n現在の小節線 = this.JumpPointList[index].Measure;
 									TJAPlayer3.stage演奏ドラム画面.actPlayInfo.NowMeasure[0] = this.n現在の小節線;
-									TJAPlayer3.Skin.soundSkip.t再生する();
+									TJAPlayer3.Skin.sound特訓スキップ音.t再生する();
 									this.t譜面の表示位置を合わせる(false);
 									break;
 								}
@@ -530,6 +530,7 @@ namespace TJAPlayer3
 			{
 				if (!JumpPointList.Contains(new STJUMPP() { Time = (long)(CSound管理.rc演奏用タイマ.n現在時刻ms * (((double)TJAPlayer3.ConfigIni.n演奏速度) / 20.0)), Measure = this.n現在の小節線 }))
 					JumpPointList.Add(new STJUMPP() { Time = (long)(CSound管理.rc演奏用タイマ.n現在時刻ms * (((double)TJAPlayer3.ConfigIni.n演奏速度) / 20.0)), Measure = this.n現在の小節線 });
+				TJAPlayer3.Skin.sound特訓ジャンプポイント.t再生する();
 				JumpPointList.Sort((a, b) => a.Time.CompareTo(b.Time));
 			}
 		}

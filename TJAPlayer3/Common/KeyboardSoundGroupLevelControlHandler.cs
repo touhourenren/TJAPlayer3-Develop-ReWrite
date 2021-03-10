@@ -49,7 +49,7 @@ namespace TJAPlayer3
             }
             else if (isSongPreview)
             {
-                soundGroup = ESoundGroup.SongPreview;
+                soundGroup = ESoundGroup.SongPlayback;
             }
             else
             {
