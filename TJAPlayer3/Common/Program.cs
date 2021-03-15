@@ -155,7 +155,7 @@ namespace TJAPlayer3
 						Trace.WriteLine( "エラーだゴメン！（涙" );
                         AssemblyName asmApp = Assembly.GetExecutingAssembly().GetName();
                         MessageBox.Show( "エラーが発生しました。\n" +
-                            e.ToString(), asmApp.Name + " Ver." + asmApp.Version.ToString().Substring(0, asmApp.Version.ToString().Length - 2) + " Error", MessageBoxButtons.OK, MessageBoxIcon.Error );	// #23670 2011.2.28 yyagi to show error dialog
+                            e.ToString(), asmApp.Name + " Error", MessageBoxButtons.OK, MessageBoxIcon.Error );	// #23670 2011.2.28 yyagi to show error dialog
 					}
 #endif
 					// END #24606 2011.03.08 from

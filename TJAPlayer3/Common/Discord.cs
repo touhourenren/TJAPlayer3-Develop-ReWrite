@@ -100,8 +100,8 @@ namespace TJAPlayer3
 
             if (startTimeStamp != 0) presence.startTimestamp = startTimeStamp;
             if (endTimeStamp != 0) presence.endTimestamp = endTimeStamp;
-            presence.largeImageKey = StrToPtr("rewrite");
-            presence.largeImageText = StrToPtr("Ver." + TJAPlayer3.VERSION);
+            presence.largeImageKey = StrToPtr("TJAPlayer3-Develop-ReWrite");
+            presence.largeImageText = StrToPtr("TJAPlayer3-Develop-ReWrite");
             if (!string.IsNullOrEmpty(smallImageKey)) presence.smallImageKey = StrToPtr(smallImageKey);
             if (!string.IsNullOrEmpty(smallImageText)) presence.smallImageText = StrToPtr(smallImageText);
 
