@@ -142,7 +142,16 @@ namespace TJAPlayer3
 					if (TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDXKeys.Key.Escape))
 						return (int)E戻り値.EXIT;
 
-					if(!bバナパス読み込み && !bバナパス読み込み失敗)
+					if ((TJAPlayer3.Input管理.Keyboard.bキーが押されている((int)SlimDXKeys.Key.RightShift) || TJAPlayer3.Input管理.Keyboard.bキーが押されている((int)SlimDXKeys.Key.LeftShift)) && TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDXKeys.Key.F1))
+					{
+						TJAPlayer3.Skin.soundEntry.t停止する();
+						n現在の選択行モード選択 = (int)E戻り値.CONFIG - 1;
+						this.actFO.tフェードアウト開始();
+						base.eフェーズID = CStage.Eフェーズ.共通_フェードアウト;
+						TJAPlayer3.Skin.sound取消音.t再生する();
+					}
+
+					if (!bバナパス読み込み && !bバナパス読み込み失敗)
 					{
 						if (TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDXKeys.Key.P))
 							this.ctバナパス読み込み待機.t開始(0, 600, 1, TJAPlayer3.Timer);
@@ -202,6 +211,7 @@ namespace TJAPlayer3
 								TJAPlayer3.Skin.sound決定音.t再生する();
 								bプレイヤーエントリー = false;
 								bバナパス読み込み = false;
+								TJAPlayer3.Skin.SoundBanapas.bPlayed = false;
 								ctバナパス読み込み成功 = new CCounter();
 								ctバナパス読み込み待機 = new CCounter();
 							}

@@ -445,7 +445,8 @@ namespace TJAPlayer3
 
 							if (TJAPlayer3.stage選曲.r現在選択中の曲.r親ノード != null)
 								TJAPlayer3.stage選曲.act曲リスト.tBOXを出る();
-							else
+							
+
 							{
 								base.eフェーズID = CStage.Eフェーズ.共通_フェードアウト;
 								this.eフェードアウト完了時の戻り値 = E戻り値.完了;
