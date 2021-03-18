@@ -4,253 +4,94 @@ using System.Diagnostics;
 using System.Text;
 using System.Runtime.InteropServices;
 using SlimDX;
+using FDK;
+using System.Drawing;
 
 namespace TJAPlayer3
 {
-	internal class CAct演奏Drums判定文字列 : CAct演奏判定文字列共通
+	internal class CAct演奏Drums判定文字列 : CActivity
 	{
 		// コンストラクタ
 
 		public CAct演奏Drums判定文字列()
 		{
-			this.stレーンサイズ = new STレーンサイズ[12];
 			base.b活性化してない = true;
 		}
 
+        public override void On活性化()
+        {
+			JudgeAnimes = new JudgeAnime[512];
+			for (int i = 0; i < 512; i++)
+            {
+				JudgeAnimes[i] = new JudgeAnime();
+            }
+            base.On活性化();
+        }
 
-		// CActivity 実装（共通クラスからの差分のみ）
-		public override int On進行描画()
-		{
-			throw new InvalidOperationException("t進行描画(C演奏判定ライン座標共通 演奏判定ライン共通 ) のほうを使用してください。");
-		}
-		public override int t進行描画(C演奏判定ライン座標共通 演奏判定ライン座標)
+        public override void On非活性化()
+        {
+			for (int i = 0; i < 128; i++)
+            {
+				JudgeAnimes[i] = null;
+            }
+            base.On非活性化();
+        }
+
+        // CActivity 実装（共通クラスからの差分のみ）
+        public override int On進行描画()
 		{
 			if (!base.b活性化してない)
 			{
-				for (int i = 0; i < 12; i++)
+				for (int i = 0; i < 512; i++)
 				{
-					if (!base.st状態[i].ct進行.b停止中)
-					{
-						base.st状態[i].ct進行.t進行();
-						if (base.st状態[i].ct進行.b終了値に達した)
-						{
-							base.st状態[i].ct進行.t停止();
-							base.st状態[i].b使用中 = false;
-						}
-						int num2 = base.st状態[i].ct進行.n現在の値;
-						if (base.st状態[i].judge != E判定.Great)
-						{
-							base.st状態[i].n相対X座標 = 0;
-							base.st状態[i].n相対Y座標 = 0;
-							base.st状態[i].n透明度 = 0xff;
-						}
-						if ((base.st状態[i].judge != E判定.Miss) && (base.st状態[i].judge != E判定.Bad))
-						{
-							if (num2 < 5)
-							{
-								this.st状態[i].n相対X座標 = 0;
-								this.st状態[i].n相対Y座標 = 0;
-								this.st状態[i].n透明度 = 0;
-							}
-							else if (num2 < 10)
-							{
-								this.st状態[i].n相対X座標 = 0;
-								this.st状態[i].n相対Y座標 = -3;
-								this.st状態[i].n透明度 = 0;
-							}
-							else if (num2 < 15)
-							{
-								this.st状態[i].n相対X座標 = 0;
-								this.st状態[i].n相対Y座標 = -6;
-								this.st状態[i].n透明度 = 0;
-							}
-							else if (num2 < 20)
-							{
-								this.st状態[i].n相対X座標 = 0;
-								this.st状態[i].n相対Y座標 = -9;
-								this.st状態[i].n透明度 = 255;
-							}
-							else if (num2 < 25)
-							{
-								this.st状態[i].n相対X座標 = 0;
-								this.st状態[i].n相対Y座標 = -12;
-								this.st状態[i].n透明度 = 0;
-							}
-							else if (num2 < 30)
-							{
-								this.st状態[i].n相対X座標 = 0;
-								this.st状態[i].n相対Y座標 = -15;
-								this.st状態[i].n透明度 = 0;
-							}
-							else if (num2 < 35)
-							{
-								this.st状態[i].n相対X座標 = 0;
-								this.st状態[i].n相対Y座標 = -12;
-								this.st状態[i].n透明度 = 0;
-							}
-							else if (num2 < 40)
-							{
-								this.st状態[i].n相対X座標 = 0;
-								this.st状態[i].n相対Y座標 = -9;
-								this.st状態[i].n透明度 = 0;
-							}
-							else if (num2 < 45)
-							{
-								this.st状態[i].n相対X座標 = 0;
-								this.st状態[i].n相対Y座標 = -6;
-								this.st状態[i].n透明度 = 0;
-							}
-							else if (num2 < 50)
-							{
-								this.st状態[i].n相対X座標 = 0;
-								this.st状態[i].n相対Y座標 = -3;
-								this.st状態[i].n透明度 = 0;
-							}
-							else if (num2 < 55)
-							{
-								this.st状態[i].n相対X座標 = 0;
-								this.st状態[i].n相対Y座標 = -6;
-								this.st状態[i].n透明度 = 0;
-							}
-							else if (num2 < 60)
-							{
-								this.st状態[i].n相対X座標 = 0;
-								this.st状態[i].n相対Y座標 = -4;
-								this.st状態[i].n透明度 = 0;
-							}
-							else if (num2 < 65)
-							{
-								this.st状態[i].n相対X座標 = 0;
-								this.st状態[i].n相対Y座標 = -2;
-								this.st状態[i].n透明度 = 0;
-							}
-							else if (num2 < 70)
-							{
-								this.st状態[i].n相対X座標 = 0;
-								this.st状態[i].n相対Y座標 = 0;
-								this.st状態[i].n透明度 = 0;
-							}
-						}
-						if (num2 < 5)
-						{
-							this.st状態[i].n相対X座標 = 0;
-							this.st状態[i].n相対Y座標 = 0;
-							this.st状態[i].n透明度 = 0;
-						}
-						else if (num2 < 10)
-						{
-							this.st状態[i].n相対X座標 = 0;
-							this.st状態[i].n相対Y座標 = -3;
-							this.st状態[i].n透明度 = 0;
-						}
-						else if (num2 < 15)
-						{
-							this.st状態[i].n相対X座標 = 0;
-							this.st状態[i].n相対Y座標 = -6;
-							this.st状態[i].n透明度 = 0;
-						}
-						else if (num2 < 20)
-						{
-							this.st状態[i].n相対X座標 = 0;
-							this.st状態[i].n相対Y座標 = -9;
-							this.st状態[i].n透明度 = 255;
-						}
-						else if (num2 < 25)
-						{
-							this.st状態[i].n相対X座標 = 0;
-							this.st状態[i].n相対Y座標 = -12;
-							this.st状態[i].n透明度 = 0;
-						}
-						else if (num2 < 30)
-						{
-							this.st状態[i].n相対X座標 = 0;
-							this.st状態[i].n相対Y座標 = -15;
-							this.st状態[i].n透明度 = 0;
-						}
-						else if (num2 < 35)
-						{
-							this.st状態[i].n相対X座標 = 0;
-							this.st状態[i].n相対Y座標 = -12;
-							this.st状態[i].n透明度 = 0;
-						}
-						else if (num2 < 40)
-						{
-							this.st状態[i].n相対X座標 = 0;
-							this.st状態[i].n相対Y座標 = -9;
-							this.st状態[i].n透明度 = 0;
-						}
-						else if (num2 < 45)
-						{
-							this.st状態[i].n相対X座標 = 0;
-							this.st状態[i].n相対Y座標 = -6;
-							this.st状態[i].n透明度 = 0;
-						}
-						else if (num2 < 50)
-						{
-							this.st状態[i].n相対X座標 = 0;
-							this.st状態[i].n相対Y座標 = -3;
-							this.st状態[i].n透明度 = 0;
-						}
-						else if (num2 < 55)
-						{
-							this.st状態[i].n相対X座標 = 0;
-							this.st状態[i].n相対Y座標 = -6;
-							this.st状態[i].n透明度 = 0;
-						}
-						else if (num2 < 60)
-						{
-							this.st状態[i].n相対X座標 = 0;
-							this.st状態[i].n相対Y座標 = -4;
-							this.st状態[i].n透明度 = 0;
-						}
-						else if (num2 < 65)
-						{
-							this.st状態[i].n相対X座標 = 0;
-							this.st状態[i].n相対Y座標 = -2;
-							this.st状態[i].n透明度 = 0;
-						}
-						else if (num2 < 70)
-						{
-							this.st状態[i].n相対X座標 = 0;
-							this.st状態[i].n相対Y座標 = 0;
-							this.st状態[i].n透明度 = 0;
-						}
-					}
-				}
-				for (int j = 0; j < 12; j++)
-				{
-					if (!base.st状態[j].ct進行.b停止中)
-					{
-						int baseX = 370;
-						//int baseY = 135;
-						int baseY = TJAPlayer3.Skin.nScrollFieldY[base.st状態[j].nPlayer] - 43;
-						int x = TJAPlayer3.Skin.nScrollFieldX[0] - TJAPlayer3.Tx.Judge.szテクスチャサイズ.Width / 2;
-						int y = (baseY + base.st状態[j].n相対Y座標);
-						if (TJAPlayer3.Tx.Judge != null)
-						{
-							TJAPlayer3.Tx.Judge.Opacity = base.st状態[j].ct進行.n現在の値 >= 150 ? (int)(255 - (base.st状態[j].ct進行.n現在の値 - 150) * 1.7) : 255;
-							TJAPlayer3.Tx.Judge.t2D描画(TJAPlayer3.app.Device, x, y, base.st判定文字列[(int)base.st状態[j].judge].rc);
-						}
-					}
+					if (JudgeAnimes[i].counter.b停止中) continue;
+					JudgeAnimes[i].counter.t進行();
+					float x = TJAPlayer3.Skin.nScrollFieldX[0] - TJAPlayer3.Tx.Judge.szテクスチャサイズ.Width / 2;
+					float y = (TJAPlayer3.Skin.nScrollFieldY[JudgeAnimes[JudgeAnime.Index].Player] - 53 + CubicEaseOut((float)(JudgeAnimes[i].counter.n現在の値 >= 180 ? 180 : JudgeAnimes[i].counter.n現在の値) / 180f) * 15f);
+					TJAPlayer3.Tx.Judge.Opacity = (int)(255f - (JudgeAnimes[i].counter.n現在の値 >= 360 ? ((JudgeAnimes[i].counter.n現在の値 - 360) / 50.0f) * 255f : 0f));
+					TJAPlayer3.Tx.Judge.t2D描画(TJAPlayer3.app.Device, x, y, JudgeAnimes[i].rc);
 				}
 			}
-			return 0;
+            return 0;
 		}
 
+		public void Start(int player, E判定 judge)
+        {
+			JudgeAnimes[JudgeAnime.Index].counter.t開始(0, 410, 1, TJAPlayer3.Timer);
+			JudgeAnimes[JudgeAnime.Index].Judge = judge;
+			JudgeAnimes[JudgeAnime.Index].Player = player;
+			int njudge = judge == E判定.Perfect ? 0 : judge == E判定.Good ? 1 : 2;
+			JudgeAnimes[JudgeAnime.Index].rc = new Rectangle(0, (int)njudge * 60, 90, 60);
+			if(JudgeAnime.Index >= 2)
+			{
+				if (JudgeAnimes[JudgeAnime.Index - 2].counter.b終了値に達した)
+				{
+					JudgeAnime.Index++;
+					if (JudgeAnime.Index >= 511) JudgeAnime.Index = 0;
+				}
+			}
+		}
 
 		// その他
 
 		#region [ private ]
 		//-----------------
-		[StructLayout(LayoutKind.Sequential)]
-		private struct STレーンサイズ
-		{
-			public int x;
-			public int w;
+
+		private JudgeAnime[] JudgeAnimes;
+		private class JudgeAnime
+        {
+			public static int Index;
+			public int Player;
+			public E判定 Judge;
+			public Rectangle rc;
+			public CCounter counter = new CCounter();
 		}
 
-		private readonly int[] n文字の縦表示位置 = new int[] { 1, 2, 0, 1, 3, 2, 1, 0, 0, 0, 1, 1 };
-		private STレーンサイズ[] stレーンサイズ;
+		private float CubicEaseOut(float p)
+		{
+			float f = (p - 1);
+			return f * f * f + 1;
+		}
 		//-----------------
 		#endregion
 	}
