@@ -650,7 +650,7 @@ namespace TJAPlayer3
 		public    CAct演奏ゲージ共通 actGauge;
 
         public CAct演奏DrumsDancer actDancer;
-		protected CAct演奏判定文字列共通 actJudgeString;
+		protected CAct演奏Drums判定文字列 actJudgeString;
 		public TaikoLaneFlash actTaikoLaneFlash;
 		protected CAct演奏レーンフラッシュGB共通 actLaneFlushGB;
 		public CAct演奏パネル文字列 actPanel;
@@ -1534,7 +1534,7 @@ namespace TJAPlayer3
                         {
                             if (eJudgeResult != E判定.Auto && eJudgeResult != E判定.Miss)
                             {
-                                this.actJudgeString.Start(0, E判定.Bad, pChip.nLag, pChip, nPlayer);
+                                this.actJudgeString.Start(nPlayer, E判定.Bad);
                                 TJAPlayer3.stage演奏ドラム画面.actLaneTaiko.Start(0x11, eJudgeResult, true, nPlayer);
                                 TJAPlayer3.stage演奏ドラム画面.actChipFireD.Start(0x11, eJudgeResult, nPlayer);
                             }
@@ -1550,7 +1550,7 @@ namespace TJAPlayer3
 
                         if (eJudgeResult != E判定.Auto && eJudgeResult != E判定.Miss)
                         {
-                            this.actJudgeString.Start(0, bAutoPlay ? E判定.Auto : eJudgeResult, pChip.nLag, pChip, nPlayer);
+                            this.actJudgeString.Start(nPlayer, bAutoPlay ? E判定.Auto : eJudgeResult);
                             TJAPlayer3.stage演奏ドラム画面.actLaneTaiko.Start(pChip.nチャンネル番号, eJudgeResult, true, nPlayer);
                             TJAPlayer3.stage演奏ドラム画面.actChipFireD.Start(pChip.nチャンネル番号, eJudgeResult, nPlayer);
 
@@ -4774,21 +4774,21 @@ namespace TJAPlayer3
 		}
 		protected void t進行描画_判定文字列()
 		{
-			this.actJudgeString.t進行描画( 演奏判定ライン座標 );
+			this.actJudgeString.On進行描画();
 		}
 		protected void t進行描画_判定文字列1_通常位置指定の場合()
 		{
-			if ( ( (E判定文字表示位置) TJAPlayer3.ConfigIni.判定文字表示位置.Drums ) != E判定文字表示位置.コンボ下 )	// 判定ライン上または横
-			{
-				this.actJudgeString.t進行描画( 演奏判定ライン座標 );
-			}
+			if ( ( (E判定文字表示位置) TJAPlayer3.ConfigIni.判定文字表示位置.Drums ) != E判定文字表示位置.コンボ下 )    // 判定ライン上または横
+            {
+                this.actJudgeString.On進行描画();
+            }
 		}
 		protected void t進行描画_判定文字列2_判定ライン上指定の場合()
 		{
-			if ( ( (E判定文字表示位置) TJAPlayer3.ConfigIni.判定文字表示位置.Drums ) == E判定文字表示位置.コンボ下 )	// 判定ライン上または横
-			{
-				this.actJudgeString.t進行描画( 演奏判定ライン座標 );
-			}
+			if ( ( (E判定文字表示位置) TJAPlayer3.ConfigIni.判定文字表示位置.Drums ) == E判定文字表示位置.コンボ下 )    // 判定ライン上または横
+            {
+                this.actJudgeString.On進行描画();
+            }
 		}
 
 		protected void t進行描画_譜面スクロール速度()
