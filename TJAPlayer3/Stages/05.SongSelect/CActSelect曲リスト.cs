@@ -810,6 +810,14 @@ namespace TJAPlayer3
 					if (this.txSongNotFound != null)
 						this.txSongNotFound.t2D描画(TJAPlayer3.app.Device, 320, 160);
 				}
+				if (TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDXKeys.Key.Escape))
+				{
+					TJAPlayer3.Skin.sound取消音.t再生する();
+					TJAPlayer3.stage選曲.eフェードアウト完了時の戻り値 = CStage選曲.E戻り値.タイトルに戻る;
+					TJAPlayer3.stage選曲.actFIFO.tフェードアウト開始();
+					TJAPlayer3.stage選曲.eフェーズID = CStage.Eフェーズ.共通_フェードアウト;
+					return 0;
+				}
 				//-----------------
 				#endregion
 

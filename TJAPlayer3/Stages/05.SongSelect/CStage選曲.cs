@@ -864,7 +864,7 @@ namespace TJAPlayer3
         public string NowGenre;
         public string OldGenre;
         private CActSelectArtistComment actArtistComment;
-        private CActFIFOBlack actFIFO;
+        public CActFIFOBlack actFIFO;
         private CActFIFOBlack actFIfrom結果画面;
         //private CActFIFOBlack actFOtoNowLoading;
         public CActFIFOStart actFOtoNowLoading;
@@ -895,7 +895,7 @@ namespace TJAPlayer3
         private STキー反復用カウンタ ctキー反復用;
         public CCounter ct登場時アニメ用共通;
         private CCounter ct背景スクロール用タイマー;
-        private E戻り値 eフェードアウト完了時の戻り値;
+        public E戻り値 eフェードアウト完了時の戻り値;
         private Font ftフォント;
         //private CTexture tx下部パネル;
         //private CTexture tx上部パネル;
