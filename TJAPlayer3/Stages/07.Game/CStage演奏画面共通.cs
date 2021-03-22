@@ -1297,9 +1297,6 @@ namespace TJAPlayer3
                    
                 }
 
-                if (TJAPlayer3.stage選曲.n確定された曲の難易度 == (int)Difficulty.Dan)
-                    this.n連打[actDan.NowShowingNumber]++;
-
                 if (this.actBalloon.ct風船アニメ[player].b終了値に達してない)
                 {
                     this.actBalloon.ct風船アニメ[player] = new CCounter(0, 9, 14, TJAPlayer3.Timer);
@@ -1313,7 +1310,11 @@ namespace TJAPlayer3
                 pChip.nRollCount++;
                 this.n風船残り[ player ]--;
 
+                if (TJAPlayer3.stage選曲.n確定された曲の難易度 == (int)Difficulty.Dan)
+                    this.n連打[actDan.NowShowingNumber]++;
+
                 this.n合計連打数[player]++; //  成績発表の連打数に風船を含めるように (AioiLight)
+
                 //分岐のための処理。実装してない。
 
                 //赤か青かの分岐

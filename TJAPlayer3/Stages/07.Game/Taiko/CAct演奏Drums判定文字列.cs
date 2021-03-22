@@ -60,7 +60,7 @@ namespace TJAPlayer3
 			JudgeAnimes[JudgeAnime.Index].counter.t開始(0, 410, 1, TJAPlayer3.Timer);
 			JudgeAnimes[JudgeAnime.Index].Judge = judge;
 			JudgeAnimes[JudgeAnime.Index].Player = player;
-			int njudge = judge == E判定.Perfect ? 0 : judge == E判定.Good ? 1 : 2;
+			int njudge = judge == E判定.Perfect ? 0 : judge == E判定.Good ? 1 : judge == E判定.Auto ? 0 : 2;
 			JudgeAnimes[JudgeAnime.Index].rc = new Rectangle(0, (int)njudge * 60, 90, 60);
 			if(JudgeAnime.Index >= 2)
 			{

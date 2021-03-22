@@ -1578,7 +1578,7 @@ namespace TJAPlayer3
 
 							TJAPlayer3.Tx.SongSelect_Box_Chara[this.nStrジャンルtoNumBox(r現在選択中の曲.strジャンル)].t2D中心基準描画(TJAPlayer3.app.Device, 640 - TJAPlayer3.Tx.SongSelect_Box_Chara[this.nStrジャンルtoNumBox(r現在選択中の曲.strジャンル)].szテクスチャサイズ.Width / 4 + 114 - anime, 360, 
 								new Rectangle(0, 0, TJAPlayer3.Tx.SongSelect_Box_Chara[this.nStrジャンルtoNumBox(r現在選択中の曲.strジャンル)].szテクスチャサイズ.Width / 2, TJAPlayer3.Tx.SongSelect_Box_Chara[this.nStrジャンルtoNumBox(r現在選択中の曲.strジャンル)].szテクスチャサイズ.Height));
-
+							
 							TJAPlayer3.Tx.SongSelect_Box_Chara[this.nStrジャンルtoNumBox(r現在選択中の曲.strジャンル)].t2D中心基準描画(TJAPlayer3.app.Device, 640 + TJAPlayer3.Tx.SongSelect_Box_Chara[this.nStrジャンルtoNumBox(r現在選択中の曲.strジャンル)].szテクスチャサイズ.Width / 4 - 114 + anime, 360, 
 								new Rectangle(TJAPlayer3.Tx.SongSelect_Box_Chara[this.nStrジャンルtoNumBox(r現在選択中の曲.strジャンル)].szテクスチャサイズ.Width / 2, 0, TJAPlayer3.Tx.SongSelect_Box_Chara[this.nStrジャンルtoNumBox(r現在選択中の曲.strジャンル)].szテクスチャサイズ.Width / 2, TJAPlayer3.Tx.SongSelect_Box_Chara[this.nStrジャンルtoNumBox(r現在選択中の曲.strジャンル)].szテクスチャサイズ.Height));
 						}

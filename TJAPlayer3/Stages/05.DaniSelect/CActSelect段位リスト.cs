@@ -90,6 +90,8 @@ namespace TJAPlayer3
                 }
             }
 
+            #region [ バー表示 ]
+
             if (stバー情報.Length != 0)
             {
                 TJAPlayer3.Tx.DanC_ExamType.vc拡大縮小倍率.X = 0.81f;
@@ -230,7 +232,11 @@ namespace TJAPlayer3
                 }
             }
 
-            if(ctDaniMoveAnime.n現在の値 == 90)
+            #endregion
+
+            #region [ バー移動 ]
+
+            if (ctDaniMoveAnime.n現在の値 == 90)
             {
                 if (bLeftMove)
                 {
@@ -244,7 +250,7 @@ namespace TJAPlayer3
                 ctDaniMoveAnime.n現在の値 = 0;
             }
 
-            TJAPlayer3.act文字コンソール.tPrint(0, 0, C文字コンソール.Eフォント種別.灰, ctDanAnimeIn.n現在の値.ToString());
+            #endregion
 
             return 0;
         }

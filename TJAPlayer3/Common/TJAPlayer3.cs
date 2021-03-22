@@ -1124,13 +1124,22 @@ namespace TJAPlayer3
 								//DTX.t全チップの再生停止();
 								if( DTX != null )
                                     DTX.On非活性化();
-								Trace.TraceInformation( "曲の読み込みを中止しました。" );
-								this.tガベージコレクションを実行する();
-								Trace.TraceInformation( "----------------------" );
-								Trace.TraceInformation( "■ 選曲" );
-								stage選曲.On活性化();
-								r直前のステージ = r現在のステージ;
-								r現在のステージ = stage選曲;
+								if (stage選曲.n確定された曲の難易度 == (int)Difficulty.Dan)
+								{
+									Trace.TraceInformation("----------------------");
+									Trace.TraceInformation("■ 段位選択");
+									stage段位選択.On活性化();
+									r直前のステージ = r現在のステージ;
+									r現在のステージ = stage段位選択;
+								}
+								else
+								{
+									Trace.TraceInformation("----------------------");
+									Trace.TraceInformation("■ 選曲");
+									stage選曲.On活性化();
+									r直前のステージ = r現在のステージ;
+									r現在のステージ = stage選曲;
+								}
 								foreach ( STPlugin pg in this.listプラグイン )
 								{
 									Directory.SetCurrentDirectory( pg.strプラグインフォルダ );
@@ -1280,33 +1289,6 @@ for (int i = 0; i < 3; i++) {
 								//-----------------------------
 								scoreIni = this.tScoreIniへBGMAdjustとHistoryとPlayCountを更新( "Play canceled" );
 
-								//int lastd = 0;
-								//int f = 0;
-								//for (int i = 0; i < swlist1.Count; i++)
-								//{
-								//    int d1 = swlist1[ i ];
-								//    int d2 = swlist2[ i ];
-								//    int d3 = swlist3[ i ];
-								//    int d4 = swlist4[ i ];
-
-								//    int dif = d1 - lastd;
-								//    string s = "";
-								//    if ( 16 <= dif && dif <= 17 )
-								//    {
-								//    }
-								//    else
-								//    {
-								//        s = "★";
-								//    }
-								//    Trace.TraceInformation( "frame {0:D4}: {1:D3} ( {2:D3}, {3:D3}, {4:D3} ) {5}, n現在時刻={6}", f, dif, d1, d2, d3, s, d4 );
-								//    lastd = d1;
-								//    f++;
-								//}
-								//swlist1.Clear();
-								//swlist2.Clear();
-								//swlist3.Clear();
-								//swlist4.Clear();
-		
 								#region [ プラグイン On演奏キャンセル() の呼び出し ]
 								//---------------------
 								foreach( STPlugin pg in this.listプラグイン )
@@ -1327,15 +1309,26 @@ for (int i = 0; i < 3; i++) {
 								}
 								else
 								{
-									Trace.TraceInformation( "----------------------" );
-									Trace.TraceInformation( "■ 選曲" );
-									stage選曲.On活性化();
-									r直前のステージ = r現在のステージ;
-									r現在のステージ = stage選曲;
+									if(stage選曲.n確定された曲の難易度 == (int)Difficulty.Dan)
+									{
+										Trace.TraceInformation("----------------------");
+										Trace.TraceInformation("■ 段位選択");
+										stage段位選択.On活性化();
+										r直前のステージ = r現在のステージ;
+										r現在のステージ = stage段位選択;
+									}
+                                    else
+									{
+										Trace.TraceInformation("----------------------");
+										Trace.TraceInformation("■ 選曲");
+										stage選曲.On活性化();
+										r直前のステージ = r現在のステージ;
+										r現在のステージ = stage選曲;
+									}
 
 									#region [ プラグイン Onステージ変更() の呼び出し ]
 									//---------------------
-									foreach( STPlugin pg in this.listプラグイン )
+									foreach ( STPlugin pg in this.listプラグイン )
 									{
 										Directory.SetCurrentDirectory( pg.strプラグインフォルダ );
 										pg.plugin.Onステージ変更();
@@ -1498,11 +1491,22 @@ for (int i = 0; i < 3; i++) {
                             this.tガベージコレクションを実行する();
                             if ( !bコンパクトモード )
 							{
-								Trace.TraceInformation( "----------------------" );
-								Trace.TraceInformation( "■ 選曲" );
-								stage選曲.On活性化();
-								r直前のステージ = r現在のステージ;
-								r現在のステージ = stage選曲;
+								if (stage選曲.n確定された曲の難易度 == (int)Difficulty.Dan)
+								{
+									Trace.TraceInformation("----------------------");
+									Trace.TraceInformation("■ 段位選択");
+									stage段位選択.On活性化();
+									r直前のステージ = r現在のステージ;
+									r現在のステージ = stage段位選択;
+								}
+								else
+								{
+									Trace.TraceInformation("----------------------");
+									Trace.TraceInformation("■ 選曲");
+									stage選曲.On活性化();
+									r直前のステージ = r現在のステージ;
+									r現在のステージ = stage選曲;
+								}
 								stage選曲.NowSong++;
 
 								foreach( STPlugin pg in this.listプラグイン )

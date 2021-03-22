@@ -171,6 +171,7 @@
     <Compile Include="Stages\04.Config\CActConfigList.cs" />
     <Compile Include="Stages\04.Config\CStageコンフィグ.cs" />
     <Compile Include="Stages\05.DaniSelect\CActSelect段位リスト.cs" />
+    <Compile Include="Stages\05.DaniSelect\CActSelect段位挑戦選択画面.cs" />
     <Compile Include="Stages\05.DaniSelect\CStage段位選択.cs" />
     <Compile Include="Stages\05.SongSelect\CActPlayOption.cs" />
     <Compile Include="Stages\05.SongSelect\CActSelectArtistComment.cs" />

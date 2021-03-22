@@ -13,7 +13,7 @@ EXAM3:jb,40,2,l
 
 #START
 #NEXTSONG プチポチ,,クラシック,プチポチ.ogg,420,103,8,3
-EXAM4:r,10,20,m
+EXAM4:r,50,60,m
 #BPMCHANGE 149
 #MEASURE 4/4
 #SCROLL 1.0

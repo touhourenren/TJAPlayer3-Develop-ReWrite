@@ -23,7 +23,7 @@ namespace TJAPlayer3
 		{
             this.bEsc有効 = false;
 			lci = new List<List<List<CItemBase>>>();									// この画面に来る度に、メニューを作り直す。
-			for ( int nConfSet = 0; nConfSet < 3; nConfSet++ )
+			for ( int nConfSet = 0; nConfSet < (TJAPlayer3.stage選曲.n確定された曲の難易度 != (int)Difficulty.Dan ? 3 : 2); nConfSet++ )
 			{
 				lci.Add( new List<List<CItemBase>>() );									// ConfSet用の3つ分の枠。
 				for ( int nInst = 0; nInst < 3; nInst++ )
@@ -32,7 +32,7 @@ namespace TJAPlayer3
 					lci[ nConfSet ][ nInst ] = MakeListCItemBase( nConfSet, nInst );
 				}
 			}
-			base.Initialize( lci[ nCurrentConfigSet ][ 0 ], true, QuickCfgTitle, 2 );	// ConfSet=0, nInst=Drums
+			base.Initialize( lci[ nCurrentConfigSet ][ 0 ], true, QuickCfgTitle, 0 );	// ConfSet=0, nInst=Drums
 		}
 
 		private List<CItemBase> MakeListCItemBase( int nConfigSet, int nInst )
@@ -41,7 +41,7 @@ namespace TJAPlayer3
 
 			#region [ 共通 SET切り替え/More/Return ]
 			l.Add( new CSwitchItemList( "続ける", CItemBase.Eパネル種別.通常, 0, "", "", new string[] { "" } ) );
-			l.Add( new CSwitchItemList( "やり直し", CItemBase.Eパネル種別.通常, 0, "", "", new string[] { "" } ) );
+			if(TJAPlayer3.stage選曲.n確定された曲の難易度 != (int)Difficulty.Dan) l.Add( new CSwitchItemList( "やり直し", CItemBase.Eパネル種別.通常, 0, "", "", new string[] { "" } ) );
 			l.Add( new CSwitchItemList( "演奏中止", CItemBase.Eパネル種別.通常, 0, "", "", new string[] { "", "" } ) );
 			#endregion
 
@@ -93,7 +93,17 @@ namespace TJAPlayer3
 					break;
 
 				case (int) EOrder.Redoing:
-                    this.bやり直しを選択した = true;
+					if (TJAPlayer3.stage選曲.n確定された曲の難易度 != (int)Difficulty.Dan)
+					{
+						this.bやり直しを選択した = true;
+					}
+                    else
+					{
+						CSound管理.rc演奏用タイマ.t再開();
+						TJAPlayer3.Timer.t再開();
+						TJAPlayer3.stage演奏ドラム画面.t演奏中止();
+						this.tDeativatePopupMenu();
+					}
 					break;
 
 				case (int) EOrder.Return:

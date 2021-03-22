@@ -14,6 +14,7 @@ namespace TJAPlayer3
 		{
 			this.mode = EFIFOモード.フェードアウト;
 
+			TJAPlayer3.Skin.soundDanSelectBGM.t停止する();
 			if (TJAPlayer3.stage選曲.n確定された曲の難易度 == (int)Difficulty.Dan)
 				this.counter = new CCounter(0, 1255, 1, TJAPlayer3.Timer);
 			else

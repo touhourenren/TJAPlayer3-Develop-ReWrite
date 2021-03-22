@@ -107,12 +107,8 @@ namespace TJAPlayer3
             {
                 this.ct進行メイン.t進行();
 
-                //CDTXMania.act文字コンソール.tPrint( 0, 0, C文字コンソール.Eフォント種別.灰, this.ct進行メイン.n現在の値.ToString() );
-                //仮置き
                 for (int i = 0; i < TJAPlayer3.ConfigIni.nPlayerCount; i++)
                 {
-                    this.Mode[0] = EndMode.StageCleared;
-
                     switch (this.Mode[i])
                     {
                         case EndMode.StageFailed:

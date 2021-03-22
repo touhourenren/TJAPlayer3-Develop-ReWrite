@@ -352,6 +352,11 @@ namespace TJAPlayer3
         public Cシステムサウンド soundPon = null;
         public Cシステムサウンド soundGauge = null;
         public Cシステムサウンド soundScoreDon = null;
+        public Cシステムサウンド soundChallengeVoice = null;
+        public Cシステムサウンド soundDanSelectStart = null;
+        public Cシステムサウンド soundDanSongSelectCheck = null;
+        public Cシステムサウンド soundDanSelectBGM = null;
+        public Cシステムサウンド soundDanSongSelect = null;
 
         //public Cシステムサウンド soundRed = null;
         //public Cシステムサウンド soundBlue = null;
@@ -699,6 +704,11 @@ namespace TJAPlayer3
             this.soundPon = new Cシステムサウンド(@"Sounds\Pon.ogg", false, false, false, ESoundGroup.SoundEffect);
             this.soundGauge = new Cシステムサウンド(@"Sounds\Gauge.ogg", false, false, false, ESoundGroup.SoundEffect);
             this.soundScoreDon = new Cシステムサウンド(@"Sounds\ScoreDon.ogg", false, false, false, ESoundGroup.SoundEffect);
+            this.soundChallengeVoice = new Cシステムサウンド(@"Sounds\Dan\ChallengeVoice.wav", false, false, false, ESoundGroup.SoundEffect);
+            this.soundDanSelectStart = new Cシステムサウンド(@"Sounds\Dan\DanSelectStart.wav", false, false, false, ESoundGroup.SoundEffect);
+            this.soundDanSongSelectCheck = new Cシステムサウンド(@"Sounds\Dan\DanSongSelectCheck.wav", false, false, false, ESoundGroup.SoundEffect);
+            this.soundDanSelectBGM = new Cシステムサウンド(@"Sounds\Dan\DanSelectBGM.wav", true, false, false, ESoundGroup.SongPlayback);
+            this.soundDanSongSelect = new Cシステムサウンド(@"Sounds\Dan\DanSongSelect.wav", false, false, false, ESoundGroup.SoundEffect);
             ReloadSkin();
             tReadSkinConfig();
         }
@@ -2571,7 +2581,7 @@ namespace TJAPlayer3
         public int SongSelect_BoxExplanation_Interval = 30;
         public int SongSelect_Title_X = 0;
         public int SongSelect_Title_Y = 0;
-        public string[] SongSelect_GenreName = { "ポップス", "アニメ", "ゲームバラエティ", "ナムコオリジナル", "クラシック", "キッズ", "ボーカロイド", "最近遊んだ曲"};
+        public string[] SongSelect_GenreName = { "ポップス", "アニメ", "ゲームバラエティ", "ナムコオリジナル", "クラシック", "バラエティ", "キッズ", "ボーカロイド", "最近遊んだ曲"};
         public int[] SongSelect_NamePlate_X = new int[] { 36, 1020 };
         public int[] SongSelect_NamePlate_Y = new int[] { 615, 615 };
         public int[] SongSelect_Auto_X = new int[] { 60, 950 };

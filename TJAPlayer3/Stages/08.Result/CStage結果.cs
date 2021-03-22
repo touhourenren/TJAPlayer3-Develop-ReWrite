@@ -443,8 +443,9 @@ namespace TJAPlayer3
 								b最近遊んだ曲追加済み = true;
 							}
 
-							if (TJAPlayer3.stage選曲.r現在選択中の曲.r親ノード != null)
-								TJAPlayer3.stage選曲.act曲リスト.tBOXを出る();
+							if(TJAPlayer3.stage選曲.n確定された曲の難易度 != (int)Difficulty.Dan)
+								if (TJAPlayer3.stage選曲.r現在選択中の曲.r親ノード != null)
+									TJAPlayer3.stage選曲.act曲リスト.tBOXを出る();
 							
 
 							{

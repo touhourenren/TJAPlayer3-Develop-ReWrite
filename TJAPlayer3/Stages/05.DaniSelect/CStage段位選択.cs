@@ -17,6 +17,7 @@ namespace TJAPlayer3
 
             base.list子Activities.Add(this.段位リスト = new CActSelect段位リスト());
             base.list子Activities.Add(this.actFOtoNowLoading = new CActFIFOStart());
+            base.list子Activities.Add(this.段位挑戦選択画面 = new CActSelect段位挑戦選択画面());
         }
 
         public override void On活性化()
@@ -29,6 +30,7 @@ namespace TJAPlayer3
             base.eフェーズID = CStage.Eフェーズ.共通_通常状態;
             this.eフェードアウト完了時の戻り値 = E戻り値.継続;
 
+            ct待機 = new CCounter();
             ctDonchan_In = new CCounter();
             ctDonchan_Normal = new CCounter(0, TJAPlayer3.Tx.SongSelect_Donchan_Normal.Length - 1, 1000 / 45, TJAPlayer3.Timer);
 
@@ -54,6 +56,7 @@ namespace TJAPlayer3
         {
             ctDonchan_Normal.t進行Loop();
             ctDonchan_In.t進行();
+            ct待機.t進行();
 
             TJAPlayer3.Tx.Dani_Background.t2D描画(TJAPlayer3.app.Device, 0, 0);
 
@@ -62,13 +65,17 @@ namespace TJAPlayer3
             if(this.段位リスト.ctDaniIn.n現在の値 == 3000)
             {
                 if (!ctDonchan_In.b開始した)
+                {
+                    TJAPlayer3.Skin.soundDanSelectStart.t再生する();
+                    TJAPlayer3.Skin.soundDanSelectBGM.t再生する();
                     ctDonchan_In.t開始(0, 180, 1.25f, TJAPlayer3.Timer);
+                }
 
                 TJAPlayer3.NamePlate.tNamePlateDraw(TJAPlayer3.Skin.SongSelect_NamePlate_X[0], TJAPlayer3.Skin.SongSelect_NamePlate_Y[0] + 5, 0);
 
                 #region [ キー関連 ]
 
-                if (!this.段位リスト.bスクロール中 && !b選択した)
+                if (!this.段位リスト.bスクロール中 && !b選択した && !bDifficultyIn)
                 {
                     if (TJAPlayer3.Input管理.Keyboard.bキーが押された((int)Key.RightArrow) ||
                         TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.RBlue))
@@ -86,7 +93,10 @@ namespace TJAPlayer3
                         TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.LRed) ||
                         TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.RRed))
                     {
-                        this.t段位を選択する();
+                        //this.t段位を選択する();
+                        TJAPlayer3.Skin.soundDanSongSelectCheck.t再生する();
+                        this.bDifficultyIn = true;
+                        this.段位挑戦選択画面.ctBarIn.t開始(0, 255, 1, TJAPlayer3.Timer);
                     }
                 }
 
@@ -106,6 +116,15 @@ namespace TJAPlayer3
                 }
 
                 #endregion
+
+                this.段位挑戦選択画面.On進行描画();
+            }
+
+            if(ct待機.n現在の値 >= 3000)
+            {
+                TJAPlayer3.stage段位選択.t段位を選択する();
+                ct待機.n現在の値 = 0;
+                ct待機.t停止();
             }
 
             switch (base.eフェーズID)
@@ -117,6 +136,7 @@ namespace TJAPlayer3
                     }
                     return (int)this.eフェードアウト完了時の戻り値;
             }
+
             return 0;
         }
 
@@ -127,10 +147,9 @@ namespace TJAPlayer3
             選曲した
         }
 
-        private void t段位を選択する()
+        public void t段位を選択する()
         {
             this.b選択した = true;
-            TJAPlayer3.Skin.sound曲決定音.t再生する();
             TJAPlayer3.stage選曲.r確定された曲 = TJAPlayer3.Songs管理.list曲ルート_Dan[段位リスト.n現在の選択行];
             TJAPlayer3.stage選曲.r確定されたスコア = TJAPlayer3.Songs管理.list曲ルート_Dan[段位リスト.n現在の選択行].arスコア[(int)Difficulty.Dan];
             TJAPlayer3.stage選曲.n確定された曲の難易度 = (int)Difficulty.Dan;
@@ -144,7 +163,10 @@ namespace TJAPlayer3
             TJAPlayer3.Skin.bgm選曲画面.t停止する();
         }
 
-        private bool b選択した;
+        public CCounter ct待機;
+
+        public bool b選択した;
+        public bool bDifficultyIn;
 
         private CCounter ctDonchan_In;
         private CCounter ctDonchan_Normal;
@@ -153,5 +175,6 @@ namespace TJAPlayer3
 
         public CActFIFOStart actFOtoNowLoading;
         public CActSelect段位リスト 段位リスト;
+        public CActSelect段位挑戦選択画面 段位挑戦選択画面;
     }
 }

@@ -56,6 +56,7 @@ namespace TJAPlayer3
                             {
                                 TJAPlayer3.stage選曲.r確定された曲.DanSongs[NowShowingNumber].Dan_C[j].Amount = 0;
                             }
+
                             Challenge[j] = TJAPlayer3.stage選曲.r確定された曲.DanSongs[NowShowingNumber].Dan_C[j];
                             ExamChange[j] = true;
                         }
@@ -76,7 +77,19 @@ namespace TJAPlayer3
             for (int i = 0; i < 4; i++)
             {
                 if(TJAPlayer3.DTX.Dan_C[i] != null) Challenge[i] = new Dan_C(TJAPlayer3.DTX.Dan_C[i]);
+
+                for (int j = 0; j < TJAPlayer3.stage選曲.r確定された曲.DanSongs.Count; j++)
+                {
+                    if (TJAPlayer3.stage選曲.r確定された曲.DanSongs[j].Dan_C[i] != null)
+                    {
+                        TJAPlayer3.stage選曲.r確定された曲.DanSongs[j].Dan_C[i] = new Dan_C(TJAPlayer3.stage選曲.r確定された曲.DanSongs[j].Dan_C[i]);
+                    }
+                }
             }
+
+            if(TJAPlayer3.stage演奏ドラム画面.ListDan_Number >= 1 && FirstSectionAnime)
+                TJAPlayer3.stage演奏ドラム画面.ListDan_Number = 0;
+
             FirstSectionAnime = false;
             // 始点を決定する。
             ExamCount = 0;
@@ -98,7 +111,8 @@ namespace TJAPlayer3
                 Status[i].Timer_Gauge = new CCounter();
                 Status[i].Timer_Failed = new CCounter();
             }
-            IsEnded = false;
+            
+            IsEnded = new bool[TJAPlayer3.stage選曲.r確定された曲.DanSongs.Count];
 
             if (TJAPlayer3.stage選曲.n確定された曲の難易度 == (int)Difficulty.Dan) IsAnimating = true;
             base.On活性化();
@@ -165,7 +179,7 @@ namespace TJAPlayer3
                     songsnotesremain[NowShowingNumber] = TJAPlayer3.DTX.nDan_NotesCount[NowShowingNumber] - (TJAPlayer3.stage演奏ドラム画面.n良[NowShowingNumber] + TJAPlayer3.stage演奏ドラム画面.n可[NowShowingNumber] + TJAPlayer3.stage演奏ドラム画面.n不可[NowShowingNumber]);
                     notesremain = TJAPlayer3.DTX.nノーツ数[3] - (TJAPlayer3.stage演奏ドラム画面.nヒット数_Auto含む.Drums.Perfect + TJAPlayer3.stage演奏ドラム画面.nヒット数_Auto含まない.Drums.Perfect) - (TJAPlayer3.stage演奏ドラム画面.nヒット数_Auto含む.Drums.Great + TJAPlayer3.stage演奏ドラム画面.nヒット数_Auto含まない.Drums.Great) - (TJAPlayer3.stage演奏ドラム画面.nヒット数_Auto含む.Drums.Miss + TJAPlayer3.stage演奏ドラム画面.nヒット数_Auto含まない.Drums.Miss);
                     // 残り音符数が0になったときに判断されるやつ
-                    if (notesremain <= 0)
+                    if (ExamChange[i] ? songsnotesremain[NowShowingNumber] <= 0 : notesremain <= 0)
                     {
                         // 残り音符数ゼロ
                         switch (Challenge[i].GetExamType())
@@ -199,10 +213,10 @@ namespace TJAPlayer3
 
                     // 音源が終了したやつの分岐。
                     // ( CDTXMania.DTX.listChip.Count > 0 ) ? CDTXMania.DTX.listChip[ CDTXMania.DTX.listChip.Count - 1 ].n発声時刻ms : 0;
-                    if(!IsEnded)
+                    if(!IsEnded[NowShowingNumber])
                     {
                         if (TJAPlayer3.DTX.listChip.Count <= 0) continue;
-                        if (ExamChange[i] ? TJAPlayer3.DTX.pDan_LastChip[NowShowingNumber].n発声時刻ms < TJAPlayer3.Timer.n現在時刻 : TJAPlayer3.DTX.listChip[TJAPlayer3.DTX.listChip.Count - 1].n発声時刻ms < TJAPlayer3.Timer.n現在時刻)
+                        if (ExamChange[i] ? TJAPlayer3.DTX.pDan_LastChip[NowShowingNumber].n発声時刻ms <= TJAPlayer3.Timer.n現在時刻 : TJAPlayer3.DTX.listChip[TJAPlayer3.DTX.listChip.Count - 1].n発声時刻ms <= TJAPlayer3.Timer.n現在時刻)
                         {
                             switch (Challenge[i].GetExamType())
                             {
@@ -216,7 +230,7 @@ namespace TJAPlayer3
                                 default:
                                     break;
                             }
-                            IsEnded = true;
+                            IsEnded[NowShowingNumber] = true;
                         }
                     }
                 }
@@ -240,7 +254,9 @@ namespace TJAPlayer3
                 Status[i].Timer_Gauge = null;
                 Status[i].Timer_Failed = null;
             }
-            IsEnded = false;
+            for(int i = 0; i < IsEnded.Length; i++)
+                IsEnded[i] = false;
+
             base.On非活性化();
         }
 
@@ -421,6 +437,9 @@ namespace TJAPlayer3
             } 
             // 段プレートを描画する。
             Dan_Plate?.t2D中心基準描画(TJAPlayer3.app.Device, TJAPlayer3.Skin.Game_DanC_Dan_Plate[0], TJAPlayer3.Skin.Game_DanC_Dan_Plate[1]);
+
+            TJAPlayer3.act文字コンソール.tPrint(0, 0, C文字コンソール.Eフォント種別.白, TJAPlayer3.DTX.pDan_LastChip[NowShowingNumber].n発声時刻ms + " / " + CSound管理.rc演奏用タイマ.n現在時刻);
+
 
             return base.On進行描画();
         }
@@ -926,6 +945,13 @@ namespace TJAPlayer3
             var isFailed = false;
             for (int i = 0; i < this.ExamCount; i++)
             {
+                for(int j = 0; j < TJAPlayer3.stage選曲.r確定された曲.DanSongs.Count; j++ )
+                {
+                    if(TJAPlayer3.stage選曲.r確定された曲.DanSongs[j].Dan_C[i] != null)
+                    {
+                        if (TJAPlayer3.stage選曲.r確定された曲.DanSongs[j].Dan_C[i].GetReached()) isFailed = true;
+                    }
+                }
                 if (Challenge[i].GetReached()) isFailed = true;
             }
             return isFailed;
@@ -1028,7 +1054,7 @@ namespace TJAPlayer3
         private int ExamCount;
         private ChallengeStatus[] Status = new ChallengeStatus[4];
         private CTexture Dan_Plate;
-        private bool IsEnded;
+        private bool[] IsEnded;
         public bool FirstSectionAnime;
 
         // アニメ関連

@@ -20,6 +20,7 @@ namespace TJAPlayer3
 			base.list子Activities.Add( this.actFIfromSetup = new CActFIFOBlack() );
 			base.list子Activities.Add( this.actFI = new CActFIFOBlack() );
 			base.list子Activities.Add( this.actFO = new CActFIFOBlack() );
+
 		}
 
 
@@ -42,9 +43,12 @@ namespace TJAPlayer3
 				this.ctエントリーバー決定点滅 = new CCounter();
 
 				this.ctどんちゃんエントリーループ = new CCounter();
-
 				this.ctどんちゃんイン = new CCounter();
 				this.ctどんちゃんループ = new CCounter(0, TJAPlayer3.Tx.Entry_Donchan_Normal.Length - 1, 1000 / 30, TJAPlayer3.Timer);
+
+				this.ctBarAnimeIn = new CCounter();
+				this.ctBarMove = new CCounter();
+				this.ctBarMove.n現在の値 = 250;
 
 				this.bバナパス読み込み = false;
 				this.bバナパス読み込み失敗 = false;
@@ -54,6 +58,12 @@ namespace TJAPlayer3
 				this.bどんちゃんカウンター初期化 = false;
 
 				this.n現在の選択行プレイヤーエントリー = 1;
+
+				for (int i = 0; i < 2; i++)
+				{
+					this.stModeBar[i].BarTexture = TJAPlayer3.Tx.ModeSelect_Bar[i];
+					this.stModeBar[i].n現在存在している行 = i + 1;
+				}
 
 				TJAPlayer3.Skin.soundEntry.t再生する();
 				TJAPlayer3.Skin.SoundBanapas.bPlayed = false;
@@ -122,6 +132,7 @@ namespace TJAPlayer3
 				this.ctどんちゃんイン.t進行();
 				this.ctどんちゃんループ.t進行Loop();
 				this.ctどんちゃんエントリーループ.t進行Loop();
+				this.ctBarMove.t進行();
 
 				if (!TJAPlayer3.Skin.bgmタイトルイン.b再生中)
                 {
@@ -177,8 +188,20 @@ namespace TJAPlayer3
 								TJAPlayer3.Skin.sound変更音.t再生する();
 								n現在の選択行プレイヤーエントリー += 1;
 							}
-                        }							
-                    }
+						}
+
+						if (bモード選択)
+						{
+							if (n現在の選択行モード選択 != 1)
+							{
+								TJAPlayer3.Skin.sound変更音.t再生する();
+								ctBarMove.t開始(0, 250, 1.2f, TJAPlayer3.Timer);
+								n現在の選択行モード選択 = 1;
+								for (int i = 0; i < 2; i++)
+									this.stModeBar[i].n現在存在している行 = i;
+							}
+						}
+					}
 
 					if (TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.LBlue)||TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDXKeys.Key.LeftArrow))
                     {
@@ -189,7 +212,19 @@ namespace TJAPlayer3
 								TJAPlayer3.Skin.sound変更音.t再生する();
 								n現在の選択行プレイヤーエントリー -= 1;
 							}
-                        }							
+                        }
+
+						if (bモード選択)
+						{
+							if(n現在の選択行モード選択 != 0)
+							{
+								TJAPlayer3.Skin.sound変更音.t再生する();
+								ctBarMove.t開始(0, 250, 1.2f, TJAPlayer3.Timer);
+								n現在の選択行モード選択 = 0;
+								for (int i = 0; i < 2; i++)
+									this.stModeBar[i].n現在存在している行 = i + 1;
+							}
+						}
                     }
 
 
@@ -218,9 +253,9 @@ namespace TJAPlayer3
 						}
 						if (bモード選択)
 						{
-							if (TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDXKeys.Key.Return))
+							if (this.n現在の選択行モード選択 == 1)
 							{
-									if (TJAPlayer3.Songs管理.list曲ルート_Dan.Count > 0 && TJAPlayer3.ConfigIni.nPlayerCount !=2)
+									if (TJAPlayer3.Songs管理.list曲ルート_Dan.Count > 0 && TJAPlayer3.ConfigIni.nPlayerCount != 2)
 									{
 										TJAPlayer3.Skin.sound決定音.t再生する();
 										n現在の選択行モード選択 = (int)E戻り値.DANGAMESTART - 1;
@@ -260,28 +295,10 @@ namespace TJAPlayer3
 								TJAPlayer3.Skin.soundsanka.t再生する();
 
 							ctどんちゃんイン.t開始(0, 180, 2, TJAPlayer3.Timer);
+							ctBarAnimeIn.t開始(0, 1295, 1, TJAPlayer3.Timer);
 							bモード選択 = true;
                         }
                     }
-
-					/*
-					if ((TJAPlayer3.Pad.b押されたDGB(Eパッド.CY) || TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.RD)) || (TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.LC) || (TJAPlayer3.ConfigIni.bEnterがキー割り当てのどこにも使用されていない && TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDXKeys.Key.Return))))
-					{
-						if ((this.n現在のカーソル行 == (int)E戻り値.GAMESTART - 1) && TJAPlayer3.Skin.soundゲーム開始音.b読み込み成功)
-						{
-							TJAPlayer3.Skin.soundゲーム開始音.t再生する();
-						}
-						else
-						{
-							TJAPlayer3.Skin.sound決定音.t再生する();
-						}
-						if (this.n現在のカーソル行 == (int)E戻り値.EXIT - 1)
-						{
-							return (int)E戻り値.EXIT;
-						}
-						this.actFO.tフェードアウト開始();
-						base.eフェーズID = CStage.Eフェーズ.共通_フェードアウト;
-					}*/
 				}
 
 				#endregion
@@ -480,13 +497,105 @@ namespace TJAPlayer3
                 #region [ モード選択 ]
 
                 if (bモード選択)
-                {
+				{
+					this.ctBarAnimeIn.t進行();
+
+					#region [ どんちゃん描画 ]
+
 					float DonchanX = 0f, DonchanY = 0f;
 
 					DonchanX = (float)Math.Sin(ctどんちゃんイン.n現在の値 / 2 * (Math.PI / 180)) * 200f;
 					DonchanY = ( (float)Math.Sin((90 + (ctどんちゃんイン.n現在の値 / 2)) * (Math.PI / 180)) * 150f);
 
 					TJAPlayer3.Tx.Entry_Donchan_Normal[ctどんちゃんループ.n現在の値].t2D描画(TJAPlayer3.app.Device, -200 + DonchanX, 341 - DonchanY);
+
+					#endregion
+
+					if(ctBarAnimeIn.n現在の値 >= (int)(16 * 16.6f))
+					{
+						TJAPlayer3.act文字コンソール.tPrint(0, 0, C文字コンソール.Eフォント種別.白, ctBarMove.n現在の値.ToString());
+
+						for (int i = 0; i < 2; i++)
+                        {
+							if(this.stModeBar[i].n現在存在している行 == 1 && ctBarMove.n現在の値 >= 150)
+							{
+								int BarAnime = ctBarAnimeIn.n現在の値 >= (int)(26 * 16.6f) + 100 ? 0 : ctBarAnimeIn.n現在の値 >= (int)(26 * 16.6f) && ctBarAnimeIn.n現在の値 <= (int)(26 * 16.6f) + 100 ? 40 + (int)((ctBarAnimeIn.n現在の値 - (26 * 16.6)) / 100f * 71f) : ctBarAnimeIn.n現在の値 < (int)(26 * 16.6f) ? 40 : 111;
+								int BarAnime1 = BarAnime == 0 ? ctBarMove.n現在の値 >= 150 ? 40 + (int)((ctBarMove.n現在の値 - 150) / 100f * 71f) : ctBarMove.n現在の値 < 150 ? 40 : 111 : 0;
+
+								this.stModeBar[i].BarTexture.Opacity = (int)((ctBarAnimeIn.n現在の値 - (16 * 16.6f)) * 1.23f);
+
+								this.stModeBar[i].BarTexture.vc拡大縮小倍率.Y = 1.0f;
+								this.stModeBar[i].BarTexture.t2D描画(TJAPlayer3.app.Device, 320, 347 - BarAnime - BarAnime1, new Rectangle(0, 0, 641, 27));
+								this.stModeBar[i].BarTexture.t2D描画(TJAPlayer3.app.Device, 320, 346 + BarAnime + BarAnime1, new Rectangle(0, 76, 641, 30));
+
+								this.stModeBar[i].BarTexture.vc拡大縮小倍率.Y = BarAnime / 25.7f + BarAnime1 / 25.7f;
+								this.stModeBar[i].BarTexture.t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, 640, 360, new Rectangle(0, 27, 641, 45));
+
+								TJAPlayer3.Tx.ModeSelect_Bar[2].vc拡大縮小倍率.Y = 1.0f;
+								TJAPlayer3.Tx.ModeSelect_Bar[2].t2D描画(TJAPlayer3.app.Device, 320, 306, new Rectangle(0, 0, 641, 27));
+								TJAPlayer3.Tx.ModeSelect_Bar[2].t2D描画(TJAPlayer3.app.Device, 320, 334 + (BarAnime + BarAnime1) / 0.95238f, new Rectangle(0, 71, 641, 35));
+
+								TJAPlayer3.Tx.ModeSelect_Bar[2].vc拡大縮小倍率.Y = (BarAnime + BarAnime1) / 0.95238f;
+								TJAPlayer3.Tx.ModeSelect_Bar[2].t2D拡大率考慮上中央基準描画(TJAPlayer3.app.Device, 640, 333, new Rectangle(0, 27, 641, 1));
+
+								float anime = 0;
+								float BarAnimeCount = this.ctBarMove.n現在の値 - 150;
+
+								if (BarAnimeCount <= 45)
+									anime = BarAnimeCount * 3.333333333f;
+								else
+									anime = 150 - (BarAnimeCount - 45) * 0.61764705f;
+
+								TJAPlayer3.Tx.ModeSelect_Bar_Chara[i].Opacity = (int)(BarAnimeCount * 2.55f) + (int)(BarAnime * 2.5f);
+								//130
+								TJAPlayer3.Tx.ModeSelect_Bar_Chara[i].t2D中心基準描画(TJAPlayer3.app.Device, 640 - TJAPlayer3.Tx.ModeSelect_Bar_Chara[i].szテクスチャサイズ.Width / 4 + 114 - anime, 360,
+									new Rectangle(0, 0, TJAPlayer3.Tx.ModeSelect_Bar_Chara[i].szテクスチャサイズ.Width / 2, TJAPlayer3.Tx.ModeSelect_Bar_Chara[i].szテクスチャサイズ.Height));
+
+								TJAPlayer3.Tx.ModeSelect_Bar_Chara[i].t2D中心基準描画(TJAPlayer3.app.Device, 640 + TJAPlayer3.Tx.ModeSelect_Bar_Chara[i].szテクスチャサイズ.Width / 4 - 114 + anime, 360,
+									new Rectangle(TJAPlayer3.Tx.ModeSelect_Bar_Chara[i].szテクスチャサイズ.Width / 2, 0, TJAPlayer3.Tx.ModeSelect_Bar_Chara[i].szテクスチャサイズ.Width / 2, TJAPlayer3.Tx.ModeSelect_Bar_Chara[i].szテクスチャサイズ.Height));
+
+								TJAPlayer3.Tx.ModeSelect_Bar_Text[i].Opacity = 255;
+								TJAPlayer3.Tx.ModeSelect_Bar_Text[i]?.t2D中心基準描画(TJAPlayer3.app.Device, 640, 355 - BarAnimeCount / 1.5f, new Rectangle(0, 0, 642, 122));
+
+								TJAPlayer3.Tx.ModeSelect_Bar_Text[i].Opacity = (int)(BarAnimeCount * 2.55f);
+								TJAPlayer3.Tx.ModeSelect_Bar_Text[i]?.t2D中心基準描画(TJAPlayer3.app.Device, 640, 355 + 132 / 2, new Rectangle(0, 122, 642, 148));
+
+							}
+							else
+							{
+								int BarAnimeY = ctBarAnimeIn.n現在の値 >= (int)(26 * 16.6f) + 100 && ctBarAnimeIn.n現在の値 <= (int)(26 * 16.6f) + 299 ? 600 - (ctBarAnimeIn.n現在の値 - (int)(26 * 16.6f + 100)) * 3 : ctBarAnimeIn.n現在の値 >= (int)(26 * 16.6f) + 100 ? 0 : 600;
+								int BarAnimeX = ctBarAnimeIn.n現在の値 >= (int)(26 * 16.6f) + 100 && ctBarAnimeIn.n現在の値 <= (int)(26 * 16.6f) + 299 ? 100 - (int)((ctBarAnimeIn.n現在の値 - (int)(26 * 16.6f + 100)) * 0.5f) : ctBarAnimeIn.n現在の値 >= (int)(26 * 16.6f) + 100 ? 0 : 100;
+
+								int BarMoveX = 0;
+								int BarMoveY = 0;
+
+								if (this.stModeBar[i].n現在存在している行 - n現在の選択行モード選択 != 0)
+								{
+									if (this.stModeBar[i].n現在存在している行 - this.n現在の選択行モード選択 != 2)
+									{
+										BarMoveX = ctBarMove.n現在の値 <= 100 ? (int)(this.ptモード選択バー座標[this.stModeBar[i].n現在存在している行].X - this.ptモード選択バー座標[this.n現在の選択行モード選択].X) - (int)(ctBarMove.n現在の値 / 100f * (this.ptモード選択バー座標[this.stModeBar[i].n現在存在している行].X - this.ptモード選択バー座標[this.n現在の選択行モード選択].X)) : 0;
+										BarMoveY = ctBarMove.n現在の値 <= 100 ? (int)(this.ptモード選択バー座標[this.stModeBar[i].n現在存在している行].Y - this.ptモード選択バー座標[this.n現在の選択行モード選択].Y) - (int)(ctBarMove.n現在の値 / 100f * (this.ptモード選択バー座標[this.stModeBar[i].n現在存在している行].Y - this.ptモード選択バー座標[this.n現在の選択行モード選択].Y)) : 0;
+									}
+									else
+                                    {
+										BarMoveX = ctBarMove.n現在の値 <= 100 ? (int)(this.ptモード選択バー座標[this.stModeBar[i].n現在存在している行].X - this.ptモード選択バー座標[this.n現在の選択行モード選択 + 1].X) - (int)(ctBarMove.n現在の値 / 100f * (this.ptモード選択バー座標[this.stModeBar[i].n現在存在している行].X - this.ptモード選択バー座標[this.n現在の選択行モード選択 + 1].X)) : 0;
+										BarMoveY = ctBarMove.n現在の値 <= 100 ? (int)(this.ptモード選択バー座標[this.stModeBar[i].n現在存在している行].Y - this.ptモード選択バー座標[this.n現在の選択行モード選択 + 1].Y) - (int)(ctBarMove.n現在の値 / 100f * (this.ptモード選択バー座標[this.stModeBar[i].n現在存在している行].Y - this.ptモード選択バー座標[this.n現在の選択行モード選択 + 1].Y)) : 0;
+									}
+								}
+								else
+								{
+									BarMoveX = ctBarMove.n現在の値 <= 100 ? (int)(this.ptモード選択バー座標[this.stModeBar[i].n現在存在している行 - 1].X - this.ptモード選択バー座標[this.n現在の選択行モード選択].X) - (int)(ctBarMove.n現在の値 / 100f * (this.ptモード選択バー座標[this.stModeBar[i].n現在存在している行 - 1].X - this.ptモード選択バー座標[this.n現在の選択行モード選択].X)) : 0;
+									BarMoveY = ctBarMove.n現在の値 <= 100 ? (int)(this.ptモード選択バー座標[this.stModeBar[i].n現在存在している行 - 1].Y - this.ptモード選択バー座標[this.n現在の選択行モード選択].Y) - (int)(ctBarMove.n現在の値 / 100f * (this.ptモード選択バー座標[this.stModeBar[i].n現在存在している行 - 1].Y - this.ptモード選択バー座標[this.n現在の選択行モード選択].Y)) : 0;
+								}
+
+								this.stModeBar[i].BarTexture.vc拡大縮小倍率.Y = 1.0f;
+								TJAPlayer3.Tx.ModeSelect_Bar[2].vc拡大縮小倍率.Y = 1.0f;
+								this.stModeBar[i].BarTexture.t2D描画(TJAPlayer3.app.Device, this.ptモード選択バー座標[stModeBar[i].n現在存在している行].X + BarAnimeX - BarMoveX, this.ptモード選択バー座標[stModeBar[i].n現在存在している行].Y + BarAnimeY - BarMoveY);
+								TJAPlayer3.Tx.ModeSelect_Bar[2].t2D描画(TJAPlayer3.app.Device, this.ptモード選択バー座標[stModeBar[i].n現在存在している行].X + BarAnimeX - BarMoveX, this.ptモード選択バー座標[stModeBar[i].n現在存在している行].Y + BarAnimeY - BarMoveY);
+								TJAPlayer3.Tx.ModeSelect_Bar_Text[i]?.t2D描画(TJAPlayer3.app.Device, this.ptモード選択バー座標[stModeBar[i].n現在存在している行].X + BarAnimeX - BarMoveX, this.ptモード選択バー座標[stModeBar[i].n現在存在している行].Y + BarAnimeY - BarMoveY - 13, new Rectangle(0, 0, 642, 122));
+							}
+                        }
+					}
 
 					TJAPlayer3.NamePlate.tNamePlateDraw(TJAPlayer3.Skin.SongSelect_NamePlate_X[0], TJAPlayer3.Skin.SongSelect_NamePlate_Y[0], 0, false, 255);
 				}
@@ -508,9 +617,7 @@ namespace TJAPlayer3
 
 #endif
                 #endregion
-
-                TJAPlayer3.act文字コンソール.tPrint(0, 200, C文字コンソール.Eフォント種別.白, ctバナパス読み込み待機.n現在の値.ToString());
-
+				
 				CStage.Eフェーズ eフェーズid = base.eフェーズID;
 				switch( eフェーズid )
 				{
@@ -584,6 +691,9 @@ namespace TJAPlayer3
 		private CCounter ctどんちゃんイン;
 		private CCounter ctどんちゃんループ;
 
+		private CCounter ctBarAnimeIn;
+		private CCounter ctBarMove;
+
 		private bool bバナパス読み込み;
 		private bool bバナパス読み込み失敗;
 		private bool bプレイヤーエントリー;
@@ -596,6 +706,17 @@ namespace TJAPlayer3
 
 		private Point[] ptプレイヤーエントリーバー座標 =
 			{ new Point(337, 488), new Point( 529, 487), new Point(743, 486) };
+
+		private Point[] ptモード選択バー座標 =
+			{ new Point(290, 107), new Point(319, 306), new Point(356, 513) };
+
+		private STModeBar[] stModeBar = new STModeBar[2];
+
+		private struct STModeBar
+		{
+			public int n現在存在している行;
+			public CTexture BarTexture;
+		}
 
 		private bool b音声再生;
 		private CActFIFOBlack actFI;

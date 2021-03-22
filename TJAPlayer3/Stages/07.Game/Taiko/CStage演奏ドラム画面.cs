@@ -630,9 +630,6 @@ namespace TJAPlayer3
 					this.tキー入力();
 
 
-                // 確認用 18_04_26(AioiLight)
-                //CDTXMania.act文字コンソール.tPrint(0, 0, C文字コンソール.Eフォント種別.白, this.actGauge.db現在のゲージ値[0].ToString());
-
             }
             base.sw.Stop();
 			return 0;
