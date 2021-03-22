@@ -2939,20 +2939,16 @@ namespace TJAPlayer3
                             break;
                     }
 				}
-                if (TJAPlayer3.ConfigIni.bTokkunMode) 
-                {
-                    if (keyboard.bキーが押された((int)SlimDXKeys.Key.F6))
-                    {
-                        if (TJAPlayer3.ConfigIni.b太鼓パートAutoPlay == false)
-                            TJAPlayer3.ConfigIni.b太鼓パートAutoPlay = true;
-                        else
-                            TJAPlayer3.ConfigIni.b太鼓パートAutoPlay = false;
-                    }
-                }
             }
 
 #if DEBUG
-
+            if (keyboard.bキーが押された((int)SlimDXKeys.Key.F6))
+            {
+               if (TJAPlayer3.ConfigIni.b太鼓パートAutoPlay == false)
+                   TJAPlayer3.ConfigIni.b太鼓パートAutoPlay = true;
+                else
+                   TJAPlayer3.ConfigIni.b太鼓パートAutoPlay = false;
+            }
             if (keyboard.bキーが押された((int)SlimDXKeys.Key.F7))
             {
                 if (TJAPlayer3.ConfigIni.b太鼓パートAutoPlay2P == false)
