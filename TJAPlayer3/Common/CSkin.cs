@@ -2685,7 +2685,7 @@ namespace TJAPlayer3
         public int Game_MusicName_X = 1260;
         public int Game_MusicName_Y = 28;
         public int Game_MusicName_FontSize = 27;
-        public ReferencePoint Game_MusicName_ReferencePoint = ReferencePoint.Right;
+        public ReferencePoint Game_MusicName_ReferencePoint = ReferencePoint.Center;
         public int Game_Genre_X = 1000;
         public int Game_Genre_Y = 70;
         public int Game_Lyric_X = 640;

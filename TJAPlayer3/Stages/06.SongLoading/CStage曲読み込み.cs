@@ -130,7 +130,7 @@ namespace TJAPlayer3
 			{
 				this.tx背景 = TJAPlayer3.tテクスチャの生成( this.strSTAGEFILE, false );
                 //this.txSongnamePlate = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\6_SongnamePlate.png" ) );
-                this.ct待機 = new CCounter( 0, TJAPlayer3.stage選曲.n確定された曲の難易度 == (int)Difficulty.Dan ? 1000 : 600, 5, TJAPlayer3.Timer );
+                this.ct待機 = new CCounter( 0, TJAPlayer3.stage選曲.n確定された曲の難易度[0] == (int)Difficulty.Dan ? 1000 : 600, 5, TJAPlayer3.Timer );
                 this.ct曲名表示 = new CCounter( 1, 30, 30, TJAPlayer3.Timer );
 				try
 				{
@@ -249,7 +249,7 @@ namespace TJAPlayer3
 			}
 			#endregion
 
-			if(TJAPlayer3.stage選曲.n確定された曲の難易度 != (int)Difficulty.Dan)
+			if(TJAPlayer3.stage選曲.n確定された曲の難易度[0] != (int)Difficulty.Dan)
 			{
 				#region [ 背景、音符＋タイトル表示 ]
 				//-----------------------------
@@ -366,14 +366,14 @@ namespace TJAPlayer3
 
                         //if( CDTXMania.DTX == null )
                         {
-							TJAPlayer3.DTX = new CDTX(str, false, 1.0, ini.stファイル.BGMAdjust, 0, 0, true);
+							TJAPlayer3.DTX = new CDTX(str, false, 1.0, ini.stファイル.BGMAdjust, 0, 0, true, TJAPlayer3.stage選曲.n確定された曲の難易度[0]);
 							if ( TJAPlayer3.ConfigIni.nPlayerCount == 2 )
-								TJAPlayer3.DTX_2P = new CDTX(str, false, 1.0, ini.stファイル.BGMAdjust, 0, 1, true);
+								TJAPlayer3.DTX_2P = new CDTX(str, false, 1.0, ini.stファイル.BGMAdjust, 0, 1, true, TJAPlayer3.stage選曲.n確定された曲の難易度[1]);
 							if ( File.Exists( TJAPlayer3.DTX.strフォルダ名 + @"\\set.def" ) )
                             {
-								TJAPlayer3.DTX_2P = new CDTX(str, false, 1.0, ini.stファイル.BGMAdjust, 0, 1, true);
+								TJAPlayer3.DTX_2P = new CDTX(str, false, 1.0, ini.stファイル.BGMAdjust, 0, 1, true, TJAPlayer3.stage選曲.n確定された曲の難易度[0]);
 								if ( TJAPlayer3.ConfigIni.nPlayerCount == 2 )
-									TJAPlayer3.DTX_2P = new CDTX(str, false, 1.0, ini.stファイル.BGMAdjust, 0, 1, true);
+									TJAPlayer3.DTX_2P = new CDTX(str, false, 1.0, ini.stファイル.BGMAdjust, 0, 1, true, TJAPlayer3.stage選曲.n確定された曲の難易度[1]);
 							}
 
 							Trace.TraceInformation( "----曲情報-----------------" );
@@ -385,7 +385,7 @@ namespace TJAPlayer3
     						Trace.TraceInformation( "DTX読込所要時間:           {0}", span.ToString() );
 
                             // 段位認定モード用。
-                            if (TJAPlayer3.stage選曲.n確定された曲の難易度 == (int)Difficulty.Dan && TJAPlayer3.DTX.List_DanSongs != null)
+                            if (TJAPlayer3.stage選曲.n確定された曲の難易度[0] == (int)Difficulty.Dan && TJAPlayer3.DTX.List_DanSongs != null)
                             {
                                 var pfTitle = new CPrivateFont();
                                 var pfSubTitle = new CPrivateFont();

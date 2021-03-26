@@ -114,7 +114,7 @@ namespace TJAPlayer3
             
             IsEnded = new bool[TJAPlayer3.stage選曲.r確定された曲.DanSongs.Count];
 
-            if (TJAPlayer3.stage選曲.n確定された曲の難易度 == (int)Difficulty.Dan) IsAnimating = true;
+            if (TJAPlayer3.stage選曲.n確定された曲の難易度[0] == (int)Difficulty.Dan) IsAnimating = true;
             base.On活性化();
         }
 
@@ -280,7 +280,7 @@ namespace TJAPlayer3
 
         public override int On進行描画()
         {
-            if (TJAPlayer3.stage選曲.n確定された曲の難易度 != (int)Difficulty.Dan) return base.On進行描画();
+            if (TJAPlayer3.stage選曲.n確定された曲の難易度[0] != (int)Difficulty.Dan) return base.On進行描画();
             Counter_In?.t進行();
             Counter_Wait?.t進行();
             Counter_Out?.t進行();

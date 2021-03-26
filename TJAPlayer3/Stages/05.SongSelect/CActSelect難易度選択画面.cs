@@ -35,28 +35,28 @@ namespace TJAPlayer3
             base.b活性化してない = true;
 		}
 
-        public void t次に移動()
+        public void t次に移動(int player)
         {
-            if (n現在の選択行 < 5)
+            if (n現在の選択行[player] < 5)
             {
-                ctBarAnime.t開始(0, 180, 1, TJAPlayer3.Timer);
+                ctBarAnime[player].t開始(0, 180, 1, TJAPlayer3.Timer);
                 if (!b裏譜面)
                 {
-                    n現在の選択行++;
+                    n現在の選択行[player]++;
                 }
                 else
                 {
-                    if (n現在の選択行 == 4)
+                    if (n現在の選択行[player] == 4)
                     {
-                        n現在の選択行 += 2;
+                        n現在の選択行[player] += 2;
                     }
                     else
                     {
-                        n現在の選択行++;
+                        n現在の選択行[player]++;
                     }
                 }
             }
-            else if (n現在の選択行 >= 5)
+            else if (n現在の選択行[player] >= 5)
             {
                 if (nスイッチカウント < 9 && TJAPlayer3.stage選曲.r現在選択中のスコア.譜面情報.nレベル[4] >= 0)
                 {
@@ -64,13 +64,15 @@ namespace TJAPlayer3
                 }
                 else if (nスイッチカウント == 9)
                 {
-                    if (n現在の選択行 == 5)
+                    if (n現在の選択行[player] == 5)
                     {
-                        n現在の選択行 = 6;
+                        n現在の選択行[0] = 6;
+                        n現在の選択行[1] = 6;
                     }
-                    else if (n現在の選択行 == 6)
+                    else if (n現在の選択行[player] == 6)
                     {
-                        n現在の選択行 = 5;
+                        n現在の選択行[0] = 5;
+                        n現在の選択行[1] = 5;
                     }
 
                     b裏譜面 = !b裏譜面;
@@ -79,16 +81,16 @@ namespace TJAPlayer3
             }
         }
 
-		public void t前に移動()
+		public void t前に移動(int player)
 		{
-            if(n現在の選択行 - 1 >= 0)
+            if(n現在の選択行[player] - 1 >= 0)
             {
-                ctBarAnime.t開始(0, 180, 1, TJAPlayer3.Timer);
+                ctBarAnime[player].t開始(0, 180, 1, TJAPlayer3.Timer);
                 nスイッチカウント = 0;
-                if(n現在の選択行 == 6)
-                    n現在の選択行 -= 2;
+                if(n現在の選択行[player] == 6)
+                    n現在の選択行[player] -= 2;
                 else
-                    n現在の選択行--;
+                    n現在の選択行[player]--;
             }
 		}
 
@@ -107,9 +109,10 @@ namespace TJAPlayer3
 
             this.txTitle = TJAPlayer3.tテクスチャの生成(pfTitle.DrawPrivateFont(TJAPlayer3.stage選曲.r現在選択中の曲.strタイトル, Color.White, Color.Black ));
             this.txSubTitle = TJAPlayer3.tテクスチャの生成(pfSubTitle.DrawPrivateFont(TJAPlayer3.stage選曲.r現在選択中の曲.strサブタイトル, Color.White, Color.Black));
-
-            this.n現在の選択行 = 0;
-            this.bSelect = false;
+            
+            this.n現在の選択行 = new int[2];
+            this.bSelect[0] = false;
+            this.bSelect[1] = false;
             this.b裏譜面 = false;
 
             this.b初めての進行描画 = true;
@@ -121,8 +124,9 @@ namespace TJAPlayer3
 		{
 			if( this.b活性化してる )
 				return;
-
-            ctBarAnime = new CCounter();
+            ctBarAnime = new CCounter[2];
+            ctBarAnime[0] = new CCounter();
+            ctBarAnime[1] = new CCounter();
 
             base.On活性化();
 		}
@@ -170,44 +174,96 @@ namespace TJAPlayer3
             #endregion
 
             ctBarAnimeIn.t進行();
-            ctBarAnime.t進行();
+            ctBarAnime[0].t進行();
+            ctBarAnime[1].t進行();
 
             #region [ キー入力 ]
 
-            if (this.ctBarAnimeIn.b終了値に達した && !bSelect && !bOption)
+            if (this.ctBarAnimeIn.b終了値に達した)
             {
-                if (TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.RBlue) || TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDXKeys.Key.RightArrow))
+                if (!bSelect[0] && !bOption[0])
                 {
-                    TJAPlayer3.Skin.sound変更音.t再生する();
-                    this.t次に移動();
-                }
-                else if (TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.LBlue) || TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDXKeys.Key.LeftArrow))
-                {
-                    TJAPlayer3.Skin.sound変更音.t再生する();
-                    this.t前に移動();
-                }
-                else if (TJAPlayer3.Pad.b押されたDGB(Eパッド.Decide) || TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.LRed) || TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.RRed) ||
-                     (TJAPlayer3.ConfigIni.bEnterがキー割り当てのどこにも使用されていない && TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDXKeys.Key.Return)))
-                {
-                    if (n現在の選択行 == 0)
+                    if (TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.RBlue) || TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDXKeys.Key.RightArrow))
                     {
-                        TJAPlayer3.Skin.sound決定音.t再生する();
-                        TJAPlayer3.stage選曲.act曲リスト.ctBarOpen.t開始(100, 260, 2, TJAPlayer3.Timer);
-                        this.bIsDifficltSelect = false;
+                        TJAPlayer3.Skin.sound変更音.t再生する();
+                        this.t次に移動(0);
                     }
-                    else if (n現在の選択行 == 1)
+                    else if (TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.LBlue) || TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDXKeys.Key.LeftArrow))
                     {
-                        TJAPlayer3.Skin.sound決定音.t再生する();
-                        bOption = true;
+                        TJAPlayer3.Skin.sound変更音.t再生する();
+                        this.t前に移動(0);
                     }
-                    else
+                    if (TJAPlayer3.Pad.b押されたDGB(Eパッド.Decide) || TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.LRed) || TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.RRed) ||
+                             (TJAPlayer3.ConfigIni.bEnterがキー割り当てのどこにも使用されていない && TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDXKeys.Key.Return)))
                     {
-                        if (TJAPlayer3.stage選曲.r現在選択中のスコア.譜面情報.nレベル[n現在の選択行 - 2] > 0)
+                        if (n現在の選択行[0] == 0)
                         {
-                            TJAPlayer3.stage選曲.ctDonchan_Jump.t開始(0, TJAPlayer3.Tx.SongSelect_Donchan_Jump.Length - 1, 1000 / 45, TJAPlayer3.Timer);
-                            this.bSelect = true;
-                            TJAPlayer3.Skin.sound曲決定音.t再生する();
-                            TJAPlayer3.stage選曲.t曲を選択する(n現在の選択行 - 2);
+                            TJAPlayer3.Skin.sound決定音.t再生する();
+                            TJAPlayer3.stage選曲.act曲リスト.ctBarOpen.t開始(100, 260, 2, TJAPlayer3.Timer);
+                            this.bIsDifficltSelect = false;
+                        }
+                        else if (n現在の選択行[0] == 1)
+                        {
+                            TJAPlayer3.Skin.sound決定音.t再生する();
+                            bOption[0] = true;
+                        }
+                        else
+                        {
+                            if (TJAPlayer3.stage選曲.r現在選択中のスコア.譜面情報.nレベル[n現在の選択行[0] - 2] > 0)
+                            {
+                                TJAPlayer3.stage選曲.ctDonchan_Jump[0].t開始(0, TJAPlayer3.Tx.SongSelect_Donchan_Jump.Length - 1, 1000 / 45, TJAPlayer3.Timer);
+                                this.bSelect[0] = true;
+                                TJAPlayer3.Skin.sound曲決定音.t再生する();
+
+                                if(bSelect[1])
+                                {
+                                    TJAPlayer3.stage選曲.t曲を選択する(n現在の選択行[0] - 2, 0);
+                                    TJAPlayer3.stage選曲.t曲を選択する(n現在の選択行[1] - 2, 1);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (!bSelect[1] && !bOption[1])
+                {
+                    if (TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.RBlue2P))
+                    {
+                        TJAPlayer3.Skin.sound変更音.t再生する();
+                        this.t次に移動(1);
+                    }
+                    else if (TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.LBlue2P))
+                    {
+                        TJAPlayer3.Skin.sound変更音.t再生する();
+                        this.t前に移動(1);
+                    }
+                    if (TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.LRed2P) || TJAPlayer3.Pad.b押された(E楽器パート.DRUMS, Eパッド.RRed2P))
+                    {
+                        if (n現在の選択行[1] == 0)
+                        {
+                            TJAPlayer3.Skin.sound決定音.t再生する();
+                            TJAPlayer3.stage選曲.act曲リスト.ctBarOpen.t開始(100, 260, 2, TJAPlayer3.Timer);
+                            this.bIsDifficltSelect = false;
+                        }
+                        else if (n現在の選択行[1] == 1)
+                        {
+                            TJAPlayer3.Skin.sound決定音.t再生する();
+                            bOption[1] = true;
+                        }
+                        else
+                        {
+                            if (TJAPlayer3.stage選曲.r現在選択中のスコア.譜面情報.nレベル[n現在の選択行[1] - 2] > 0)
+                            {
+                                TJAPlayer3.stage選曲.ctDonchan_Jump[1].t開始(0, TJAPlayer3.Tx.SongSelect_Donchan_Jump.Length - 1, 1000 / 45, TJAPlayer3.Timer);
+                                this.bSelect[1] = true;
+                                TJAPlayer3.Skin.sound曲決定音.t再生する();
+
+                                if (bSelect[0])
+                                {
+                                    TJAPlayer3.stage選曲.t曲を選択する(n現在の選択行[0] - 2, 0);
+                                    TJAPlayer3.stage選曲.t曲を選択する(n現在の選択行[1] - 2, 1);
+                                }
+                            }
                         }
                     }
                 }
@@ -229,8 +285,11 @@ namespace TJAPlayer3
 
             TJAPlayer3.Tx.Difficulty_Back[nStrジャンルtoNum(TJAPlayer3.stage選曲.r現在選択中の曲.strジャンル)].t2D中心基準描画(TJAPlayer3.app.Device, 640, 290);
 
-            TJAPlayer3.Tx.Difficulty_Select_Bar.Opacity = (int)(ctBarAnimeIn.n現在の値 >= 80 ? (ctBarAnimeIn.n現在の値 - 80) * 2.84f : 0);
-            TJAPlayer3.Tx.Difficulty_Select_Bar.t2D描画(TJAPlayer3.app.Device, (float)this.BarX[n現在の選択行], 242, new RectangleF(0, (n現在の選択行 >= 2 ? 114 : 387), 259, 275 - (n現在の選択行 >= 2 ? 0 : 164)));
+            for(int i = 0; i < TJAPlayer3.ConfigIni.nPlayerCount; i++)
+            {
+                TJAPlayer3.Tx.Difficulty_Select_Bar[i].Opacity = (int)(ctBarAnimeIn.n現在の値 >= 80 ? (ctBarAnimeIn.n現在の値 - 80) * 2.84f : 0);
+                TJAPlayer3.Tx.Difficulty_Select_Bar[i].t2D描画(TJAPlayer3.app.Device, (float)this.BarX[n現在の選択行[i]], 242, new RectangleF(0, (n現在の選択行[i] >= 2 ? 114 : 387), 259, 275 - (n現在の選択行[i] >= 2 ? 0 : 164)));
+            }
 
             TJAPlayer3.Tx.Difficulty_Bar.color4 = new Color4(1.0f, 1.0f, 1.0f);
             TJAPlayer3.Tx.Difficulty_Bar.t2D描画(TJAPlayer3.app.Device, 255, 270, new RectangleF(0, 0, 171, 236));    //閉じる、演奏オプション
@@ -309,7 +368,13 @@ namespace TJAPlayer3
 
             #region [ バーの描画 ]
 
-            TJAPlayer3.Tx.Difficulty_Select_Bar.t2D描画(TJAPlayer3.app.Device, (float)this.BarX[n現在の選択行], 126 + ((float)Math.Sin((float)(ctBarAnimeIn.n現在の値 >= 80 ? (ctBarAnimeIn.n現在の値 - 80) : 0) * (Math.PI / 180)) * 50) + (float)Math.Sin((float)ctBarAnime.n現在の値 * (Math.PI / 180)) * 10, new RectangleF(0, 0, 259, 114));
+            for(int i = 0; i < TJAPlayer3.ConfigIni.nPlayerCount; i++)
+            {
+                TJAPlayer3.Tx.Difficulty_Select_Bar[i].t2D描画(TJAPlayer3.app.Device,
+                    n現在の選択行[0] != n現在の選択行[1] ? (float)this.BarX[n現在の選択行[i]] : i == 0 ? (float)this.BarX[n現在の選択行[i]] - 30 : (float)this.BarX[n現在の選択行[i]] + 30, 
+                    126 + ((float)Math.Sin((float)(ctBarAnimeIn.n現在の値 >= 80 ? (ctBarAnimeIn.n現在の値 - 80) : 0) * (Math.PI / 180)) * 50) + (float)Math.Sin((float)ctBarAnime[i].n現在の値 * (Math.PI / 180)) * 10, 
+                    new RectangleF(0, 0, 259, 114));
+            }
 
             #endregion
 
@@ -323,8 +388,8 @@ namespace TJAPlayer3
         #region [ private ]
         //-----------------
 
-        public bool bSelect;
-        public bool bOption = false;
+        public bool[] bSelect = new bool[2];
+        public bool[] bOption = new bool[2];
 
         private CPrivateFastFont pfTitle;
         private CPrivateFastFont pfSubTitle;
@@ -332,10 +397,10 @@ namespace TJAPlayer3
         private CTexture txSubTitle;
 
         private CCounter ctBarAnimeIn;
-        private CCounter ctBarAnime;
+        private CCounter[] ctBarAnime = new CCounter[2];
 
         //0 閉じる 1 演奏オプション 2~ 難易度
-		private int n現在の選択行;
+		private int[] n現在の選択行;
         private int nスイッチカウント;
 
         private bool b裏譜面;

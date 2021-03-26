@@ -21,7 +21,7 @@ namespace TJAPlayer3
             }
 
             this.ScoreRank = new int[] { 500000, 600000, 700000, 800000, 900000, 950000,
-                (int)(TJAPlayer3.stage演奏ドラム画面.nAddScoreNiji * TJAPlayer3.stage演奏ドラム画面.nNoteCount) + (int)(TJAPlayer3.stage演奏ドラム画面.nBalloonCount * 100) + (int)(Math.Ceiling(RollTimems * 16.6 / 10) * 100 * 10)};
+                (int)(TJAPlayer3.stage演奏ドラム画面.nAddScoreNiji[0] * TJAPlayer3.stage演奏ドラム画面.nNoteCount[0]) + (int)(TJAPlayer3.stage演奏ドラム画面.nBalloonCount[0] * 100) + (int)(Math.Ceiling(RollTimems * 16.6 / 10) * 100 * 10)};
 
             for(int i = 0; i < 7; i++)
             {
@@ -37,7 +37,7 @@ namespace TJAPlayer3
 
         public override int On進行描画()
         {
-            if(TJAPlayer3.stage選曲.n確定された曲の難易度 != (int)Difficulty.Dan)
+            if(TJAPlayer3.stage選曲.n確定された曲の難易度[0] != (int)Difficulty.Dan)
             {
                 float x = 0;
                 for (int i = 0; i < 7; i++)

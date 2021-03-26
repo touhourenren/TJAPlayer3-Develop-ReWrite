@@ -218,7 +218,7 @@ namespace TJAPlayer3
                 */
 
 
-                if (TJAPlayer3.stage選曲.n確定された曲の難易度 == (int)Difficulty.Dan)
+                if (TJAPlayer3.stage選曲.n確定された曲の難易度[0] == (int)Difficulty.Dan)
                 {
                     if (TJAPlayer3.Tx.Gauge_Dan[0] != null)
                     {
@@ -252,7 +252,7 @@ namespace TJAPlayer3
                 #region[ ゲージ1P ]
                 if( TJAPlayer3.Tx.Gauge[0] != null )
                 {
-                    if (TJAPlayer3.stage選曲.n確定された曲の難易度 == (int)Difficulty.Dan)
+                    if (TJAPlayer3.stage選曲.n確定された曲の難易度[0] == (int)Difficulty.Dan)
                     {
                         TJAPlayer3.Tx.Gauge_Dan[1]?.t2D描画(TJAPlayer3.app.Device, 492, 144, new Rectangle(0, 0, nRectX, 44));
                     }
@@ -269,23 +269,23 @@ namespace TJAPlayer3
                             if(TJAPlayer3.Tx.Gauge_Rainbow[ this.ct虹アニメ.n現在の値 ] != null )
                             {
 				                TJAPlayer3.Tx.Gauge_Rainbow[this.ct虹アニメ.n現在の値].Opacity = 255;
-                                TJAPlayer3.Tx.Gauge_Rainbow[this.ct虹アニメ.n現在の値].t2D描画(TJAPlayer3.app.Device, 492, 144 + (TJAPlayer3.stage選曲.n確定された曲の難易度 == (int)Difficulty.Dan ? 22 : 0),
+                                TJAPlayer3.Tx.Gauge_Rainbow[this.ct虹アニメ.n現在の値].t2D描画(TJAPlayer3.app.Device, 492, 144 + (TJAPlayer3.stage選曲.n確定された曲の難易度[0] == (int)Difficulty.Dan ? 22 : 0),
                                     new RectangleF(0,
-                                    TJAPlayer3.stage選曲.n確定された曲の難易度 == (int)Difficulty.Dan ? 22 : 0,
+                                    TJAPlayer3.stage選曲.n確定された曲の難易度[0] == (int)Difficulty.Dan ? 22 : 0,
                                     TJAPlayer3.Tx.Gauge_Rainbow[this.ct虹アニメ.n現在の値].szテクスチャサイズ.Width,
-                                    TJAPlayer3.stage選曲.n確定された曲の難易度 == (int)Difficulty.Dan ? TJAPlayer3.Tx.Gauge_Rainbow[this.ct虹アニメ.n現在の値].szテクスチャサイズ.Height - 22 : TJAPlayer3.Tx.Gauge_Rainbow[this.ct虹アニメ.n現在の値].szテクスチャサイズ.Height));
+                                    TJAPlayer3.stage選曲.n確定された曲の難易度[0] == (int)Difficulty.Dan ? TJAPlayer3.Tx.Gauge_Rainbow[this.ct虹アニメ.n現在の値].szテクスチャサイズ.Height - 22 : TJAPlayer3.Tx.Gauge_Rainbow[this.ct虹アニメ.n現在の値].szテクスチャサイズ.Height));
                                 TJAPlayer3.Tx.Gauge_Rainbow[虹ベース].Opacity = (ct虹透明度.n現在の値 * 255 / (int)ct虹透明度.n終了値)/1;
-                                TJAPlayer3.Tx.Gauge_Rainbow[虹ベース].t2D描画(TJAPlayer3.app.Device, 492, 144 + (TJAPlayer3.stage選曲.n確定された曲の難易度 == (int)Difficulty.Dan ? 22 : 0), 
+                                TJAPlayer3.Tx.Gauge_Rainbow[虹ベース].t2D描画(TJAPlayer3.app.Device, 492, 144 + (TJAPlayer3.stage選曲.n確定された曲の難易度[0] == (int)Difficulty.Dan ? 22 : 0), 
                                     new RectangleF(0, 
-                                    TJAPlayer3.stage選曲.n確定された曲の難易度 == (int)Difficulty.Dan ? 22 : 0, 
+                                    TJAPlayer3.stage選曲.n確定された曲の難易度[0] == (int)Difficulty.Dan ? 22 : 0, 
                                     TJAPlayer3.Tx.Gauge_Rainbow[虹ベース].szテクスチャサイズ.Width,
-                                    TJAPlayer3.stage選曲.n確定された曲の難易度 == (int)Difficulty.Dan ? TJAPlayer3.Tx.Gauge_Rainbow[虹ベース].szテクスチャサイズ.Height - 22 : TJAPlayer3.Tx.Gauge_Rainbow[虹ベース].szテクスチャサイズ.Height));
+                                    TJAPlayer3.stage選曲.n確定された曲の難易度[0] == (int)Difficulty.Dan ? TJAPlayer3.Tx.Gauge_Rainbow[虹ベース].szテクスチャサイズ.Height - 22 : TJAPlayer3.Tx.Gauge_Rainbow[虹ベース].szテクスチャサイズ.Height));
                             }
                         }
                        TJAPlayer3.Tx.Gauge_Line[0].t2D描画( TJAPlayer3.app.Device, 492, 144 );
                     }
                     #region[ 「クリア」文字 ]
-                    if (TJAPlayer3.stage選曲.n確定された曲の難易度 != (int)Difficulty.Dan)
+                    if (TJAPlayer3.stage選曲.n確定された曲の難易度[0] != (int)Difficulty.Dan)
                     {
                         if (this.db現在のゲージ値[0] >= 80.0)
                         {

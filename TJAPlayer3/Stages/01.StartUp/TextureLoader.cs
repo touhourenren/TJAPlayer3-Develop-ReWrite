@@ -224,10 +224,12 @@ namespace TJAPlayer3
             Difficulty_Bar = TxC(SONGSELECT + @"Difficulty_Select\Difficulty_Bar.png");
             Difficulty_Number = TxC(SONGSELECT + @"Difficulty_Select\Difficulty_Number.png");
             Difficulty_Star = TxC(SONGSELECT + @"Difficulty_Select\Difficulty_Star.png");
-            Difficulty_Select_Bar = TxC(SONGSELECT + @"Difficulty_Select\Difficulty_Select_Bar.png");
             Difficulty_Crown = TxC(SONGSELECT + @"Difficulty_Select\Difficulty_Crown.png");
             Difficulty_Option = TxC($"{SONGSELECT}Difficulty_Select/Difficulty_Option.png");
             Difficulty_Option_Select = TxC($"{SONGSELECT}Difficulty_Select/Difficulty_Option_Select.png");
+
+            Difficulty_Select_Bar[0] = TxC(SONGSELECT + @"Difficulty_Select\Difficulty_Select_Bar.png");
+            Difficulty_Select_Bar[1] = TxC(SONGSELECT + @"Difficulty_Select\Difficulty_Select_Bar2.png");
 
             TJAPlayer3.Skin.SongSelect_Difficulty_Background_Count = TJAPlayer3.t連番画像の枚数を数える(CSkin.Path(BASE + SONGSELECT + @"Difficulty_Select\Difficulty_Back\"), "Difficulty_Back_");
 
@@ -790,14 +792,14 @@ namespace TJAPlayer3
 
         #region [ 難易度選択画面 ]
         public CTexture Difficulty_Bar;
-        public CTexture Difficulty_Select_Bar;
         public CTexture Difficulty_Number;
         public CTexture Difficulty_Star;
         public CTexture Difficulty_Crown;
         public CTexture Difficulty_Option;
         public CTexture Difficulty_Option_Select;
 
-        public CTexture[] Difficulty_Back = new CTexture[8];
+        public CTexture[] Difficulty_Select_Bar = new CTexture[2];
+        public CTexture[] Difficulty_Back;
         #endregion
 
         #endregion

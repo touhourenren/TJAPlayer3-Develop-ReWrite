@@ -152,7 +152,7 @@ namespace TJAPlayer3
             this.b選択した = true;
             TJAPlayer3.stage選曲.r確定された曲 = TJAPlayer3.Songs管理.list曲ルート_Dan[段位リスト.n現在の選択行];
             TJAPlayer3.stage選曲.r確定されたスコア = TJAPlayer3.Songs管理.list曲ルート_Dan[段位リスト.n現在の選択行].arスコア[(int)Difficulty.Dan];
-            TJAPlayer3.stage選曲.n確定された曲の難易度 = (int)Difficulty.Dan;
+            TJAPlayer3.stage選曲.n確定された曲の難易度[0] = (int)Difficulty.Dan;
             TJAPlayer3.stage選曲.str確定された曲のジャンル = TJAPlayer3.Songs管理.list曲ルート_Dan[段位リスト.n現在の選択行].strジャンル;
             if ((TJAPlayer3.stage選曲.r確定された曲 != null) && (TJAPlayer3.stage選曲.r確定されたスコア != null))
             {

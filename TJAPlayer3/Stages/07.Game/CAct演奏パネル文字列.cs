@@ -50,7 +50,7 @@ namespace TJAPlayer3
                         string strDiff = "";
                         if (TJAPlayer3.Skin.eDiffDispMode == E難易度表示タイプ.n曲目に表示)
                         {
-                            switch (TJAPlayer3.stage選曲.n確定された曲の難易度)
+                            switch (TJAPlayer3.stage選曲.n確定された曲の難易度[0])
                             {
                                 case 0:
                                     strDiff = "かんたん ";
@@ -92,13 +92,13 @@ namespace TJAPlayer3
 				}
                 if( !string.IsNullOrEmpty(genreName) )
                 {
-                    if(genreName.Equals( "アニメ" ) )
+                    if (genreName.Equals("J-POP"))
+                    {
+                        this.txGENRE = TJAPlayer3.Tx.TxCGen("Pops");
+                    }
+                    else if (genreName.Equals( "アニメ" ) )
                     {
                         this.txGENRE = TJAPlayer3.Tx.TxCGen("Anime");
-                    }
-                    else if(genreName.Equals( "J-POP" ) )
-                    {
-                        this.txGENRE = TJAPlayer3.Tx.TxCGen("J-POP");
                     }
                     else if(genreName.Equals( "ゲームミュージック" ) )
                     {
@@ -112,6 +112,10 @@ namespace TJAPlayer3
                     {
                         this.txGENRE = TJAPlayer3.Tx.TxCGen("Classic");
                     }
+                    else if(genreName.Equals( "バラエティ" ) )
+                    {
+                        this.txGENRE = TJAPlayer3.Tx.TxCGen("Variety");
+                    }
                     else if(genreName.Equals( "どうよう" ) )
                     {
                         this.txGENRE = TJAPlayer3.Tx.TxCGen("Child");
@@ -120,7 +124,7 @@ namespace TJAPlayer3
                     {
                         this.txGENRE = TJAPlayer3.Tx.TxCGen("Variety");
                     }
-                    else if(genreName.Equals( "ボーカロイド" ) || genreName.Equals( "VOCALOID" ) )
+                    else if(genreName.Equals( "ボーカロイド" ) || genreName.Equals("Vocaloid") )
                     {
                         this.txGENRE = TJAPlayer3.Tx.TxCGen("Vocaloid");
                     }

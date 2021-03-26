@@ -78,8 +78,8 @@ namespace TJAPlayer3
                 if( !TJAPlayer3.ConfigIni.b太鼓パートAutoPlay )
                 {
                     Drums.nハイスコア = TJAPlayer3.stage選曲.r確定されたスコア.譜面情報.nハイスコア; //2015.06.16 kairera0467 他難易度の上書き防止。
-                    if( TJAPlayer3.stage選曲.r確定されたスコア.譜面情報.nハイスコア[ TJAPlayer3.stage選曲.n確定された曲の難易度 ] < (int)this.actScore.Get( E楽器パート.DRUMS, 0 ) )
-                        Drums.nハイスコア[ TJAPlayer3.stage選曲.n確定された曲の難易度 ] = (int)this.actScore.Get( E楽器パート.DRUMS, 0 );
+                    if( TJAPlayer3.stage選曲.r確定されたスコア.譜面情報.nハイスコア[ TJAPlayer3.stage選曲.n確定された曲の難易度[0]] < (int)this.actScore.Get( E楽器パート.DRUMS, 0 ) )
+                        Drums.nハイスコア[ TJAPlayer3.stage選曲.n確定された曲の難易度[0]] = (int)this.actScore.Get( E楽器パート.DRUMS, 0 );
                 }
                 var danC = TJAPlayer3.stage演奏ドラム画面.actDan.GetExam();
                 for (int i = 0; i < danC.Length; i++)
@@ -151,9 +151,9 @@ namespace TJAPlayer3
 
         // CStage 実装
         
-        public int nNoteCount;
-        public int nBalloonCount;
-        public double nAddScoreNiji;
+        public int[] nNoteCount = new int[2];
+        public int[] nBalloonCount = new int[2];
+        public double[] nAddScoreNiji = new double[2];
 
         public override void On活性化()
 		{
@@ -190,20 +190,39 @@ namespace TJAPlayer3
 
             for (int i = 0; i < TJAPlayer3.DTX.listChip.Count; i++)
             {
-                nNoteCount = TJAPlayer3.DTX.listChip.Where(num => num.nチャンネル番号 > 16 && num.nチャンネル番号 < 21).Count();
-                nBalloonCount += TJAPlayer3.DTX.listChip[i].nRollCount;
+                nNoteCount[0] = TJAPlayer3.DTX.listChip.Where(num => num.nチャンネル番号 > 16 && num.nチャンネル番号 < 21).Count();
+                nBalloonCount[0] += TJAPlayer3.DTX.listChip[i].nRollCount;
             }
 
             //nAddScoreNiji = (1000000 - (15 * RollTimems * 100) - (nBalloonCount * 100)) / TJAPlayer3.DTX.listChip.Count;
-            if(nNoteCount == 0 && nBalloonCount == 0)
+            if(nNoteCount[0] == 0 && nBalloonCount[0] == 0)
             {
-                nAddScoreNiji = 1000000;
+                nAddScoreNiji[0] = 1000000;
             }
             else
             {
-                nAddScoreNiji = (double)Math.Ceiling((decimal)(1000000 - (nBalloonCount * 100)) / nNoteCount / 10) * 10;
+                nAddScoreNiji[0] = (double)Math.Ceiling((decimal)(1000000 - (nBalloonCount[0] * 100)) / nNoteCount[0] / 10) * 10;
             }
 
+            if(TJAPlayer3.ConfigIni.nPlayerCount == 2)
+            {
+                for (int i = 0; i < TJAPlayer3.DTX_2P.listChip.Count; i++)
+                {
+                    nNoteCount[1] = TJAPlayer3.DTX_2P.listChip.Where(num => num.nチャンネル番号 > 16 && num.nチャンネル番号 < 21).Count();
+                    nBalloonCount[1] += TJAPlayer3.DTX_2P.listChip[i].nRollCount;
+                }
+
+                //nAddScoreNiji = (1000000 - (15 * RollTimems * 100) - (nBalloonCount * 100)) / TJAPlayer3.DTX.listChip.Count;
+                if (nNoteCount[1] == 0 && nBalloonCount[1] == 0)
+                {
+                    nAddScoreNiji[1] = 1000000;
+                }
+                else
+                {
+                    nAddScoreNiji[1] = (double)Math.Ceiling((decimal)(1000000 - (nBalloonCount[1] * 100)) / nNoteCount[1] / 10) * 10;
+                }
+            }
+            
             for (int index = TJAPlayer3.DTX.listChip.Count - 1; index >= 0; index--)
             {
                 if (TJAPlayer3.DTX.listChip[index].nチャンネル番号 == 0x01)
@@ -313,7 +332,8 @@ namespace TJAPlayer3
             //this.bIsAutoPlay.Guitar = CDTXMania.ConfigIni.bギターが全部オートプレイである;
             //this.bIsAutoPlay.Bass = CDTXMania.ConfigIni.bベースが全部オートプレイである;
             //			this.nRisky = CDTXMania.ConfigIni.nRisky;											// #23559 2011.7.28 yyagi
-            actGauge.Init( TJAPlayer3.ConfigIni.nRisky );									// #23559 2011.7.28 yyagi
+            actGauge.Init( TJAPlayer3.ConfigIni.nRisky, 0 );									// #23559 2011.7.28 yyagi
+            if(bDoublePlay) actGauge.Init( TJAPlayer3.ConfigIni.nRisky, 1 );									// #23559 2011.7.28 yyagi
 			this.nPolyphonicSounds = TJAPlayer3.ConfigIni.nPoliphonicSounds;
 			e判定表示優先度 = TJAPlayer3.ConfigIni.e判定表示優先度;
 
@@ -364,7 +384,7 @@ namespace TJAPlayer3
 			}
             #endregion
 
-            if(TJAPlayer3.stage選曲.n確定された曲の難易度 == (int)Difficulty.Dan)
+            if(TJAPlayer3.stage選曲.n確定された曲の難易度[0] == (int)Difficulty.Dan)
             {
                 n良 = new int[TJAPlayer3.stage選曲.r確定された曲.DanSongs.Count];
                 n可 = new int[TJAPlayer3.stage選曲.r確定された曲.DanSongs.Count];
@@ -1129,7 +1149,7 @@ namespace TJAPlayer3
 			}
 			else if ( TJAPlayer3.stage選曲.r確定された曲 != null )
 			{
-				this.actStatusPanels.tラベル名からステータスパネルを決定する( TJAPlayer3.stage選曲.r確定された曲.ar難易度ラベル[ TJAPlayer3.stage選曲.n確定された曲の難易度 ] );
+				this.actStatusPanels.tラベル名からステータスパネルを決定する( TJAPlayer3.stage選曲.r確定された曲.ar難易度ラベル[ TJAPlayer3.stage選曲.n確定された曲の難易度[0]] );
 			}
 		}
 
@@ -1178,13 +1198,13 @@ namespace TJAPlayer3
 
                 pChip.nRollCount++;
 
-                if (TJAPlayer3.stage選曲.n確定された曲の難易度 == (int)Difficulty.Dan)
+                if (TJAPlayer3.stage選曲.n確定された曲の難易度[0] == (int)Difficulty.Dan)
                     this.n連打[actDan.NowShowingNumber]++;
 
                 this.n現在の連打数[ nPlayer ]++;
                 this.CBranchScore[ nPlayer ].nRoll++;
                 this.n合計連打数[ nPlayer ]++;
-                if(TJAPlayer3.stage選曲.n確定された曲の難易度 != (int)Difficulty.Dan) this.actRollChara.Start(nPlayer);
+                if(TJAPlayer3.stage選曲.n確定された曲の難易度[0] != (int)Difficulty.Dan) this.actRollChara.Start(nPlayer);
 
                 //2017.01.28 DD CDTXから直接呼び出す
                 if (pChip.bGOGOTIME && !TJAPlayer3.ConfigIni.ShinuchiMode) //2018.03.11 kairera0467 チップに埋め込んだフラグから読み取る
@@ -1310,7 +1330,7 @@ namespace TJAPlayer3
                 pChip.nRollCount++;
                 this.n風船残り[ player ]--;
 
-                if (TJAPlayer3.stage選曲.n確定された曲の難易度 == (int)Difficulty.Dan)
+                if (TJAPlayer3.stage選曲.n確定された曲の難易度[0] == (int)Difficulty.Dan)
                     this.n連打[actDan.NowShowingNumber]++;
 
                 this.n合計連打数[player]++; //  成績発表の連打数に風船を含めるように (AioiLight)
@@ -1574,7 +1594,7 @@ namespace TJAPlayer3
             {
                 if (pChip.nチャンネル番号 != 0x15 && pChip.nチャンネル番号 != 0x16 && pChip.nチャンネル番号 != 0x17 && pChip.nチャンネル番号 != 0x18 && pChip.nチャンネル番号 != 0x1F)
                 {
-                    actGauge.Damage(pChip.nコース, screenmode, pChip.e楽器パート, eJudgeResult, nPlayer);
+                    actGauge.Damage(screenmode, pChip.e楽器パート, eJudgeResult, nPlayer);
                 }
             }
 
@@ -1646,7 +1666,7 @@ namespace TJAPlayer3
                                     if ( nPlayer == 0 ) this.nヒット数_Auto含まない.Drums.Perfect++;
                                     this.actCombo.n現在のコンボ数[nPlayer]++;
 
-                                    if(TJAPlayer3.stage選曲.n確定された曲の難易度 == (int)Difficulty.Dan)
+                                    if(TJAPlayer3.stage選曲.n確定された曲の難易度[0] == (int)Difficulty.Dan)
                                         this.n良[actDan.NowShowingNumber]++;
 
                                     if (this.actCombo.ctコンボ加算[nPlayer].b終了値に達してない)
@@ -1666,7 +1686,7 @@ namespace TJAPlayer3
                                     if ( nPlayer == 0 ) this.nヒット数_Auto含まない.Drums.Great++;
                                     this.actCombo.n現在のコンボ数[ nPlayer ]++;
 
-                                    if (TJAPlayer3.stage選曲.n確定された曲の難易度 == (int)Difficulty.Dan)
+                                    if (TJAPlayer3.stage選曲.n確定された曲の難易度[0] == (int)Difficulty.Dan)
                                         this.n可[actDan.NowShowingNumber]++;
                                     //this.actCombo.ctコンボ加算 = new CCounter( 0, 8, 10, CDTXMania.Timer );
                                     //this.actCombo.ctコンボ加算.t進行();
@@ -1688,7 +1708,7 @@ namespace TJAPlayer3
                                     if( pChip.nチャンネル番号 == 0x1F )
                                         break;
 
-                                    if (TJAPlayer3.stage選曲.n確定された曲の難易度 == (int)Difficulty.Dan)
+                                    if (TJAPlayer3.stage選曲.n確定された曲の難易度[0] == (int)Difficulty.Dan)
                                         this.n不可[actDan.NowShowingNumber]++;
                                     this.CBranchScore[nPlayer].nMiss++;
                                     if ( nPlayer == 0 ) this.nヒット数_Auto含まない.Drums.Miss++;
@@ -1715,7 +1735,7 @@ namespace TJAPlayer3
                                 {
                                     if( pChip.nチャンネル番号 != 0x15 && pChip.nチャンネル番号 != 0x16 && pChip.nチャンネル番号 != 0x17 && pChip.nチャンネル番号 != 0x18 )
                                     {
-                                        if (TJAPlayer3.stage選曲.n確定された曲の難易度 == (int)Difficulty.Dan)
+                                        if (TJAPlayer3.stage選曲.n確定された曲の難易度[0] == (int)Difficulty.Dan)
                                             this.n良[actDan.NowShowingNumber]++;
                                         this.CBranchScore[nPlayer].nGreat++;
                                         if ( nPlayer == 0 ) this.nヒット数_Auto含む.Drums.Perfect++;
@@ -1737,7 +1757,7 @@ namespace TJAPlayer3
                                 {
                                     if( pChip.nチャンネル番号 != 0x15 && pChip.nチャンネル番号 != 0x16 && pChip.nチャンネル番号 != 0x17 && pChip.nチャンネル番号 != 0x18 && pChip.nチャンネル番号 != 0x1F )
                                     {
-                                        if (TJAPlayer3.stage選曲.n確定された曲の難易度 == (int)Difficulty.Dan)
+                                        if (TJAPlayer3.stage選曲.n確定された曲の難易度[0] == (int)Difficulty.Dan)
                                             this.n不可[actDan.NowShowingNumber]++;
                                         this.CBranchScore[nPlayer].nMiss++;
                                         this.actCombo.n現在のコンボ数[ nPlayer ] = 0;
@@ -1857,17 +1877,17 @@ namespace TJAPlayer3
 			if ( ( ( pChip.e楽器パート != E楽器パート.UNKNOWN ) ) && ( eJudgeResult != E判定.Miss ) && ( eJudgeResult != E判定.Bad ) && ( eJudgeResult != E判定.Poor ) && ( pChip.nチャンネル番号 <= 0x14 || pChip.nチャンネル番号 == 0x1A || pChip.nチャンネル番号 == 0x1B ) )
 			{
                 int nCombos = this.actCombo.n現在のコンボ数[nPlayer];
-                long nInit = TJAPlayer3.DTX.nScoreInit[0, TJAPlayer3.stage選曲.n確定された曲の難易度];
-                long nDiff = TJAPlayer3.DTX.nScoreDiff[TJAPlayer3.stage選曲.n確定された曲の難易度];
+                long nInit = TJAPlayer3.DTX.nScoreInit[0, TJAPlayer3.stage選曲.n確定された曲の難易度[nPlayer]];
+                long nDiff = TJAPlayer3.DTX.nScoreDiff[TJAPlayer3.stage選曲.n確定された曲の難易度[nPlayer]];
                 long nAddScore = 0;
 
                 if ( TJAPlayer3.ConfigIni.ShinuchiMode )  //2016.07.04 kairera0467 真打モード。
                 {
-                    nAddScore = (long)nAddScoreNiji;
+                    nAddScore = (long)nAddScoreNiji[nPlayer];
 
                     if (eJudgeResult == E判定.Great || eJudgeResult == E判定.Good)
                     {
-                        nAddScore = (long)nAddScoreNiji / 20;
+                        nAddScore = (long)nAddScoreNiji[nPlayer] / 20;
                         nAddScore = (long)nAddScore * 10;
                     }
                     this.actScore.Add( E楽器パート.TAIKO, bIsAutoPlay, (long)nAddScore, nPlayer );
@@ -2096,7 +2116,7 @@ namespace TJAPlayer3
 			cInvisibleChip.ShowChipTemporally( part );
 
             //ChipのCourseをベースにゲージの伸びを調節
-            actGauge.Damage(eCourse, screenmode, part, E判定.Miss, 0);
+            actGauge.Damage(screenmode, part, E判定.Miss, 0);
             switch ( part )
 			{
 				case E楽器パート.DRUMS:
@@ -2842,7 +2862,7 @@ namespace TJAPlayer3
 				}
                 else if ( keyboard.bキーが押された( (int)SlimDXKeys.Key.D1 ) )
                 {
-                    if (!TJAPlayer3.DTX.bHasBranch[TJAPlayer3.stage選曲.n確定された曲の難易度]) return;
+                    if (!TJAPlayer3.DTX.bHasBranch[TJAPlayer3.stage選曲.n確定された曲の難易度[0]]) return;
 
                     //listBRANCHを廃止したため強制分岐の開始値を
                     //rc演奏用タイマ.n現在時刻msから引っ張ることに
@@ -2866,7 +2886,7 @@ namespace TJAPlayer3
                 }
                 else if ( keyboard.bキーが押された( (int)SlimDXKeys.Key.D2 ) )		// #24243 2011.1.16 yyagi UI for InputAdjustTime in playing screen.
                 {
-                    if (!TJAPlayer3.DTX.bHasBranch[TJAPlayer3.stage選曲.n確定された曲の難易度]) return;
+                    if (!TJAPlayer3.DTX.bHasBranch[TJAPlayer3.stage選曲.n確定された曲の難易度[0]]) return;
 
                     //listBRANCHを廃止したため強制分岐の開始値を
                     //rc演奏用タイマ.n現在時刻msから引っ張ることに
@@ -2891,7 +2911,7 @@ namespace TJAPlayer3
                 }
                 else if ( keyboard.bキーが押された( (int)SlimDXKeys.Key.D3 ) )		// #24243 2011.1.16 yyagi UI for InputAdjustTime in playing screen.
                 {
-                    if (!TJAPlayer3.DTX.bHasBranch[TJAPlayer3.stage選曲.n確定された曲の難易度]) return;
+                    if (!TJAPlayer3.DTX.bHasBranch[TJAPlayer3.stage選曲.n確定された曲の難易度[0]]) return;
 
                     //listBRANCHを廃止したため強制分岐の開始値を
                     //rc演奏用タイマ.n現在時刻msから引っ張ることに
@@ -4379,7 +4399,8 @@ namespace TJAPlayer3
 
                 this.actCombo.On活性化();
                 this.actScore.On活性化();
-                this.actGauge.Init( TJAPlayer3.ConfigIni.nRisky );
+                this.actGauge.Init( TJAPlayer3.ConfigIni.nRisky, 0 );
+                if (bDoublePlay) this.actGauge.Init( TJAPlayer3.ConfigIni.nRisky, 1 );
             }
             if( b演奏状態 )
             {
@@ -4403,7 +4424,7 @@ namespace TJAPlayer3
                 }
             }
 
-            this.ReSetScore(TJAPlayer3.DTX.nScoreInit[0, TJAPlayer3.stage選曲.n確定された曲の難易度], TJAPlayer3.DTX.nScoreDiff[TJAPlayer3.stage選曲.n確定された曲の難易度]);
+            this.ReSetScore(TJAPlayer3.DTX.nScoreInit[0, TJAPlayer3.stage選曲.n確定された曲の難易度[0]], TJAPlayer3.DTX.nScoreDiff[TJAPlayer3.stage選曲.n確定された曲の難易度[0]]);
             this.nHand = new int[]{ 0, 0, 0, 0 };
         }
 

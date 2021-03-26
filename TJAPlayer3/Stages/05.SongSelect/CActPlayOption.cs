@@ -88,7 +88,7 @@ namespace TJAPlayer3
             base.OnManagedリソースの解放();
         }
 
-        public override int On進行描画()
+        public int On進行描画(int player)
         {
             if (this.b活性化してない)
                 return 0;
@@ -145,7 +145,7 @@ namespace TJAPlayer3
                 ctClose.t停止();
                 ctClose.n現在の値 = 0;
                 bEnd = false;
-                act難易度.bOption = false;
+                act難易度.bOption[player] = false;
             }
 
             #region [ Key ]

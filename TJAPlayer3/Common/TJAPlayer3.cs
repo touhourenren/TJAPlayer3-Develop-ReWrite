@@ -1124,7 +1124,7 @@ namespace TJAPlayer3
 								//DTX.t全チップの再生停止();
 								if( DTX != null )
                                     DTX.On非活性化();
-								if (stage選曲.n確定された曲の難易度 == (int)Difficulty.Dan)
+								if (stage選曲.n確定された曲の難易度[0] == (int)Difficulty.Dan)
 								{
 									Trace.TraceInformation("----------------------");
 									Trace.TraceInformation("■ 段位選択");
@@ -1309,7 +1309,7 @@ for (int i = 0; i < 3; i++) {
 								}
 								else
 								{
-									if(stage選曲.n確定された曲の難易度 == (int)Difficulty.Dan)
+									if(stage選曲.n確定された曲の難易度[0] == (int)Difficulty.Dan)
 									{
 										Trace.TraceInformation("----------------------");
 										Trace.TraceInformation("■ 段位選択");
@@ -1491,7 +1491,7 @@ for (int i = 0; i < 3; i++) {
                             this.tガベージコレクションを実行する();
                             if ( !bコンパクトモード )
 							{
-								if (stage選曲.n確定された曲の難易度 == (int)Difficulty.Dan)
+								if (stage選曲.n確定された曲の難易度[0] == (int)Difficulty.Dan)
 								{
 									Trace.TraceInformation("----------------------");
 									Trace.TraceInformation("■ 段位選択");

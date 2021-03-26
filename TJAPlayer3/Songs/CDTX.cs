@@ -1441,41 +1441,41 @@ namespace TJAPlayer3
             pDan_LastChip = new CChip[1];
             DanSongs.Number = 0;
         }
-        public CDTX(string str全入力文字列)
+        public CDTX(string str全入力文字列, int difficulty)
             : this()
         {
             this.On活性化();
-            this.t入力_全入力文字列から(str全入力文字列);
+            this.t入力_全入力文字列から(str全入力文字列, difficulty);
         }
-        public CDTX(string strファイル名, bool bヘッダのみ)
+        public CDTX(string strファイル名, bool bヘッダのみ, int difficulty)
             : this()
         {
             this.On活性化();
-            this.t入力(strファイル名, bヘッダのみ);
+            this.t入力(strファイル名, bヘッダのみ, difficulty);
         }
-        public CDTX(string str全入力文字列, double db再生速度, int nBGMAdjust)
+        public CDTX(string str全入力文字列, double db再生速度, int nBGMAdjust, int difficulty)
             : this()
         {
             this.On活性化();
-            this.t入力_全入力文字列から(str全入力文字列, str全入力文字列, db再生速度, nBGMAdjust);
+            this.t入力_全入力文字列から(str全入力文字列, str全入力文字列, db再生速度, nBGMAdjust, difficulty);
         }
-        public CDTX(string strファイル名, bool bヘッダのみ, double db再生速度, int nBGMAdjust)
+        public CDTX(string strファイル名, bool bヘッダのみ, double db再生速度, int nBGMAdjust, int difficulty)
             : this()
         {
             this.On活性化();
-            this.t入力(strファイル名, bヘッダのみ, db再生速度, nBGMAdjust, 0, 0, false);
+            this.t入力(strファイル名, bヘッダのみ, db再生速度, nBGMAdjust, 0, 0, false, difficulty);
         }
-        public CDTX(string strファイル名, bool bヘッダのみ, double db再生速度, int nBGMAdjust, int nReadVersion)
+        public CDTX(string strファイル名, bool bヘッダのみ, double db再生速度, int nBGMAdjust, int nReadVersion, int difficulty)
             : this()
         {
             this.On活性化();
-            this.t入力(strファイル名, bヘッダのみ, db再生速度, nBGMAdjust, nReadVersion, 0, false);
+            this.t入力(strファイル名, bヘッダのみ, db再生速度, nBGMAdjust, nReadVersion, 0, false, difficulty);
         }
-        public CDTX(string strファイル名, bool bヘッダのみ, double db再生速度, int nBGMAdjust, int nReadVersion, int nPlayerSide, bool bSession)
+        public CDTX(string strファイル名, bool bヘッダのみ, double db再生速度, int nBGMAdjust, int nReadVersion, int nPlayerSide, bool bSession, int difficulty)
             : this()
         {
             this.On活性化();
-            this.t入力(strファイル名, bヘッダのみ, db再生速度, nBGMAdjust, nReadVersion, nPlayerSide, bSession);
+            this.t入力(strファイル名, bヘッダのみ, db再生速度, nBGMAdjust, nReadVersion, nPlayerSide, bSession, difficulty);
         }
 
 
@@ -1922,11 +1922,11 @@ namespace TJAPlayer3
         }
         #endregion
 
-        public void t入力(string strファイル名, bool bヘッダのみ)
+        public void t入力(string strファイル名, bool bヘッダのみ, int difficulty)
         {
-            this.t入力(strファイル名, bヘッダのみ, 1.0, 0, 0, 0, false);
+            this.t入力(strファイル名, bヘッダのみ, 1.0, 0, 0, 0, false, difficulty);
         }
-        public void t入力(string strファイル名, bool bヘッダのみ, double db再生速度, int nBGMAdjust, int nReadVersion, int nPlayerSide, bool bSession)
+        public void t入力(string strファイル名, bool bヘッダのみ, double db再生速度, int nBGMAdjust, int nReadVersion, int nPlayerSide, bool bSession, int difficulty)
         {
             this.bヘッダのみ = bヘッダのみ;
             this.strファイル名の絶対パス = Path.GetFullPath(strファイル名);
@@ -1958,7 +1958,7 @@ namespace TJAPlayer3
                         //span = (TimeSpan) ( DateTime.Now - timeBeginLoad );
                         //Trace.TraceInformation( "DTXfileload時間:          {0}", span.ToString() );
 
-                        this.t入力_全入力文字列から(str2, str3, db再生速度, nBGMAdjust);
+                        this.t入力_全入力文字列から(str2, str3, db再生速度, nBGMAdjust, difficulty);
                     }
                     else
                     {
@@ -1980,7 +1980,7 @@ namespace TJAPlayer3
                         //span = (TimeSpan) ( DateTime.Now - timeBeginLoad );
                         //Trace.TraceInformation( "DTXfileload時間:          {0}", span.ToString() );
 
-                        this.t入力_全入力文字列から(str2, str3, db再生速度, nBGMAdjust);
+                        this.t入力_全入力文字列から(str2, str3, db再生速度, nBGMAdjust, difficulty);
                     }
                 }
                 catch (Exception ex)
@@ -1992,11 +1992,11 @@ namespace TJAPlayer3
                 }
             }
         }
-        public void t入力_全入力文字列から(string str全入力文字列)
+        public void t入力_全入力文字列から(string str全入力文字列, int difficulty)
         {
-            this.t入力_全入力文字列から(str全入力文字列, str全入力文字列, 1.0, 0);
+            this.t入力_全入力文字列から(str全入力文字列, str全入力文字列, 1.0, 0, difficulty);
         }
-        public void t入力_全入力文字列から(string str全入力文字列, string str1, double db再生速度, int nBGMAdjust)
+        public void t入力_全入力文字列から(string str全入力文字列, string str1, double db再生速度, int nBGMAdjust, int Difficulty)
         {
             //DateTime timeBeginLoad = DateTime.Now;
             //TimeSpan span;
@@ -2054,7 +2054,7 @@ namespace TJAPlayer3
                         {
                             //this.t入力(str1);
                             //this.t入力_V3( str1, 3 );
-                            this.t入力_V4(str1);
+                            this.t入力_V4(str1, Difficulty);
                         }
                         if (ce.Current == '#')
                         {
@@ -3031,7 +3031,7 @@ namespace TJAPlayer3
         /// 
         /// </summary>
         /// <param name="strInput">譜面のデータ</param>
-        private void t入力_V4(string strInput)
+        private void t入力_V4(string strInput, int difficulty)
         {
             if (!String.IsNullOrEmpty(strInput)) //空なら通さない
             {
@@ -3106,9 +3106,9 @@ namespace TJAPlayer3
                         this.b譜面が存在する[i] = false;
                 }
                 #region[ 読み込ませるコースを決定 ]
-                if (this.b譜面が存在する[TJAPlayer3.stage選曲.n確定された曲の難易度] == false)
+                if (this.b譜面が存在する[difficulty] == false)
                 {
-                    n読み込むコース = TJAPlayer3.stage選曲.n確定された曲の難易度;
+                    n読み込むコース = difficulty;
                     n読み込むコース++;
                     for (int n = 1; n < (int)Difficulty.Total; n++)
                     {
@@ -3123,7 +3123,7 @@ namespace TJAPlayer3
                     }
                 }
                 else
-                    n読み込むコース = TJAPlayer3.stage選曲.n確定された曲の難易度;
+                    n読み込むコース = difficulty;
                 #endregion
 
                 //指定したコースの譜面の命令を消去する。

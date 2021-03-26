@@ -305,20 +305,16 @@ namespace TJAPlayer3
 								if (dtx.Dan_C != null)
 									c曲リストノード.Dan_C = dtx.Dan_C;
 
-                                if (!string.IsNullOrEmpty(dtx.GENRE))
-                                {
-                                    c曲リストノード.strジャンル = dtx.GENRE;
-									c曲リストノード.str本当のジャンル = c曲リストノード.strジャンル;
+								if (!string.IsNullOrEmpty(dtx.GENRE))
+								{
+									c曲リストノード.strジャンル = c曲リストノード.r親ノード.strジャンル;
+									c曲リストノード.str本当のジャンル = dtx.GENRE;
 								}
-                                else
-                                {
-                                    if (c曲リストノード.r親ノード != null && c曲リストノード.r親ノード.strジャンル != "")
-                                    {
-										// .tjaのジャンルが存在しなくて、かつ親ノードにジャンルが指定されていればそちらを読み込む。
-										c曲リストノード.str本当のジャンル = dtx.GENRE;
-										c曲リストノード.strジャンル = c曲リストノード.r親ノード.strジャンル;
-									}
-                                }
+								else
+								{
+									c曲リストノード.strジャンル = c曲リストノード.r親ノード.strジャンル;
+									c曲リストノード.str本当のジャンル = c曲リストノード.r親ノード.strジャンル;
+								}
 
 								switch (c曲リストノード.strジャンル)
 								{

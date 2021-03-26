@@ -15,7 +15,7 @@ namespace TJAPlayer3
 			this.mode = EFIFOモード.フェードアウト;
 
 			TJAPlayer3.Skin.soundDanSelectBGM.t停止する();
-			if (TJAPlayer3.stage選曲.n確定された曲の難易度 == (int)Difficulty.Dan)
+			if (TJAPlayer3.stage選曲.n確定された曲の難易度[0] == (int)Difficulty.Dan)
 				this.counter = new CCounter(0, 1255, 1, TJAPlayer3.Timer);
 			else
 				this.counter = new CCounter(0, 3580, 1, TJAPlayer3.Timer);
@@ -24,7 +24,7 @@ namespace TJAPlayer3
 		{
 			this.mode = EFIFOモード.フェードイン;
 
-			if (TJAPlayer3.stage選曲.n確定された曲の難易度 == (int)Difficulty.Dan)
+			if (TJAPlayer3.stage選曲.n確定された曲の難易度[0] == (int)Difficulty.Dan)
 			{
 				this.counter = new CCounter(0, 255, 1, TJAPlayer3.Timer);
 
@@ -66,7 +66,7 @@ namespace TJAPlayer3
 			}
 			this.counter.t進行();
 
-			if(TJAPlayer3.stage選曲.n確定された曲の難易度 == (int)Difficulty.Dan)
+			if(TJAPlayer3.stage選曲.n確定された曲の難易度[0] == (int)Difficulty.Dan)
             {
 				if (TJAPlayer3.Tx.Tile_Black != null)
 				{

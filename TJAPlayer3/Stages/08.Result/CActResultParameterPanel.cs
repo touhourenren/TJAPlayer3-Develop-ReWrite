@@ -232,7 +232,7 @@ namespace TJAPlayer3
 			ct全体進行.t進行();
 			ctゲージアニメ.t進行();
 
-			if (TJAPlayer3.stage選曲.n確定された曲の難易度 != (int)Difficulty.Dan)
+			if (TJAPlayer3.stage選曲.n確定された曲の難易度[0] != (int)Difficulty.Dan)
 			{
 				#region [ 通常時リザルト ]
 
@@ -240,7 +240,7 @@ namespace TJAPlayer3
 
 				TJAPlayer3.Tx.Result_Panel.t2D描画(TJAPlayer3.app.Device, 0, 0);
 
-				TJAPlayer3.Tx.Result_Diff_Bar.t2D描画(TJAPlayer3.app.Device, 18, 101, new RectangleF(0, TJAPlayer3.stage選曲.n確定された曲の難易度 * 54, 185, 54));
+				TJAPlayer3.Tx.Result_Diff_Bar.t2D描画(TJAPlayer3.app.Device, 18, 101, new RectangleF(0, TJAPlayer3.stage選曲.n確定された曲の難易度[0] * 54, 185, 54));
 
 				TJAPlayer3.Tx.Result_Gauge_Base.t2D描画(TJAPlayer3.app.Device, 55, 140);
 
