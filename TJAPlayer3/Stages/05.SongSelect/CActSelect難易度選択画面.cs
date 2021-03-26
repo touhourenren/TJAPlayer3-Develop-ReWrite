@@ -215,10 +215,17 @@ namespace TJAPlayer3
                                 this.bSelect[0] = true;
                                 TJAPlayer3.Skin.sound曲決定音.t再生する();
 
-                                if(bSelect[1])
+                                if(TJAPlayer3.ConfigIni.nPlayerCount == 2)
+                                {
+                                    if (bSelect[1])
+                                    {
+                                        TJAPlayer3.stage選曲.t曲を選択する(n現在の選択行[0] - 2, 0);
+                                        TJAPlayer3.stage選曲.t曲を選択する(n現在の選択行[1] - 2, 1);
+                                    }
+                                }
+                                else
                                 {
                                     TJAPlayer3.stage選曲.t曲を選択する(n現在の選択行[0] - 2, 0);
-                                    TJAPlayer3.stage選曲.t曲を選択する(n現在の選択行[1] - 2, 1);
                                 }
                             }
                         }
