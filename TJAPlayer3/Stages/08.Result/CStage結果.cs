@@ -368,33 +368,36 @@ namespace TJAPlayer3
 							TJAPlayer3.Skin.sound決定音.t再生する();
 							actFI.tフェードアウト開始();
 
-							if (TJAPlayer3.stage選曲.n確定された曲の難易度[0] != (int)Difficulty.Dan && TJAPlayer3.stage選曲.n確定された曲の難易度[0] != (int)Difficulty.Tower)
+							if(TJAPlayer3.ConfigIni.bAutoPlay[0])
 							{
-								if (nスコアランク != 0)
+								if (TJAPlayer3.stage選曲.n確定された曲の難易度[0] != (int)Difficulty.Dan && TJAPlayer3.stage選曲.n確定された曲の難易度[0] != (int)Difficulty.Tower)
 								{
-									if (TJAPlayer3.stage選曲.r確定されたスコア.譜面情報.nスコアランク[TJAPlayer3.stage選曲.n確定された曲の難易度[0]] == 0)
+									if (nスコアランク != 0)
 									{
-										TJAPlayer3.stage選曲.act曲リスト.ScoreRankCount[nスコアランク - 1] += 1;
-									}
-									else if (TJAPlayer3.stage選曲.r確定されたスコア.譜面情報.nスコアランク[TJAPlayer3.stage選曲.n確定された曲の難易度[0]] < nスコアランク)
-									{
-										TJAPlayer3.stage選曲.act曲リスト.ScoreRankCount[nスコアランク - 1] += 1;
-										TJAPlayer3.stage選曲.act曲リスト.ScoreRankCount[TJAPlayer3.stage選曲.r確定されたスコア.譜面情報.nスコアランク[TJAPlayer3.stage選曲.n確定された曲の難易度[0]] - 1] -= 1;
-									}
-								}
-
-								if (nクリア != 0)
-								{
-									if (TJAPlayer3.stage選曲.r確定されたスコア.譜面情報.nクリア[TJAPlayer3.stage選曲.n確定された曲の難易度[0]] == 0)
-									{
-										TJAPlayer3.stage選曲.act曲リスト.CrownCount[nクリア - 1] += 1;
-									}
-									else if (TJAPlayer3.stage選曲.r確定されたスコア.譜面情報.nクリア[TJAPlayer3.stage選曲.n確定された曲の難易度[0]] < nクリア)
-									{
-										TJAPlayer3.stage選曲.act曲リスト.CrownCount[nクリア - 1] += 1;
-										TJAPlayer3.stage選曲.act曲リスト.CrownCount[TJAPlayer3.stage選曲.r確定されたスコア.譜面情報.nクリア[TJAPlayer3.stage選曲.n確定された曲の難易度[0]] - 1] -= 1;
+										if (TJAPlayer3.stage選曲.r確定されたスコア.譜面情報.nスコアランク[TJAPlayer3.stage選曲.n確定された曲の難易度[0]] == 0)
+										{
+											TJAPlayer3.stage選曲.act曲リスト.ScoreRankCount[nスコアランク - 1] += 1;
+										}
+										else if (TJAPlayer3.stage選曲.r確定されたスコア.譜面情報.nスコアランク[TJAPlayer3.stage選曲.n確定された曲の難易度[0]] < nスコアランク)
+										{
+											TJAPlayer3.stage選曲.act曲リスト.ScoreRankCount[nスコアランク - 1] += 1;
+											TJAPlayer3.stage選曲.act曲リスト.ScoreRankCount[TJAPlayer3.stage選曲.r確定されたスコア.譜面情報.nスコアランク[TJAPlayer3.stage選曲.n確定された曲の難易度[0]] - 1] -= 1;
+										}
 									}
 
+									if (nクリア != 0)
+									{
+										if (TJAPlayer3.stage選曲.r確定されたスコア.譜面情報.nクリア[TJAPlayer3.stage選曲.n確定された曲の難易度[0]] == 0)
+										{
+											TJAPlayer3.stage選曲.act曲リスト.CrownCount[nクリア - 1] += 1;
+										}
+										else if (TJAPlayer3.stage選曲.r確定されたスコア.譜面情報.nクリア[TJAPlayer3.stage選曲.n確定された曲の難易度[0]] < nクリア)
+										{
+											TJAPlayer3.stage選曲.act曲リスト.CrownCount[nクリア - 1] += 1;
+											TJAPlayer3.stage選曲.act曲リスト.CrownCount[TJAPlayer3.stage選曲.r確定されたスコア.譜面情報.nクリア[TJAPlayer3.stage選曲.n確定された曲の難易度[0]] - 1] -= 1;
+										}
+
+									}
 								}
 							}
 
