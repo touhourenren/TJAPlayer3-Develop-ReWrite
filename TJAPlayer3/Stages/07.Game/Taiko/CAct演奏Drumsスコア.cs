@@ -99,12 +99,12 @@ namespace TJAPlayer3
                                 stScore[i].bAddEnd = true;
                                 if (ct点数アニメタイマ[stScore[i].nPlayer].b終了値に達してない)
                                 {
-                                    this.ct点数アニメタイマ[stScore[i].nPlayer] = new CCounter(0, 11, 12, TJAPlayer3.Timer);
+                                    this.ct点数アニメタイマ[stScore[i].nPlayer] = new CCounter(0, 11, 13, TJAPlayer3.Timer);
                                     this.ct点数アニメタイマ[stScore[i].nPlayer].n現在の値 = 1;
                                 }
                                 else
                                 {
-                                    this.ct点数アニメタイマ[stScore[i].nPlayer] = new CCounter(0, 11, 12, TJAPlayer3.Timer);
+                                    this.ct点数アニメタイマ[stScore[i].nPlayer] = new CCounter(0, 11, 13, TJAPlayer3.Timer);
                                 }
                             }
 
@@ -152,48 +152,48 @@ namespace TJAPlayer3
 
 
 
-                            if ( this.stScore[ i ].ctTimer.n現在の値 > 300 )
+                            if ( this.stScore[ i ].ctTimer.n現在の値 > 120 )
                             {
                                 yAdd = -1;
                             }
-                            if (this.stScore[i].ctTimer.n現在の値 > 310)
+                            if (this.stScore[i].ctTimer.n現在の値 > 130)
                             {
                                 yAdd = -5;
                             }
-                            if (this.stScore[i].ctTimer.n現在の値 > 320)
+                            if (this.stScore[i].ctTimer.n現在の値 > 140)
                             {
                                 yAdd = -7;
                             }
-                            if (this.stScore[i].ctTimer.n現在の値 > 330)
+                            if (this.stScore[i].ctTimer.n現在の値 > 150)
                             {
                                 yAdd = -8;
                             }
-                            if (this.stScore[i].ctTimer.n現在の値 > 340)
+                            if (this.stScore[i].ctTimer.n現在の値 > 160)
                             {
                                 yAdd = -8;
                                 alpha = 256;
                             }
-                            if (this.stScore[i].ctTimer.n現在の値 > 350)
+                            if (this.stScore[i].ctTimer.n現在の値 > 170)
                             {
                                 yAdd = -6;
                                 alpha = 256;
                             }
-                            if (this.stScore[i].ctTimer.n現在の値 > 360)
+                            if (this.stScore[i].ctTimer.n現在の値 > 180)
                             {
                                 yAdd = 0;
                                 alpha = 256;
                             }
-                            if (this.stScore[i].ctTimer.n現在の値 > 370)
+                            if (this.stScore[i].ctTimer.n現在の値 > 190)
                             {
                                 yAdd = 5;
                                 alpha = 200;
                             }
-                            if (this.stScore[i].ctTimer.n現在の値 > 380)
+                            if (this.stScore[i].ctTimer.n現在の値 > 200)
                             {
                                 yAdd = 12;
                                 alpha = 150;
                             }
-                            if (this.stScore[i].ctTimer.n現在の値 > 390)
+                            if (this.stScore[i].ctTimer.n現在の値 > 210)
                             {
                                 yAdd = 20;
                                 alpha = 0;

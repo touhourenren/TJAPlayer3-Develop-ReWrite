@@ -160,15 +160,15 @@ namespace TJAPlayer3
         private float[] ScoreScale = new float[]
         {
            1f,
-            1.111f,
-            1.222f,
-            1.185f,
-            1.148f,
-            1.129f,
-            1.111f,
-            1.074f,
+            1.050f,
+            1.100f,
+            1.110f,
+            1.120f,
+            1.125f,
+            1.120f,
+            1.080f,
             1.065f,
-            1.033f,
+            1.030f,
             1.015f,
             1f
         };
