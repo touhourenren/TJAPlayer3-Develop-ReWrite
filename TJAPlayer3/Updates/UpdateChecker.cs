@@ -27,7 +27,7 @@ namespace TJAPlayer3.Updates
         private static string GetLatestReleaseJson()
         {
             var client = new WebClientWithTimeout(TimeSpan.FromSeconds(2));
-            client.Headers.Add("User-Agent", "twopointzero/TJAPlayer3");
+            client.Headers.Add("User-Agent", "touhourenren/TJAPlayer3-Develop-ReWrite");
 
             return client.DownloadString(
                 "https://api.github.com/repos/touhourenren/TJAPlayer3-Develop-ReWrite/releases/latest");
