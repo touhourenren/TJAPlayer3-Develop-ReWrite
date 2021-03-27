@@ -15,6 +15,7 @@ using FDK;
 using SampleFramework;
 using System.Reflection;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace TJAPlayer3
 {
@@ -23,8 +24,30 @@ namespace TJAPlayer3
         // プロパティ
         #region [ properties ]
         public static readonly string VERSION = Assembly.GetExecutingAssembly().GetName().Version.ToString().Substring(0, Assembly.GetExecutingAssembly().GetName().Version.ToString().Length - 2);
+		public static readonly string AppDisplayThreePartVersion = GetAppDisplayThreePartVersion();
+		public static readonly string AppNumericThreePartVersion = GetAppNumericThreePartVersion();
 
-        public static readonly string SLIMDXDLL = "c_net20x86_Jun2010";
+		private static string GetAppDisplayThreePartVersion()
+		{
+			return $"v{GetAppNumericThreePartVersion()}";
+		}
+
+		private static string GetAppNumericThreePartVersion()
+		{
+			var version = Assembly.GetExecutingAssembly().GetName().Version;
+
+			return $"{version.Major}.{version.Minor}.{version.Build}";
+		}
+
+		public static readonly string AppInformationalVersion =
+			Assembly
+				.GetExecutingAssembly()
+				.GetCustomAttributes(typeof(AssemblyInformationalVersionAttribute), false)
+				.Cast<AssemblyInformationalVersionAttribute>()
+				.FirstOrDefault()
+				?.InformationalVersion
+			?? $"{GetAppDisplayThreePartVersion()} (unknown informational version)";
+		public static readonly string SLIMDXDLL = "c_net20x86_Jun2010";
 		public static readonly string D3DXDLL = "d3dx9_43.dll";		// June 2010
         //public static readonly string D3DXDLL = "d3dx9_42.dll";	// February 2010
         //public static readonly string D3DXDLL = "d3dx9_41.dll";	// March 2009

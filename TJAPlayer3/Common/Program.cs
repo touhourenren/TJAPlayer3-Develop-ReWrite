@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.IO;
 using FDK;
 using System.Reflection;
+using TJAPlayer3.Updates;
 
 namespace TJAPlayer3
 {
@@ -62,6 +63,7 @@ namespace TJAPlayer3
 		[STAThread] 
 		static void Main()
 		{
+			UpdateChecker.CheckForAndOfferUpdate();
 			mutex二重起動防止用 = new Mutex( false, "DTXManiaMutex" );
 
 			if ( mutex二重起動防止用.WaitOne( 0, false ) )
