@@ -188,10 +188,21 @@ namespace TJAPlayer3
                 }
             }
 
-            for (int i = 0; i < TJAPlayer3.DTX.listChip.Count; i++)
+            if(TJAPlayer3.DTX.bチップがある.Branch)
             {
-                nNoteCount[0] = TJAPlayer3.DTX.listChip.Where(num => num.nチャンネル番号 > 16 && num.nチャンネル番号 < 21).Count();
-                nBalloonCount[0] += TJAPlayer3.DTX.listChip[i].nRollCount;
+                for (int i = 0; i < TJAPlayer3.DTX.listChip_Branch[2].Count; i++)
+                {
+                    nNoteCount[0] = TJAPlayer3.DTX.listChip_Branch[2].Where(num => num.nチャンネル番号 > 16 && num.nチャンネル番号 < 21).Count();
+                    nBalloonCount[0] += TJAPlayer3.DTX.listChip_Branch[2][i].nRollCount;
+                }
+            }
+            else
+            {
+                for (int i = 0; i < TJAPlayer3.DTX.listChip.Count; i++)
+                {
+                    nNoteCount[0] = TJAPlayer3.DTX.listChip.Where(num => num.nチャンネル番号 > 16 && num.nチャンネル番号 < 21).Count();
+                    nBalloonCount[0] += TJAPlayer3.DTX.listChip[i].nRollCount;
+                }
             }
 
             //nAddScoreNiji = (1000000 - (15 * RollTimems * 100) - (nBalloonCount * 100)) / TJAPlayer3.DTX.listChip.Count;
@@ -206,10 +217,21 @@ namespace TJAPlayer3
 
             if(TJAPlayer3.ConfigIni.nPlayerCount == 2)
             {
-                for (int i = 0; i < TJAPlayer3.DTX_2P.listChip.Count; i++)
+                if (TJAPlayer3.DTX.bチップがある.Branch)
                 {
-                    nNoteCount[1] = TJAPlayer3.DTX_2P.listChip.Where(num => num.nチャンネル番号 > 16 && num.nチャンネル番号 < 21).Count();
-                    nBalloonCount[1] += TJAPlayer3.DTX_2P.listChip[i].nRollCount;
+                    for (int i = 0; i < TJAPlayer3.DTX_2P.listChip_Branch[2].Count; i++)
+                    {
+                        nNoteCount[1] = TJAPlayer3.DTX_2P.listChip_Branch[2].Where(num => num.nチャンネル番号 > 16 && num.nチャンネル番号 < 21).Count();
+                        nBalloonCount[1] += TJAPlayer3.DTX_2P.listChip_Branch[2][i].nRollCount;
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < TJAPlayer3.DTX_2P.listChip.Count; i++)
+                    {
+                        nNoteCount[1] = TJAPlayer3.DTX_2P.listChip.Where(num => num.nチャンネル番号 > 16 && num.nチャンネル番号 < 21).Count();
+                        nBalloonCount[1] += TJAPlayer3.DTX_2P.listChip[i].nRollCount;
+                    }
                 }
 
                 //nAddScoreNiji = (1000000 - (15 * RollTimems * 100) - (nBalloonCount * 100)) / TJAPlayer3.DTX.listChip.Count;

@@ -1190,6 +1190,7 @@ namespace TJAPlayer3
         public Dictionary<int, CDirectShow> listDS;
         public Dictionary<int, CBPM> listBPM;
         public List<CChip> listChip;
+        public List<CChip>[] listChip_Branch;
         public Dictionary<int, CWAV> listWAV;
         public Dictionary<int, CSCROLL> listSCROLL;
         public Dictionary<int, CSCROLL> listSCROLL_Normal;
@@ -4492,6 +4493,7 @@ namespace TJAPlayer3
                                             this.nノーツ数_Branch[l]++;
                                     }
 
+
                                     if(this.n参照中の難易度 == (int)Difficulty.Dan)
                                         this.nDan_NotesCount[DanSongs.Number - 1]++;
 
@@ -4510,6 +4512,11 @@ namespace TJAPlayer3
                                 
                                 Array.Resize(ref nDan_NotesCount, nDan_NotesCount.Length + 1);
                                 this.listChip.Add(chip);
+
+                                if(IsEndedBranching)
+                                    this.listChip_Branch[i].Add(chip);
+                                else
+                                    this.listChip_Branch[(int)chip.nコース].Add(chip);
                             }
                         }
 
@@ -7124,6 +7131,10 @@ namespace TJAPlayer3
             this.listAVIPAN = new Dictionary<int, CAVIPAN>();
             this.listDS = new Dictionary<int, CDirectShow>();
             this.listChip = new List<CChip>();
+            this.listChip_Branch = new List<CChip>[3];
+            this.listChip_Branch[0] = new List<CChip>();
+            this.listChip_Branch[1] = new List<CChip>();
+            this.listChip_Branch[2] = new List<CChip>();
             this.listBalloon = new List<int>();
             this.listBalloon_Normal = new List<int>();
             this.listBalloon_Expert = new List<int>();
