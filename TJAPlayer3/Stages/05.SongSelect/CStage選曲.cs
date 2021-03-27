@@ -1,4 +1,5 @@
 ﻿using FDK;
+using SlimDX;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -218,7 +219,7 @@ namespace TJAPlayer3
                 // Discord Presenceの更新
                 Discord.UpdatePresence("", Properties.Discord.Stage_SongSelect, TJAPlayer3.StartupTime);
 
-               
+                colCharaColor = new Color4();
 
                 if(r現在選択中の曲 != null)
                     NowGenre = r現在選択中の曲.strジャンル;
@@ -868,6 +869,7 @@ namespace TJAPlayer3
         private CCounter ctTimer;
         private CCounter ctCreditAnime;
         private Random[] r = new Random[3];
+        private Color4 colCharaColor;
         public CCounter ctBackgroundFade;
         public string NowGenre;
         public string OldGenre;
