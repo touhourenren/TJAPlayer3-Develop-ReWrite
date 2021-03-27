@@ -64,15 +64,19 @@ namespace TJAPlayer3
                 }
                 else if (nスイッチカウント == 9)
                 {
-                    if (n現在の選択行[player] == 5)
+                    for(int i = 0; i < 2; i++)
                     {
-                        n現在の選択行[0] = 6;
-                        n現在の選択行[1] = 6;
-                    }
-                    else if (n現在の選択行[player] == 6)
-                    {
-                        n現在の選択行[0] = 5;
-                        n現在の選択行[1] = 5;
+                        if(!bSelect[i])
+                        {
+                            if (n現在の選択行[i] == 5)
+                            {
+                                n現在の選択行[i] = 6;
+                            }
+                            else if (n現在の選択行[i] == 6)
+                            {
+                                n現在の選択行[i] = 5;
+                            }
+                        }
                     }
 
                     b裏譜面 = !b裏譜面;
@@ -378,7 +382,7 @@ namespace TJAPlayer3
             for(int i = 0; i < TJAPlayer3.ConfigIni.nPlayerCount; i++)
             {
                 TJAPlayer3.Tx.Difficulty_Select_Bar[i].t2D描画(TJAPlayer3.app.Device,
-                    n現在の選択行[0] != n現在の選択行[1] ? (float)this.BarX[n現在の選択行[i]] : i == 0 ? (float)this.BarX[n現在の選択行[i]] - 30 : (float)this.BarX[n現在の選択行[i]] + 30, 
+                    TJAPlayer3.ConfigIni.nPlayerCount == 2 ? n現在の選択行[0] != n現在の選択行[1] ? (float)this.BarX[n現在の選択行[i]] : i == 0 ? (float)this.BarX[n現在の選択行[i]] - 30 : (float)this.BarX[n現在の選択行[i]] + 30 : (float)this.BarX[n現在の選択行[i]], 
                     126 + ((float)Math.Sin((float)(ctBarAnimeIn.n現在の値 >= 80 ? (ctBarAnimeIn.n現在の値 - 80) : 0) * (Math.PI / 180)) * 50) + (float)Math.Sin((float)ctBarAnime[i].n現在の値 * (Math.PI / 180)) * 10, 
                     new RectangleF(0, 0, 259, 114));
             }

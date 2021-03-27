@@ -107,6 +107,7 @@
     <Compile Include="Common\Easing.cs" />
     <Compile Include="Common\NamePlateConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Updates\UpdateChecker.cs" />
     <EmbeddedResource Include="Properties\Discord.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Discord.Designer.cs</LastGenOutput>

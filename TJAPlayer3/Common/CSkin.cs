@@ -2682,11 +2682,11 @@ namespace TJAPlayer3
         public int[] Game_CourseSymbol_Y = new int[] { 232, 582 };
         #endregion
         #region PanelFont
-        public int Game_MusicName_X = 1260;
+        public int Game_MusicName_X = 1160;
         public int Game_MusicName_Y = 28;
         public int Game_MusicName_FontSize = 27;
         public ReferencePoint Game_MusicName_ReferencePoint = ReferencePoint.Center;
-        public int Game_Genre_X = 1000;
+        public int Game_Genre_X = 1015;
         public int Game_Genre_Y = 70;
         public int Game_Lyric_X = 640;
         public int Game_Lyric_Y = 630;
@@ -2759,7 +2759,7 @@ namespace TJAPlayer3
         public int[] Game_Balloon_Balloon_Number_Y = new int[] { 187, 373 };
         public int[] Game_Balloon_Roll_Frame_X = new int[] { 218, 218 };
         public int[] Game_Balloon_Roll_Frame_Y = new int[] { -3, 514 };
-        public int[] Game_Balloon_Roll_Number_X = new int[] { 382, 382 };
+        public int[] Game_Balloon_Roll_Number_X = new int[] { 378, 378 };
         public int[] Game_Balloon_Roll_Number_Y = new int[] { 128, 639 };
         public int[] Game_Balloon_Number_Size = new int[] { 63, 75 };
         public int Game_Balloon_Number_Padding = 55;
