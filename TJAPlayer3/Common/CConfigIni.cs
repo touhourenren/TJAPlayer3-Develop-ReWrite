@@ -3030,10 +3030,10 @@ LeftRed=K015
 RightRed=K019
 LeftBlue=K013
 RightBlue=K020
-LeftRed2P=
-RightRed2P=
-LeftBlue2P=
-RightBlue2P=
+LeftRed2P=K011
+RightRed2P=K023
+LeftBlue2P=K012
+RightBlue2P=K047
 
 [SystemKeyAssign]
 Capture=K065

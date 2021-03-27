@@ -140,7 +140,7 @@ namespace TJAPlayer3
                             dbGaugeMaxComboValue = this.DTX[nPlayer].nノーツ数[3] * (this.fGaugeMaxRate[0] / 100.0f);
                             for (int i = 0; i < 3; i++)
                             {
-                                dbGaugeMaxComboValue_branch[i] = this.DTX[nPlayer].nノーツ数[i] * (this.fGaugeMaxRate[0] / 100.0f);
+                                dbGaugeMaxComboValue_branch[i] = this.DTX[nPlayer].nノーツ数_Branch[i] * (this.fGaugeMaxRate[0] / 100.0f);
                             }
                             dbDamageRate = 0.625f;
                         }
@@ -160,7 +160,7 @@ namespace TJAPlayer3
                             dbGaugeMaxComboValue = this.DTX[nPlayer].nノーツ数[3] * (this.fGaugeMaxRate[1] / 100.0f);
                             for (int i = 0; i < 3; i++)
                             {
-                                dbGaugeMaxComboValue_branch[i] = this.DTX[nPlayer].nノーツ数[i] * (this.fGaugeMaxRate[1] / 100.0f);
+                                dbGaugeMaxComboValue_branch[i] = this.DTX[nPlayer].nノーツ数_Branch[i] * (this.fGaugeMaxRate[1] / 100.0f);
                             }
                             dbDamageRate = 0.625f;
                         }
@@ -180,7 +180,7 @@ namespace TJAPlayer3
                             dbGaugeMaxComboValue = this.DTX[nPlayer].nノーツ数[3] * (this.fGaugeMaxRate[2] / 100.0f);
                             for (int i = 0; i < 3; i++)
                             {
-                                dbGaugeMaxComboValue_branch[i] = this.DTX[nPlayer].nノーツ数[i] * (this.fGaugeMaxRate[2] / 100.0f);
+                                dbGaugeMaxComboValue_branch[i] = this.DTX[nPlayer].nノーツ数_Branch[i] * (this.fGaugeMaxRate[2] / 100.0f);
                             }
                         }
                         else
@@ -247,6 +247,34 @@ namespace TJAPlayer3
             //this.dbゲージ増加量[ 2 ] = CDTXMania.DTX.bチップがある.Branch ? ( -260.0 / CDTXMania.DTX.nノーツ数[ 0 ] ) : -260.0 / CDTXMania.DTX.nノーツ数[ 3 ];
 
             //2015.03.26 kairera0467 計算を初期化時にするよう修正。
+
+            #region [ 計算結果がInfintyだった場合も考えて ]
+            float fIsDontInfinty = 0.4f;//適当に0.4で
+            float[] fAddVolume = new float[] { 1.0f, 0.5f, dbDamageRate };
+
+            for (int i = 0; i < 3; i++)
+            {
+                for (int l = 0; l < 3; l++)
+                {
+                    if (!double.IsInfinity(nGaugeRankValue_branch[i] / 100.0f))//値がInfintyかチェック
+                    {
+                        fIsDontInfinty = (float)(nGaugeRankValue_branch[i] / 100.0f);
+                        this.dbゲージ増加量_Branch[i, l][nPlayer] = fIsDontInfinty * fAddVolume[l];
+                    }
+                }
+            }
+            for (int i = 0; i < 3; i++)
+            {
+                for (int l = 0; l < 3; l++)
+                {
+                    if (double.IsInfinity(nGaugeRankValue_branch[i] / 100.0f))//値がInfintyかチェック
+                    {
+                        //Infintyだった場合はInfintyではない値 * 3.0をしてその値を利用する。
+                        this.dbゲージ増加量_Branch[i, l][nPlayer] = (fIsDontInfinty * fAddVolume[l]) * 3f;
+                    }
+                }
+            }
+            #endregion
 
             #region ゲージの丸め処理
             var increase = new float[] { dbゲージ増加量[0][nPlayer], dbゲージ増加量[1][nPlayer], dbゲージ増加量[2][nPlayer] };
