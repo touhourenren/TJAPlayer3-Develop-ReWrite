@@ -307,8 +307,16 @@ namespace TJAPlayer3
 
 								if (!string.IsNullOrEmpty(dtx.GENRE))
 								{
-									c曲リストノード.strジャンル = c曲リストノード.r親ノード.strジャンル;
-									c曲リストノード.str本当のジャンル = dtx.GENRE;
+									if(c曲リストノード.r親ノード != null)
+									{
+										c曲リストノード.strジャンル = c曲リストノード.r親ノード.strジャンル;
+										c曲リストノード.str本当のジャンル = dtx.GENRE;
+									}
+                                    else
+									{
+										c曲リストノード.strジャンル = dtx.GENRE;
+										c曲リストノード.str本当のジャンル = dtx.GENRE;
+									}
 								}
 								else
 								{

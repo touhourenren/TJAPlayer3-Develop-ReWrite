@@ -127,21 +127,7 @@ namespace TJAPlayer3
             public int Lane;
         }
         private STチップエフェクト[] st = new STチップエフェクト[128];
-        //private struct ST連打キャラ
-        //{
-        //    public int nColor;
-        //    public bool b使用中;
-        //    public CCounter ct進行;
-        //    public int n前回のValue;
-        //    public float fX;
-        //    public float fY;
-        //    public float fX開始点;
-        //    public float fY開始点;
-        //    public float f進行方向; //進行方向 0:左→右 1:左下→右上 2:右→左
-        //    public float fX加速度;
-        //    public float fY加速度;
-        //}
-        //private ST連打キャラ[] st連打キャラ = new ST連打キャラ[64];
+
         //-----------------
         #endregion
     }

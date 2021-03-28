@@ -84,6 +84,11 @@ namespace TJAPlayer3
             NamePlateBase = TxC(@"NamePlate.png");
             NamePlate[0] = TxC(@"1P_NamePlate.png");
             NamePlate[1] = TxC(@"2P_NamePlate.png");
+            NamePlate_Effect[0] = TxC(@"9_NamePlateEffect\GoldMStar.png");
+            NamePlate_Effect[1] = TxC(@"9_NamePlateEffect\PurpleMStar.png");
+            NamePlate_Effect[2] = TxC(@"9_NamePlateEffect\GoldBStar.png");
+            NamePlate_Effect[3] = TxC(@"9_NamePlateEffect\PurpleBStar.png");
+            NamePlate_Effect[4] = TxC(@"9_NamePlateEffect\Slash.png");
             #endregion
             #region 1_タイトル画面
             Title_Background = TxC(TITLE + @"Background.png");
@@ -729,6 +734,8 @@ namespace TJAPlayer3
             Overlay,
             Network_Connection;
         public CTexture[] NamePlate;
+
+        public CTexture[] NamePlate_Effect = new CTexture[5];
         #endregion
         #region 1_タイトル画面
         public CTexture Title_Background,

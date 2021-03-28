@@ -52,7 +52,8 @@ namespace TJAPlayer3
 		public override void tActivatePopupMenu( E楽器パート einst )
 		{
             this.CAct演奏PauseMenuMain();
-            this.bやり直しを選択した = false;
+			CActSelectPopupMenu.b選択した = false;
+			this.bやり直しを選択した = false;
 			base.tActivatePopupMenu( einst );
 		}
 		//public void tDeativatePopupMenu()
@@ -88,7 +89,7 @@ namespace TJAPlayer3
 					TJAPlayer3.Timer.t再開();
 					TJAPlayer3.DTX.t全チップの再生再開();
                     TJAPlayer3.stage演奏ドラム画面.actAVI.tPauseControl();
-
+					CActSelectPopupMenu.b選択した = true;
 					this.tDeativatePopupMenu();
 					break;
 
@@ -96,12 +97,14 @@ namespace TJAPlayer3
 					if (TJAPlayer3.stage選曲.n確定された曲の難易度[0] != (int)Difficulty.Dan)
 					{
 						this.bやり直しを選択した = true;
+						CActSelectPopupMenu.b選択した = true;
 					}
                     else
 					{
 						CSound管理.rc演奏用タイマ.t再開();
 						TJAPlayer3.Timer.t再開();
 						TJAPlayer3.stage演奏ドラム画面.t演奏中止();
+						CActSelectPopupMenu.b選択した = true;
 						this.tDeativatePopupMenu();
 					}
 					break;
@@ -110,6 +113,7 @@ namespace TJAPlayer3
                     CSound管理.rc演奏用タイマ.t再開();
 					TJAPlayer3.Timer.t再開();
                     TJAPlayer3.stage演奏ドラム画面.t演奏中止();
+					CActSelectPopupMenu.b選択した = true;
 					this.tDeativatePopupMenu();
                     break;
                 default:
@@ -169,6 +173,7 @@ namespace TJAPlayer3
 			Default = 99
 		};
 
+		private bool b選択した;
 		private CTexture txパネル本体;
 		private CTexture tx文字列パネル;
         private Stopwatch sw;

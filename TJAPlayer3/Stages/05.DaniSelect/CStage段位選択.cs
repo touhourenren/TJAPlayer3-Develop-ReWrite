@@ -18,6 +18,7 @@ namespace TJAPlayer3
             base.list子Activities.Add(this.段位リスト = new CActSelect段位リスト());
             base.list子Activities.Add(this.actFOtoNowLoading = new CActFIFOStart());
             base.list子Activities.Add(this.段位挑戦選択画面 = new CActSelect段位挑戦選択画面());
+            base.list子Activities.Add(this.actFOtoTitle = new CActFIFOBlack());
         }
 
         public override void On活性化()
@@ -98,6 +99,16 @@ namespace TJAPlayer3
                         this.bDifficultyIn = true;
                         this.段位挑戦選択画面.ctBarIn.t開始(0, 255, 1, TJAPlayer3.Timer);
                     }
+
+                    if(TJAPlayer3.Input管理.Keyboard.bキーが押された((int)Key.Escape))
+                    {
+                        TJAPlayer3.Skin.soundDanSelectBGM.t停止する();
+                        TJAPlayer3.Skin.sound取消音.t再生する();
+                        this.eフェードアウト完了時の戻り値 = E戻り値.タイトルに戻る;
+                        this.actFOtoTitle.tフェードアウト開始();
+                        base.eフェーズID = CStage.Eフェーズ.共通_フェードアウト;
+                        return 0;
+                    }
                 }
 
                 #endregion
@@ -135,6 +146,14 @@ namespace TJAPlayer3
                         break;
                     }
                     return (int)this.eフェードアウト完了時の戻り値;
+
+                case CStage.Eフェーズ.共通_フェードアウト:
+                    if (this.actFOtoTitle.On進行描画() == 0)
+                    {
+                        break;
+                    }
+                    return (int)this.eフェードアウト完了時の戻り値;
+
             }
 
             return 0;
@@ -174,6 +193,7 @@ namespace TJAPlayer3
         public E戻り値 eフェードアウト完了時の戻り値;
 
         public CActFIFOStart actFOtoNowLoading;
+        public CActFIFOBlack actFOtoTitle;
         public CActSelect段位リスト 段位リスト;
         public CActSelect段位挑戦選択画面 段位挑戦選択画面;
     }
