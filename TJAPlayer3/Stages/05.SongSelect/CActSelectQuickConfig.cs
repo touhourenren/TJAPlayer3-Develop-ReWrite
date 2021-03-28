@@ -96,6 +96,7 @@ namespace TJAPlayer3
 
 			#endregion
 			#region [ 共通 SET切り替え/More/Return ]
+			l.Add(new CItemInteger("PlayerCount", 1, 2, TJAPlayer3.ConfigIni.nPlayerCount, "プレイヤーの人数を指定します。" ,"Set a player count."));
 			l.Add( new CSwitchItemList( "More...", CItemBase.Eパネル種別.通常, 0, "", "", new string[] { "" } ) );
 			l.Add( new CSwitchItemList( "戻る", CItemBase.Eパネル種別.通常, 0, "", "", new string[] { "", "" } ) );
 			#endregion
@@ -148,6 +149,9 @@ namespace TJAPlayer3
 					break;
                 case (int)EOrder.ShinuchiMode:
                     TJAPlayer3.ConfigIni.ShinuchiMode = !TJAPlayer3.ConfigIni.ShinuchiMode;
+                    break;
+                case (int)EOrder.PlayerCount:
+                    TJAPlayer3.ConfigIni.nPlayerCount = (int)GetObj現在値((int) EOrder.PlayerCount );
                     break;
 				case (int) EOrder.More:
 					SetAutoParameters();			// 簡易CONFIGメニュー脱出に伴い、簡易CONFIG内のAUTOの設定をConfigIniクラスに反映する
@@ -250,8 +254,10 @@ namespace TJAPlayer3
             Stealth,
             GameMode,
             ShinuchiMode,
+			PlayerCount,
 			More,
-			Return, END,
+			Return, 
+			END,
 			Default = 99
 		};
 
