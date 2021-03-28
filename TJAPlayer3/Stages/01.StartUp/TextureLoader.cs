@@ -140,6 +140,7 @@ namespace TJAPlayer3
 
             #region 2_コンフィグ画面
             Config_Background = TxC(CONFIG + @"Background.png");
+            Config_Header = TxC(CONFIG + @"Header.png");
             Config_Cursor = TxC(CONFIG + @"Cursor.png");
             Config_ItemBox = TxC(CONFIG + @"ItemBox.png");
             Config_Arrow = TxC(CONFIG + @"Arrow.png");
@@ -755,6 +756,7 @@ namespace TJAPlayer3
 
         #region 2_コンフィグ画面
         public CTexture Config_Background,
+            Config_Header,
             Config_Cursor,
             Config_ItemBox,
             Config_Arrow,

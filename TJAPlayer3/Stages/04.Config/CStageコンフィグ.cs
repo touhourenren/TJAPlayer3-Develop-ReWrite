@@ -120,11 +120,12 @@ namespace TJAPlayer3
 		{
 			if( !base.b活性化してない )
 			{
+				ctBackgroundAnime = new CCounter(0, 1280, 20, TJAPlayer3.Timer);
 				//this.tx背景 = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\4_background.jpg" ), false );
 				//this.tx上部パネル = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\4_header panel.png" ) );
 				//this.tx下部パネル = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\4_footer panel.png" ) );
 				//this.txMenuカーソル = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\ScreenConfig menu cursor.png" ) );
-			    string[] strMenuItem = {"System", "Drums", "Exit"};
+				string[] strMenuItem = {"System", "Drums", "Exit"};
 			    txMenuItemLeft = new CTexture[strMenuItem.Length, 2];
 			    using (var prvFont = new CPrivateFastFont(CSkin.Path(@"mplus-1p-heavy.ttf"), 20))
 			    {
@@ -184,12 +185,17 @@ namespace TJAPlayer3
 				base.b初めての進行描画 = false;
 			}
 
+			ctBackgroundAnime.t進行Loop();
+
 			// 描画
 
 			#region [ 背景 ]
 			//---------------------
-			if(TJAPlayer3.Tx.Config_Background != null )
-                TJAPlayer3.Tx.Config_Background.t2D描画( TJAPlayer3.app.Device, 0, 0 );
+			for(int i = 0; i < 2; i++)
+				if (TJAPlayer3.Tx.Config_Background != null )
+					TJAPlayer3.Tx.Config_Background.t2D描画( TJAPlayer3.app.Device, 0 + -(1280 * i) + ctBackgroundAnime.n現在の値, 0 );
+			if(TJAPlayer3.Tx.Config_Header != null )
+                TJAPlayer3.Tx.Config_Header.t2D描画( TJAPlayer3.app.Device, 0, 0 );
 			//---------------------
 			#endregion
 			#region [ メニューカーソル ]
@@ -447,6 +453,7 @@ namespace TJAPlayer3
 			}
 		}
 
+		private CCounter ctBackgroundAnime;
 		private CActFIFOWhite actFIFO;
 		private CActConfigKeyAssign actKeyAssign;
 		private CActConfigList actList;
