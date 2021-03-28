@@ -2065,14 +2065,14 @@ namespace TJAPlayer3
 				TJAPlayer3.Tx.SongSelect_ScoreRank.vc拡大縮小倍率.X = 0.8f;
 				TJAPlayer3.Tx.SongSelect_ScoreRank.vc拡大縮小倍率.Y = 0.8f;
 
-				if (クリア[3] != 0)
+				if (クリア[3] != 0 && クリア[4] == 0)
 					TJAPlayer3.Tx.SongSelect_Crown.t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, x + 30, y + 30, new RectangleF(9 * 43.2f + (クリア[3] - 1) * 43.2f, 0, 43.2f, 39));
-				else if (クリア[4] != 0)
+				if (クリア[4] != 0)
 					TJAPlayer3.Tx.SongSelect_Crown.t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, x + 30, y + 30, new RectangleF(12 * 43.2f + (クリア[4] - 1) * 43.2f, 0, 43.2f, 39));
 
-				if (スコアランク[3] != 0)
+				if (スコアランク[3] != 0 && スコアランク[4] == 0)
 					TJAPlayer3.Tx.SongSelect_ScoreRank.t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, x + 30, y + 60, new RectangleF(0, (スコアランク[3] - 1) * 42.71f, 50, 42.71f));
-				else if (スコアランク[4] != 0)
+				if (スコアランク[4] != 0)
 					TJAPlayer3.Tx.SongSelect_ScoreRank.t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, x + 30, y + 60, new RectangleF(0, (スコアランク[4] - 1) * 42.71f, 50, 42.71f));
 			}
 		}
