@@ -1,0 +1,702 @@
+
+DTXMania powered by YAMAHA Silent Session Drums
+Release: 1.4.5
+
+2021/03/28 18:23:20.027 [INFO] ----------------------
+2021/03/28 18:23:20.027 [INFO] ■ アプリケーションの初期化
+2021/03/28 18:23:20.027 [INFO] OS Version: Microsoft Windows NT 6.2.9200.0
+2021/03/28 18:23:20.027 [INFO] ProcessorCount: 12
+2021/03/28 18:23:20.027 [INFO] CLR Version: 4.0.30319.42000
+2021/03/28 18:23:20.258 [INFO] スキンの初期化を行います。
+2021/03/28 18:23:20.263 [INFO]     SkinPath検出: C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\EngNijiro\
+2021/03/28 18:23:20.263 [INFO]     SkinPath検出: C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\
+2021/03/28 18:23:20.263 [INFO]     SkinPath入力: C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\
+2021/03/28 18:23:20.264 [INFO]     SkinPath設定: C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\
+2021/03/28 18:23:20.264 [INFO]     システムサウンドを読み込みました。(Sounds\Move.ogg)
+2021/03/28 18:23:20.264 [INFO]     システムサウンドを読み込みました。(Sounds\Decide.ogg)
+2021/03/28 18:23:20.264 [INFO]     システムサウンドを読み込みました。(Sounds\Change.ogg)
+2021/03/28 18:23:20.265 [INFO]     システムサウンドを読み込みました。(Sounds\Cancel.ogg)
+2021/03/28 18:23:20.265 [WARNING]     ファイルが存在しません。: Sounds\Audience.ogg
+2021/03/28 18:23:20.265 [INFO]     システムサウンドを読み込みました。(Sounds\Audience.ogg)
+2021/03/28 18:23:20.265 [WARNING]     ファイルが存在しません。: Sounds\Game start.ogg
+2021/03/28 18:23:20.265 [INFO]     システムサウンドを読み込みました。(Sounds\Game start.ogg)
+2021/03/28 18:23:20.266 [WARNING]     ファイルが存在しません。: Sounds\Full combo.ogg
+2021/03/28 18:23:20.266 [INFO]     システムサウンドを読み込みました。(Sounds\Full combo.ogg)
+2021/03/28 18:23:20.266 [INFO]     システムサウンドを読み込みました。(Sounds\BGM\Title.ogg)
+2021/03/28 18:23:20.266 [INFO]     システムサウンドを読み込みました。(Sounds\BGM\SongSelect.ogg)
+2021/03/28 18:23:20.266 [INFO]     システムサウンドを読み込みました。(Sounds\balloon.ogg)
+2021/03/28 18:23:20.266 [INFO]     システムサウンドを読み込みました。(Sounds\SongDecide.ogg)
+2021/03/28 18:23:20.266 [INFO]     システムサウンドを読み込みました。(Sounds\BGM\Result_In.ogg)
+2021/03/28 18:23:20.266 [WARNING]     ファイルが存在しません。: Sounds\Resume.ogg
+2021/03/28 18:23:20.266 [INFO]     システムサウンドを読み込みました。(Sounds\Resume.ogg)
+2021/03/28 18:23:20.266 [INFO]     システムサウンドを読み込みました。(Sounds\Pause.ogg)
+2021/03/28 18:23:20.266 [INFO]     システムサウンドを読み込みました。(Sounds\Scroll.ogg)
+2021/03/28 18:23:20.267 [INFO]     システムサウンドを読み込みました。(Sounds\Jump Point.ogg)
+2021/03/28 18:23:20.267 [INFO]     システムサウンドを読み込みました。(Sounds\Traning Skip.ogg)
+2021/03/28 18:23:20.282 [INFO]     スキンの初期化を完了しました。
+2021/03/28 18:23:20.282 [INFO] タイマの初期化を行います。
+2021/03/28 18:23:20.283 [INFO]     タイマの初期化を完了しました。
+2021/03/28 18:23:20.283 [INFO] FPSカウンタの初期化を行います。
+2021/03/28 18:23:20.283 [INFO]     FPSカウンタを生成しました。
+2021/03/28 18:23:20.283 [INFO] 文字コンソールの初期化を行います。
+2021/03/28 18:23:20.283 [INFO]     文字コンソールを生成しました。
+2021/03/28 18:23:20.289 [INFO]     文字コンソールを活性化しました。
+2021/03/28 18:23:20.289 [INFO]     文字コンソールの初期化を完了しました。
+2021/03/28 18:23:20.289 [INFO] DirectInput, MIDI入力の初期化を行います。
+2021/03/28 18:23:20.326 [INFO]     キーボード を生成しました。
+2021/03/28 18:23:20.332 [INFO]     マウス を生成しました。
+2021/03/28 18:23:20.442 [INFO]     MIDI入力デバイス数: 0
+2021/03/28 18:23:20.442 [INFO]     DirectInput の初期化を完了しました。
+2021/03/28 18:23:20.442 [INFO] パッドの初期化を行います。
+2021/03/28 18:23:20.442 [INFO]     パッドの初期化を完了しました。
+2021/03/28 18:23:20.442 [INFO] サウンドデバイスの初期化を行います。
+2021/03/28 18:23:20.445 [INFO]     BASS (WASAPI) の初期化を開始します。
+2021/03/28 18:23:20.580 [INFO]     BASS を初期化しました。(WASAPI共有モード, 50ms, 更新間隔10ms)
+2021/03/28 18:23:20.582 [INFO]     BASS_CONFIG_UpdatePeriod=0
+2021/03/28 18:23:20.582 [INFO]     BASS_CONFIG_UpdateThreads=0
+2021/03/28 18:23:20.582 [INFO]     Initializing loudness scanning, song gain control, and sound group level control...
+2021/03/28 18:23:20.584 [INFO]         LoudnessMetadataScanner.StartBackgroundScanning: BS1770GAIN is not available. A background scanning thread will not be started.
+2021/03/28 18:23:20.588 [INFO]     Initialized loudness scanning, song gain control, and sound group level control.
+2021/03/28 18:23:20.590 [INFO]     サウンドデバイスの初期化を完了しました。
+2021/03/28 18:23:20.590 [INFO] 曲リストの初期化を行います。
+2021/03/28 18:23:20.590 [INFO]     曲リストの初期化を完了しました。
+SORT MENU: Cacheにヒットせず。(cachesize=1)
+絶対パス: Cacheにヒットせず。(cachesize=2)
+曲名: Cacheにヒットせず。(cachesize=3)
+ジャンル: Cacheにヒットせず。(cachesize=4)
+戻る: Cacheにヒットせず。(cachesize=5)
+Quick Config: Cacheにヒットせず。(cachesize=1)
+ばいそく: Cacheにヒットせず。(cachesize=2)
+演奏速度: Cacheにヒットせず。(cachesize=3)
+ランダム: Cacheにヒットせず。(cachesize=4)
+ドロン: Cacheにヒットせず。(cachesize=5)
+ゲーム: Cacheにヒットせず。(cachesize=6)
+ShinuchiMode: Cacheにヒットせず。(cachesize=7)
+PlayerCount: Cacheにヒットせず。(cachesize=8)
+More...: Cacheにヒットせず。(cachesize=9)
+戻る: Cacheにヒットせず。(cachesize=10)
+ポーズ: Cacheにヒットせず。(cachesize=1)
+続ける: Cacheにヒットせず。(cachesize=2)
+やり直し: Cacheにヒットせず。(cachesize=3)
+演奏中止: Cacheにヒットせず。(cachesize=4)
+どんちゃん: Cacheにヒットせず。(cachesize=1)
+どんちゃんですよ！: Cacheにヒットせず。(cachesize=1)
+達人: Cacheにヒットせず。(cachesize=1)
+かっちゃん: Cacheにヒットせず。(cachesize=1)
+かっちゃんですよ！: Cacheにヒットせず。(cachesize=1)
+達人: Cacheにヒットせず。(cachesize=1)
+2021/03/28 18:23:20.742 [INFO] プラグインの検索と生成を行います。
+2021/03/28 18:23:20.742 [WARNING]     プラグインフォルダが存在しません。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\Plugins\)
+2021/03/28 18:23:20.742 [INFO]     プラグインの検索と生成を完了しました。
+2021/03/28 18:23:20.746 [INFO] アプリケーションの初期化を完了しました。
+2021/03/28 18:23:20.747 [INFO] ----------------------
+2021/03/28 18:23:20.747 [INFO] ■ 起動
+2021/03/28 18:23:20.747 [INFO] 起動ステージを活性化します。
+2021/03/28 18:23:20.780 [INFO]     起動ステージの活性化を完了しました。
+2021/03/28 18:23:20.794 [INFO] 0) システムサウンドを構築します。
+2021/03/28 18:23:20.795 [WARNING]     ファイルが存在しません。: Sounds\Setup BGM.ogg
+2021/03/28 18:23:20.800 [INFO]     システムサウンドを読み込みました。(Sounds\Move.ogg)
+2021/03/28 18:23:20.802 [INFO]     システムサウンドを読み込みました。(Sounds\Decide.ogg)
+2021/03/28 18:23:20.804 [INFO]     システムサウンドを読み込みました。(Sounds\Change.ogg)
+2021/03/28 18:23:20.805 [INFO]     システムサウンドを読み込みました。(Sounds\Cancel.ogg)
+2021/03/28 18:23:20.805 [WARNING]     ファイルが存在しません。: Sounds\Audience.ogg
+2021/03/28 18:23:20.805 [INFO]     システムサウンドを読み込みました。(Sounds\Audience.ogg)
+2021/03/28 18:23:20.805 [WARNING]     ファイルが存在しません。: Sounds\Game start.ogg
+2021/03/28 18:23:20.806 [INFO]     システムサウンドを読み込みました。(Sounds\Game start.ogg)
+2021/03/28 18:23:20.806 [WARNING]     ファイルが存在しません。: Sounds\Full combo.ogg
+2021/03/28 18:23:20.806 [INFO]     システムサウンドを読み込みました。(Sounds\Full combo.ogg)
+2021/03/28 18:23:20.807 [INFO]     CSound.GroupLevel set: 90
+2021/03/28 18:23:20.807 [INFO]     CSound.SetVolume: Gain:0. Automation Level: 0. Group Level: -0.915149811213502. Summed Gain: -0.915149811213502. Safe True Peak Gain: 0. Final Gain: -0.915149811213502.
+2021/03/28 18:23:20.808 [INFO]     CSound.GroupLevel set: 90
+2021/03/28 18:23:20.808 [INFO]     CSound.SetVolume: Gain:0. Automation Level: 0. Group Level: -0.915149811213502. Summed Gain: -0.915149811213502. Safe True Peak Gain: 0. Final Gain: -0.915149811213502.
+2021/03/28 18:23:20.808 [INFO]     システムサウンドを読み込みました。(Sounds\BGM\Title.ogg)
+2021/03/28 18:23:20.809 [INFO]     CSound.GroupLevel set: 90
+2021/03/28 18:23:20.809 [INFO]     CSound.SetVolume: Gain:0. Automation Level: 0. Group Level: -0.915149811213502. Summed Gain: -0.915149811213502. Safe True Peak Gain: 0. Final Gain: -0.915149811213502.
+2021/03/28 18:23:20.810 [INFO]     CSound.GroupLevel set: 90
+2021/03/28 18:23:20.810 [INFO]     CSound.SetVolume: Gain:0. Automation Level: 0. Group Level: -0.915149811213502. Summed Gain: -0.915149811213502. Safe True Peak Gain: 0. Final Gain: -0.915149811213502.
+2021/03/28 18:23:20.810 [INFO]     システムサウンドを読み込みました。(Sounds\BGM\SongSelect.ogg)
+2021/03/28 18:23:20.811 [INFO]     システムサウンドを読み込みました。(Sounds\balloon.ogg)
+2021/03/28 18:23:20.813 [INFO]     システムサウンドを読み込みました。(Sounds\SongDecide.ogg)
+2021/03/28 18:23:20.814 [INFO]     CSound.GroupLevel set: 90
+2021/03/28 18:23:20.814 [INFO]     CSound.SetVolume: Gain:0. Automation Level: 0. Group Level: -0.915149811213502. Summed Gain: -0.915149811213502. Safe True Peak Gain: 0. Final Gain: -0.915149811213502.
+2021/03/28 18:23:20.815 [INFO]     CSound.GroupLevel set: 90
+2021/03/28 18:23:20.815 [INFO]     CSound.SetVolume: Gain:0. Automation Level: 0. Group Level: -0.915149811213502. Summed Gain: -0.915149811213502. Safe True Peak Gain: 0. Final Gain: -0.915149811213502.
+2021/03/28 18:23:20.815 [INFO]     システムサウンドを読み込みました。(Sounds\BGM\Result_In.ogg)
+2021/03/28 18:23:20.816 [WARNING]     ファイルが存在しません。: Sounds\Resume.ogg
+2021/03/28 18:23:20.816 [INFO]     システムサウンドを読み込みました。(Sounds\Resume.ogg)
+2021/03/28 18:23:20.817 [INFO]     システムサウンドを読み込みました。(Sounds\Pause.ogg)
+2021/03/28 18:23:20.819 [INFO]     システムサウンドを読み込みました。(Sounds\Scroll.ogg)
+2021/03/28 18:23:20.820 [INFO]     システムサウンドを読み込みました。(Sounds\Jump Point.ogg)
+2021/03/28 18:23:20.822 [INFO]     システムサウンドを読み込みました。(Sounds\Traning Skip.ogg)
+2021/03/28 18:23:20.822 [INFO] 1) songlist.dbを読み込みます。
+2021/03/28 18:23:20.822 [INFO]     songlist.db の読み込みを完了しました。[0スコア]
+2021/03/28 18:23:20.822 [INFO] 2) songs.db を読み込みます。
+2021/03/28 18:23:20.827 [INFO]     songs.db の読み込みを完了しました。[4スコア]
+2021/03/28 18:23:20.827 [INFO] 起動所要時間: 00:00:00.0326829
+2021/03/28 18:23:20.835 [WARNING] テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Graphics\Overlay.png)
+2021/03/28 18:23:20.837 [WARNING] テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Graphics\1P_NamePlate.png)
+2021/03/28 18:23:20.837 [WARNING] テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Graphics\2P_NamePlate.png)
+2021/03/28 18:23:21.125 [WARNING] テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Graphics\3_SongSelect\Level.png)
+2021/03/28 18:23:21.126 [WARNING] テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Graphics\3_SongSelect\Bar_Center.png)
+2021/03/28 18:23:21.130 [WARNING] テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Graphics\3_SongSelect\Frame_Box.png)
+2021/03/28 18:23:21.130 [WARNING] テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Graphics\3_SongSelect\Frame_BackBox.png)
+2021/03/28 18:23:21.130 [WARNING] テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Graphics\3_SongSelect\Frame_Random.png)
+2021/03/28 18:23:21.131 [WARNING] テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Graphics\3_SongSelect\Bar_Genre_RecentryPlaySong.png)
+2021/03/28 18:23:21.150 [WARNING] テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Graphics\3_SongSelect\ScoreWindow_0.png)
+2021/03/28 18:23:21.150 [WARNING] テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Graphics\3_SongSelect\ScoreWindow_1.png)
+2021/03/28 18:23:21.150 [WARNING] テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Graphics\3_SongSelect\ScoreWindow_2.png)
+2021/03/28 18:23:21.150 [WARNING] テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Graphics\3_SongSelect\ScoreWindow_3.png)
+2021/03/28 18:23:21.151 [WARNING] テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Graphics\3_SongSelect\ScoreWindow_4.png)
+2021/03/28 18:23:21.151 [WARNING] テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Graphics\3_SongSelect\ScoreWindow_5.png)
+2021/03/28 18:23:21.151 [WARNING] テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Graphics\3_SongSelect\ScoreWindow_6.png)
+2021/03/28 18:23:21.324 [WARNING] テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Graphics\3_SongSelect\ScoreWindow_Text.png)
+2021/03/28 18:23:23.161 [WARNING] テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Graphics\5_Game\0\Background.png)
+2021/03/28 18:23:23.224 [WARNING] テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Graphics\5_Game\6_Taiko\1P_PlayerNumber.png)
+2021/03/28 18:23:23.224 [WARNING] テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Graphics\5_Game\6_Taiko\2P_PlayerNumber.png)
+2021/03/28 18:23:23.224 [WARNING] テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Graphics\5_Game\6_Taiko\1P_NamePlate.png)
+2021/03/28 18:23:23.224 [WARNING] テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Graphics\5_Game\6_Taiko\2P_NamePlate.png)
+2021/03/28 18:23:23.229 [WARNING] テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Graphics\5_Game\4_CourseSymbol\Tower.png)
+2021/03/28 18:23:23.229 [WARNING] テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Graphics\5_Game\4_CourseSymbol\Dan.png)
+2021/03/28 18:23:23.229 [WARNING] テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Graphics\5_Game\4_CourseSymbol\Shin.png)
+2021/03/28 18:23:23.511 [WARNING] テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Graphics\5_Game\15_Failed\Game.png)
+2021/03/28 18:23:23.511 [WARNING] テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Graphics\5_Game\15_Failed\Stage.png)
+2021/03/28 18:23:23.511 [WARNING] テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Graphics\5_Game\16_Runner\0.png)
+2021/03/28 18:23:23.535 [WARNING] テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Graphics\5_Game\17_DanC\ExamUnit.png)
+2021/03/28 18:23:23.540 [WARNING] テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Graphics\5_Game\18_PuchiChara\0.png)
+2021/03/28 18:23:23.784 [WARNING] テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Graphics\7_Exit\Background.png)
+2021/03/28 18:23:23.784 [INFO] 起動ステージを非活性化します。
+2021/03/28 18:23:23.786 [INFO]     起動ステージの非活性化を完了しました。
+2021/03/28 18:23:23.786 [INFO] ----------------------
+2021/03/28 18:23:23.786 [INFO] ■ タイトル
+2021/03/28 18:23:23.786 [INFO] タイトルステージを活性化します。
+2021/03/28 18:23:23.790 [INFO]     CSound.GroupLevel set: 90
+2021/03/28 18:23:23.790 [INFO]     CSound.SetVolume: Gain:0. Automation Level: 0. Group Level: -0.915149811213502. Summed Gain: -0.915149811213502. Safe True Peak Gain: 0. Final Gain: -0.915149811213502.
+2021/03/28 18:23:23.791 [INFO]     CSound.GroupLevel set: 90
+2021/03/28 18:23:23.791 [INFO]     CSound.SetVolume: Gain:0. Automation Level: 0. Group Level: -0.915149811213502. Summed Gain: -0.915149811213502. Safe True Peak Gain: 0. Final Gain: -0.915149811213502.
+2021/03/28 18:23:23.791 [INFO]     タイトルステージの活性化を完了しました。
+2021/03/28 18:23:23.814 [INFO] ★曲データ検索スレッドを起動しました。
+2021/03/28 18:23:23.816 [INFO] enum2) 曲データを検索します。
+2021/03/28 18:23:23.816 [INFO]     検索パス: C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\.\
+2021/03/28 18:23:23.892 [INFO]     曲データの検索を完了しました。[1曲1スコア]
+2021/03/28 18:23:23.892 [INFO] enum3) songs.db の情報を曲リストへ反映します。
+2021/03/28 18:23:23.893 [INFO]     曲リストへの反映を完了しました。[0/1スコア]
+2021/03/28 18:23:23.893 [INFO] 1, 0
+2021/03/28 18:23:23.893 [INFO] enum4) songs.db になかった曲データ[1スコア]の情報をファイルから読み込んで反映します。
+2021/03/28 18:23:23.905 [ERROR]     演奏記録ファイルの読み込みに失敗しました。[C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\Songs\08-ナムコオリジナル\24,はたラク2000.tja.score.ini]
+2021/03/28 18:23:23.907 [ERROR]     System.IndexOutOfRangeException: インデックスが配列の境界外です。
+   場所 TJAPlayer3.CSongs管理.tScoreIniを読み込んで譜面情報を設定する(String strScoreIniファイルパス, Cスコア score) 場所 C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\TJAPlayer3\Songs\CSong管理.cs:行 1796
+2021/03/28 18:23:23.907 [ERROR]     例外が発生しましたが処理を継続します。 (801f823d-a952-4809-a1bb-cf6a56194f5c)
+2021/03/28 18:23:23.911 [ERROR]     演奏記録ファイルの読み込みに失敗しました。[C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\Songs\08-ナムコオリジナル\24,はたラク2000.tja.score.ini]
+2021/03/28 18:23:23.911 [ERROR]     System.IndexOutOfRangeException: インデックスが配列の境界外です。
+   場所 TJAPlayer3.CSongs管理.tScoreIniを読み込んで譜面情報を設定する(String strScoreIniファイルパス, Cスコア score) 場所 C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\TJAPlayer3\Songs\CSong管理.cs:行 1796
+2021/03/28 18:23:23.911 [ERROR]     例外が発生しましたが処理を継続します。 (801f823d-a952-4809-a1bb-cf6a56194f5c)
+2021/03/28 18:23:23.916 [ERROR]     演奏記録ファイルの読み込みに失敗しました。[C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\Songs\08-ナムコオリジナル\24,はたラク2000.tja.score.ini]
+2021/03/28 18:23:23.916 [ERROR]     System.IndexOutOfRangeException: インデックスが配列の境界外です。
+   場所 TJAPlayer3.CSongs管理.tScoreIniを読み込んで譜面情報を設定する(String strScoreIniファイルパス, Cスコア score) 場所 C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\TJAPlayer3\Songs\CSong管理.cs:行 1796
+2021/03/28 18:23:23.916 [ERROR]     例外が発生しましたが処理を継続します。 (801f823d-a952-4809-a1bb-cf6a56194f5c)
+2021/03/28 18:23:23.922 [ERROR]     演奏記録ファイルの読み込みに失敗しました。[C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\Songs\08-ナムコオリジナル\24,はたラク2000.tja.score.ini]
+2021/03/28 18:23:23.922 [ERROR]     System.IndexOutOfRangeException: インデックスが配列の境界外です。
+   場所 TJAPlayer3.CSongs管理.tScoreIniを読み込んで譜面情報を設定する(String strScoreIniファイルパス, Cスコア score) 場所 C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\TJAPlayer3\Songs\CSong管理.cs:行 1796
+2021/03/28 18:23:23.922 [ERROR]     例外が発生しましたが処理を継続します。 (801f823d-a952-4809-a1bb-cf6a56194f5c)
+2021/03/28 18:23:23.922 [INFO]     曲データへの反映を完了しました。[4/1スコア]
+2021/03/28 18:23:23.922 [INFO] enum5) 曲リストへの後処理を適用します。
+2021/03/28 18:23:23.925 [INFO]     曲リストへの後処理を完了しました。
+2021/03/28 18:23:23.925 [INFO] enum6) 曲データの情報を songs.db へ出力します。
+2021/03/28 18:23:23.926 [INFO]     songs.db への出力を完了しました。[4スコア]
+2021/03/28 18:23:23.926 [INFO] enum7) 曲データの情報を songlist.db へ出力します。
+2021/03/28 18:23:23.931 [ERROR]     System.Runtime.Serialization.SerializationException: アセンブリ 'TJAPlayer3-Develop-ReWrite, Version=1.4.5.3, Culture=neutral, PublicKeyToken=null' の型 'TJAPlayer3.Dan_C' はシリアル化可能として設定されていません。
+   場所 System.Runtime.Serialization.FormatterServices.InternalGetSerializableMembers(RuntimeType type)
+   場所 System.Runtime.Serialization.FormatterServices.<>c__DisplayClass9_0.<GetSerializableMembers>b__0(MemberHolder _)
+   場所 System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   場所 System.Runtime.Serialization.FormatterServices.GetSerializableMembers(Type type, StreamingContext context)
+   場所 System.Runtime.Serialization.Formatters.Binary.WriteObjectInfo.InitMemberInfo()
+   場所 System.Runtime.Serialization.Formatters.Binary.WriteObjectInfo.InitSerialize(Type objectType, ISurrogateSelector surrogateSelector, StreamingContext context, SerObjectInfoInit serObjectInfoInit, IFormatterConverter converter, SerializationBinder binder)
+   場所 System.Runtime.Serialization.Formatters.Binary.ObjectWriter.WriteArray(WriteObjectInfo objectInfo, NameInfo memberNameInfo, WriteObjectInfo memberObjectInfo)
+   場所 System.Runtime.Serialization.Formatters.Binary.ObjectWriter.Write(WriteObjectInfo objectInfo, NameInfo memberNameInfo, NameInfo typeNameInfo)
+   場所 System.Runtime.Serialization.Formatters.Binary.ObjectWriter.Serialize(Object graph, Header[] inHeaders, __BinaryWriter serWriter, Boolean fCheck)
+   場所 System.Runtime.Serialization.Formatters.Binary.BinaryFormatter.Serialize(Stream serializationStream, Object graph, Header[] headers, Boolean fCheck)
+   場所 System.Runtime.Serialization.Formatters.Binary.BinaryFormatter.Serialize(Stream serializationStream, Object graph)
+   場所 TJAPlayer3.CEnumSongs.SerializeSongList(CSongs管理 cs, String strPathSongList) 場所 C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\TJAPlayer3\Stages\02.Title\CEnumSongs.cs:行 632
+2021/03/28 18:23:23.931 [ERROR]     例外が発生しましたが処理を継続します。 (9ad477a4-d922-412c-b87d-e3a49a608e92)
+2021/03/28 18:23:23.932 [INFO]     songlist.db への出力を完了しました。[4スコア]
+2021/03/28 18:23:23.932 [INFO] 曲探索所要時間: 00:00:00.1159222
+2021/03/28 18:23:34.926 [INFO] タイトルステージを非活性化します。
+2021/03/28 18:23:34.926 [INFO]     タイトルステージの非活性化を完了しました。
+2021/03/28 18:23:34.926 [INFO] ----------------------
+2021/03/28 18:23:34.926 [INFO] ■ 選曲
+2021/03/28 18:23:34.926 [INFO] 選曲ステージを活性化します。
+2021/03/28 18:23:34.927 [INFO]     CSound.GroupLevel set: 90
+2021/03/28 18:23:34.928 [INFO]     CSound.SetVolume: Gain:0. Automation Level: 0. Group Level: -0.915149811213502. Summed Gain: -0.915149811213502. Safe True Peak Gain: 0. Final Gain: -0.915149811213502.
+2021/03/28 18:23:34.928 [INFO]     CSound.GroupLevel set: 90
+2021/03/28 18:23:34.928 [INFO]     CSound.SetVolume: Gain:0. Automation Level: 0. Group Level: -0.915149811213502. Summed Gain: -0.915149811213502. Safe True Peak Gain: 0. Final Gain: -0.915149811213502.
+2021/03/28 18:23:34.930 [WARNING]     テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Graphics\Screen option panels.png)
+▼あそべる曲▼: Cacheにヒットせず。(cachesize=1)
+「炎」「紅蓮華」「香水」「夜に駆ける」「ロキ」: Cacheにヒットせず。(cachesize=2)
+「白日」「Pretender」「まちがいさがし」など: Cacheにヒットせず。(cachesize=3)
+2021/03/28 18:23:34.948 [WARNING]     テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Graphics\5_preimage panel.png)
+2021/03/28 18:23:34.948 [WARNING]     テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Graphics\5_sensor.png)
+2021/03/28 18:23:34.948 [WARNING]     テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Graphics\5_preimage default.png)
+2021/03/28 18:23:34.950 [WARNING]     テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Graphics\5_information_BG.png)
+2021/03/28 18:23:34.951 [WARNING]     テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Graphics\5_information.png)
+2021/03/28 18:23:34.951 [WARNING]     テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Graphics\5_information2.png)
+2021/03/28 18:23:34.951 [WARNING]     [i18n] File does not exist: C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Sounds\DiffSelect.ogg
+0.5: Cacheにヒットせず。(cachesize=1)
+1.0: Cacheにヒットせず。(cachesize=1)
+1.1: Cacheにヒットせず。(cachesize=1)
+1.2: Cacheにヒットせず。(cachesize=1)
+1.3: Cacheにヒットせず。(cachesize=1)
+1.4: Cacheにヒットせず。(cachesize=1)
+1.5: Cacheにヒットせず。(cachesize=1)
+1.6: Cacheにヒットせず。(cachesize=1)
+1.7: Cacheにヒットせず。(cachesize=1)
+1.8: Cacheにヒットせず。(cachesize=1)
+1.9: Cacheにヒットせず。(cachesize=1)
+2.0: Cacheにヒットせず。(cachesize=1)
+2.5: Cacheにヒットせず。(cachesize=1)
+3.0: Cacheにヒットせず。(cachesize=1)
+3.5: Cacheにヒットせず。(cachesize=1)
+4.0: Cacheにヒットせず。(cachesize=1)
+しない: Cacheにヒットせず。(cachesize=1)
+する: Cacheにヒットせず。(cachesize=1)
+なし: Cacheにヒットせず。(cachesize=1)
+きまぐれ: Cacheにヒットせず。(cachesize=1)
+でたらめ: Cacheにヒットせず。(cachesize=1)
+なし: Cacheにヒットせず。(cachesize=1)
+特訓モード: Cacheにヒットせず。(cachesize=1)
+使用不可: Cacheにヒットせず。(cachesize=1)
+はやさ: Cacheにヒットせず。(cachesize=1)
+ドロン: Cacheにヒットせず。(cachesize=1)
+あべこべ: Cacheにヒットせず。(cachesize=1)
+ランダム: Cacheにヒットせず。(cachesize=1)
+ゲームモード: Cacheにヒットせず。(cachesize=1)
+オート: Cacheにヒットせず。(cachesize=1)
+ボイス: Cacheにヒットせず。(cachesize=1)
+音色: Cacheにヒットせず。(cachesize=1)
+2021/03/28 18:23:34.964 [INFO]     選曲ステージの活性化を完了しました。
+キッズ: Cacheにヒットせず。(cachesize=1)
+クラシック: Cacheにヒットせず。(cachesize=2)
+ナムコオリジナル: Cacheにヒットせず。(cachesize=3)
+最近あそんだ曲: Cacheにヒットせず。(cachesize=4)
+ポップス: Cacheにヒットせず。(cachesize=5)
+アニメ: Cacheにヒットせず。(cachesize=6)
+: Cacheにヒットせず。(cachesize=4)
+最近あそんだ曲を集めたよ！: Cacheにヒットせず。(cachesize=5)
+: Cacheにヒット!! index=3
+▼あそべる曲▼: Cacheにヒットせず。(cachesize=6)
+「エンジェル ドリーム」「ドキドキ胸きゅん おまつりタイム」: Cacheにヒットせず。(cachesize=7)
+「百花繚乱」「星屑ストラック」「メカデス。」「さいたま2000」など: Cacheにヒットせず。(cachesize=8)
+2021/03/28 18:23:43.559 [WARNING] DrawPrivateFont()の入力不正。最小値のbitmapを返します。
+: Cacheにヒットせず。(cachesize=9)
+: Cacheにヒット!! index=8
+: Cacheにヒット!! index=8
+とじる: Cacheにヒットせず。(cachesize=1)
+はたラク2000: Cacheにヒットせず。(cachesize=2)
+2021/03/28 18:23:45.429 [INFO] CSound.GroupLevel set: 90
+2021/03/28 18:23:45.429 [INFO] CSound.SetVolume: Gain:0. Automation Level: 0. Group Level: -0.915149811213502. Summed Gain: -0.915149811213502. Safe True Peak Gain: 0. Final Gain: -0.915149811213502.
+2021/03/28 18:23:45.431 [INFO] プレビューサウンドを生成しました。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\Songs\08-ナムコオリジナル\はたラク2000.ogg)
+2021/03/28 18:23:45.444 [INFO] CSound.AutomationLevel set: 99
+2021/03/28 18:23:45.444 [INFO] CSound.SetVolume: Gain:0. Automation Level: -0.0872961080490018. Group Level: -0.915149811213502. Summed Gain: -1.0024459192625. Safe True Peak Gain: 0. Final Gain: -1.0024459192625.
+2021/03/28 18:23:45.452 [INFO] CSound.AutomationLevel set: 98
+2021/03/28 18:23:45.453 [INFO] CSound.SetVolume: Gain:0. Automation Level: -0.175478486150103. Group Level: -0.915149811213502. Summed Gain: -1.09062829736361. Safe True Peak Gain: 0. Final Gain: -1.09062829736361.
+2021/03/28 18:23:45.461 [INFO] CSound.AutomationLevel set: 97
+2021/03/28 18:23:45.461 [INFO] CSound.SetVolume: Gain:0. Automation Level: -0.264565314675103. Group Level: -0.915149811213502. Summed Gain: -1.17971512588861. Safe True Peak Gain: 0. Final Gain: -1.17971512588861.
+2021/03/28 18:23:45.470 [INFO] CSound.AutomationLevel set: 96
+2021/03/28 18:23:45.470 [INFO] CSound.SetVolume: Gain:0. Automation Level: -0.354575339208632. Group Level: -0.915149811213502. Summed Gain: -1.26972515042213. Safe True Peak Gain: 0. Final Gain: -1.26972515042213.
+はたラク2000: Cacheにヒットせず。(cachesize=1)
+: Cacheにヒットせず。(cachesize=1)
+2021/03/28 18:23:45.478 [INFO] CSound.AutomationLevel set: 95
+2021/03/28 18:23:45.478 [INFO] CSound.SetVolume: Gain:0. Automation Level: -0.445527894223045. Group Level: -0.915149811213502. Summed Gain: -1.36067770543655. Safe True Peak Gain: 0. Final Gain: -1.36067770543655.
+2021/03/28 18:23:45.494 [INFO] CSound.AutomationLevel set: 94
+2021/03/28 18:23:45.494 [INFO] CSound.SetVolume: Gain:0. Automation Level: -0.537442928006027. Group Level: -0.915149811213502. Summed Gain: -1.45259273921953. Safe True Peak Gain: 0. Final Gain: -1.45259273921953.
+2021/03/28 18:23:45.502 [INFO] CSound.AutomationLevel set: 93
+2021/03/28 18:23:45.503 [INFO] CSound.SetVolume: Gain:0. Automation Level: -0.630341028921297. Group Level: -0.915149811213502. Summed Gain: -1.5454908401348. Safe True Peak Gain: 0. Final Gain: -1.5454908401348.
+2021/03/28 18:23:45.511 [INFO] CSound.AutomationLevel set: 92
+2021/03/28 18:23:45.511 [INFO] CSound.SetVolume: Gain:0. Automation Level: -0.724243453088894. Group Level: -0.915149811213502. Summed Gain: -1.6393932643024. Safe True Peak Gain: 0. Final Gain: -1.6393932643024.
+2021/03/28 18:23:45.519 [INFO] CSound.AutomationLevel set: 91
+2021/03/28 18:23:45.519 [INFO] CSound.SetVolume: Gain:0. Automation Level: -0.819172153578128. Group Level: -0.915149811213502. Summed Gain: -1.73432196479163. Safe True Peak Gain: 0. Final Gain: -1.73432196479163.
+2021/03/28 18:23:45.527 [INFO] CSound.AutomationLevel set: 90
+2021/03/28 18:23:45.528 [INFO] CSound.SetVolume: Gain:0. Automation Level: -0.915149811213502. Group Level: -0.915149811213502. Summed Gain: -1.830299622427. Safe True Peak Gain: 0. Final Gain: -1.830299622427.
+2021/03/28 18:23:45.544 [INFO] CSound.AutomationLevel set: 89
+2021/03/28 18:23:45.544 [INFO] CSound.SetVolume: Gain:0. Automation Level: -1.01219986710174. Group Level: -0.915149811213502. Summed Gain: -1.92734967831525. Safe True Peak Gain: 0. Final Gain: -1.92734967831525.
+2021/03/28 18:23:45.553 [INFO] CSound.AutomationLevel set: 88
+2021/03/28 18:23:45.553 [INFO] CSound.SetVolume: Gain:0. Automation Level: -1.11034655699663. Group Level: -0.915149811213502. Summed Gain: -2.02549636821013. Safe True Peak Gain: 0. Final Gain: -2.02549636821013.
+2021/03/28 18:23:45.561 [INFO] CSound.AutomationLevel set: 87
+2021/03/28 18:23:45.561 [INFO] CSound.SetVolume: Gain:0. Automation Level: -1.20961494762763. Group Level: -0.915149811213502. Summed Gain: -2.12476475884113. Safe True Peak Gain: 0. Final Gain: -2.12476475884113.
+2021/03/28 18:23:45.569 [INFO] CSound.AutomationLevel set: 86
+2021/03/28 18:23:45.570 [INFO] CSound.SetVolume: Gain:0. Automation Level: -1.31003097512865. Group Level: -0.915149811213502. Summed Gain: -2.22518078634215. Safe True Peak Gain: 0. Final Gain: -2.22518078634215.
+2021/03/28 18:23:45.578 [INFO] CSound.AutomationLevel set: 85
+2021/03/28 18:23:45.578 [INFO] CSound.SetVolume: Gain:0. Automation Level: -1.41162148571415. Group Level: -0.915149811213502. Summed Gain: -2.32677129692765. Safe True Peak Gain: 0. Final Gain: -2.32677129692765.
+2021/03/28 18:23:45.594 [INFO] CSound.AutomationLevel set: 84
+2021/03/28 18:23:45.594 [INFO] CSound.SetVolume: Gain:0. Automation Level: -1.51441427876237. Group Level: -0.915149811213502. Summed Gain: -2.42956408997587. Safe True Peak Gain: 0. Final Gain: -2.42956408997587.
+2021/03/28 18:23:45.603 [INFO] CSound.AutomationLevel set: 83
+2021/03/28 18:23:45.603 [INFO] CSound.SetVolume: Gain:0. Automation Level: -1.61843815247852. Group Level: -0.915149811213502. Summed Gain: -2.53358796369202. Safe True Peak Gain: 0. Final Gain: -2.53358796369202.
+2021/03/28 18:23:45.611 [INFO] CSound.AutomationLevel set: 82
+2021/03/28 18:23:45.611 [INFO] CSound.SetVolume: Gain:0. Automation Level: -1.72372295232567. Group Level: -0.915149811213502. Summed Gain: -2.63887276353917. Safe True Peak Gain: 0. Final Gain: -2.63887276353917.
+2021/03/28 18:23:45.619 [INFO] CSound.AutomationLevel set: 81
+2021/03/28 18:23:45.619 [INFO] CSound.SetVolume: Gain:0. Automation Level: -1.830299622427. Group Level: -0.915149811213502. Summed Gain: -2.74544943364051. Safe True Peak Gain: 0. Final Gain: -2.74544943364051.
+2021/03/28 18:23:45.628 [INFO] CSound.AutomationLevel set: 80
+2021/03/28 18:23:45.628 [INFO] CSound.SetVolume: Gain:0. Automation Level: -1.93820026016113. Group Level: -0.915149811213502. Summed Gain: -2.85335007137463. Safe True Peak Gain: 0. Final Gain: -2.85335007137463.
+2021/03/28 18:23:45.644 [INFO] CSound.AutomationLevel set: 79
+2021/03/28 18:23:45.644 [INFO] CSound.SetVolume: Gain:0. Automation Level: -2.04745817419117. Group Level: -0.915149811213502. Summed Gain: -2.96260798540467. Safe True Peak Gain: 0. Final Gain: -2.96260798540467.
+2021/03/28 18:23:45.653 [INFO] CSound.AutomationLevel set: 78
+2021/03/28 18:23:45.653 [INFO] CSound.SetVolume: Gain:0. Automation Level: -2.15810794619039. Group Level: -0.915149811213502. Summed Gain: -3.07325775740389. Safe True Peak Gain: 0. Final Gain: -3.07325775740389.
+2021/03/28 18:23:45.661 [INFO] CSound.AutomationLevel set: 77
+2021/03/28 18:23:45.661 [INFO] CSound.SetVolume: Gain:0. Automation Level: -2.27018549655036. Group Level: -0.915149811213502. Summed Gain: -3.18533530776386. Safe True Peak Gain: 0. Final Gain: -3.18533530776386.
+2021/03/28 18:23:45.669 [INFO] CSound.AutomationLevel set: 76
+2021/03/28 18:23:45.669 [INFO] CSound.SetVolume: Gain:0. Automation Level: -2.38372815438417. Group Level: -0.915149811213502. Summed Gain: -3.29887796559768. Safe True Peak Gain: 0. Final Gain: -3.29887796559768.
+2021/03/28 18:23:45.678 [INFO] CSound.AutomationLevel set: 75
+2021/03/28 18:23:45.678 [INFO] CSound.SetVolume: Gain:0. Automation Level: -2.498774732166. Group Level: -0.915149811213502. Summed Gain: -3.4139245433795. Safe True Peak Gain: 0. Final Gain: -3.4139245433795.
+2021/03/28 18:23:45.694 [INFO] CSound.AutomationLevel set: 74
+2021/03/28 18:23:45.694 [INFO] CSound.SetVolume: Gain:0. Automation Level: -2.61536560538048. Group Level: -0.915149811213502. Summed Gain: -3.53051541659398. Safe True Peak Gain: 0. Final Gain: -3.53051541659398.
+2021/03/28 18:23:45.703 [INFO] CSound.AutomationLevel set: 73
+2021/03/28 18:23:45.703 [INFO] CSound.SetVolume: Gain:0. Automation Level: -2.73354279759088. Group Level: -0.915149811213502. Summed Gain: -3.64869260880438. Safe True Peak Gain: 0. Final Gain: -3.64869260880438.
+2021/03/28 18:23:45.711 [INFO] CSound.AutomationLevel set: 72
+2021/03/28 18:23:45.711 [INFO] CSound.SetVolume: Gain:0. Automation Level: -2.85335007137463. Group Level: -0.915149811213502. Summed Gain: -3.76849988258813. Safe True Peak Gain: 0. Final Gain: -3.76849988258813.
+2021/03/28 18:23:45.719 [INFO] CSound.AutomationLevel set: 71
+2021/03/28 18:23:45.719 [INFO] CSound.SetVolume: Gain:0. Automation Level: -2.97483302561849. Group Level: -0.915149811213502. Summed Gain: -3.889982836832. Safe True Peak Gain: 0. Final Gain: -3.889982836832.
+2021/03/28 18:23:45.728 [INFO] CSound.AutomationLevel set: 70
+2021/03/28 18:23:45.728 [INFO] CSound.SetVolume: Gain:0. Automation Level: -3.09803919971486. Group Level: -0.915149811213502. Summed Gain: -4.01318901092837. Safe True Peak Gain: 0. Final Gain: -4.01318901092837.
+2021/03/28 18:23:45.744 [INFO] CSound.AutomationLevel set: 69
+2021/03/28 18:23:45.744 [INFO] CSound.SetVolume: Gain:0. Automation Level: -3.22301818525489. Group Level: -0.915149811213502. Summed Gain: -4.1381679964684. Safe True Peak Gain: 0. Final Gain: -4.1381679964684.
+2021/03/28 18:23:45.753 [INFO] CSound.AutomationLevel set: 68
+2021/03/28 18:23:45.753 [INFO] CSound.SetVolume: Gain:0. Automation Level: -3.34982174587527. Group Level: -0.915149811213502. Summed Gain: -4.26497155708878. Safe True Peak Gain: 0. Final Gain: -4.26497155708878.
+2021/03/28 18:23:45.761 [INFO] CSound.AutomationLevel set: 67
+2021/03/28 18:23:45.761 [INFO] CSound.SetVolume: Gain:0. Automation Level: -3.47850394598347. Group Level: -0.915149811213502. Summed Gain: -4.39365375719697. Safe True Peak Gain: 0. Final Gain: -4.39365375719697.
+2021/03/28 18:23:45.769 [INFO] CSound.AutomationLevel set: 66
+2021/03/28 18:23:45.769 [INFO] CSound.SetVolume: Gain:0. Automation Level: -3.60912128916263. Group Level: -0.915149811213502. Summed Gain: -4.52427110037613. Safe True Peak Gain: 0. Final Gain: -4.52427110037613.
+2021/03/28 18:23:45.778 [INFO] CSound.AutomationLevel set: 65
+2021/03/28 18:23:45.778 [INFO] CSound.SetVolume: Gain:0. Automation Level: -3.74173286714289. Group Level: -0.915149811213502. Summed Gain: -4.65688267835639. Safe True Peak Gain: 0. Final Gain: -4.65688267835639.
+2021/03/28 18:23:45.794 [INFO] CSound.AutomationLevel set: 64
+2021/03/28 18:23:45.795 [INFO] CSound.SetVolume: Gain:0. Automation Level: -3.87640052032226. Group Level: -0.915149811213502. Summed Gain: -4.79155033153576. Safe True Peak Gain: 0. Final Gain: -4.79155033153576.
+2021/03/28 18:23:45.803 [INFO] CSound.AutomationLevel set: 63
+2021/03/28 18:23:45.803 [INFO] CSound.SetVolume: Gain:0. Automation Level: -4.01318901092837. Group Level: -0.915149811213502. Summed Gain: -4.92833882214187. Safe True Peak Gain: 0. Final Gain: -4.92833882214187.
+2021/03/28 18:23:45.811 [INFO] CSound.AutomationLevel set: 62
+2021/03/28 18:23:45.811 [INFO] CSound.SetVolume: Gain:0. Automation Level: -4.15216621003492. Group Level: -0.915149811213502. Summed Gain: -5.06731602124843. Safe True Peak Gain: 0. Final Gain: -5.06731602124843.
+2021/03/28 18:23:45.819 [INFO] CSound.AutomationLevel set: 61
+2021/03/28 18:23:45.819 [INFO] CSound.SetVolume: Gain:0. Automation Level: -4.29340329978466. Group Level: -0.915149811213502. Summed Gain: -5.20855311099816. Safe True Peak Gain: 0. Final Gain: -5.20855311099816.
+2021/03/28 18:23:45.828 [INFO] CSound.AutomationLevel set: 60
+2021/03/28 18:23:45.828 [INFO] CSound.SetVolume: Gain:0. Automation Level: -4.43697499232713. Group Level: -0.915149811213502. Summed Gain: -5.35212480354063. Safe True Peak Gain: 0. Final Gain: -5.35212480354063.
+2021/03/28 18:23:45.845 [INFO] CSound.AutomationLevel set: 59
+2021/03/28 18:23:45.845 [INFO] CSound.SetVolume: Gain:0. Automation Level: -4.58295976715712. Group Level: -0.915149811213502. Summed Gain: -5.49810957837062. Safe True Peak Gain: 0. Final Gain: -5.49810957837062.
+2021/03/28 18:23:45.853 [INFO] CSound.AutomationLevel set: 58
+2021/03/28 18:23:45.853 [INFO] CSound.SetVolume: Gain:0. Automation Level: -4.73144012874126. Group Level: -0.915149811213502. Summed Gain: -5.64658993995476. Safe True Peak Gain: 0. Final Gain: -5.64658993995476.
+2021/03/28 18:23:45.861 [INFO] CSound.AutomationLevel set: 57
+2021/03/28 18:23:45.861 [INFO] CSound.SetVolume: Gain:0. Automation Level: -4.88250288655017. Group Level: -0.915149811213502. Summed Gain: -5.79765269776367. Safe True Peak Gain: 0. Final Gain: -5.79765269776367.
+2021/03/28 18:23:45.869 [INFO] CSound.AutomationLevel set: 56
+2021/03/28 18:23:45.870 [INFO] CSound.SetVolume: Gain:0. Automation Level: -5.03623945987599. Group Level: -0.915149811213502. Summed Gain: -5.95138927108949. Safe True Peak Gain: 0. Final Gain: -5.95138927108949.
+2021/03/28 18:23:45.878 [INFO] CSound.AutomationLevel set: 55
+2021/03/28 18:23:45.878 [INFO] CSound.SetVolume: Gain:0. Automation Level: -5.19274621011512. Group Level: -0.915149811213502. Summed Gain: -6.10789602132862. Safe True Peak Gain: 0. Final Gain: -6.10789602132862.
+2021/03/28 18:23:45.894 [INFO] CSound.AutomationLevel set: 54
+2021/03/28 18:23:45.895 [INFO] CSound.SetVolume: Gain:0. Automation Level: -5.35212480354063. Group Level: -0.915149811213502. Summed Gain: -6.26727461475413. Safe True Peak Gain: 0. Final Gain: -6.26727461475413.
+2021/03/28 18:23:45.903 [INFO] CSound.AutomationLevel set: 53
+2021/03/28 18:23:45.903 [INFO] CSound.SetVolume: Gain:0. Automation Level: -5.51448260798422. Group Level: -0.915149811213502. Summed Gain: -6.42963241919772. Safe True Peak Gain: 0. Final Gain: -6.42963241919772.
+2021/03/28 18:23:45.911 [INFO] CSound.AutomationLevel set: 52
+2021/03/28 18:23:45.911 [INFO] CSound.SetVolume: Gain:0. Automation Level: -5.67993312730402. Group Level: -0.915149811213502. Summed Gain: -6.59508293851752. Safe True Peak Gain: 0. Final Gain: -6.59508293851752.
+2021/03/28 18:23:45.920 [INFO] CSound.AutomationLevel set: 51
+2021/03/28 18:23:45.920 [INFO] CSound.SetVolume: Gain:0. Automation Level: -5.84859647804127. Group Level: -0.915149811213502. Summed Gain: -6.76374628925478. Safe True Peak Gain: 0. Final Gain: -6.76374628925478.
+2021/03/28 18:23:45.928 [INFO] CSound.AutomationLevel set: 50
+2021/03/28 18:23:45.928 [INFO] CSound.SetVolume: Gain:0. Automation Level: -6.02059991327962. Group Level: -0.915149811213502. Summed Gain: -6.93574972449313. Safe True Peak Gain: 0. Final Gain: -6.93574972449313.
+2021/03/28 18:23:45.945 [INFO] CSound.AutomationLevel set: 49
+2021/03/28 18:23:45.945 [INFO] CSound.SetVolume: Gain:0. Automation Level: -6.19607839942973. Group Level: -0.915149811213502. Summed Gain: -7.11122821064323. Safe True Peak Gain: 0. Final Gain: -7.11122821064323.
+2021/03/28 18:23:45.953 [INFO] CSound.AutomationLevel set: 48
+2021/03/28 18:23:45.953 [INFO] CSound.SetVolume: Gain:0. Automation Level: -6.37517525248826. Group Level: -0.915149811213502. Summed Gain: -7.29032506370176. Safe True Peak Gain: 0. Final Gain: -7.29032506370176.
+2021/03/28 18:23:45.961 [INFO] CSound.AutomationLevel set: 47
+2021/03/28 18:23:45.962 [INFO] CSound.SetVolume: Gain:0. Automation Level: -6.55804284128565. Group Level: -0.915149811213502. Summed Gain: -7.47319265249915. Safe True Peak Gain: 0. Final Gain: -7.47319265249915.
+2021/03/28 18:23:45.970 [INFO] CSound.AutomationLevel set: 46
+2021/03/28 18:23:45.970 [INFO] CSound.SetVolume: Gain:0. Automation Level: -6.74484336636852. Group Level: -0.915149811213502. Summed Gain: -7.65999317758202. Safe True Peak Gain: 0. Final Gain: -7.65999317758202.
+2021/03/28 18:23:45.978 [INFO] CSound.AutomationLevel set: 45
+2021/03/28 18:23:45.978 [INFO] CSound.SetVolume: Gain:0. Automation Level: -6.93574972449313. Group Level: -0.915149811213502. Summed Gain: -7.85089953570663. Safe True Peak Gain: 0. Final Gain: -7.85089953570663.
+2021/03/28 18:23:45.995 [INFO] CSound.AutomationLevel set: 44
+2021/03/28 18:23:45.995 [INFO] CSound.SetVolume: Gain:0. Automation Level: -7.13094647027625. Group Level: -0.915149811213502. Summed Gain: -8.04609628148975. Safe True Peak Gain: 0. Final Gain: -8.04609628148975.
+2021/03/28 18:23:46.003 [INFO] CSound.AutomationLevel set: 43
+2021/03/28 18:23:46.003 [INFO] CSound.SetVolume: Gain:0. Automation Level: -7.33063088840827. Group Level: -0.915149811213502. Summed Gain: -8.24578069962177. Safe True Peak Gain: 0. Final Gain: -8.24578069962177.
+2021/03/28 18:23:46.012 [INFO] CSound.AutomationLevel set: 42
+2021/03/28 18:23:46.012 [INFO] CSound.SetVolume: Gain:0. Automation Level: -7.53501419204199. Group Level: -0.915149811213502. Summed Gain: -8.45016400325549. Safe True Peak Gain: 0. Final Gain: -8.45016400325549.
+2021/03/28 18:23:46.020 [INFO] CSound.AutomationLevel set: 41
+2021/03/28 18:23:46.020 [INFO] CSound.SetVolume: Gain:0. Automation Level: -7.74432286560529. Group Level: -0.915149811213502. Summed Gain: -8.65947267681879. Safe True Peak Gain: 0. Final Gain: -8.65947267681879.
+2021/03/28 18:23:46.028 [INFO] CSound.AutomationLevel set: 40
+2021/03/28 18:23:46.028 [INFO] CSound.SetVolume: Gain:0. Automation Level: -7.95880017344075. Group Level: -0.915149811213502. Summed Gain: -8.87394998465425. Safe True Peak Gain: 0. Final Gain: -8.87394998465425.
+2021/03/28 18:23:46.045 [INFO] CSound.AutomationLevel set: 39
+2021/03/28 18:23:46.045 [INFO] CSound.SetVolume: Gain:0. Automation Level: -8.17870785947002. Group Level: -0.915149811213502. Summed Gain: -9.09385767068352. Safe True Peak Gain: 0. Final Gain: -9.09385767068352.
+2021/03/28 18:23:46.053 [INFO] CSound.AutomationLevel set: 38
+2021/03/28 18:23:46.053 [INFO] CSound.SetVolume: Gain:0. Automation Level: -8.4043280676638. Group Level: -0.915149811213502. Summed Gain: -9.3194778788773. Safe True Peak Gain: 0. Final Gain: -9.3194778788773.
+2021/03/28 18:23:46.062 [INFO] CSound.AutomationLevel set: 37
+2021/03/28 18:23:46.062 [INFO] CSound.SetVolume: Gain:0. Automation Level: -8.6359655186601. Group Level: -0.915149811213502. Summed Gain: -9.5511153298736. Safe True Peak Gain: 0. Final Gain: -9.5511153298736.
+2021/03/28 18:23:46.070 [INFO] CSound.AutomationLevel set: 36
+2021/03/28 18:23:46.070 [INFO] CSound.SetVolume: Gain:0. Automation Level: -8.87394998465425. Group Level: -0.915149811213502. Summed Gain: -9.78909979586776. Safe True Peak Gain: 0. Final Gain: -9.78909979586776.
+2021/03/28 18:23:46.078 [INFO] CSound.AutomationLevel set: 35
+2021/03/28 18:23:46.078 [INFO] CSound.SetVolume: Gain:0. Automation Level: -9.11863911299449. Group Level: -0.915149811213502. Summed Gain: -10.033788924208. Safe True Peak Gain: 0. Final Gain: -10.033788924208.
+2021/03/28 18:23:46.095 [INFO] CSound.AutomationLevel set: 34
+2021/03/28 18:23:46.095 [INFO] CSound.SetVolume: Gain:0. Automation Level: -9.3704216591549. Group Level: -0.915149811213502. Summed Gain: -10.2855714703684. Safe True Peak Gain: 0. Final Gain: -10.2855714703684.
+2021/03/28 18:23:46.103 [INFO] CSound.AutomationLevel set: 33
+2021/03/28 18:23:46.104 [INFO] CSound.SetVolume: Gain:0. Automation Level: -9.62972120244225. Group Level: -0.915149811213502. Summed Gain: -10.5448710136558. Safe True Peak Gain: 0. Final Gain: -10.5448710136558.
+2021/03/28 18:23:46.112 [INFO] CSound.AutomationLevel set: 32
+2021/03/28 18:23:46.112 [INFO] CSound.SetVolume: Gain:0. Automation Level: -9.89700043360188. Group Level: -0.915149811213502. Summed Gain: -10.8121502448154. Safe True Peak Gain: 0. Final Gain: -10.8121502448154.
+2021/03/28 18:23:46.120 [INFO] CSound.AutomationLevel set: 31
+2021/03/28 18:23:46.120 [INFO] CSound.SetVolume: Gain:0. Automation Level: -10.1727661233145. Group Level: -0.915149811213502. Summed Gain: -11.0879159345281. Safe True Peak Gain: 0. Final Gain: -11.0879159345281.
+2021/03/28 18:23:46.128 [INFO] CSound.AutomationLevel set: 30
+2021/03/28 18:23:46.128 [INFO] CSound.SetVolume: Gain:0. Automation Level: -10.4575749056068. Group Level: -0.915149811213502. Summed Gain: -11.3727247168203. Safe True Peak Gain: 0. Final Gain: -11.3727247168203.
+2021/03/28 18:23:46.145 [INFO] CSound.AutomationLevel set: 29
+2021/03/28 18:23:46.145 [INFO] CSound.SetVolume: Gain:0. Automation Level: -10.7520400420209. Group Level: -0.915149811213502. Summed Gain: -11.6671898532344. Safe True Peak Gain: 0. Final Gain: -11.6671898532344.
+2021/03/28 18:23:46.153 [INFO] CSound.AutomationLevel set: 28
+2021/03/28 18:23:46.153 [INFO] CSound.SetVolume: Gain:0. Automation Level: -11.0568393731556. Group Level: -0.915149811213502. Summed Gain: -11.9719891843691. Safe True Peak Gain: 0. Final Gain: -11.9719891843691.
+2021/03/28 18:23:46.162 [INFO] CSound.AutomationLevel set: 27
+2021/03/28 18:23:46.162 [INFO] CSound.SetVolume: Gain:0. Automation Level: -11.3727247168203. Group Level: -0.915149811213502. Summed Gain: -12.2878745280338. Safe True Peak Gain: 0. Final Gain: -12.2878745280338.
+2021/03/28 18:23:46.170 [INFO] CSound.AutomationLevel set: 26
+2021/03/28 18:23:46.170 [INFO] CSound.SetVolume: Gain:0. Automation Level: -11.7005330405836. Group Level: -0.915149811213502. Summed Gain: -12.6156828517971. Safe True Peak Gain: 0. Final Gain: -12.6156828517971.
+2021/03/28 18:23:46.178 [INFO] CSound.AutomationLevel set: 25
+2021/03/28 18:23:46.178 [INFO] CSound.SetVolume: Gain:0. Automation Level: -12.0411998265592. Group Level: -0.915149811213502. Summed Gain: -12.9563496377728. Safe True Peak Gain: 0. Final Gain: -12.9563496377728.
+2021/03/28 18:23:46.195 [INFO] CSound.AutomationLevel set: 24
+2021/03/28 18:23:46.195 [INFO] CSound.SetVolume: Gain:0. Automation Level: -12.3957751657679. Group Level: -0.915149811213502. Summed Gain: -13.3109249769814. Safe True Peak Gain: 0. Final Gain: -13.3109249769814.
+2021/03/28 18:23:46.203 [INFO] CSound.AutomationLevel set: 23
+2021/03/28 18:23:46.203 [INFO] CSound.SetVolume: Gain:0. Automation Level: -12.7654432796481. Group Level: -0.915149811213502. Summed Gain: -13.6805930908616. Safe True Peak Gain: 0. Final Gain: -13.6805930908616.
+2021/03/28 18:23:46.212 [INFO] CSound.AutomationLevel set: 22
+2021/03/28 18:23:46.212 [INFO] CSound.SetVolume: Gain:0. Automation Level: -13.1515463835559. Group Level: -0.915149811213502. Summed Gain: -14.0666961947694. Safe True Peak Gain: 0. Final Gain: -14.0666961947694.
+2021/03/28 18:23:46.220 [INFO] CSound.AutomationLevel set: 21
+2021/03/28 18:23:46.220 [INFO] CSound.SetVolume: Gain:0. Automation Level: -13.5556141053216. Group Level: -0.915149811213502. Summed Gain: -14.4707639165351. Safe True Peak Gain: 0. Final Gain: -14.4707639165351.
+2021/03/28 18:23:46.228 [INFO] CSound.AutomationLevel set: 20
+2021/03/28 18:23:46.228 [INFO] CSound.SetVolume: Gain:0. Automation Level: -13.9794000867204. Group Level: -0.915149811213502. Summed Gain: -14.8945498979339. Safe True Peak Gain: 0. Final Gain: -14.8945498979339.
+2021/03/28 18:23:46.246 [INFO] CSound.AutomationLevel set: 19
+2021/03/28 18:23:46.246 [INFO] CSound.SetVolume: Gain:0. Automation Level: -14.4249279809434. Group Level: -0.915149811213502. Summed Gain: -15.3400777921569. Safe True Peak Gain: 0. Final Gain: -15.3400777921569.
+2021/03/28 18:23:46.253 [INFO] CSound.AutomationLevel set: 18
+2021/03/28 18:23:46.253 [INFO] CSound.SetVolume: Gain:0. Automation Level: -14.8945498979339. Group Level: -0.915149811213502. Summed Gain: -15.8096997091474. Safe True Peak Gain: 0. Final Gain: -15.8096997091474.
+2021/03/28 18:23:46.263 [INFO] CSound.AutomationLevel set: 17
+2021/03/28 18:23:46.263 [INFO] CSound.SetVolume: Gain:0. Automation Level: -15.3910215724345. Group Level: -0.915149811213502. Summed Gain: -16.306171383648. Safe True Peak Gain: 0. Final Gain: -16.306171383648.
+2021/03/28 18:23:46.271 [INFO] CSound.AutomationLevel set: 16
+2021/03/28 18:23:46.271 [INFO] CSound.SetVolume: Gain:0. Automation Level: -15.9176003468815. Group Level: -0.915149811213502. Summed Gain: -16.832750158095. Safe True Peak Gain: 0. Final Gain: -16.832750158095.
+2021/03/28 18:23:46.278 [INFO] CSound.AutomationLevel set: 15
+2021/03/28 18:23:46.278 [INFO] CSound.SetVolume: Gain:0. Automation Level: -16.4781748188864. Group Level: -0.915149811213502. Summed Gain: -17.3933246300999. Safe True Peak Gain: 0. Final Gain: -17.3933246300999.
+2021/03/28 18:23:46.296 [INFO] CSound.AutomationLevel set: 14
+2021/03/28 18:23:46.296 [INFO] CSound.SetVolume: Gain:0. Automation Level: -17.0774392864352. Group Level: -0.915149811213502. Summed Gain: -17.9925890976487. Safe True Peak Gain: 0. Final Gain: -17.9925890976487.
+2021/03/28 18:23:46.304 [INFO] CSound.AutomationLevel set: 13
+2021/03/28 18:23:46.304 [INFO] CSound.SetVolume: Gain:0. Automation Level: -17.7211329538633. Group Level: -0.915149811213502. Summed Gain: -18.6362827650768. Safe True Peak Gain: 0. Final Gain: -18.6362827650768.
+2021/03/28 18:23:46.313 [INFO] CSound.AutomationLevel set: 12
+2021/03/28 18:23:46.313 [INFO] CSound.SetVolume: Gain:0. Automation Level: -18.4163750790475. Group Level: -0.915149811213502. Summed Gain: -19.331524890261. Safe True Peak Gain: 0. Final Gain: -19.331524890261.
+2021/03/28 18:23:46.321 [INFO] CSound.AutomationLevel set: 11
+2021/03/28 18:23:46.321 [INFO] CSound.SetVolume: Gain:0. Automation Level: -19.1721462968355. Group Level: -0.915149811213502. Summed Gain: -20.087296108049. Safe True Peak Gain: 0. Final Gain: -20.087296108049.
+2021/03/28 18:23:46.329 [INFO] CSound.AutomationLevel set: 10
+2021/03/28 18:23:46.329 [INFO] CSound.SetVolume: Gain:0. Automation Level: -20. Group Level: -0.915149811213502. Summed Gain: -20.9151498112135. Safe True Peak Gain: 0. Final Gain: -20.9151498112135.
+2021/03/28 18:23:46.345 [INFO] CSound.AutomationLevel set: 9
+2021/03/28 18:23:46.345 [INFO] CSound.SetVolume: Gain:0. Automation Level: -20.9151498112135. Group Level: -0.915149811213502. Summed Gain: -21.830299622427. Safe True Peak Gain: 0. Final Gain: -21.830299622427.
+2021/03/28 18:23:46.353 [INFO] CSound.AutomationLevel set: 8
+2021/03/28 18:23:46.353 [INFO] CSound.SetVolume: Gain:0. Automation Level: -21.9382002601611. Group Level: -0.915149811213502. Summed Gain: -22.8533500713746. Safe True Peak Gain: 0. Final Gain: -22.8533500713746.
+2021/03/28 18:23:46.362 [INFO] CSound.AutomationLevel set: 7
+2021/03/28 18:23:46.362 [INFO] CSound.SetVolume: Gain:0. Automation Level: -23.0980391997149. Group Level: -0.915149811213502. Summed Gain: -24.0131890109284. Safe True Peak Gain: 0. Final Gain: -24.0131890109284.
+2021/03/28 18:23:46.370 [INFO] CSound.AutomationLevel set: 6
+2021/03/28 18:23:46.370 [INFO] CSound.SetVolume: Gain:0. Automation Level: -24.4369749923271. Group Level: -0.915149811213502. Summed Gain: -25.3521248035406. Safe True Peak Gain: 0. Final Gain: -25.3521248035406.
+2021/03/28 18:23:46.378 [INFO] CSound.AutomationLevel set: 5
+2021/03/28 18:23:46.378 [INFO] CSound.SetVolume: Gain:0. Automation Level: -26.0205999132796. Group Level: -0.915149811213502. Summed Gain: -26.9357497244931. Safe True Peak Gain: 0. Final Gain: -26.9357497244931.
+2021/03/28 18:23:46.395 [INFO] CSound.AutomationLevel set: 4
+2021/03/28 18:23:46.395 [INFO] CSound.SetVolume: Gain:0. Automation Level: -27.9588001734408. Group Level: -0.915149811213502. Summed Gain: -28.8739499846543. Safe True Peak Gain: 0. Final Gain: -28.8739499846543.
+2021/03/28 18:23:46.403 [INFO] CSound.AutomationLevel set: 3
+2021/03/28 18:23:46.403 [INFO] CSound.SetVolume: Gain:0. Automation Level: -30.4575749056068. Group Level: -0.915149811213502. Summed Gain: -31.3727247168203. Safe True Peak Gain: 0. Final Gain: -31.3727247168203.
+2021/03/28 18:23:46.410 [INFO] CSound.AutomationLevel set: 2
+2021/03/28 18:23:46.410 [INFO] CSound.SetVolume: Gain:0. Automation Level: -33.9794000867204. Group Level: -0.915149811213502. Summed Gain: -34.8945498979339. Safe True Peak Gain: 0. Final Gain: -34.8945498979339.
+2021/03/28 18:23:46.420 [INFO] CSound.AutomationLevel set: 1
+2021/03/28 18:23:46.420 [INFO] CSound.SetVolume: Gain:0. Automation Level: -40. Group Level: -0.915149811213502. Summed Gain: -40.9151498112135. Safe True Peak Gain: 0. Final Gain: -40.9151498112135.
+2021/03/28 18:23:46.429 [INFO] CSound.AutomationLevel set: 0
+2021/03/28 18:23:46.429 [INFO] CSound.SetVolume: Gain:0. Automation Level: -Infinity. Group Level: -0.915149811213502. Summed Gain: -Infinity. Safe True Peak Gain: 0. Final Gain: -Infinity.
+2021/03/28 18:23:52.118 [INFO] 選曲ステージを非活性化します。
+2021/03/28 18:23:52.120 [INFO]     選曲ステージの非活性化を完了しました。
+2021/03/28 18:23:52.120 [INFO] ----------------------
+2021/03/28 18:23:52.120 [INFO] ■ 曲読み込み
+2021/03/28 18:23:52.121 [INFO] 曲読み込みステージを活性化します。
+2021/03/28 18:23:52.121 [WARNING]     テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Graphics\4_SongLoading\Background.png)
+はたラク2000: Cacheにヒットせず。(cachesize=1)
+: Cacheにヒットせず。(cachesize=1)
+2021/03/28 18:23:52.123 [INFO]     曲読み込みステージの活性化を完了しました。
+2021/03/28 18:23:52.129 [WARNING] ファイルが存在しません。: Sounds\Now loading.ogg
+2021/03/28 18:23:52.140 [INFO] ----曲情報-----------------
+2021/03/28 18:23:52.140 [INFO] TITLE: はたラク2000
+2021/03/28 18:23:52.140 [INFO] FILE: C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\Songs\08-ナムコオリジナル\24,はたラク2000.tja
+2021/03/28 18:23:52.140 [INFO] ---------------------------
+2021/03/28 18:23:52.140 [INFO] DTX読込所要時間:           00:00:00.0056177
+2021/03/28 18:23:53.438 [INFO] CSound.GroupLevel set: 90
+2021/03/28 18:23:53.438 [INFO] CSound.SetVolume: Gain:0. Automation Level: 0. Group Level: -0.915149811213502. Summed Gain: -0.915149811213502. Safe True Peak Gain: 0. Final Gain: -0.915149811213502.
+2021/03/28 18:23:53.438 [INFO] WAV読込所要時間(   1):     00:00:01.2978761
+2021/03/28 18:23:53.474 [WARNING] テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Graphics\5_Game\5_Background\0\Background.png)
+2021/03/28 18:23:53.475 [WARNING] [i18n] File does not exist: C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Sounds\Clear.ogg
+2021/03/28 18:23:53.477 [WARNING] テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\Songs\08-ナムコオリジナル\Dan_Plate.png)
+2021/03/28 18:23:53.483 [WARNING] テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Graphics\ScreenSelect level numbers.png)
+2021/03/28 18:23:53.505 [WARNING] [i18n] File does not exist: C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Sounds\Clear.ogg
+2021/03/28 18:23:53.508 [WARNING] テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\Songs\08-ナムコオリジナル\Dan_Plate.png)
+2021/03/28 18:23:53.510 [WARNING] System.IO.IOException: 別のプロセスで使用されているため、プロセスはファイル 'C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Sounds\Dan\Section_First.wav' にアクセスできません。
+   場所 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   場所 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   場所 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   場所 System.IO.File.Open(String path, FileMode mode, FileAccess access)
+   場所 FDK.CSound.tRIFFchunkedVorbisならDirectShowでDecodeする(String strファイル名, Byte[]& byArrWAVファイルイメージ) 場所 C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\FDK19\コード\03.サウンド\CSound.cs:行 1743
+2021/03/28 18:23:53.510 [WARNING] Warning: Section_First.wav : 読み込みに失敗しました。
+はたラク2000: Cacheにヒットせず。(cachesize=1)
+1曲目: Cacheにヒットせず。(cachesize=2)
+2021/03/28 18:23:53.517 [INFO] 総読込時間:                00:00:01.3826473
+2021/03/28 18:23:55.121 [INFO] 曲読み込みステージを非活性化します。
+2021/03/28 18:23:55.121 [INFO]     曲読み込みステージの非活性化を完了しました。
+2021/03/28 18:23:55.121 [INFO] ----------------------
+2021/03/28 18:23:55.121 [INFO] ■ 演奏（ドラム画面）
+Total On進行描画=1435ms
+2021/03/28 18:24:26.683 [INFO] CLagLogger.LogAndReturnMeanLag: Mean lag: -3.78125. Median lag: 1. Mode(s) of lag: -10. Standard deviation of lag: 39.2744624207321.
+2021/03/28 18:24:26.683 [INFO] CLagLogger.LogAndReturnMeanLag: Hit chip counts, indexed by lag in milliseconds:
+-118,-103,-102,-88,-87,-71,-60,-57,-56,-55,-44,-42,-41,-40,-38,-31,-29,-26,-25,-24,-16,-15,-13,-11,-10,-9,-6,0,1,2,3,4,5,6,7,8,9,16,17,18,19,20,21,22,24,25,33,34,35,37,39,40,41,50,54,55,56,64,65,85
+2,1,2,1,2,1,1,2,1,2,1,2,2,1,1,2,1,5,3,3,1,1,2,4,8,6,1,3,6,2,5,1,2,3,3,2,1,1,3,2,2,1,3,1,1,1,1,2,1,3,2,3,1,4,1,3,2,1,1,1
+2021/03/28 18:24:26.685 [INFO] CStage演奏画面共通 リソースの開放
+2021/03/28 18:24:26.689 [INFO] LoudnessMetadataScanner.StartBackgroundScanning: BS1770GAIN is not available. A background scanning thread will not be started.
+2021/03/28 18:24:26.689 [INFO] ----------------------
+2021/03/28 18:24:26.690 [INFO] ■ 選曲
+2021/03/28 18:24:26.690 [INFO] 選曲ステージを活性化します。
+2021/03/28 18:24:26.690 [WARNING]     テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Graphics\Screen option panels.png)
+2021/03/28 18:24:26.690 [WARNING]     DrawPrivateFont()の入力不正。最小値のbitmapを返します。
+: Cacheにヒットせず。(cachesize=1)
+: Cacheにヒット!! index=0
+: Cacheにヒット!! index=0
+2021/03/28 18:24:26.701 [WARNING]     テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Graphics\5_preimage panel.png)
+2021/03/28 18:24:26.701 [WARNING]     テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Graphics\5_sensor.png)
+2021/03/28 18:24:26.701 [WARNING]     テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Graphics\5_preimage default.png)
+2021/03/28 18:24:26.701 [WARNING]     テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Graphics\5_information_BG.png)
+2021/03/28 18:24:26.702 [WARNING]     テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Graphics\5_information.png)
+2021/03/28 18:24:26.702 [WARNING]     テクスチャファイルが見つかりませんでした。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Graphics\5_information2.png)
+2021/03/28 18:24:26.702 [WARNING]     [i18n] File does not exist: C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\System\SimpleStyle\Sounds\DiffSelect.ogg
+0.5: Cacheにヒットせず。(cachesize=1)
+1.0: Cacheにヒットせず。(cachesize=1)
+1.1: Cacheにヒットせず。(cachesize=1)
+1.2: Cacheにヒットせず。(cachesize=1)
+1.3: Cacheにヒットせず。(cachesize=1)
+1.4: Cacheにヒットせず。(cachesize=1)
+1.5: Cacheにヒットせず。(cachesize=1)
+1.6: Cacheにヒットせず。(cachesize=1)
+1.7: Cacheにヒットせず。(cachesize=1)
+1.8: Cacheにヒットせず。(cachesize=1)
+1.9: Cacheにヒットせず。(cachesize=1)
+2.0: Cacheにヒットせず。(cachesize=1)
+2.5: Cacheにヒットせず。(cachesize=1)
+3.0: Cacheにヒットせず。(cachesize=1)
+3.5: Cacheにヒットせず。(cachesize=1)
+4.0: Cacheにヒットせず。(cachesize=1)
+しない: Cacheにヒットせず。(cachesize=1)
+する: Cacheにヒットせず。(cachesize=1)
+なし: Cacheにヒットせず。(cachesize=1)
+きまぐれ: Cacheにヒットせず。(cachesize=1)
+でたらめ: Cacheにヒットせず。(cachesize=1)
+なし: Cacheにヒットせず。(cachesize=1)
+特訓モード: Cacheにヒットせず。(cachesize=1)
+使用不可: Cacheにヒットせず。(cachesize=1)
+はやさ: Cacheにヒットせず。(cachesize=1)
+ドロン: Cacheにヒットせず。(cachesize=1)
+あべこべ: Cacheにヒットせず。(cachesize=1)
+ランダム: Cacheにヒットせず。(cachesize=1)
+ゲームモード: Cacheにヒットせず。(cachesize=1)
+オート: Cacheにヒットせず。(cachesize=1)
+ボイス: Cacheにヒットせず。(cachesize=1)
+音色: Cacheにヒットせず。(cachesize=1)
+2021/03/28 18:24:26.715 [INFO]     選曲ステージの活性化を完了しました。
+アニメ: Cacheにヒットせず。(cachesize=1)
+キッズ: Cacheにヒットせず。(cachesize=2)
+クラシック: Cacheにヒットせず。(cachesize=3)
+とじる: Cacheにヒットせず。(cachesize=1)
+はたラク2000: Cacheにヒットせず。(cachesize=2)
+最近あそんだ曲: Cacheにヒットせず。(cachesize=4)
+ポップス: Cacheにヒットせず。(cachesize=5)
+はたラク2000: Cacheにヒット!! index=1
+2021/03/28 18:24:26.745 [INFO] CSound.AutomationLevel set: 1
+2021/03/28 18:24:26.745 [INFO] CSound.SetVolume: Gain:0. Automation Level: -40. Group Level: -0.915149811213502. Summed Gain: -40.9151498112135. Safe True Peak Gain: 0. Final Gain: -40.9151498112135.
+2021/03/28 18:24:26.761 [INFO] CSound.AutomationLevel set: 2
+2021/03/28 18:24:26.761 [INFO] CSound.SetVolume: Gain:0. Automation Level: -33.9794000867204. Group Level: -0.915149811213502. Summed Gain: -34.8945498979339. Safe True Peak Gain: 0. Final Gain: -34.8945498979339.
+2021/03/28 18:24:26.786 [INFO] CSound.AutomationLevel set: 3
+2021/03/28 18:24:26.786 [INFO] CSound.SetVolume: Gain:0. Automation Level: -30.4575749056068. Group Level: -0.915149811213502. Summed Gain: -31.3727247168203. Safe True Peak Gain: 0. Final Gain: -31.3727247168203.
+2021/03/28 18:24:26.803 [INFO] CSound.AutomationLevel set: 4
+2021/03/28 18:24:26.803 [INFO] CSound.SetVolume: Gain:0. Automation Level: -27.9588001734408. Group Level: -0.915149811213502. Summed Gain: -28.8739499846543. Safe True Peak Gain: 0. Final Gain: -28.8739499846543.
+2021/03/28 18:24:26.820 [INFO] CSound.AutomationLevel set: 5
+2021/03/28 18:24:26.820 [INFO] CSound.SetVolume: Gain:0. Automation Level: -26.0205999132796. Group Level: -0.915149811213502. Summed Gain: -26.9357497244931. Safe True Peak Gain: 0. Final Gain: -26.9357497244931.
+2021/03/28 18:24:26.845 [INFO] CSound.AutomationLevel set: 6
+2021/03/28 18:24:26.845 [INFO] CSound.SetVolume: Gain:0. Automation Level: -24.4369749923271. Group Level: -0.915149811213502. Summed Gain: -25.3521248035406. Safe True Peak Gain: 0. Final Gain: -25.3521248035406.
+2021/03/28 18:24:26.861 [INFO] CSound.AutomationLevel set: 7
+2021/03/28 18:24:26.861 [INFO] CSound.SetVolume: Gain:0. Automation Level: -23.0980391997149. Group Level: -0.915149811213502. Summed Gain: -24.0131890109284. Safe True Peak Gain: 0. Final Gain: -24.0131890109284.
+2021/03/28 18:24:26.878 [INFO] CSound.AutomationLevel set: 8
+2021/03/28 18:24:26.879 [INFO] CSound.SetVolume: Gain:0. Automation Level: -21.9382002601611. Group Level: -0.915149811213502. Summed Gain: -22.8533500713746. Safe True Peak Gain: 0. Final Gain: -22.8533500713746.
+2021/03/28 18:24:26.903 [INFO] CSound.AutomationLevel set: 9
+2021/03/28 18:24:26.903 [INFO] CSound.SetVolume: Gain:0. Automation Level: -20.9151498112135. Group Level: -0.915149811213502. Summed Gain: -21.830299622427. Safe True Peak Gain: 0. Final Gain: -21.830299622427.
+2021/03/28 18:24:26.920 [INFO] CSound.AutomationLevel set: 10
+2021/03/28 18:24:26.920 [INFO] CSound.SetVolume: Gain:0. Automation Level: -20. Group Level: -0.915149811213502. Summed Gain: -20.9151498112135. Safe True Peak Gain: 0. Final Gain: -20.9151498112135.
+2021/03/28 18:24:26.945 [INFO] CSound.AutomationLevel set: 11
+2021/03/28 18:24:26.945 [INFO] CSound.SetVolume: Gain:0. Automation Level: -19.1721462968355. Group Level: -0.915149811213502. Summed Gain: -20.087296108049. Safe True Peak Gain: 0. Final Gain: -20.087296108049.
+2021/03/28 18:24:26.962 [INFO] CSound.AutomationLevel set: 12
+2021/03/28 18:24:26.962 [INFO] CSound.SetVolume: Gain:0. Automation Level: -18.4163750790475. Group Level: -0.915149811213502. Summed Gain: -19.331524890261. Safe True Peak Gain: 0. Final Gain: -19.331524890261.
+2021/03/28 18:24:26.978 [INFO] CSound.AutomationLevel set: 13
+2021/03/28 18:24:26.979 [INFO] CSound.SetVolume: Gain:0. Automation Level: -17.7211329538633. Group Level: -0.915149811213502. Summed Gain: -18.6362827650768. Safe True Peak Gain: 0. Final Gain: -18.6362827650768.
+2021/03/28 18:24:26.996 [INFO] CSound.GroupLevel set: 90
+2021/03/28 18:24:26.996 [INFO] CSound.SetVolume: Gain:0. Automation Level: 0. Group Level: -0.915149811213502. Summed Gain: -0.915149811213502. Safe True Peak Gain: 0. Final Gain: -0.915149811213502.
+2021/03/28 18:24:26.997 [INFO] プレビューサウンドを生成しました。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\Songs\08-ナムコオリジナル\はたラク2000.ogg)
+2021/03/28 18:24:27.012 [INFO] CSound.AutomationLevel set: 12
+2021/03/28 18:24:27.012 [INFO] CSound.SetVolume: Gain:0. Automation Level: -18.4163750790475. Group Level: -0.915149811213502. Summed Gain: -19.331524890261. Safe True Peak Gain: 0. Final Gain: -19.331524890261.
+2021/03/28 18:24:27.020 [INFO] CSound.AutomationLevel set: 11
+2021/03/28 18:24:27.020 [INFO] CSound.SetVolume: Gain:0. Automation Level: -19.1721462968355. Group Level: -0.915149811213502. Summed Gain: -20.087296108049. Safe True Peak Gain: 0. Final Gain: -20.087296108049.
+2021/03/28 18:24:27.028 [INFO] CSound.AutomationLevel set: 10
+2021/03/28 18:24:27.028 [INFO] CSound.SetVolume: Gain:0. Automation Level: -20. Group Level: -0.915149811213502. Summed Gain: -20.9151498112135. Safe True Peak Gain: 0. Final Gain: -20.9151498112135.
+2021/03/28 18:24:27.037 [INFO] CSound.AutomationLevel set: 9
+2021/03/28 18:24:27.037 [INFO] CSound.SetVolume: Gain:0. Automation Level: -20.9151498112135. Group Level: -0.915149811213502. Summed Gain: -21.830299622427. Safe True Peak Gain: 0. Final Gain: -21.830299622427.
+2021/03/28 18:24:27.045 [INFO] CSound.AutomationLevel set: 8
+2021/03/28 18:24:27.045 [INFO] CSound.SetVolume: Gain:0. Automation Level: -21.9382002601611. Group Level: -0.915149811213502. Summed Gain: -22.8533500713746. Safe True Peak Gain: 0. Final Gain: -22.8533500713746.
+2021/03/28 18:24:27.062 [INFO] CSound.AutomationLevel set: 7
+2021/03/28 18:24:27.063 [INFO] CSound.SetVolume: Gain:0. Automation Level: -23.0980391997149. Group Level: -0.915149811213502. Summed Gain: -24.0131890109284. Safe True Peak Gain: 0. Final Gain: -24.0131890109284.
+2021/03/28 18:24:27.071 [INFO] CSound.AutomationLevel set: 6
+2021/03/28 18:24:27.071 [INFO] CSound.SetVolume: Gain:0. Automation Level: -24.4369749923271. Group Level: -0.915149811213502. Summed Gain: -25.3521248035406. Safe True Peak Gain: 0. Final Gain: -25.3521248035406.
+2021/03/28 18:24:27.079 [INFO] CSound.AutomationLevel set: 5
+2021/03/28 18:24:27.079 [INFO] CSound.SetVolume: Gain:0. Automation Level: -26.0205999132796. Group Level: -0.915149811213502. Summed Gain: -26.9357497244931. Safe True Peak Gain: 0. Final Gain: -26.9357497244931.
+2021/03/28 18:24:27.087 [INFO] CSound.AutomationLevel set: 4
+2021/03/28 18:24:27.087 [INFO] CSound.SetVolume: Gain:0. Automation Level: -27.9588001734408. Group Level: -0.915149811213502. Summed Gain: -28.8739499846543. Safe True Peak Gain: 0. Final Gain: -28.8739499846543.
+2021/03/28 18:24:27.095 [INFO] CSound.AutomationLevel set: 3
+2021/03/28 18:24:27.095 [INFO] CSound.SetVolume: Gain:0. Automation Level: -30.4575749056068. Group Level: -0.915149811213502. Summed Gain: -31.3727247168203. Safe True Peak Gain: 0. Final Gain: -31.3727247168203.
+2021/03/28 18:24:27.112 [INFO] CSound.AutomationLevel set: 2
+2021/03/28 18:24:27.112 [INFO] CSound.SetVolume: Gain:0. Automation Level: -33.9794000867204. Group Level: -0.915149811213502. Summed Gain: -34.8945498979339. Safe True Peak Gain: 0. Final Gain: -34.8945498979339.
+2021/03/28 18:24:27.120 [INFO] CSound.AutomationLevel set: 1
+2021/03/28 18:24:27.120 [INFO] CSound.SetVolume: Gain:0. Automation Level: -40. Group Level: -0.915149811213502. Summed Gain: -40.9151498112135. Safe True Peak Gain: 0. Final Gain: -40.9151498112135.
+2021/03/28 18:24:27.129 [INFO] CSound.AutomationLevel set: 0
+2021/03/28 18:24:27.129 [INFO] CSound.SetVolume: Gain:0. Automation Level: -Infinity. Group Level: -0.915149811213502. Summed Gain: -Infinity. Safe True Peak Gain: 0. Final Gain: -Infinity.
+▼あそべる曲▼: Cacheにヒットせず。(cachesize=2)
+「エンジェル ドリーム」「ドキドキ胸きゅん おまつりタイム」: Cacheにヒットせず。(cachesize=3)
+「百花繚乱」「星屑ストラック」「メカデス。」「さいたま2000」など: Cacheにヒットせず。(cachesize=4)
+ナムコオリジナル: Cacheにヒットせず。(cachesize=6)
+2021/03/28 18:24:29.514 [INFO] 選曲ステージを非活性化します。
+2021/03/28 18:24:29.514 [INFO]     選曲ステージの非活性化を完了しました。
+2021/03/28 18:24:29.514 [INFO] ----------------------
+2021/03/28 18:24:29.514 [INFO] ■ タイトル
+2021/03/28 18:24:29.514 [INFO] タイトルステージを活性化します。
+2021/03/28 18:24:29.514 [INFO]     タイトルステージの活性化を完了しました。
+2021/03/28 18:24:30.682 [INFO] タイトルステージを非活性化します。
+2021/03/28 18:24:30.682 [INFO]     タイトルステージの非活性化を完了しました。
+2021/03/28 18:24:30.682 [INFO] ----------------------
+2021/03/28 18:24:30.682 [INFO] ■ 終了
+2021/03/28 18:24:30.682 [INFO] 終了ステージを活性化します。
+2021/03/28 18:24:30.683 [INFO]     終了ステージの活性化を完了しました。
+2021/03/28 18:24:30.709 [INFO] ----------------------
+2021/03/28 18:24:30.709 [INFO] ■ アプリケーションの終了
+2021/03/28 18:24:30.709 [INFO] 曲検索actの終了処理を行います。
+2021/03/28 18:24:30.709 [INFO]     曲検索actの終了処理を完了しました。
+2021/03/28 18:24:30.709 [INFO] 現在のステージを終了します。
+2021/03/28 18:24:30.709 [INFO]     終了ステージを非活性化します。
+2021/03/28 18:24:30.709 [INFO]         終了ステージの非活性化を完了しました。
+2021/03/28 18:24:30.709 [INFO]     現在のステージの終了処理を完了しました。
+2021/03/28 18:24:30.710 [INFO] [Discord] Shutdowned.
+2021/03/28 18:24:30.710 [INFO] 曲リストの終了処理を行います。
+2021/03/28 18:24:30.710 [INFO]     曲リストの終了処理を完了しました。
+2021/03/28 18:24:30.770 [INFO] スキンの終了処理を行います。
+2021/03/28 18:24:30.775 [INFO]     スキンの終了処理を完了しました。
+2021/03/28 18:24:30.775 [INFO] DirectSound の終了処理を行います。
+2021/03/28 18:24:30.780 [INFO]     DirectSound の終了処理を完了しました。
+2021/03/28 18:24:30.780 [INFO] パッドの終了処理を行います。
+2021/03/28 18:24:30.780 [INFO]     パッドの終了処理を完了しました。
+2021/03/28 18:24:30.780 [INFO] DirectInput, MIDI入力の終了処理を行います。
+2021/03/28 18:24:30.781 [INFO]     DirectInput, MIDI入力の終了処理を完了しました。
+2021/03/28 18:24:30.781 [INFO] 文字コンソールの終了処理を行います。
+2021/03/28 18:24:30.782 [INFO]     文字コンソールの終了処理を完了しました。
+2021/03/28 18:24:30.782 [INFO] FPSカウンタの終了処理を行います。
+2021/03/28 18:24:30.782 [INFO]     FPSカウンタの終了処理を完了しました。
+2021/03/28 18:24:30.782 [INFO] タイマの終了処理を行います。
+2021/03/28 18:24:30.782 [INFO]     タイマの終了処理を完了しました。
+2021/03/28 18:24:30.782 [INFO] Config.ini を出力します。
+2021/03/28 18:24:30.787 [INFO]     保存しました。(C:\Users\戸井翔太\Source\Repos\TJAPlayer3-Develop-ReWrite NEW\Test\Config.ini)
+2021/03/28 18:24:30.787 [INFO] Deinitializing loudness scanning, song gain control, and sound group level control...
+2021/03/28 18:24:30.787 [INFO] Deinitialized loudness scanning, song gain control, and sound group level control.
+2021/03/28 18:24:30.787 [INFO] アプリケーションの終了処理を完了しました。
+
+遊んでくれてありがとう！
