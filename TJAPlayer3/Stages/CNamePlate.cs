@@ -117,14 +117,14 @@ namespace TJAPlayer3
                         txTitle[player].vc拡大縮小倍率.Y = 160.0f / txTitle[player].szテクスチャサイズ.Width;
                     }
 
-                    txTitle[player].t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, x + 115, y + 22);
+                    txTitle[player].t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, x + 115, y + 19);
                     if (TJAPlayer3.NamePlateConfig.data.Dan[player] == "" || TJAPlayer3.NamePlateConfig.data.Dan[player] == null)
-                        this.txName[player].t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, x + 100, y + 46);
+                        this.txName[player].t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, x + 100, y + 42);
                     else
-                        this.txName[player].t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, x + 149, y + 46);
+                        this.txName[player].t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, x + 149, y + 42);
                 }
                 else
-                    this.txName[player].t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, x + 121, y + 39);
+                    this.txName[player].t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, x + 121, y + 36);
             }
             else
             {
@@ -163,7 +163,7 @@ namespace TJAPlayer3
 
                 if (TJAPlayer3.NamePlateConfig.data.Dan[player] != "" && TJAPlayer3.NamePlateConfig.data.Dan[player] != null)
                 {
-                    this.txdan[player].t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, x + 69, y + 45);
+                    this.txdan[player].t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, x + 69, y + 44);
                     if (TJAPlayer3.NamePlateConfig.data.DanGold[player])
                     {
                         TJAPlayer3.Tx.NamePlateBase.b乗算合成 = true;
@@ -180,14 +180,14 @@ namespace TJAPlayer3
                         txTitle[player].vc拡大縮小倍率.Y = 160.0f / txTitle[player].szテクスチャサイズ.Width;
                     }
 
-                    txTitle[player].t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, x + 124, y + 23);
+                    txTitle[player].t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, x + 124, y + 20);
                     if (TJAPlayer3.NamePlateConfig.data.Dan[player] == "" || TJAPlayer3.NamePlateConfig.data.Dan[player] == null)
-                        this.txName[player].t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, x + 121, y + 47);
+                        this.txName[player].t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, x + 121, y + 44);
                     else
-                        this.txName[player].t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, x + 144, y + 47);
+                        this.txName[player].t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, x + 144, y + 44);
                 }
                 else
-                    this.txName[player].t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, x + 121, y + 39);
+                    this.txName[player].t2D拡大率考慮中央基準描画(TJAPlayer3.app.Device, x + 121, y + 36);
             }
         }
 

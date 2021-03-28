@@ -2683,7 +2683,7 @@ namespace TJAPlayer3
         #endregion
         #region PanelFont
         public int Game_MusicName_X = 1160;
-        public int Game_MusicName_Y = 28;
+        public int Game_MusicName_Y = 24;
         public int Game_MusicName_FontSize = 27;
         public ReferencePoint Game_MusicName_ReferencePoint = ReferencePoint.Center;
         public int Game_Genre_X = 1015;
