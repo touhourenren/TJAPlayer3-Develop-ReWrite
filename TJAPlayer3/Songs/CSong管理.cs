@@ -17,7 +17,7 @@ namespace TJAPlayer3
 	{
 		// プロパティ
 
-		public int nSongsDBから取得できたスコア数
+		/*public int nSongsDBから取得できたスコア数
 		{
 			get; 
 			set; 
@@ -26,7 +26,7 @@ namespace TJAPlayer3
 		{
 			get;
 			set;
-		}
+		}*/
 		public int nスコアキャッシュから反映できたスコア数 
 		{
 			get;
@@ -47,8 +47,8 @@ namespace TJAPlayer3
 			get; 
 			set;
 		}
-		[NonSerialized]
-		public List<Cスコア> listSongsDB;					// songs.dbから構築されるlist
+		/*[NonSerialized]
+		public List<Cスコア> listSongsDB;*/					// songs.dbから構築されるlist
 		public List<C曲リストノード> list曲ルート;			// 起動時にフォルダ検索して構築されるlist
 		public List<C曲リストノード> list曲ルート_Dan = new List<C曲リストノード>();			// 起動時にフォルダ検索して構築されるlist
 		public bool bIsSuspending							// 外部スレッドから、内部スレッドのsuspendを指示する時にtrueにする
@@ -62,8 +62,8 @@ namespace TJAPlayer3
 			set;
 		}
 		[NonSerialized]
-		private AutoResetEvent autoReset;
-		public AutoResetEvent AutoReset
+		public AutoResetEvent AutoReset;
+		/*public AutoResetEvent AutoReset
 		{
 			get
 			{
@@ -73,7 +73,7 @@ namespace TJAPlayer3
 			{
 				autoReset = value;
 			}
-		}
+		}*/
 
 		private int searchCount;							// #PREMOVIE中は検索n回実行したら少しスリープする
 
@@ -81,18 +81,18 @@ namespace TJAPlayer3
 
 		public CSongs管理()
 		{
-			this.listSongsDB = new List<Cスコア>();
+			//this.listSongsDB = new List<Cスコア>();
 			this.list曲ルート = new List<C曲リストノード>();
 			this.n検索された曲ノード数 = 0;
 			this.n検索されたスコア数 = 0;
 			this.bIsSuspending = false;						// #27060
-			this.autoReset = new AutoResetEvent( true );	// #27060
+			this.AutoReset = new AutoResetEvent( true );	// #27060
 			this.searchCount = 0;
 		}
 
 
 		// メソッド
-
+		/*
 		#region [ SongsDB(songs.db) を読み込む ]
 		//-----------------
 		public void tSongsDBを読み込む( string SongsDBファイル名 )
@@ -133,7 +133,7 @@ namespace TJAPlayer3
 		}
 		//-----------------
 		#endregion
-
+		*/
 		#region [ 曲を検索してリストを作成する ]
 		//-----------------
 		public void t曲を検索してリストを作成する( string str基点フォルダ, bool b子BOXへ再帰する )
@@ -719,7 +719,7 @@ namespace TJAPlayer3
 		}
 		//-----------------
 		#endregion
-		#region [ スコアキャッシュを曲リストに反映する ]
+		/*#region [ スコアキャッシュを曲リストに反映する ]
 		//-----------------
 		public void tスコアキャッシュを曲リストに反映する()
 		{
@@ -879,7 +879,7 @@ namespace TJAPlayer3
             return cスコア;
 		}
 		//-----------------
-		#endregion
+		#endregion*/
 		#region [ SongsDBになかった曲をファイルから読み込んで反映する ]
 		//-----------------
 		public void tSongsDBになかった曲をファイルから読み込んで反映する()
@@ -1230,7 +1230,7 @@ namespace TJAPlayer3
 		//-----------------
 		#endregion
 
-		#region [ スコアキャッシュをSongsDBに出力する ]
+		/*#region [ スコアキャッシュをSongsDBに出力する ]
 		//-----------------
 		public void tスコアキャッシュをSongsDBに出力する( string SongsDBファイル名 )
 		{
@@ -1362,7 +1362,7 @@ namespace TJAPlayer3
 			}
 		}
 		//-----------------
-		#endregion
+		#endregion*/
 		
 		#region [ 曲リストソート ]
 		//-----------------
@@ -1801,7 +1801,7 @@ Debug.WriteLine( dBPM + ":" + c曲リストノード.strタイトル );
 
 		#region [ private ]
 		//-----------------
-		private const string SONGSDB_VERSION = "SongsDB5";
+		//private const string SONGSDB_VERSION = "SongsDB5";
 		private List<string> listStrBoxDefSkinSubfolderFullName;
 
 		/// <summary>
@@ -1811,7 +1811,7 @@ Debug.WriteLine( dBPM + ":" + c曲リストノード.strタイトル );
 		{
 			if ( this.bIsSuspending )		// #27060 中断要求があったら、解除要求が来るまで待機
 			{
-				autoReset.WaitOne();
+				AutoReset.WaitOne();
 			}
 			if ( this.bIsSlowdown && ++this.searchCount > 10 )			// #27060 #PREMOVIE再生中は検索負荷を下げる
 			{
