@@ -211,8 +211,6 @@ namespace TJAPlayer3
 											c曲リストノード.strジャンル = "ポップス";
 											break;
 										case "ゲームミュージック":
-										case "バラエティー":
-										case "バラエティ":
 											c曲リストノード.strジャンル = "ゲームバラエティ";
 											break;
 										case "どうよう":
@@ -330,8 +328,6 @@ namespace TJAPlayer3
 										c曲リストノード.strジャンル = "ポップス";
 										break;
 									case "ゲームミュージック":
-									case "バラエティー":
-									case "バラエティ":
 										c曲リストノード.strジャンル = "ゲームバラエティ";
 										break;
 									case "どうよう":
@@ -345,8 +341,6 @@ namespace TJAPlayer3
 										c曲リストノード.str本当のジャンル = "ポップス";
 										break;
 									case "ゲームミュージック":
-									case "バラエティー":
-									case "バラエティ":
 										c曲リストノード.str本当のジャンル = "ゲームバラエティ";
 										break;
 									case "どうよう":
@@ -591,8 +585,6 @@ namespace TJAPlayer3
 							c曲リストノード.strジャンル = "ポップス";
 							break;
 						case "ゲームミュージック":
-						case "バラエティー":
-						case "バラエティ":
 							c曲リストノード.strジャンル = "ゲームバラエティ";
 							break;
 						case "どうよう":
