@@ -386,7 +386,7 @@ namespace TJAPlayer3
 			}
 			finally
 			{
-				TJAPlayer3.stage起動.eフェーズID = CStage.Eフェーズ.起動7_完了;
+				TJAPlayer3.stage起動.eフェーズID = CStage.Eフェーズ.起動_テクスチャの読み込み;
 				TimeSpan span = (TimeSpan) ( DateTime.Now - now );
 				Trace.TraceInformation( "起動所要時間: {0}", span.ToString() );
 				lock ( this )							// #28700 2012.6.12 yyagi; state change must be in finally{} for exiting as of compact mode.

@@ -6,7 +6,7 @@ using System.Threading;
 using System.IO;
 using FDK;
 using System.Runtime.Serialization.Formatters.Binary;
-
+using System.Windows.Input;
 
 namespace TJAPlayer3
 {
@@ -91,8 +91,8 @@ namespace TJAPlayer3
 					this.list進行文字列.Add( "Release: " + TJAPlayer3.VERSION + " [" + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString() + "]" );
 
                     this.list進行文字列.Add("");
-                    this.list進行文字列.Add("TJAPlayer3 forked TJAPlayer2 forPC(kairera0467)");
-                    this.list進行文字列.Add("TJAPlayer3 edited by AioiLight(@aioilight)");
+                    this.list進行文字列.Add("TJAPlayer3-Develop-ReWrite forked TJAPlayer3(@aioilight)");
+                    this.list進行文字列.Add("-Develop-ReWrite edited by touhou-renren(@TouhouRenren)");
                     this.list進行文字列.Add("");
 
                     es = new CEnumSongs();
@@ -142,35 +142,49 @@ namespace TJAPlayer3
 						this.str現在進行中 = string.Format( "{0} ... ", "Saving songs.db" );
 						break;
 
-					case CStage.Eフェーズ.起動7_完了:
+					case CStage.Eフェーズ.起動_テクスチャの読み込み:
                         this.list進行文字列.Add("LOADING TEXTURES...");
                         TJAPlayer3.Tx.LoadTexture();
                         this.list進行文字列.Add("LOADING TEXTURES...OK");
                         this.str現在進行中 = "Setup done.";
+						this.eフェーズID = Eフェーズ.起動7_完了;
                         break;
 				}
 				//-----------------
 				#endregion
-				#region [ this.list進行文字列＋this.現在進行中 の表示 ]
-				//-----------------
-				lock( this.list進行文字列 )
-				{
-					int x = 320;
-					int y = 20;
-					foreach( string str in this.list進行文字列 )
-					{
-						TJAPlayer3.act文字コンソール.tPrint( x, y, C文字コンソール.Eフォント種別.白, str );
-						y += 24;
-					}
-					TJAPlayer3.act文字コンソール.tPrint( x, y, C文字コンソール.Eフォント種別.白, this.str現在進行中 );
-				}
-				//-----------------
-				#endregion
 
-				if( es != null && es.IsSongListEnumCompletelyDone )							// 曲リスト作成が終わったら
+				if(eフェーズID != Eフェーズ.起動7_完了)
+                {
+					#region [ this.list進行文字列＋this.現在進行中 の表示 ]
+					//-----------------
+					lock (this.list進行文字列)
+					{
+						int x = 320;
+						int y = 20;
+						foreach (string str in this.list進行文字列)
+						{
+							TJAPlayer3.act文字コンソール.tPrint(x, y, C文字コンソール.Eフォント種別.白, str);
+							y += 24;
+						}
+						TJAPlayer3.act文字コンソール.tPrint(x, y, C文字コンソール.Eフォント種別.白, this.str現在進行中);
+					}
+					//-----------------
+					#endregion
+				}
+                else
+                {
+					TJAPlayer3.Tx.Readme.t2D描画(TJAPlayer3.app.Device, 0, 0);
+				}
+
+				if ( es != null && es.IsSongListEnumCompletelyDone )							// 曲リスト作成が終わったら
 				{
 					TJAPlayer3.Songs管理 = ( es != null ) ? es.Songs管理 : null;		// 最後に、曲リストを拾い上げる
-					return 1;
+
+					if(TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDXKeys.Key.Return))
+                    {
+						TJAPlayer3.Skin.sound決定音.t再生する();
+						return 1;
+                    }
 				}
 			}
 			return 0;
