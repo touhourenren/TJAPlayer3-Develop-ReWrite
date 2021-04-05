@@ -118,9 +118,9 @@ namespace TJAPlayer3
 						this.str現在進行中 = "SONG LIST...";
 						break;
 
-					case CStage.Eフェーズ.起動1_SongsDBからスコアキャッシュを構築:
+					/*case CStage.Eフェーズ.起動1_SongsDBからスコアキャッシュを構築:
 						this.str現在進行中 = "SONG DATABASE...";
-						break;
+						break;*/
 
 					case CStage.Eフェーズ.起動2_曲を検索してリストを作成する:
 						this.str現在進行中 = string.Format( "{0} ... {1}", "Enumerating songs", es.Songs管理.n検索されたスコア数 );
@@ -138,9 +138,9 @@ namespace TJAPlayer3
 						this.str現在進行中 = string.Format( "{0} ... ", "Building songlists" );
 						break;
 
-					case CStage.Eフェーズ.起動6_スコアキャッシュをSongsDBに出力する:
+					/*case CStage.Eフェーズ.起動6_スコアキャッシュをSongsDBに出力する:
 						this.str現在進行中 = string.Format( "{0} ... ", "Saving songs.db" );
-						break;
+						break;*/
 
 					case CStage.Eフェーズ.起動_テクスチャの読み込み:
                         this.list進行文字列.Add("LOADING TEXTURES...");
