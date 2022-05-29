@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TJAPlayer3</RootNamespace>
     <AssemblyName>TJAPlayer3-Develop-ReWrite</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ApplicationIcon>TJAPlayer3-Develop-ReWrite.ico</ApplicationIcon>
     <IsWebBootstrapper>false</IsWebBootstrapper>

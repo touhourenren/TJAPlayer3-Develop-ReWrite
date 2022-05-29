@@ -152,7 +152,14 @@ namespace TJAPlayer3
 				{
 					if (TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDXKeys.Key.Escape))
 						return (int)E戻り値.EXIT;
-
+					if(TJAPlayer3.Input管理.Keyboard.bキーが押されている((int)SlimDXKeys.Key.Q))
+                    {
+						TJAPlayer3.Skin.sound決定音.t再生する();
+						n現在の選択行モード選択 = (int)E戻り値.GAMESTART - 1;
+						this.actFO.tフェードアウト開始(0, 500);
+						base.eフェーズID = CStage.Eフェーズ.共通_フェードアウト;
+						TJAPlayer3.Skin.soundEntry.t停止する();
+					}
 					if ((TJAPlayer3.Input管理.Keyboard.bキーが押されている((int)SlimDXKeys.Key.RightShift) || TJAPlayer3.Input管理.Keyboard.bキーが押されている((int)SlimDXKeys.Key.LeftShift)) && TJAPlayer3.Input管理.Keyboard.bキーが押された((int)SlimDXKeys.Key.F1))
 					{
 						TJAPlayer3.Skin.soundEntry.t停止する();
